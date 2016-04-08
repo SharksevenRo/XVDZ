@@ -1,0 +1,59 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+	<context:component-scan base-package="com.estate.controller"/>
+
+	<!-- 静态资源访问配置 start-->  
+	<mvc:annotation-driven/>  
+	<mvc:resources location="/plugins/" mapping="/plugins/**"></mvc:resources>   
+	<mvc:resources location="/jsp/" mapping="/jsp/**"></mvc:resources>   
+	<mvc:resources location="/admin/" mapping="/admin/**"></mvc:resources>   
+	<mvc:resources location="/" mapping="/**"></mvc:resources>
+	<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
+	<!-- 静态资源访问配置 end-->
+	  
+	<!-- 视图解析器,解析jsp，默认使用jstl标签，classpath下的得有jstl的包 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 配置jsp路径的前缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<!-- 配置jsp路径的后缀 -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<!-- 文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为5MB -->
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean>
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/adminLogin"/>
+			定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的
+			<bean class="com.estate.filter.SpringMVC1PermissionInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path=".jsp"/>
+			定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的
+			<bean class="com.estate.filter.SpringMVC2PermissionInterceptor"/>
+		</mvc:interceptor>
+		使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求
+		<bean class="com.estate.filter.SpringMVC2PermissionInterceptor"/>
+	</mvc:interceptors> -->
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 配置Excel文件与实体类的映射 -->
+<objects>
+	<excel name="业主信息批量导入模板_Custom.xls">
+		<object>
+			<class_name>com.estate.model.House</class_name>
+			<key>houseNo</key>
+		</object>
+	</excel>
+	<excel name="业主信息批量导入模板.xls">
+		<object>
+			<class_name>com.estate.model.House</class_name>
+			<key>houseNo</key>
+		</object>
+	</excel>
+	<excel name="水抄表.xls">
+		<object>
+			<class_name>com.estate.model.DataInfo</class_name>
+			<key>houseNo</key>
+		</object>
+	</excel>
+	<excel name="电抄表.xls">
+		<object>
+			<class_name>com.estate.model.DataInfo</class_name>
+			<key>houseNo</key>
+		</object>
+	</excel>
+	<excel name="初始水抄表.xls">
+		<object>
+			<class_name>com.estate.model.House</class_name>
+			<key>houseNo</key>
+		</object>
+	</excel>
+	<excel name="初始电抄表.xls">
+		<object>
+			<class_name>com.estate.model.House</class_name>
+			<key>houseNo</key>
+		</object>
+	</excel>
+</objects>

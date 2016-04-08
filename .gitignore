@@ -1,0 +1,7 @@
+*.classpath
+*.project
+*.mymetadata
+XVDZ-web/target
+XVDZ-core/target
+XVDZ-api/target
+*.settings
