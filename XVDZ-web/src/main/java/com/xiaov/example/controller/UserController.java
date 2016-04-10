@@ -63,7 +63,7 @@ public class UserController {
 		//分页必带的参数 pageNo,pageSize  eg:http://localhost:8080/XVDZ-web/example/page?pageNo=5&pageSize=10
 		
 		//从request参数中封装分页条件（即查询条件）//有多个构造函数,PropertyFilters 
-		//用name过滤条件参数名为 filter_name_EQS=1 filter固定，EQ表示过滤条件是EQ,S表示name的类型是String
+		//用name过滤条件参数名为 filter_name_EQS=1 filter固定，EQ表示过滤条件是EQ(相等),S表示name的类型是String
 		//实例：http://localhost:8080/XVDZ-web/example/page?filter_name_EQS=1
 		//List<PropertyFilter> build = PropertyFilters.build(request);
 		//没有过滤条件传nul即可
