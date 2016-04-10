@@ -35,7 +35,7 @@ import org.springframework.util.Assert;
 /**
  * 反射工具类.
  * 
- * @author maurice
+ * @author Sharkseven
  */
 
 @SuppressWarnings({ "unchecked", "rawtypes" })

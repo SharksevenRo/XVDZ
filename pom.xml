@@ -19,6 +19,7 @@
 		<springversion>3.1.1.RELEASE</springversion>
 		<junitversion>3.8.1</junitversion>
 		<hibernate.version>4.2.7.Final</hibernate.version>
+		<aspectj.version>1.7.3</aspectj.version>
 	</properties>
   <dependencies>
 		<dependency>
@@ -139,6 +140,17 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		
+		<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
  
 		<dependency>
 			<groupId>javax.servlet</groupId>

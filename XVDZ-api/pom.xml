@@ -15,4 +15,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <dependencies>
+  <dependency>
+  		<groupId>com.xiaov</groupId>
+		 <artifactId>XVDZ-core</artifactId>
+		 <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

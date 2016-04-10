@@ -24,12 +24,12 @@
     </dependency>
     <dependency>
   		<groupId>com.xiaov</groupId>
-		 <artifactId>XVDZ-api</artifactId>
+		 <artifactId>XVDZ-core</artifactId>
 		 <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>com.xiaov</groupId>
-		 <artifactId>XVDZ-core</artifactId>
+		 <artifactId>XVDZ-api</artifactId>
 		 <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>

@@ -58,7 +58,7 @@ import com.xiaov.utils.ReflectionUtils;
  * 
  * Hibernate基础类,包含对Hibernate的CURD和其他Hibernate操作
  * 
- * @author maurice
+ * @author Sharkseven
  *
  * @param <T> ROM对象
  * @param <PK> ORM主键ID类型
