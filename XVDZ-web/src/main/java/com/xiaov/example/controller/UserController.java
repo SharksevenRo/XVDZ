@@ -58,6 +58,8 @@ public class UserController {
 		//实例：http://localhost:8080/XVDZ-web/example/page?filter_name_EQS=1
 		//List<PropertyFilter> build = PropertyFilters.build(request);
 		//没有过滤条件传nul即可
+		
+		//在service也提供HQL和Criteria的方式分页的例子
 		Page<UserModel> results = userService.page(page,null);
 		try {
 			results=LazyObjecUtil.LazyPageSetNull(results,"role" );
