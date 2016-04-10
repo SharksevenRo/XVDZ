@@ -1,4 +1,4 @@
-package org.XVDZ.core;
+package org.XVDZ.service;
 
 /**
  * Hello world!

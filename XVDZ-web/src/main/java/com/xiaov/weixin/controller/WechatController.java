@@ -40,6 +40,8 @@ public class WechatController {
 	@RequestMapping("/xvdz/wechat")
 	public void XVDZWechat(HttpServletRequest request,HttpServletResponse response){
 		try { 
+			
+			init();
 			response.setContentType("text/html;charset=utf-8");
 			response.setStatus(HttpServletResponse.SC_OK);
  

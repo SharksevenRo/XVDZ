@@ -18,6 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springversion>3.1.1.RELEASE</springversion>
 		<junitversion>3.8.1</junitversion>
+		<hibernate.version>4.2.7.Final</hibernate.version>
 	</properties>
   <dependencies>
 		<dependency>
@@ -150,7 +151,7 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.1</version>
+			<version>3.2.1</version>
 		</dependency>
  
 		<dependency>
@@ -183,10 +184,20 @@
 		</dependency>
  
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>3.6.10.Final</version>
-		</dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.hibernate</groupId>
+			    <artifactId>hibernate-envers</artifactId>
+			    <version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
 		<dependency>
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
@@ -239,11 +250,21 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
- 
+		<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.8.3</version>
+		</dependency>
+ 		<dependency>
+			    <groupId>com.google.guava</groupId>
+			    <artifactId>guava</artifactId>
+			    <version>15.0</version>
+		</dependency>
 	</dependencies>
   <modules>
     <module>XVDZ-api</module>
     <module>XVDZ-core</module>
     <module>XVDZ-web</module>
+    <module>XVDZ-service</module>
   </modules>
 </project>
