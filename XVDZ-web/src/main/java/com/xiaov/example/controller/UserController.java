@@ -46,6 +46,15 @@ public class UserController {
 		
 		return "/index.jsp";
 	}
+	
+	/**
+	 * 如果要向前途返回json格式数据，加@ResponseBody，返回要返回的对象，
+	 * 如果查询的结果有代理对象调用LazyObjecUtil.LazyPageSetNull去除代理对象
+	 * 如果关联对象数据也要带到前台，选择动态关闭延迟加载的方式查询数据库，方法见UserServiceImp page方法中的实例
+	 * @param request
+	 * @param page
+	 * @return
+	 */
 	//分页查询
 	@RequestMapping("/example/page")
 	@ResponseBody
@@ -61,7 +70,12 @@ public class UserController {
 		
 		//在service也提供HQL和Criteria的方式分页的例子
 		Page<UserModel> results = userService.page(page,null);
+		
+		//Hibnernate 的延迟加载默认是打开的，例如UserModel有个成员是RoleModel 也是个持久化对象，正常查询是只能得到一个代理对象，里面只有主键id
+		//但是有的时候需要得到完整的RoleModel对象，在userService里有动态关闭某一属性的延迟加载的实例
+		
 		try {
+			//去除代理对象，现在只是简单处理，后期考虑转换成带有id主键的关联对象
 			results=LazyObjecUtil.LazyPageSetNull(results,"role" );
 		} catch (Exception e) {
 			e.printStackTrace();
