@@ -1,0 +1,14 @@
+.customer{
+	width:20%;
+	text-align: center;
+	margin-top: -23px;
+	float: left;
+}
+.nav-item{
+	float: left;
+    /*padding: 13px 12px;*/
+    font-size: 18px;
+    line-height: 20px;
+    width:20%;
+    text-align: center;
+}
