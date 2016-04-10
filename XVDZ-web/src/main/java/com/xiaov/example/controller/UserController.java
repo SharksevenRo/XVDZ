@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xiaov.example.model.RoleModel;
 import com.xiaov.example.model.UserModel;
@@ -14,6 +15,7 @@ import com.xiaov.example.service.UserService;
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.core.PropertyFilter;
 import com.xiaov.orm.core.PropertyFilters;
+import com.xiaov.utils.LazyObjecUtil;
 
 @Controller
 public class UserController {
@@ -46,7 +48,8 @@ public class UserController {
 	}
 	//分页查询
 	@RequestMapping("/example/page")
-	public String page(HttpServletRequest request,UserModel page){
+	@ResponseBody
+	public Page<UserModel> page(HttpServletRequest request,UserModel page){
 		
 		//分页必带的参数 pageNo,pageSize  eg:http://localhost:8080/XVDZ-web/example/page?pageNo=5&pageSize=10
 		
@@ -56,8 +59,14 @@ public class UserController {
 		//List<PropertyFilter> build = PropertyFilters.build(request);
 		//没有过滤条件传nul即可
 		Page<UserModel> results = userService.page(page,null);
+		try {
+			results=LazyObjecUtil.LazyPageSetNull(results,"role" );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println("11");
-		return "/index.jsp";
+		
+		return results;
 	}
 	//删除
 	@RequestMapping("/example/delete")
