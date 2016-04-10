@@ -3,6 +3,8 @@ package com.xiaov.example.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,8 @@ import com.xiaov.orm.core.PropertyFilter;
 @Service
 public class UserServiceImpl implements UserService{
 
+	//必须定义 在做增删改的时候打日志
+	private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class); 
 	@Autowired
 	private UserDao userDao;
 	@Transactional
@@ -32,16 +36,13 @@ public class UserServiceImpl implements UserService{
 		userDao.save(user);
 	}
 
-	public void deletel(UserModel user) {
-			
-			//save方法是个重载函数。接受List<T>时批量插入
-			userDao.delete(user);
-		}
 	public void update(UserModel user) {
 		userDao.update(user);
+		logger.info(user.getName()+"被修改");
 	}
 	public void delete(UserModel user) {
 		userDao.delete(user);
+		logger.info(user.getName()+"被删除");
 		
 	}
 	public Page<UserModel> page(Page<UserModel> page,List<PropertyFilter> filters) {

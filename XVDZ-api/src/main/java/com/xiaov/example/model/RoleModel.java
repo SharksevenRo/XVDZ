@@ -7,10 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.xiaov.orm.core.Page;
 @Entity 
 @Table(name="tb_role")
-public class RoleModel implements Serializable{
+/**
+ * 必须实现Serializable接口，会涉及到分页查询的继承Page<T>,暂时全部继承
+ * @author Sharkseven
+ *
+ */
+public class RoleModel extends Page<RoleModel> implements Serializable{
 
+	//必须定义序列化id
+	private static final long serialVersionUID = 1L;
+	
 	private Long roleId;
 	private String name;
 	
