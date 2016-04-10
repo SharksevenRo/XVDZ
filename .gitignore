@@ -1,7 +1,8 @@
-*.classpath
 *.project
 *.mymetadata
 XVDZ-web/target
 XVDZ-core/target
 XVDZ-api/target
+XVDZ-web/bin
 *.settings
+
