@@ -24,11 +24,13 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.SimpleExpression;
 import org.hibernate.engine.spi.TypedValue;
 import org.hibernate.internal.AbstractQueryImpl;
 import org.hibernate.internal.CriteriaImpl;
@@ -387,7 +389,7 @@ public class HibernateSupportDao<T,PK extends Serializable> extends BasicHiberna
 	/**
 	 * 在HQL的后面添加分页参数定义的orderBy, 辅助函数.
 	 */
-	protected String setPageRequestToHql( String hql, PageRequest pageRequest) {
+	public String setPageRequestToHql( String hql, PageRequest pageRequest) {
 		
 		if (CollectionUtils.isEmpty(pageRequest.getSort())) {
 			return hql;
@@ -414,7 +416,7 @@ public class HibernateSupportDao<T,PK extends Serializable> extends BasicHiberna
 	 * 
 	 * @return {@link Criteria}
 	 */
-	protected Criteria setPageRequestToCriteria( Criteria c,  PageRequest pageRequest) {
+	public Criteria setPageRequestToCriteria( Criteria c,  PageRequest pageRequest) {
 		Assert.isTrue(pageRequest.getPageSize() > 0, "分页大小必须大于0");
 
 		c.setFirstResult(pageRequest.getOffset());
@@ -433,6 +435,37 @@ public class HibernateSupportDao<T,PK extends Serializable> extends BasicHiberna
 		}
 		
 		return c;
+	}
+	/**
+	 * 动态关闭某列的延迟加载
+	 * @param t
+	 *            要查找表的的bean实例
+	 * @param fields
+	 *            是表实例类型的 成员变量名
+	 * @return
+	 */
+	public <T> List<T> getEntitiestNotLazy(T t, String[] fields,
+			SimpleExpression[] eqs) {
+
+		try {
+			Criteria criteria = getSession().createCriteria(t.getClass());
+
+			if (fields != null) {
+				for (String string : fields) {
+					criteria = criteria.setFetchMode(string, org.hibernate.FetchMode.JOIN);
+				}
+			}
+			if (eqs != null) {
+
+				for (SimpleExpression eq : eqs) {
+					criteria.add(eq);
+				}
+			}
+			return criteria.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

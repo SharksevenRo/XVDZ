@@ -66,11 +66,11 @@ import com.xiaov.utils.ReflectionUtils;
 @SuppressWarnings("unchecked")
 public class BasicHibernateDao<T,PK extends Serializable> {
 	
-	protected SessionFactory sessionFactory;
+	public SessionFactory sessionFactory;
 
-	protected Class<T> entityClass;
+	public Class<T> entityClass;
 	
-	protected final String DEFAULT_ALIAS = "X";
+	public final String DEFAULT_ALIAS = "X";
 	
 	private static Logger logger = LoggerFactory.getLogger(BasicHibernateDao.class); 
 	
@@ -399,7 +399,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 * 
 	 * @return @return {@link Criteria}
 	 */
-	protected Criteria createCriteria(Criterion... criterions) {
+	public Criteria createCriteria(Criterion... criterions) {
 		
 		Criteria criteria = getSession().createCriteria(this.entityClass);
 		
@@ -420,7 +420,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 * @return {@link Query}           
 	 * 
 	 */
-	protected Query createQuery( String queryOrNamedQuery, Map<String, ?> values) {
+	public Query createQuery( String queryOrNamedQuery, Map<String, ?> values) {
 		Query query = createQuery(queryOrNamedQuery);
 		if (values != null) {
 			query.setProperties(values);
@@ -437,7 +437,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 *            
 	 * @return {@link Query}
 	 */
-	protected Query createQuery(String queryOrNamedQuery, Object... values) {
+	public Query createQuery(String queryOrNamedQuery, Object... values) {
 		Assert.hasText(queryOrNamedQuery, "queryOrNamedQuery不能为空");
 		
 		SessionFactoryImpl factory = (SessionFactoryImpl) sessionFactory;
@@ -464,7 +464,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 * @return {@link Query}           
 	 * 
 	 */
-	protected SQLQuery createSQLQuery( String queryOrSqlQuery, Map<String, ?> values) {
+	public SQLQuery createSQLQuery( String queryOrSqlQuery, Map<String, ?> values) {
 		SQLQuery query = createSQLQuery(queryOrSqlQuery);
 		if (values != null) {
 			query.setProperties(values);
@@ -480,7 +480,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 *            
 	 * @return {@link SQLQuery}
 	 */
-	protected SQLQuery createSQLQuery( String queryOrNamedSQLQuery,  Object... values) {
+	public SQLQuery createSQLQuery( String queryOrNamedSQLQuery,  Object... values) {
 		Assert.hasText(queryOrNamedSQLQuery, "queryOrNamedSQLQuery不能为空");
 		SessionFactoryImpl factory = (SessionFactoryImpl) sessionFactory;
 		NamedSQLQueryDefinition nsqlqd = factory.getNamedSQLQuery( queryOrNamedSQLQuery );
@@ -504,7 +504,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 * @param query Hibernate Query
 	 * @param values 参数值可变数组
 	 */
-	protected void setQueryValues(Query query ,Object... values) {
+	public void setQueryValues(Query query ,Object... values) {
 		if (ArrayUtils.isEmpty(values)) {
 			return ;
 		}
@@ -530,7 +530,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 * @param criteria Criteria
 	 * @param orders 排序表达式，规则为:属性名称_排序规则,如:property_asc或property_desc,可以支持多个属性排序，用逗号分割,如:"property1_asc,proerty2_desc",也可以"property"不加排序规则时默认是desc
 	 */
-	protected void setOrderToCriteria(Criteria criteria, Order ...orders) {
+	public void setOrderToCriteria(Criteria criteria, Order ...orders) {
 		if (ArrayUtils.isEmpty(orders)) {
 			return ;
 		}
@@ -553,7 +553,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 * 
 	 * @return long
 	 */
-	protected Long countHqlResult(String queryString,  Map<String, ?> values) {
+	public Long countHqlResult(String queryString,  Map<String, ?> values) {
 		String countHql = prepareCountHql(queryString);
 
 		try {
@@ -577,7 +577,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 * 
 	 * @return long
 	 */
-	protected Long countHqlResult(String queryString,  Object... values) {
+	public Long countHqlResult(String queryString,  Object... values) {
 		String countHql = prepareCountHql(queryString);
 
 		try {
