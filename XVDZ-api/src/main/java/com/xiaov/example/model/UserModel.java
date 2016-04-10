@@ -10,16 +10,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.xiaov.orm.core.Page;
 @Entity 
 @Table(name="tb_user")
-public class UserModel implements Serializable{
+public class UserModel extends Page<UserModel> implements Serializable{
 
 	private Long userId;
 	private String name;
 	private RoleModel role;
 	
 	@Id 
-	@Column(name = "id", unique = true, nullable = false,insertable=false, updatable=false) 
+	@Column(name = "userid", unique = true, nullable = false,insertable=false, updatable=false) 
 	@GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY) 
 	public Long getUserId() {
 		return userId;
@@ -35,7 +37,7 @@ public class UserModel implements Serializable{
 		this.name = name;
 	}
 	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name = "roleId") 
+	@JoinColumn(name = "roleid") 
 	public RoleModel getRole() {
 		return role;
 	}

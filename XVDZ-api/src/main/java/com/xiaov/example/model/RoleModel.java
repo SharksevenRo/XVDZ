@@ -16,7 +16,7 @@ public class RoleModel implements Serializable{
 	
 	
 	@Id
-	@Column(name = "useId", unique = true, nullable = false,insertable=false, updatable=false)
+	@Column(name = "roleId", unique = true, nullable = false,insertable=false, updatable=false)
 	@GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY) 
 	public Long getRoleId() {
 		return roleId;

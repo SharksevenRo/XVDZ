@@ -27,7 +27,7 @@ import org.springframework.util.Assert;
 
 /**
  * 分页参数封装类.
- * @author maurice
+ * @author Sharkseven
  */
 public class PageRequest implements java.io.Serializable {
 	

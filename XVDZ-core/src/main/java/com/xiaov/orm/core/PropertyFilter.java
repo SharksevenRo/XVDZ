@@ -39,10 +39,8 @@ import com.xiaov.orm.core.FieldType;
  * <p>当使用以上filter到{@link  com.github.dactiv.orm.core.hibernate.support.HibernateSupportDao#findUniqueByPropertyFilter(java.util.List)}是会产生以下sql</p>
  * <p>sql:selete * from table where (propertyName1 = 'a' or propertyName1 = 'b') and (propertyName2 = 'a' or propertyName2 = 'b')</p>
  * 
- * @see PropertyFilters#build(String, String)
- * @see com.github.dactiv.orm.core.hibernate.CriterionBuilder
  * 
- * @author maurice
+ * @author Sharkseven
  */
 @SuppressWarnings("serial")
 public class PropertyFilter implements Serializable{
