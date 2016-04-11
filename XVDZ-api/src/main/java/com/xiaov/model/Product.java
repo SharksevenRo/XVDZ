@@ -1,4 +1,4 @@
-package com.xiaov.example.model;
+package com.xiaov.model;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -48,7 +48,6 @@ public class Product implements java.io.Serializable {
 	private Boolean pdtOpenState;
 	private String remark;
 	private Boolean deletFlag;
-	private Set<ProductComment> productComments = new HashSet<ProductComment>(0);
 
 	// Constructors
 
@@ -83,8 +82,7 @@ public class Product implements java.io.Serializable {
 			String pdtPicBs, String pdtPicBp, Double pdtPrc, Double pdtDsct,
 			Integer pdtSaleCount, Integer pdtGdCount, Integer pdtShareCount,
 			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
-			Boolean pdtOpenState, String remark, Boolean deletFlag,
-			Set<ProductComment> productComments) {
+			Boolean pdtOpenState, String remark, Boolean deletFlag) {
 		this.pdtId = pdtId;
 		this.dbTypesByColorTypeId = dbTypesByColorTypeId;
 		this.dbTypesBySizeTypeId = dbTypesBySizeTypeId;
@@ -111,7 +109,6 @@ public class Product implements java.io.Serializable {
 		this.pdtOpenState = pdtOpenState;
 		this.remark = remark;
 		this.deletFlag = deletFlag;
-		this.productComments = productComments;
 	}
 
 	// Property accessors
@@ -355,14 +352,4 @@ public class Product implements java.io.Serializable {
 	public void setDeletFlag(Boolean deletFlag) {
 		this.deletFlag = deletFlag;
 	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
-	public Set<ProductComment> getProductComments() {
-		return this.productComments;
-	}
-
-	public void setProductComments(Set<ProductComment> productComments) {
-		this.productComments = productComments;
-	}
-
 }

@@ -1,4 +1,4 @@
-package com.xiaov.example.model;
+package com.xiaov.model;
 
 import java.sql.Timestamp;
 import javax.persistence.Column;
@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * Advertisment entity. @author MyEclipse Persistence Tools
  */
@@ -18,7 +20,8 @@ public class Advertisment implements java.io.Serializable {
 
 	// Fields
 
-	private Integer adsId;
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	private String adsId;
 	private UserInfo userInfoByDeleteId;
 	private UserInfo userInfoByUpdateId;
 	private String addId;
@@ -39,7 +42,7 @@ public class Advertisment implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Advertisment(Integer adsId, String adsContent, Boolean adsState,
+	public Advertisment(String adsId, String adsContent, Boolean adsState,
 			Timestamp addTime) {
 		this.adsId = adsId;
 		this.adsContent = adsContent;
@@ -48,7 +51,7 @@ public class Advertisment implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Advertisment(Integer adsId, UserInfo userInfoByDeleteId,
+	public Advertisment(String adsId, UserInfo userInfoByDeleteId,
 			UserInfo userInfoByUpdateId, String addId, String adsTt,
 			String adsContent, String adsPic, Boolean adsState,
 			Timestamp addTime, Timestamp adsOnme, Timestamp updateTime,
@@ -71,11 +74,11 @@ public class Advertisment implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "ads_id", unique = true, nullable = false)
-	public Integer getAdsId() {
+	public String getAdsId() {
 		return this.adsId;
 	}
 
-	public void setAdsId(Integer adsId) {
+	public void setAdsId(String adsId) {
 		this.adsId = adsId;
 	}
 

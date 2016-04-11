@@ -1,4 +1,4 @@
-package com.xiaov.example.model;
+package com.xiaov.model;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * UserInfo entity. @author MyEclipse Persistence Tools
  */
@@ -22,7 +24,7 @@ import javax.persistence.TemporalType;
 public class UserInfo implements java.io.Serializable {
 
 	// Fields
-
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String usId;
 	private Integer typeId;
 	private String appId;
@@ -48,23 +50,6 @@ public class UserInfo implements java.io.Serializable {
 	private Timestamp deleteTime;
 	private String usRemark;
 	private Boolean deleteFlag;
-	private Set<ReceiveAddress> receiveAddresses = new HashSet<ReceiveAddress>(
-			0);
-	private Set<Messages> messagesesForReceiveId = new HashSet<Messages>(0);
-	private Set<Messages> messagesesForSendId = new HashSet<Messages>(0);
-	private Set<Account> accounts = new HashSet<Account>(0);
-	private Set<DiscountCoupan> discountCoupans = new HashSet<DiscountCoupan>(0);
-	private Set<DiscountCode> discountCodesForProUId = new HashSet<DiscountCode>(
-			0);
-	private Set<Dynamic> dynamics = new HashSet<Dynamic>(0);
-	private Set<DiscountCodeUseRecord> discountCodeUseRecords = new HashSet<DiscountCodeUseRecord>(
-			0);
-	private Set<Advertisment> advertismentsForDeleteId = new HashSet<Advertisment>(
-			0);
-	private Set<DiscountCode> discountCodesForGnrtUId = new HashSet<DiscountCode>(
-			0);
-	private Set<Advertisment> advertismentsForUpdateId = new HashSet<Advertisment>(
-			0);
 
 	// Constructors
 
@@ -95,15 +80,7 @@ public class UserInfo implements java.io.Serializable {
 			String usIdCard, Integer usLoginErrorTimes,
 			Timestamp usLastLoginTime, Boolean usLoginState, Timestamp addTime,
 			Timestamp updateTime, Timestamp deleteTime, String usRemark,
-			Boolean deleteFlag, Set<ReceiveAddress> receiveAddresses,
-			Set<Messages> messagesesForReceiveId,
-			Set<Messages> messagesesForSendId, Set<Account> accounts,
-			Set<DiscountCoupan> discountCoupans,
-			Set<DiscountCode> discountCodesForProUId, Set<Dynamic> dynamics,
-			Set<DiscountCodeUseRecord> discountCodeUseRecords,
-			Set<Advertisment> advertismentsForDeleteId,
-			Set<DiscountCode> discountCodesForGnrtUId,
-			Set<Advertisment> advertismentsForUpdateId) {
+			Boolean deleteFlag) {
 		this.usId = usId;
 		this.typeId = typeId;
 		this.appId = appId;
@@ -129,17 +106,6 @@ public class UserInfo implements java.io.Serializable {
 		this.deleteTime = deleteTime;
 		this.usRemark = usRemark;
 		this.deleteFlag = deleteFlag;
-		this.receiveAddresses = receiveAddresses;
-		this.messagesesForReceiveId = messagesesForReceiveId;
-		this.messagesesForSendId = messagesesForSendId;
-		this.accounts = accounts;
-		this.discountCoupans = discountCoupans;
-		this.discountCodesForProUId = discountCodesForProUId;
-		this.dynamics = dynamics;
-		this.discountCodeUseRecords = discountCodeUseRecords;
-		this.advertismentsForDeleteId = advertismentsForDeleteId;
-		this.discountCodesForGnrtUId = discountCodesForGnrtUId;
-		this.advertismentsForUpdateId = advertismentsForUpdateId;
 	}
 
 	// Property accessors
@@ -368,110 +334,6 @@ public class UserInfo implements java.io.Serializable {
 
 	public void setDeleteFlag(Boolean deleteFlag) {
 		this.deleteFlag = deleteFlag;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfo")
-	public Set<ReceiveAddress> getReceiveAddresses() {
-		return this.receiveAddresses;
-	}
-
-	public void setReceiveAddresses(Set<ReceiveAddress> receiveAddresses) {
-		this.receiveAddresses = receiveAddresses;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfoByReceiveId")
-	public Set<Messages> getMessagesesForReceiveId() {
-		return this.messagesesForReceiveId;
-	}
-
-	public void setMessagesesForReceiveId(Set<Messages> messagesesForReceiveId) {
-		this.messagesesForReceiveId = messagesesForReceiveId;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfoBySendId")
-	public Set<Messages> getMessagesesForSendId() {
-		return this.messagesesForSendId;
-	}
-
-	public void setMessagesesForSendId(Set<Messages> messagesesForSendId) {
-		this.messagesesForSendId = messagesesForSendId;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfo")
-	public Set<Account> getAccounts() {
-		return this.accounts;
-	}
-
-	public void setAccounts(Set<Account> accounts) {
-		this.accounts = accounts;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfo")
-	public Set<DiscountCoupan> getDiscountCoupans() {
-		return this.discountCoupans;
-	}
-
-	public void setDiscountCoupans(Set<DiscountCoupan> discountCoupans) {
-		this.discountCoupans = discountCoupans;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfoByProUId")
-	public Set<DiscountCode> getDiscountCodesForProUId() {
-		return this.discountCodesForProUId;
-	}
-
-	public void setDiscountCodesForProUId(
-			Set<DiscountCode> discountCodesForProUId) {
-		this.discountCodesForProUId = discountCodesForProUId;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfo")
-	public Set<Dynamic> getDynamics() {
-		return this.dynamics;
-	}
-
-	public void setDynamics(Set<Dynamic> dynamics) {
-		this.dynamics = dynamics;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfo")
-	public Set<DiscountCodeUseRecord> getDiscountCodeUseRecords() {
-		return this.discountCodeUseRecords;
-	}
-
-	public void setDiscountCodeUseRecords(
-			Set<DiscountCodeUseRecord> discountCodeUseRecords) {
-		this.discountCodeUseRecords = discountCodeUseRecords;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfoByDeleteId")
-	public Set<Advertisment> getAdvertismentsForDeleteId() {
-		return this.advertismentsForDeleteId;
-	}
-
-	public void setAdvertismentsForDeleteId(
-			Set<Advertisment> advertismentsForDeleteId) {
-		this.advertismentsForDeleteId = advertismentsForDeleteId;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfoByGnrtUId")
-	public Set<DiscountCode> getDiscountCodesForGnrtUId() {
-		return this.discountCodesForGnrtUId;
-	}
-
-	public void setDiscountCodesForGnrtUId(
-			Set<DiscountCode> discountCodesForGnrtUId) {
-		this.discountCodesForGnrtUId = discountCodesForGnrtUId;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInfoByUpdateId")
-	public Set<Advertisment> getAdvertismentsForUpdateId() {
-		return this.advertismentsForUpdateId;
-	}
-
-	public void setAdvertismentsForUpdateId(
-			Set<Advertisment> advertismentsForUpdateId) {
-		this.advertismentsForUpdateId = advertismentsForUpdateId;
 	}
 
 }

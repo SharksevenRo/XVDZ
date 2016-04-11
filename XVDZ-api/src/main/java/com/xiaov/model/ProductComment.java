@@ -1,4 +1,4 @@
-package com.xiaov.example.model;
+package com.xiaov.model;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * ProductComment entity. @author MyEclipse Persistence Tools
  */
@@ -21,7 +23,7 @@ import javax.persistence.Table;
 public class ProductComment implements java.io.Serializable {
 
 	// Fields
-
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String cmtId;
 	private Product product;
 	private Material material;
@@ -31,7 +33,6 @@ public class ProductComment implements java.io.Serializable {
 	private Integer cmtLogisticsSt;
 	private Integer cmtWrapSt;
 	private Timestamp cmtTime;
-	private Set<ProductComment> productComments = new HashSet<ProductComment>(0);
 
 	// Constructors
 
@@ -53,8 +54,7 @@ public class ProductComment implements java.io.Serializable {
 	/** full constructor */
 	public ProductComment(String cmtId, Product product, Material material,
 			ProductComment productComment, String cmtContent, Integer cmtQtSt,
-			Integer cmtLogisticsSt, Integer cmtWrapSt, Timestamp cmtTime,
-			Set<ProductComment> productComments) {
+			Integer cmtLogisticsSt, Integer cmtWrapSt, Timestamp cmtTime) {
 		this.cmtId = cmtId;
 		this.product = product;
 		this.material = material;
@@ -64,7 +64,6 @@ public class ProductComment implements java.io.Serializable {
 		this.cmtLogisticsSt = cmtLogisticsSt;
 		this.cmtWrapSt = cmtWrapSt;
 		this.cmtTime = cmtTime;
-		this.productComments = productComments;
 	}
 
 	// Property accessors
@@ -151,15 +150,6 @@ public class ProductComment implements java.io.Serializable {
 
 	public void setCmtTime(Timestamp cmtTime) {
 		this.cmtTime = cmtTime;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "productComment")
-	public Set<ProductComment> getProductComments() {
-		return this.productComments;
-	}
-
-	public void setProductComments(Set<ProductComment> productComments) {
-		this.productComments = productComments;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.xiaov.example.model;
+package com.xiaov.model;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * DiscountCoupan entity. @author MyEclipse Persistence Tools
  */
@@ -21,7 +23,7 @@ import javax.persistence.Table;
 public class DiscountCoupan implements java.io.Serializable {
 
 	// Fields
-
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String disCouId;
 	private UserInfo userInfo;
 	private String disCouNo;
@@ -31,7 +33,6 @@ public class DiscountCoupan implements java.io.Serializable {
 	private Integer disCouState;
 	private String disCouRemark;
 	private Boolean deleteFlag;
-	private Set<Orders> orderses = new HashSet<Orders>(0);
 
 	// Constructors
 
@@ -56,7 +57,7 @@ public class DiscountCoupan implements java.io.Serializable {
 	public DiscountCoupan(String disCouId, UserInfo userInfo, String disCouNo,
 			Double disCouPrice, Timestamp disCouTime,
 			Timestamp disCouValidTime, Integer disCouState,
-			String disCouRemark, Boolean deleteFlag, Set<Orders> orderses) {
+			String disCouRemark, Boolean deleteFlag) {
 		this.disCouId = disCouId;
 		this.userInfo = userInfo;
 		this.disCouNo = disCouNo;
@@ -66,7 +67,6 @@ public class DiscountCoupan implements java.io.Serializable {
 		this.disCouState = disCouState;
 		this.disCouRemark = disCouRemark;
 		this.deleteFlag = deleteFlag;
-		this.orderses = orderses;
 	}
 
 	// Property accessors
@@ -152,14 +152,4 @@ public class DiscountCoupan implements java.io.Serializable {
 	public void setDeleteFlag(Boolean deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "discountCoupan")
-	public Set<Orders> getOrderses() {
-		return this.orderses;
-	}
-
-	public void setOrderses(Set<Orders> orderses) {
-		this.orderses = orderses;
-	}
-
 }

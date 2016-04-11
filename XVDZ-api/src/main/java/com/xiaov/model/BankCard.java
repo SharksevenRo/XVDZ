@@ -1,4 +1,4 @@
-package com.xiaov.example.model;
+package com.xiaov.model;
 
 import java.sql.Timestamp;
 import javax.persistence.Column;
@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * BankCard entity. @author MyEclipse Persistence Tools
  */
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 public class BankCard implements java.io.Serializable {
 
 	// Fields
-
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String bkCdId;
 	private DbTypes dbTypes;
 	private Account account;

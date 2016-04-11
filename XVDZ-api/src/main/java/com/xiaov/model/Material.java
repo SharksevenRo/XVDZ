@@ -1,4 +1,4 @@
-package com.xiaov.example.model;
+package com.xiaov.model;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * Material entity. @author MyEclipse Persistence Tools
  */
@@ -21,7 +23,7 @@ import javax.persistence.Table;
 public class Material implements java.io.Serializable {
 
 	// Fields
-
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private Integer materialId;
 	private Material material;
 	private DbTypes dbTypes;
@@ -32,9 +34,6 @@ public class Material implements java.io.Serializable {
 	private Timestamp updateTime;
 	private Timestamp deleteTime;
 	private Boolean deleteFlag;
-	private Set<Product> products = new HashSet<Product>(0);
-	private Set<Material> materials = new HashSet<Material>(0);
-	private Set<ProductComment> productComments = new HashSet<ProductComment>(0);
 
 	// Constructors
 
@@ -56,8 +55,7 @@ public class Material implements java.io.Serializable {
 	public Material(Integer materialId, Material material, DbTypes dbTypes,
 			String materialNo, String meterialName, String meterialRemark,
 			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
-			Boolean deleteFlag, Set<Product> products, Set<Material> materials,
-			Set<ProductComment> productComments) {
+			Boolean deleteFlag) {
 		this.materialId = materialId;
 		this.material = material;
 		this.dbTypes = dbTypes;
@@ -68,9 +66,6 @@ public class Material implements java.io.Serializable {
 		this.updateTime = updateTime;
 		this.deleteTime = deleteTime;
 		this.deleteFlag = deleteFlag;
-		this.products = products;
-		this.materials = materials;
-		this.productComments = productComments;
 	}
 
 	// Property accessors
@@ -166,32 +161,4 @@ public class Material implements java.io.Serializable {
 	public void setDeleteFlag(Boolean deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "material")
-	public Set<Product> getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "material")
-	public Set<Material> getMaterials() {
-		return this.materials;
-	}
-
-	public void setMaterials(Set<Material> materials) {
-		this.materials = materials;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "material")
-	public Set<ProductComment> getProductComments() {
-		return this.productComments;
-	}
-
-	public void setProductComments(Set<ProductComment> productComments) {
-		this.productComments = productComments;
-	}
-
 }

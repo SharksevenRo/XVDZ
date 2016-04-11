@@ -1,4 +1,4 @@
-package com.xiaov.example.model;
+package com.xiaov.model;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * Account entity. @author MyEclipse Persistence Tools
  */
@@ -22,6 +24,7 @@ public class Account implements java.io.Serializable {
 
 	// Fields
 
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String actId;
 	private UserInfo userInfo;
 	private Double actMm;
@@ -34,7 +37,6 @@ public class Account implements java.io.Serializable {
 	private Timestamp deleteTime;
 	private String remark;
 	private Boolean deleteFlag;
-	private Set<BankCard> bankCards = new HashSet<BankCard>(0);
 
 	// Constructors
 
@@ -58,7 +60,7 @@ public class Account implements java.io.Serializable {
 	public Account(String actId, UserInfo userInfo, Double actMm,
 			Double actTtEn, Double actBlc, Double actFm, Integer actState,
 			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
-			String remark, Boolean deleteFlag, Set<BankCard> bankCards) {
+			String remark, Boolean deleteFlag) {
 		this.actId = actId;
 		this.userInfo = userInfo;
 		this.actMm = actMm;
@@ -71,7 +73,6 @@ public class Account implements java.io.Serializable {
 		this.deleteTime = deleteTime;
 		this.remark = remark;
 		this.deleteFlag = deleteFlag;
-		this.bankCards = bankCards;
 	}
 
 	// Property accessors
@@ -183,15 +184,6 @@ public class Account implements java.io.Serializable {
 
 	public void setDeleteFlag(Boolean deleteFlag) {
 		this.deleteFlag = deleteFlag;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "account")
-	public Set<BankCard> getBankCards() {
-		return this.bankCards;
-	}
-
-	public void setBankCards(Set<BankCard> bankCards) {
-		this.bankCards = bankCards;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.xiaov.example.model;
+package com.xiaov.model;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * OrderDetail entity. @author MyEclipse Persistence Tools
  */
@@ -19,7 +21,7 @@ import javax.persistence.Table;
 public class OrderDetail implements java.io.Serializable {
 
 	// Fields
-
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String orDtId;
 	private Integer pdtId;
 	private String orDtNo;
@@ -33,7 +35,6 @@ public class OrderDetail implements java.io.Serializable {
 	private Timestamp updateTime;
 	private Timestamp deleteTime;
 	private Boolean deleteFlag;
-	private Set<Orders> orderses = new HashSet<Orders>(0);
 
 	// Constructors
 
@@ -60,7 +61,7 @@ public class OrderDetail implements java.io.Serializable {
 			Double orDtPrc, Integer orDtMount, Double orDtDsct,
 			Double orDtItmeTotal, Double orDtRlTotal, String orDtRemark,
 			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
-			Boolean deleteFlag, Set<Orders> orderses) {
+			Boolean deleteFlag) {
 		this.orDtId = orDtId;
 		this.pdtId = pdtId;
 		this.orDtNo = orDtNo;
@@ -74,7 +75,6 @@ public class OrderDetail implements java.io.Serializable {
 		this.updateTime = updateTime;
 		this.deleteTime = deleteTime;
 		this.deleteFlag = deleteFlag;
-		this.orderses = orderses;
 	}
 
 	// Property accessors
@@ -195,14 +195,4 @@ public class OrderDetail implements java.io.Serializable {
 	public void setDeleteFlag(Boolean deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orderDetail")
-	public Set<Orders> getOrderses() {
-		return this.orderses;
-	}
-
-	public void setOrderses(Set<Orders> orderses) {
-		this.orderses = orderses;
-	}
-
 }
