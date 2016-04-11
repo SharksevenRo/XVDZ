@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xiaov.constant.APPConstant;
 import com.xiaov.example.model.RoleModel;
 import com.xiaov.example.model.UserModel;
 import com.xiaov.example.service.UserService;
+import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.core.PropertyFilter;
 import com.xiaov.orm.core.PropertyFilters;
@@ -32,19 +34,26 @@ public class UserController {
 	}
 	//添加
 	@RequestMapping("/example/save")
-	public String save(UserModel user){
-		System.out.println("11");
-		RoleModel role=new RoleModel();
-		role.setRoleId(new Long(1));
-		user.setRole(role);
-		for (int i=0; i<25 ; i++) {
-			user =new UserModel();
-			user.setName(i+"");
+	@ResponseBody
+	public MessageBean save(UserModel user){
+		
+		try {
+			System.out.println("11");
+			RoleModel role=new RoleModel();
+			role.setRoleId(new Long(1));
 			user.setRole(role);
-			userService.save(user);
+			for (int i=0; i<25 ; i++) {
+				user =new UserModel();
+				user.setName(i+"");
+				user.setRole(role);
+				userService.save(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new MessageBean(APPConstant.ERROR, "服务器繁忙，获取资源失败");
 		}
 		
-		return "/index.jsp";
+		return new MessageBean(APPConstant.SUCCESS, "");
 	}
 	
 	/**
@@ -86,17 +95,18 @@ public class UserController {
 	}
 	//删除
 	@RequestMapping("/example/delete")
-	public String delete(){
+	@ResponseBody
+	public MessageBean deleteAjax(){
 		List<UserModel> users = userService.getUsers();
 		System.out.println("11");
-		return "/index.jsp";
+		return new MessageBean(APPConstant.SUCCESS, "删除成功");
 	}
 	//按字段查找
 	@RequestMapping("/example/getByProperty")
-	public String getByProperty(){
-		List<UserModel> users = userService.getUsers();
-		System.out.println("11");
-		return "/index.jsp";
+	@ResponseBody
+	public String getByPropertyAjax(){
+			List<UserModel> users = userService.getUsers();
+			return "/index.jsp";
 	}
 	@RequestMapping("/example/getOne")
 	public String getOne(){

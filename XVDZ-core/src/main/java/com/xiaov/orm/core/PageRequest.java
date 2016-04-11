@@ -58,6 +58,11 @@ public class PageRequest implements java.io.Serializable {
 	 * 是否默认计算总记录数.
 	 */
 	protected boolean countTotal = true;
+	
+	/**
+	 * 响应码
+	 */
+	private String code;
 
 	/**
 	 * 构造方法
@@ -73,6 +78,15 @@ public class PageRequest implements java.io.Serializable {
 	public PageRequest(int pageNo, int pageSize) {
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
+	}
+
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	/**
