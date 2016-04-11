@@ -65,7 +65,7 @@ public class WechatController {
 			String encryptType = StringUtils.isBlank(request
 					.getParameter("encrypt_type")) ? "raw" : request
 					.getParameter("encrypt_type"); 
- 
+			response.setContentType("text/xml");
 			if ("raw".equals(encryptType)) {
 				// 明文传输的消息 
 				WxMpXmlMessage inMessage = WxMpXmlMessage.fromXml(request
