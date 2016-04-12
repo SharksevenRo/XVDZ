@@ -5,4 +5,5 @@ XVDZ-core/target
 XVDZ-api/target
 XVDZ-web/bin
 *.settings
+.externalToolBuilders
 

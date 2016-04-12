@@ -48,10 +48,12 @@ public class WechatOauth2Controller{
 			}
 			//根据state判断用户点击的菜单
 			if (state.equals("1")) {
-				
+				response.getWriter().write("xiaov商城");
+				response.sendRedirect("/index.html");
 				return;
 			} else if (state.equals("2")) {
-			
+				response.getWriter().write("授权成功"+"你的openid:"+openId);
+				response.sendRedirect("/index.html");
 			} else if(state.equals("3")){
 				
 				
@@ -85,8 +87,8 @@ public class WechatOauth2Controller{
 			//构建网页授权url
 			String authorizationUrl = wxService
 					.oauth2buildAuthorizationUrl(
-							"http://weiixn.xiaovdingzhi.com/weixin/oauth2/redirect",
-							WxConsts.OAUTH2_SCOPE_BASE, request.getParameter("code"));
+							"http://weixin.xiaovdingzhi.com/weixin/oauth2/redirect",
+							WxConsts.OAUTH2_SCOPE_BASE, request.getParameter("state"));
 			//进入微信授权
 			response.sendRedirect(authorizationUrl);
 		} catch (Exception e) {
