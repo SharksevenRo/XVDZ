@@ -3,9 +3,12 @@ package com.xiaov.weixin.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.xiaov.example.service.impl.UserServiceImpl;
 import com.xiaov.weixin.config.ConfigDao;
 import com.xiaov.weixin.config.ConfigInfo;
 
@@ -20,7 +23,8 @@ import me.chanjar.weixin.mp.bean.WxMpXmlOutTextMessage;
 
 @Controller
 public class WechatController {
-
+	
+	private static Logger logger = LoggerFactory.getLogger(WechatController.class); 
 	protected WxMpInMemoryConfigStorage wxMpConfigStorage;
 	protected WxMpService wxMpService;
 	protected WxMpMessageRouter wxMpMessageRouter;
@@ -90,6 +94,7 @@ public class WechatController {
 			return; 
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.getMessage());
 		} 
  
 	}
