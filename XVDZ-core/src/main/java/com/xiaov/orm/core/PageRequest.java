@@ -62,7 +62,9 @@ public class PageRequest implements java.io.Serializable {
 	/**
 	 * 响应码
 	 */
-	private String code;
+	protected String code;
+	
+	protected String message;
 
 	/**
 	 * 构造方法
@@ -81,6 +83,14 @@ public class PageRequest implements java.io.Serializable {
 	}
 
 	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public String getCode() {
 		return code;
 	}
