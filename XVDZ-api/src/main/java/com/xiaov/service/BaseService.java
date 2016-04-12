@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xiaov.example.model.UserModel;
+import com.xiaov.orm.core.Page;
+import com.xiaov.orm.core.PropertyFilter;
+
 /**
  * 
  * @类名称:BaseService
@@ -87,4 +91,6 @@ public interface BaseService<T>{
      * @throws
      */
     List<T> loadAll(int start,int pageSize);
+    
+    public Page<T> page(Page<T> page,List<PropertyFilter> filter);
 }
