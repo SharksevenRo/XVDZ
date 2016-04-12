@@ -43,7 +43,7 @@
 		<filter-name>EncodeFilter</filter-name>
 		<filter-class>com.xiaov.filter.EncodeFilter</filter-class>
 	</filter>
-	<filter>
+	<!-- <filter>
 		<description>
 		</description>
 		<display-name>WeChatOauth2Filter</display-name>
@@ -63,7 +63,7 @@
 	<filter-mapping>
 		<filter-name>WeChatOauth2Filter</filter-name>
 		<url-pattern>/WeChatOauth2Filter</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 	
 	<!-- springMVC 配置 -->
 	<servlet>

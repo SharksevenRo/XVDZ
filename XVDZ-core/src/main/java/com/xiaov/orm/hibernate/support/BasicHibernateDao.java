@@ -153,6 +153,14 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	}
 	
 	/**
+	 * 保存或更新对象
+	 * @param entity orm实体
+	 */
+	public void saveOrUpdate(T entity) {
+		getSession().saveOrUpdate(entity);
+	}
+	
+	/**
 	 * 批量更新对象
 	 * @param list orm实体集合
 	 */
