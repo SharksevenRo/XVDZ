@@ -3,6 +3,7 @@ package com.xiaov.example.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,8 @@ import com.xiaov.example.model.UserModel;
 import com.xiaov.example.service.UserService;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
-import com.xiaov.orm.core.PropertyFilter;
-import com.xiaov.orm.core.PropertyFilters;
 import com.xiaov.utils.LazyObjecUtil;
+import com.xiaov.web.support.CookieUtil;
 
 @Controller
 public class UserController {
@@ -113,6 +113,18 @@ public class UserController {
 		List<UserModel> users = userService.getUsers();
 		System.out.println("11");
 		return "/index.jsp";
+	}
+	/**
+	 * 获取微信用户信息实例
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/example/test")
+	public String getOne(HttpServletRequest request,HttpServletResponse response){
+		
+		CookieUtil.getCookieByName(request, "openId");
+		return null;
 	}
 	
 	
