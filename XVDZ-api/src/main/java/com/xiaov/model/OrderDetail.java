@@ -13,11 +13,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.xiaov.orm.annotation.StateDelete;
+import com.xiaov.orm.core.FieldType;
+
 /**
  * OrderDetail entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "order_detail", catalog = "xvdz")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
 public class OrderDetail implements java.io.Serializable {
 
 	// Fields

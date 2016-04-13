@@ -15,11 +15,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.xiaov.orm.annotation.StateDelete;
+import com.xiaov.orm.core.FieldType;
+
 /**
  * DiscountCoupan entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "discount_coupan", catalog = "xvdz")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
 public class DiscountCoupan implements java.io.Serializable {
 
 	// Fields
