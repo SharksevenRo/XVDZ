@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/font-awesome.min.css" />
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/custom.css" type="text/css"></link>
 		
 		<script src="js/jquery-1.7.js" type="application/x-javascript" charset="utf-8"></script>
 		<script src="js/jquery.min.js" charset="utf-8"></script>
@@ -39,10 +40,10 @@
 				$('#swipeme').swipe(function(evt, data) {
 					var details = !data ? '' : '<strong>' + data.direction + '/' + data.deltaX + ':' + data.deltaY + '</strong>!';
 					$(this).html('You swiped ' + details);
-					$(this).parent().after('<li>swiped!</li>')
+					$(this).parent().after('<li>swiped!</li>');
 				});
 				$('#tapme').tap(function() {
-					$(this).parent().after('<li>tapped!</li>')
+					$(this).parent().after('<li>tapped!</li>');
 				});
 				$('a[target="_blank"]').bind('click', function() {
 					/*if (confirm('This link opens in a new window.')) {
@@ -143,8 +144,8 @@
 
 			<div id="animations">
 				<div class="toolbar">
-					<h1>Animations</h1>
-					<a class="back" href="#">Home</a>
+					<h1>动画</h1>
+					<a class="back" href="#">首页</a>
 				</div>
 				<div class="scroll">
 					<h2>Most Popular</h2>
@@ -167,6 +168,193 @@
 					<br>View the source in <code>demos/customanimation</code> to see how.
 				</div>
 			</div>
+			
+			<!--
+            	作者：549781430@qq.com
+            	时间：2016-04-12
+            	描述：购物车
+            -->
+			<div id="shoppingcart">
+				<div class="toolbar">
+					<h1>我的购物车</h1>
+					<a class="back" href="#">首页</a>
+				</div>
+				<div class="scroll">
+					<div class="">
+						<div style="padding:10px;width:100%;height:100px">
+							<input style="width:20px;height:20px;margin:30px 10px 30px 0px;display: block;float:left" type="checkbox" id="145764578888">
+							<a href="#detail1" style="display: block;float: left">
+								<img  width="80px" height="80px" alt="作品图片" src="img/cloth1.jpg">
+							</a>
+							<div style="margin-left: 5px;float:left">
+								<h5 class="blue bold no-margin-top">我有我的个性</h5>
+								<span class="green">
+									<label style="width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:keep-all;">
+										为青少年打算，展现活力与青春光彩！
+									</label>
+								</span>
+								<span class="block">
+									<label>原价:</label>
+									<span style="text-decoration: line-through;">199元</span>
+									<label>特惠价:</label>
+									<span style="text-decoration:blink;">99元</span>
+								</span>
+							</div>
+							<div style="width:14px;height:100%;float: right">
+								<i style="margin-top:32px" class="icon-zoom-in icon-large"></i>
+							</div>
+						</div>
+						<hr style="margin:3px auto 3px auto;">
+						<div style="padding:10px;width:100%;height:100px">
+							<input style="width:20px;height:20px;margin:30px 10px 30px 0px;display: block;float:left" type="checkbox" id="145764578888">
+							<a href="#detail1" style="display: block;float: left">
+								<img  width="80px" height="80px" alt="作品图片" src="img/cloth2.jpg">
+							</a>
+							<div style="margin-left: 5px;float:left">
+								<h5 class="blue bold no-margin-top">我有我的个性</h5>
+								<span class="green">
+									<label style="width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:keep-all;">
+										为青少年打算，展现活力与青春光彩！
+									</label>
+								</span>
+								<span class="block">
+									<label>原价:</label>
+									<span style="text-decoration: line-through;">199元</span>
+									<label>特惠价:</label>
+									<span style="text-decoration:blink;">99元</span>
+								</span>
+							</div>
+							<div style="width:14px;height:100%;float: right">
+								<i style="margin-top:32px" class="icon-zoom-in icon-large"></i>
+							</div>
+						</div>
+						<hr style="margin:3px auto 3px auto">
+						<div style="padding:10px;width:100%;height:100px">
+							<input style="width:20px;height:20px;margin:30px 10px 30px 0px;display: block;float:left" type="checkbox" id="145764578888">
+							<a href="#detail1" style="display: block;float: left">
+								<img  width="80px" height="80px" alt="作品图片" src="img/cloth3.jpg">
+							</a>
+							<div style="margin-left: 5px;float:left">
+								<h5 class="blue bold no-margin-top">我有我的个性</h5>
+								<span class="green">
+									<label style="width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:keep-all;">
+										为青少年打算，展现活力与青春光彩！
+									</label>
+								</span>
+								<span class="block">
+									<label>原价:</label>
+									<span style="text-decoration: line-through;">199元</span>
+									<label>特惠价:</label>
+									<span style="text-decoration:blink;">99元</span>
+								</span>
+							</div>
+							<div style="width:14px;height:100%;float: right">
+								<i style="margin-top:32px" class="icon-zoom-in icon-large"></i>
+							</div>
+						</div>
+						<hr style="margin:3px auto 3px auto">
+						<div style="padding:10px;width:100%;height:100px">
+							<input style="width:20px;height:20px;margin:30px 10px 30px 0px;display: block;float:left" type="checkbox" id="145764578888">
+							<a href="#detail1" style="display: block;float: left">
+								<img  width="80px" height="80px" alt="作品图片" src="img/cloth2.jpg">
+							</a>
+							<div style="margin-left: 5px;float:left">
+								<h5 class="blue bold no-margin-top">我有我的个性</h5>
+								<span class="green">
+									<label style="width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:keep-all;">
+										为青少年打算，展现活力与青春光彩！
+									</label>
+								</span>
+								<span class="block">
+									<label>原价:</label>
+									<span style="text-decoration: line-through;">199元</span>
+									<label>特惠价:</label>
+									<span style="text-decoration:blink;">99元</span>
+								</span>
+							</div>
+							<div style="width:14px;height:100%;float: right">
+								<i style="margin-top:32px" class="icon-zoom-in icon-large"></i>
+							</div>
+						</div>
+						<hr style="margin:3px auto 3px auto">
+						<div style="padding:10px;width:100%;height:100px">
+							<input style="width:20px;height:20px;margin:30px 10px 30px 0px;display: block;float:left" type="checkbox" id="145764578888">
+							<a href="#detail1" style="display: block;float: left">
+								<img  width="80px" height="80px" alt="作品图片" src="img/cloth3.jpg">
+							</a>
+							<div style="margin-left: 5px;float:left">
+								<h5 class="blue bold no-margin-top">我有我的个性</h5>
+								<span class="green">
+									<label style="width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:keep-all;">
+										为青少年打算，展现活力与青春光彩！
+									</label>
+								</span>
+								<span class="block">
+									<label>原价:</label>
+									<span style="text-decoration: line-through;">199元</span>
+									<label>特惠价:</label>
+									<span style="text-decoration:blink;">99元</span>
+								</span>
+							</div>
+							<div style="width:14px;height:100%;float: right">
+								<i style="margin-top:32px" class="icon-zoom-in icon-large"></i>
+							</div>
+						</div>
+						<hr style="margin:3px auto 3px auto">
+						<div style="padding:10px;width:100%;height:100px">
+							<input style="width:20px;height:20px;margin:30px 10px 30px 0px;display: block;float:left" type="checkbox" id="145764578888">
+							<a href="#detail1" style="display: block;float: left">
+								<img  width="80px" height="80px" alt="作品图片" src="img/cloth1.jpg">
+							</a>
+							<div style="margin-left: 5px;float:left">
+								<h5 class="blue bold no-margin-top">我有我的个性</h5>
+								<span class="green">
+									<label style="width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:keep-all;">
+										为青少年打算，展现活力与青春光彩！
+									</label>
+								</span>
+								<span class="block">
+									<label>原价:</label>
+									<span style="text-decoration: line-through;">199元</span>
+									<label>特惠价:</label>
+									<span style="text-decoration:blink;">99元</span>
+								</span>
+							</div>
+							<div style="width:14px;height:100%;float: right">
+								<i style="margin-top:32px" class="icon-zoom-in icon-large"></i>
+							</div>
+						</div>
+						<hr style="margin:3px auto 3px auto">
+						<div style="padding:10px;width:100%;height:100px">
+							<input style="width:20px;height:20px;margin:30px 10px 30px 0px;display: block;float:left" type="checkbox" id="145764578888">
+							<a href="#detail1" style="display: block;float: left">
+								<img  width="80px" height="80px" alt="作品图片" src="img/cloth2.jpg">
+							</a>
+							<div style="margin-left: 5px;float:left">
+								<h5 class="blue bold no-margin-top">我有我的个性</h5>
+								<span class="green">
+									<label style="width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:keep-all;">
+										为青少年打算，展现活力与青春光彩！
+									</label>
+								</span>
+								<span class="block">
+									<label>原价:</label>
+									<span style="text-decoration: line-through;">199元</span>
+									<label>特惠价:</label>
+									<span style="text-decoration:blink;">99元</span>
+								</span>
+							</div>
+							<div style="width:14px;height:100%;float: right">
+								<i style="margin-top:32px" class="icon-zoom-in icon-large"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="info">
+					<span style="width:63%;float:left;font-size: 20px;margin: 10px 0px;padding: 10px 0 10px 0;">总额:<label>0.00</label>元</span>
+					<a href="#" style="width:30%;margin: 10px 10px 10px 0px" class="redButton right">去付款</a>
+				</div>
+			</div>
 
 			<div id="animdemo">
 				<div style="font-size: 1.5em; text-align: center; margin: 160px 0 90px; font-family: Marker felt;">
@@ -177,19 +365,19 @@
 
 			<div id="buttons">
 				<div class="toolbar">
-					<h1>Buttons!</h1>
-					<a href="#" class="back">Home</a>
+					<h1>按钮</h1>
+					<a href="#" class="back">首页</a>
 				</div>
 				<div style="margin-top: 10px;" class="scroll">
-					<a href="#" class="whiteButton">White</a>
+					<a href="#" class="whiteButton">白色</a>
 					<br>
-					<a href="#" class="grayButton">Gray</a>
+					<a href="#" class="grayButton">灰色</a>
 					<br>
-					<a href="#" class="redButton">Red</a>
+					<a href="#" class="redButton">红色</a>
 					<br>
-					<a href="#" class="greenButton">Green</a>
+					<a href="#" class="greenButton">绿色</a>
 					<br>
-					<a href="#" class="blueButton">Blue</a>
+					<a href="#" class="blueButton">蓝色</a>
 				</div>
 			</div>
 
@@ -363,8 +551,8 @@
 				</div>
 				<div class="scroll">
 					<ul class="rounded">
-						<li class="arrow"><a href="#ui">User Interface <small class="counter">5</small></a> </li>
-						<li class="arrow"><a href="#animations">Animations <small class="counter">7</small></a></li>
+						<li class="arrow"><a href="#ui">用户接口 <small class="counter">5</small></a> </li>
+						<li class="arrow"><a href="#animations">动画 <small class="counter">7</small></a></li>
 						<li class="arrow"><a href="#ajax">AJAX <small class="counter">4</small></a></li>
 						<li class="arrow"><a href="#callbacks">Events <small class="counter">4</small></a></li>
 						<li class="arrow"><a href="#extensions">Extensions <small class="counter">4</small></a> </li>
@@ -389,22 +577,22 @@
                 </div>-->
                 <div class="info">
                     <div class="toolbar">
-	                    <a class="nav-item" href="#">
-							<span class="icon-home icon-large" ari-hidden="true"></span>
+	                    <a class="flipright" href="#">
+							<span class="nav-item icon-home icon-large" ari-hidden="true"></span>
 						</a>
-						<a class="nav-item" href="#">
-							<span class="icon-user-md icon-large" ari-hidden="true"></span>
+						<a class="flipright" href="#">
+							<span class="nav-item icon-user-md icon-large" ari-hidden="true"></span>
 						</a>
 						<div class="customer">
 							<a href="#custom">
 								<img src="img/custom2.png" style="width:50px">
 							</a>
 						</div>
-						<a class="nav-item" href="#">
-							<span class="icon-shopping-cart icon-large" ari-hidden="true"></span>
+						<a class="flipright" href="#shoppingcart">
+							<span class="nav-item icon-shopping-cart icon-large" ari-hidden="true"></span>
 						</a>
-						<a class="nav-item" href="#">
-							<span class="icon-user icon-large" ari-hidden="true"></span>
+						<a class="flipright" href="#">
+							<span class="nav-item icon-user icon-large" ari-hidden="true"></span>
 						</a>
 					</div>
                 </div>
@@ -557,6 +745,10 @@
 		if (window.navigator.standalone) {
 			$("meta[name='apple-mobile-web-app-status-bar-style']").remove();
 		}
+		$(".nav-item").click(function(){
+			$(this).addClass("red");
+			$(this).siblings().removeClass("red");
+		});
 	</script>
 
 </html>
