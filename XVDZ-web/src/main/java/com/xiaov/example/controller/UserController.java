@@ -2,7 +2,9 @@ package com.xiaov.example.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,8 @@ import com.xiaov.example.model.UserModel;
 import com.xiaov.example.service.UserService;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
-import com.xiaov.orm.core.PropertyFilter;
-import com.xiaov.orm.core.PropertyFilters;
 import com.xiaov.utils.LazyObjecUtil;
+import com.xiaov.web.support.CookieUtil;
 
 @Controller
 public class UserController {
@@ -113,6 +114,23 @@ public class UserController {
 		List<UserModel> users = userService.getUsers();
 		System.out.println("11");
 		return "/index.jsp";
+	}
+	/**
+	 * 在进行获取之前需要请求http://localhost:8080/XVDZ-web/weixin/oauth2/monitor创建模拟环境
+	 * 获取微信用户信息实例,只提供OpenID,等用户信息的持久化完成后会对OpenId进行封装，但cookie里会一直保存openID
+	 * 所以需要openid时只需获取即可
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/example/test")
+	public String getOne(HttpServletRequest request,HttpServletResponse response){
+		
+		//获取cookie
+		Cookie cookie = CookieUtil.getCookieByName(request, "openId");
+		//获取cookie的openID
+		String openid = cookie.getValue();
+		return null;
 	}
 	
 	
