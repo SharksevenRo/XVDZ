@@ -85,6 +85,28 @@
 				font-family: "微软雅黑";
 			}
 			
+			.pop_style{
+				width:100px;;
+				height:30px;
+				line-height:30px;
+				text-align:right;
+			}
+			.left_semi_cycle{
+				border-radius:30px 0 0 30px;
+				width:20%;
+			}
+			.new_style{
+				width:100px;
+				height:30px;
+				line-height:30px;
+				text-align:left;
+			}
+			.right_semi_cycle{
+				border-radius:0 30px 30px 0;
+				width:20%;
+			}
+			
+			
 			#jqt.fullscreen #home .info {
 				display: none;
 			}
@@ -129,43 +151,69 @@
 
 			<div id="ajax">
 				<div class="toolbar">
-					<h1>AJAX</h1>
-					<a class="back" href="#home">Home</a>
+					<h1>设计</h1>
+					<a class="back" href="#animations">返回</a>
 				</div>
 				<div class="scroll">
-					<ul class="rounded">
-						<li class="arrow"><a href="#ajax_post">POST Form Example</a></li>
-						<li class="arrow"><a href="ajax.html">GET Example</a></li>
-						<li class="arrow"><a href="ajax_long.html">Long GET Example</a></li>
-						<li class="arrow"><a href="#callback">With Callback</a></li>
-					</ul>
+					<!-- 此处进入设计页面 -->
 				</div>
+                <div class="info">
+                    <div class="toolbar">
+	                    <a class="nav-item" href="#">
+							<span class="icon-home icon-large" ari-hidden="true"></span>
+						</a>
+						<a class="nav-item" href="#callbacks">
+							<span class="icon-user-md icon-large" ari-hidden="true"></span>
+						</a>
+						<div class="customer">
+							<a href="#animations">
+								<img src="img/custom2.png" style="width:50px">
+							</a>
+						</div>
+						<a class="nav-item" href="#shoppingcart">
+							<span class="icon-shopping-cart icon-large" ari-hidden="true"></span>
+						</a>
+						<a class="nav-item" href="#extensions">
+							<span class="icon-user icon-large" ari-hidden="true"></span>
+						</a>
+					</div>
+                </div>
 			</div>
 
 			<div id="animations">
 				<div class="toolbar">
-					<h1>动画</h1>
-					<a class="back" href="#">首页</a>
+
+					<h1>独衣无二</h1>
+					<a class="back" href="#">返回</a>
 				</div>
-				<div class="scroll">
-					<h2>Most Popular</h2>
-					<ul class="rounded">
-						<li><a href="#animdemo">Slide</a></li>
-						<li><a href="#animdemo" class="slideup">Slide Up</a></li>
-						<li><a href="#animdemo" class="dissolve">Dissolve</a></li>
-						<li><a href="#animdemo" class="pop">Pop</a></li>
-					</ul>
-					<h2>3d Transitions</h2>
-					<ul class="rounded">
-						<li><a href="#animdemo" class="flipright">Flip right</a></li>
-						<li><a href="#animdemo" class="flipleft">Flip left</a></li>
-						<li><a href="#animdemo" class="cube">Cube</a></li>
-						<li><a href="#animdemo" class="swap">Swap</a></li>
-					</ul>
-				</div>
+                <div class="scroll">
+                    <div class="row" style="margin:5px; height:80%;" align="center">
+                            <div>
+                                <img src="img/demo.jpg" class="img-responsive center-block img-rounded" />
+                            </div>
+                            <a href="#ajax"><input type="button" value="开启定制" class="btn btn-success" /></a>
+                    </div>
+                </div>
 				<div class="info">
-					Custom animations are also <a target="_blank" href="http://code.google.com/p/jqtouch/wiki/Animations">easy to write</a>.
-					<br>View the source in <code>demos/customanimation</code> to see how.
+					<div class="toolbar">
+	                    <a class="nav-item" href="#shoppingcart">
+							<span class="icon-home icon-large" ari-hidden="true"></span>
+						</a>
+						<a class="nav-item" href="#callbacks">
+							<span class="icon-user-md icon-large" ari-hidden="true"></span>
+						</a>
+						<div class="customer">
+							<a href="#animations">
+								<img src="img/custom2.png" style="width:50px">
+							</a>
+						</div>
+						<a class="nav-item" href="#shoppingcart">
+							<span class="icon-shopping-cart icon-large" ari-hidden="true"></span>
+						</a>
+						<a class="nav-item" href="#extensions">
+							<span class="icon-user icon-large" ari-hidden="true"></span>
+						</a>
+					</div>
 				</div>
 			</div>
 			
@@ -390,33 +438,54 @@
 
 			<div id="callbacks">
 				<div class="toolbar">
-					<h1>Events</h1>
-					<a class="back" href="#home">Home</a>
+					<h1>团体服</h1>
+					<a class="back" href="#home">返回</a>
 				</div>
 				<div class="scroll">
-					<ul class="rounded">
-						<li id="orient">Orientation: <strong>portrait</strong></li>
-						<li><a href="#pageevents" data-custom="WOOT!">Page events</a></li>
-						<li><a href="#" id="swipeme">Swipe me!</a></li>
-						<li><a href="#" id="tapme">Tap me!</a></li>
-					</ul>
-				</div>
-			</div>
-
-			<div id="demos">
-				<div class="toolbar">
-					<h1>Demos</h1>
-					<a class="back" href="#home">Home</a>
-				</div>
-				<div class="scroll">
-					<ul class="rounded">
-						<li><a target="_blank" href="todo/todo.html">To-Do app</a></li>
-						<li><a target="_blank" href="clock/clock.html">Clock app</a></li>
-					</ul>
+					<div class="row" style="margin:5px;" align="right">
+                        <div>
+                            <img src="img/2.png" class="img-responsive center-block img-rounded" />
+                        </div>
+                        <div style="color:#F0F; margin-top:-20px;"> 
+                        	<span class="glyphicon glyphicon-heart" style="text-align:center;">
+                            	60
+                            </span>
+                        </div>
+        			</div>
+                    
+                    <!-- 可删除 -->
+                    <div class="row" style="margin:5px;" align="right">
+                        <div>
+                            <img src="img/2.png" class="img-responsive center-block img-rounded" />
+                        </div>
+                        <div style="color:#F0F; margin-top:-20px;"> 
+                        	<span class="glyphicon glyphicon-heart" style="text-align:center;">
+                            	60
+                            </span>
+                        </div>
+        			</div>
 				</div>
 				<div class="info">
-					These apps open in a new window. Don&#8217;t forget to save them to your home screen to enable full-screen mode.
-				</div>
+                    <div class="toolbar">
+	                    <a class="nav-item" href="#">
+							<span class="icon-home icon-large" ari-hidden="true"></span>
+						</a>
+						<a class="nav-item" href="#callbacks">
+							<span class="icon-user-md icon-large" ari-hidden="true"></span>
+						</a>
+						<div class="customer">
+							<a href="#animations">
+								<img src="img/custom2.png" style="width:50px">
+							</a>
+						</div>
+						<a class="nav-item" href="#shoppingcart">
+							<span class="icon-shopping-cart icon-large" ari-hidden="true"></span>
+						</a>
+						<a class="nav-item" href="#extensions">
+							<span class="icon-user icon-large" ari-hidden="true"></span>
+						</a>
+					</div>
+                </div>
 			</div>
 
 			<div id="edge">
@@ -462,20 +531,143 @@
 
 			<div id="extensions">
 				<div class="toolbar">
-					<h1>Extensions</h1>
-					<a class="back" href="#home">Home</a>
+					<h1>我的</h1>
+					<a class="back" href="#home">返回</a>
 				</div>
 				<div class="scroll">
-					<div class="info">
-						These apps open in a new window. Don&#8217;t forget to save them to your home screen to enable full-screen mode.
-					</div>
-					<ul class="rounded">
-						<li class="forward"><a target="_blank" href="user/ext_location.html">Geo Location</a></li>
-						<li class="forward"><a target="_blank" href="user/ext_offline.html">Offline Utility</a></li>
-						<li class="forward"><a target="_blank" href="user/ext_floaty.html">Floaty Bar</a></li>
-						<li class="forward"><a target="_blank" href="user/ext_autotitles.html">Auto Titles</a></li>
-					</ul>
+                	<div align="center" style="background-color:#8FE3ED;">
+                    	<img style=" margin-top:20px; width:100px; height:100px;" src="img/head.jpg" class="img-circle" />
+                    	<br />
+                    	<span>请登录</span>
+                    </div>
+					<span class="glyphicon glyphicon-volume-up"></span>0
+                    <div align="right" style="margin-top:-30px; background-color:#8FE3ED;">
+                    	<input type="button" value="登录/注册" style="background-color:#8FE3ED;" class="btn btn-success" />
+                    </div>
+                    <div class="col-xs-6 col-sm-3" style="width:33%; height:40px; color:#00F; background-color:#FFF; border-right:#CCC solid 2px;" align="center">
+                    	<span class="glyphicon glyphicon-list-alt" style="font-size:9px"></span>
+                        <span style="color:#000;">
+                        	订单
+                       	</span>
+                    </div>
+                    <div class="col-xs-6 col-sm-3" style="width:33%; height:40px; color:#F00; background-color:#FFF; border-right:#CCC solid 2px;" align="center">
+                    	<span class="icon-shopping-cart icon-large" style="font-size:9px"></span>
+                        <span style="color:#000;">
+                        	购物车
+                        </span>
+                    </div>
+                    <div class="col-xs-6 col-sm-3" style="width:34%; height:40px; background-color:#FFF; border-right:#CCC solid 2px;" align="center">
+                    	<span class="glyphicon glyphicon-user" style="font-size:9px; color:#F4C240;"></span>
+                        	<span style="color:#000;">
+                            	退款/售后
+                            </span>
+                    </div>
+                    <div style="margin-top:50px; color:#06F; height:40px; background:#FFF;">
+                    	<span class="glyphicon glyphicon-comment" style="margin-top:11px; font-size:9px;">
+                        <span style="color:#000;">
+                        	大家的声音
+                        </span>
+                    </div>
+                    <div align="right" style="margin-top:-26px;">
+                    	>
+                    </div>
+                    <div style="color:#06F; height:40px; margin-top:3px; border-top:#CCC solid 1px; background:#FFF;"><!-- 这里缺个logo -->
+                    	<span class="glyphicon glyphicon-pencil" style="margin-top:11px; font-size:9px;">
+                        <span style="color:#000;">
+                        	关于小V（少logo）
+                        </span>
+                    </div>
+                    <div align="right" style="margin-top:-26px;">
+                    	>
+                    </div>
+                    
+                    <div style="color:#0C3; height:40px; margin-top:23px; border-top:#CCC solid 1px; background:#FFF;">
+                    	<span class="glyphicon glyphicon-picture" style="margin-top:11px; font-size:9px;">
+                        <span style="color:#000;">
+                        	我的作品
+                        </span>
+                    </div>
+                    <div align="right" style="margin-top:-26px;">
+                    	>
+                    </div>
+                    <div style="color:#C03; height:40px; margin-top:3px; border-top:#CCC solid 1px; background:#FFF;">
+                    	<span class="glyphicon glyphicon-usd" style="margin-top:11px; font-size:9px;">
+                        <span style="color:#000;">
+                        	我的收益
+                        </span>
+                    </div>
+                    <div align="right" style="margin-top:-26px;">
+                    	>
+                    </div>
+                    <div style="color:#31CEC7; height:40px; margin-top:3px; border-top:#CCC solid 1px; background:#FFF;">
+                    	<span class="glyphicon glyphicon-phone" style="margin-top:11px; font-size:9px;">
+                        <span style="color:#000;">
+                        	我的优惠券
+                        </span>
+                    </div>
+                    <div align="right" style="margin-top:-26px;">
+                    	>
+                    </div>
+                    <div style="color:#FF0; height:40px; margin-top:3px; border-top:#CCC solid 1px; background:#FFF;">
+                    	<span class="glyphicon glyphicon-star" style="margin-top:11px; font-size:9px;">
+                        <span style="color:#000;">
+                        	我的收藏
+                        </span>
+                    </div>
+                    <div align="right" style="margin-top:-26px;">
+                    	>
+                    </div>
+                    <div style="color:#3AA2CD; height:40px; margin-top:3px; border-top:#CCC solid 1px; background:#FFF;">
+                    	<span class="glyphicon glyphicon-transfer" style="margin-top:11px; font-size:9px;">
+                        <span style="color:#000;">
+                        	收货地址
+                        </span>
+                    </div>
+                    <div align="right" style="margin-top:-26px;">
+                    	>
+                    </div>
+                    
+                    <div style="color:#3AA2CD; height:40px; margin-top:23px; border-top:#CCC solid 1px; background:#FFF;">
+                    	<span class="glyphicon glyphicon-asterisk" style="margin-top:11px; font-size:9px;">
+                        <span style="color:#000;">
+                        	设置
+                        </span>
+                    </div>
+                    <div align="right" style="margin-top:-26px;">
+                    	>
+                    </div>
+                    <div style="color:#3AA2CD; height:40px; margin-top:3px; border-top:#CCC solid 1px; background:#FFF;">
+                    	<span class="glyphicon glyphicon-headphones" style="margin-top:11px; font-size:9px;">
+                        <span style="color:#000;">
+                        	联系客服
+                        </span>
+                    </div>
+                    <div align="right" style="margin-top:-26px;">
+                    	>
+                    </div>
 				</div>
+                
+                <div class="info">
+                    <div class="toolbar">
+	                    <a class="flipright" href="#">
+							<span class="nav-item icon-home icon-large" ari-hidden="true"></span>
+						</a>
+						<a class="flipright" href="#callbacks">
+							<span class="nav-item icon-user-md icon-large" ari-hidden="true"></span>
+						</a>
+						<div class="customer">
+							<a href="#animations">
+								<img src="img/custom2.png" style="width:50px">
+							</a>
+						</div>
+						<a class="flipright" href="#shoppingcart">
+							<span class="nav-item icon-shopping-cart icon-large" ari-hidden="true"></span>
+						</a>
+						<a class="flipright" href="#extensions">
+							<span class="nav-item icon-user icon-large" ari-hidden="true"></span>
+						</a>
+					</div>
+                </div>
 			</div>
 
 			<div id="forms">
@@ -550,7 +742,7 @@
 					<a class="button slideup" id="infoButton" href="#about">关于我们</a>
 				</div>
 				<div class="scroll">
-					<ul class="rounded">
+				<!--	<ul class="rounded">
 						<li class="arrow"><a href="#ui">用户接口 <small class="counter">5</small></a> </li>
 						<li class="arrow"><a href="#animations">动画 <small class="counter">7</small></a></li>
 						<li class="arrow"><a href="#ajax">AJAX <small class="counter">4</small></a></li>
@@ -570,28 +762,97 @@
 						<li><a target="_blank" href="http://twitter.com/beedesk">@beedesk</a></li>
 					</ul>
 				</div>
-				<!--<div class="info">
+				<div class="info">
                     <div class="toolbar">
 	                    <p>南昌竹新科技有限公司 <br>© 开源中国(OSChina.NET).</p>
                     </div>
                 </div>-->
+                
+                 <!-- 轮播-->
+                    <div id="myCarousel" class="carousel slide">
+                           <!-- 轮播（Carousel）指标 -->
+                           <ol class="carousel-indicators">
+                              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                              <li data-target="#myCarousel" data-slide-to="1"></li>
+                              <li data-target="#myCarousel" data-slide-to="2"></li>
+                           </ol>   
+                            <!-- 轮播（Carousel）项目 -->
+                           <div class="carousel-inner">
+                              <div class="item active">
+                                 <a href="#"><img src="img/2.png" alt="First slide"></a>
+                              </div>
+                              <div class="item">
+                                 <a href="#"><img src="img/2.png" alt="Second slide"></a>
+                              </div>
+                              <div class="item">
+                                 <a href="#"><img src="img/2.png" alt="Third slide"></a>
+                              </div>
+                           </div>
+                            <!-- 轮播（Carousel）导航 -->
+                           <a id="left" class="carousel-control left" href="#myCarousel" 
+                              data-slide="prev">&lsaquo;</a>
+                           <a id="right" class="carousel-control right" href="#myCarousel" 
+                              data-slide="next">&rsaquo;</a>
+                    </div>
+                    <div align="center">
+                    	<span id="left_style" onClick="changeColor('left');" class="pop_style left_semi_cycle" style="background:#79DFD2;">
+                        	人气设计
+                        </span>
+                        <span id="right_style" onClick="changeColor('right');" class="new_style right_semi_cycle" style="background:#FFF; margin-left:2px;">
+                        	最新设计
+                       	</span>
+                    </div>
+                    <div id="the_pop" class="row" style="margin:5px; display:block;">
+                        <div>
+                            <img src="img/2.png" class="img-responsive center-block img-rounded" />
+                        </div>
+                    </div>
+                    <div id="the_new" class="row" style=" width:100%; display:none;">
+                    	<div align="center" style=" float:right; width:45%; margin-left:5%'">
+                        	<img src="img/2.png"  class="img-responsive center-block img-rounded" />
+                        </div>
+                        <div align="center" style=" float:left; width:45%; margin-left:5%">
+                        	<img src="img/2.png"  class="img-responsive center-block img-rounded" />
+                        </div>
+                    </div>
+				</div>
+                <script type="text/javascript">
+							function changeColor(e) {
+								left = document.getElementById("left_style");
+								right = document.getElementById("right_style");
+								pop = document.getElementById("the_pop");
+								n = document.getElementById("the_new");
+								if(e == 'left') {
+									left.style.backgroundColor = '#79DFD2';
+									right.style.backgroundColor = '#fff';
+									pop.style.display = 'block';
+									n.style.display = 'none';
+								}else {
+									right.style.backgroundColor = '#79DFD2';
+									left.style.backgroundColor = '#fff';
+									n.style.display = 'block';
+									pop.style.display = 'none';
+								}
+							}
+                        </script>
+                
                 <div class="info">
                     <div class="toolbar">
 	                    <a class="flipright" href="#">
 							<span class="nav-item icon-home icon-large" ari-hidden="true"></span>
 						</a>
-						<a class="flipright" href="#">
+						<a class="flipright" href="#callbacks">
 							<span class="nav-item icon-user-md icon-large" ari-hidden="true"></span>
 						</a>
 						<div class="customer">
-							<a href="#custom">
+							<a href="#animations">
 								<img src="img/custom2.png" style="width:50px">
 							</a>
 						</div>
 						<a class="flipright" href="#shoppingcart">
 							<span class="nav-item icon-shopping-cart icon-large" ari-hidden="true"></span>
 						</a>
-						<a class="flipright" href="#">
+						<a class="flipright" href="#extensions">
 							<span class="nav-item icon-user icon-large" ari-hidden="true"></span>
 						</a>
 					</div>
