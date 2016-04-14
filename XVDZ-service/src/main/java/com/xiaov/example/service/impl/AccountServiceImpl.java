@@ -18,6 +18,7 @@ import com.xiaov.model.Account;
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.core.PropertyFilter;
 import com.xiaov.service.interfaces.AccountServiceInterface;
+import com.xiaovdingzhi.service.impl.BaseServiceImpl;
 
 /**
  * 
@@ -32,7 +33,7 @@ import com.xiaov.service.interfaces.AccountServiceInterface;
  */
 
 @Service
-public class AccountServiceImpl implements AccountServiceInterface {
+public class AccountServiceImpl extends BaseServiceImpl<Account> {
 
 	// 必须定义 在做增删改的时候打日志
 	private static Logger logger = LoggerFactory
@@ -99,7 +100,7 @@ public class AccountServiceImpl implements AccountServiceInterface {
 		return account;
 	}
 
-	public int saveOrUpdate(Account entity) {
+	public void saveOrUpdate(Account entity) {
 		// 定义返回结果
 		int result = -1;
 		// 首先捕获异常
@@ -112,10 +113,9 @@ public class AccountServiceImpl implements AccountServiceInterface {
 					+ e.getMessage());
 			result = -1;
 		}
-		return result;
 	}
 
-	public int save(Account entity) {
+	public void save(Account entity) {
 		// 定义返回结果
 		int result = -1;
 		// 首先捕获异常
@@ -128,7 +128,6 @@ public class AccountServiceImpl implements AccountServiceInterface {
 					+ e.getMessage());
 			result = -1;
 		}
-		return result;
 	}
 
 	public List<Account> loadAll(int start, int pageSize) {

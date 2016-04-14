@@ -22,44 +22,15 @@ import com.xiaov.orm.core.PropertyFilter;
 
 public interface BaseService<T>{
 	
-	/**
-	 * 
-	 * @Description:添加记录
-	 * @param entity 添加记录
-	 * @return int
-	 * @throws
-	 */
-    @Transactional
-	int insert(T entity);
-    
     /**
      * 
-     * @Description:假删除记录
-     * @param Id 删除记录主键ID
-     * @return void
-     * @throws
-     */
-    @Transactional
-    void fakeDelete(String Id);
-    /**
-     * 
-     * @Description:真删除
+     * @Description:删除,可传多个条件，关系等于和and，只传PK的时候是删除某个
      * @param @param Id
      * @return void
      * @throws
      */
     @Transactional
-    void realDelete(String Id);
-    
-    /**
-     * 
-     * @Description:根据主键查询
-     * @param @param Id
-     * @param @return
-     * @return T
-     * @throws
-     */
-    T selectById(String Id);
+    void Delete(T entity);
     
     /**
      * 
@@ -70,7 +41,7 @@ public interface BaseService<T>{
      * @throws
      */
     @Transactional
-    int saveOrUpdate(T entity);
+    void saveOrUpdate(T entity);
 
     /**
      * 
@@ -81,16 +52,21 @@ public interface BaseService<T>{
      * @throws
      */
     @Transactional
-    int save(T entity);
+    void save(T entity);
     
     /**
-     * 查询所有
-     * @Description:分页查询
-     * @param @return
+     * 查询所有 t中封装所有的查询条件 基于等于 和and
+     * @param @return 
      * @return List<T>
      * @throws
      */
-    List<T> loadAll(int start,int pageSize);
+    List<T> loadAll(T entity);
     
-    public Page<T> page(Page<T> page,List<PropertyFilter> filter);
+    /**
+     * 分页
+     * @param page
+     * @param filter
+     * @return
+     */
+    public Page<T> page(Page<T> page);
 }

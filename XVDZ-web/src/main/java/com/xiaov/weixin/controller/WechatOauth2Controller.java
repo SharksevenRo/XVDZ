@@ -106,6 +106,7 @@ public class WechatOauth2Controller{
 	public void monitor(HttpServletRequest request,HttpServletResponse response) {
 
 		try {
+			 
 			//设置一个模拟测试环境
 			Cookie cookie = new Cookie("openId","oWJP6sjCHdhDYO9gGzSa5_DvTEE8");
 			cookie.setMaxAge(3600);

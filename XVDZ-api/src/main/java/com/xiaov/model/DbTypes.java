@@ -13,11 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.xiaov.orm.annotation.StateDelete;
+import com.xiaov.orm.core.FieldType;
+
 /**
  * DbTypes entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "db_types", catalog = "xvdz")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
 public class DbTypes implements java.io.Serializable {
 
 	// Fields

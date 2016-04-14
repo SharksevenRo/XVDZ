@@ -13,11 +13,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.xiaov.orm.annotation.StateDelete;
+import com.xiaov.orm.core.FieldType;
+
 /**
  * Product entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "product", catalog = "xvdz")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
 public class Product implements java.io.Serializable {
 
 	// Fields

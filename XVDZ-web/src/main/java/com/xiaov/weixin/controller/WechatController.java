@@ -78,7 +78,6 @@ public class WechatController {
 						.fromUser(inMessage.getToUserName()).content("您好,欢迎关注小V定制微信平台")
 						.toUser(inMessage.getFromUserName()).build();
 				response.getWriter().write(m.toXml());
-				return; 
 			} 
 			if ("aes".equals(encryptType)) {
 				// 是aes加密的消息 
@@ -88,7 +87,6 @@ public class WechatController {
 						.fromUser(inMessage.getToUserName()).content("您好,欢迎关注小V定制微信平台")
 						.toUser(inMessage.getFromUserName()).build();
 				response.getWriter().write(m.toXml());
-				return; 
 			} 
 			response.getWriter().println("不可识别的加密类型");
 			return; 

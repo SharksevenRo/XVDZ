@@ -18,7 +18,7 @@ import com.xiaov.example.service.UserService;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.utils.LazyObjecUtil;
-import com.xiaov.web.support.CookieUtil;
+//import com.xiaov.web.support.CookieUtil;
 
 @Controller
 public class UserController {
@@ -127,9 +127,9 @@ public class UserController {
 	public String getOne(HttpServletRequest request,HttpServletResponse response){
 		
 		//获取cookie
-		Cookie cookie = CookieUtil.getCookieByName(request, "openId");
+		//Cookie cookie = CookieUtil.getCookieByName(request, "openId");
 		//获取cookie的openID
-		String openid = cookie.getValue();
+		//String openid = cookie.getValue();
 		return null;
 	}
 	

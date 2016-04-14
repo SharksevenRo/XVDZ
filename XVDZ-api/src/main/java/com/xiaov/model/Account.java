@@ -1,25 +1,26 @@
 package com.xiaov.model;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.xiaov.orm.annotation.StateDelete;
+import com.xiaov.orm.core.FieldType;
 
 /**
  * Account entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "account", catalog = "xvdz")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
 public class Account implements java.io.Serializable {
 
 	// Fields

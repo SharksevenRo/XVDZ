@@ -2,6 +2,7 @@ package com.xiaov.example.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -54,7 +55,8 @@ public class UserServiceImpl implements UserService{
 		String HQL="select * from";
 		//获取分页的hql
 		String hql2 = userDao.setPageRequestToHql(HQL, page);
-		List<UserModel> list = userDao.createSQLQuery(hql2, new HashMap<String, UserModel>()).list();
+		Map<String,Object>map= new HashMap<String, Object>();
+		List<UserModel> list = userDao.createSQLQuery(hql2,map).list();
 		
 		//Criteria方式分页
 		Criteria criteria = userDao.getSession().createCriteria(UserModel.class);
