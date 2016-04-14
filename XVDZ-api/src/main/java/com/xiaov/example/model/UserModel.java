@@ -22,7 +22,7 @@ import com.xiaov.orm.core.Page;
 public class UserModel extends Page<UserModel> implements Serializable{
 
 	//必须定义序列化id
-		private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private Long userId;
 	private String name;
 	private RoleModel role;

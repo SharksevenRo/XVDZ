@@ -16,12 +16,17 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.xiaov.orm.annotation.StateDelete;
+import com.xiaov.orm.core.FieldType;
+import com.xiaov.orm.core.Page;
+
 /**
  * UserInfo entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "user_info", catalog = "xvdz")
-public class UserInfo implements java.io.Serializable {
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	// Fields
 	@GenericGenerator(name="system-uuid", strategy = "uuid")

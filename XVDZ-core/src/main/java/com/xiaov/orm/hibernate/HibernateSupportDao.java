@@ -468,4 +468,14 @@ public class HibernateSupportDao<T,PK extends Serializable> extends BasicHiberna
 		return null;
 	}
 
+	public Criteria createCriteriaEq(List<SimpleExpression> criterions) {
+		Criteria criteria = getSession().createCriteria(this.entityClass);
+		
+		for (Criterion criterion :criterions) {
+			
+			criteria.add(criterion);
+		}
+		return criteria;
+	}
+
 }

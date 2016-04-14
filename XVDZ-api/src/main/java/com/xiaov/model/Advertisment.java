@@ -11,11 +11,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.xiaov.orm.annotation.StateDelete;
+import com.xiaov.orm.core.FieldType;
+
 /**
  * Advertisment entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "advertisment", catalog = "xvdz")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
 public class Advertisment implements java.io.Serializable {
 
 	// Fields
