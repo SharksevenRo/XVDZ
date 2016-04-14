@@ -44,17 +44,6 @@ public interface BaseService<T>{
     void saveOrUpdate(T entity);
 
     /**
-     * 
-     * @Description:保存
-     * @param @param entity
-     * @param @return
-     * @return int
-     * @throws
-     */
-    @Transactional
-    void save(T entity);
-    
-    /**
      * 查询所有 t中封装所有的查询条件 基于等于 和and
      * @param @return 
      * @return List<T>
@@ -69,4 +58,13 @@ public interface BaseService<T>{
      * @return
      */
     public Page<T> page(Page<T> page);
+    
+    /**
+     * 用主键获取对象
+     * @param clazz
+     * @param pk
+     * @return
+     */
+    public T getOne(Class clazz,String pk);
+    
 }

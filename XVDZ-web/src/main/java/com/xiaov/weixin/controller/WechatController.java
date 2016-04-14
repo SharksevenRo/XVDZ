@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.xiaov.example.service.impl.UserServiceImpl;
 import com.xiaov.weixin.config.ConfigDao;
 import com.xiaov.weixin.config.ConfigInfo;
 

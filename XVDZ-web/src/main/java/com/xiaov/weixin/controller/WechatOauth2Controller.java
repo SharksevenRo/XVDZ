@@ -6,10 +6,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.xiaov.model.UserInfo;
+import com.xiaov.service.interfaces.UserService;
 import com.xiaov.utils.LogBuilder;
+import com.xiaov.web.support.CookieUtil;
 
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -21,6 +26,10 @@ public class WechatOauth2Controller{
 	private static Logger logger = LoggerFactory.getLogger(WechatOauth2Controller.class);
 	
 	public static WxMpService wxService;
+	@Autowired
+	@Qualifier(value="userServiceImpl")
+	private UserService userService;
+	
 	/**
 	 * 网页授权回调
 	 * @param request
@@ -35,12 +44,21 @@ public class WechatOauth2Controller{
 			//获取请求url的类型
 			String state = request.getParameter("state");
 			String openId = null;
-			LogBuilder.writeToLog("error in oauth");
 			if (request.getSession().getAttribute("openId") == null) {
 				WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxService
 						.oauth2getAccessToken(request.getParameter("code"));
 				openId = wxMpOAuth2AccessToken.getOpenId();
-				//或者存到cookie里
+				UserInfo user= userService.getUserInfoByOpenID(openId);
+				if(user!=null){
+					CookieUtil util=new CookieUtil(request);
+					util.setValue("user", "openID", openId, true);
+					util.save(response, "user", true);
+				}else{
+					user=new UserInfo();
+					user.setAppId(openId);
+					//跳转到优惠码输入页面，现在暂不考虑
+					userService.saveOrUpdate(user);
+				}
 				request.getSession().setAttribute("openId", openId);
 			} else {
 				openId = (String) request.getSession().getAttribute(
@@ -106,14 +124,9 @@ public class WechatOauth2Controller{
 	public void monitor(HttpServletRequest request,HttpServletResponse response) {
 
 		try {
-			 
-			//设置一个模拟测试环境
-			Cookie cookie = new Cookie("openId","oWJP6sjCHdhDYO9gGzSa5_DvTEE8");
-			cookie.setMaxAge(3600);
-			//设置路径，这个路径即该工程下都可以访问该cookie 如果不设置路径，那么只有设置该cookie路径及其子路径可以访问
-			 
-			cookie.setPath("/");
-			response.addCookie(cookie);
+			CookieUtil util=new CookieUtil(request);
+			util.setValue("user", "openID", "oWJP6sjCHdhDYO9gGzSa5_DvTEE8", true);
+			util.save(response, "user", true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());

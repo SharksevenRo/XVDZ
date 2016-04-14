@@ -35,6 +35,7 @@ import org.hibernate.engine.spi.TypedValue;
 import org.hibernate.internal.AbstractQueryImpl;
 import org.hibernate.internal.CriteriaImpl;
 import org.hibernate.transform.ResultTransformer;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import com.google.common.collect.Lists;
@@ -56,6 +57,7 @@ import com.xiaov.utils.ReflectionUtils;
  * @param <PK> 主键Id类型
  */
 @SuppressWarnings({"rawtypes","unchecked"})
+@Repository
 public class HibernateSupportDao<T,PK extends Serializable> extends BasicHibernateDao<T, PK>{
 
 	public HibernateSupportDao(){
@@ -66,16 +68,16 @@ public class HibernateSupportDao<T,PK extends Serializable> extends BasicHiberna
 		super(entityClass);
 	}
 
-	
-	/**
+	/*
+	*//**
 	 * 获取实体的总记录数
 	 * 
 	 * @return long
-	 */
+	 *//*
 	public long entityCount(PropertyFilter...filters) {
 		return (Long) createCriteria(Lists.newArrayList(filters)).setProjection(Projections.rowCount()).uniqueResult();
 	}
-
+*/
 	/**
 	 * 执行count查询获得本次Criteria查询所能获得的对象总数.
 	 * 
