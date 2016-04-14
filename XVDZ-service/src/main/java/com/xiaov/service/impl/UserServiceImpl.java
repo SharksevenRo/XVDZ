@@ -55,9 +55,10 @@ public class UserServiceImpl implements UserService{
 		 * 分页对象打包参数
 		 */
 		Map<String, Object> params = new EntityParamsUtil<Page<UserInfo>>().paramsToMap(page,true);
-		String hql="select from UserInfo";
-		String hql2 = userDao.setPageRequestToHql(hql, page);
-		return (Page<UserInfo>) userDao.createQuery(hql2, params).list();
+		String hql="from UserInfo";
+		//计算总记录数（总条数）
+		page.setCountTotal(true);
+		return userDao.findPage(page, userDao.createQuery(hql, params)) ;
 	}
 
 	public UserInfo getOne(Class clazz, String pk) {
