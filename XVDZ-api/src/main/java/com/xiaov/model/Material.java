@@ -1,16 +1,13 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -34,9 +31,9 @@ public class Material implements java.io.Serializable {
 	private String materialNo;
 	private String meterialName;
 	private String meterialRemark;
-	private Timestamp addTime;
-	private Timestamp updateTime;
-	private Timestamp deleteTime;
+	private Date addTime;
+	private Date updateTime;
+	private Date deleteTime;
 	private Boolean deleteFlag;
 
 	// Constructors
@@ -47,7 +44,7 @@ public class Material implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Material(Integer materialId, String materialNo, String meterialName,
-			Timestamp addTime, Boolean deleteFlag) {
+			Date addTime, Boolean deleteFlag) {
 		this.materialId = materialId;
 		this.materialNo = materialNo;
 		this.meterialName = meterialName;
@@ -58,7 +55,7 @@ public class Material implements java.io.Serializable {
 	/** full constructor */
 	public Material(Integer materialId, Material material, DbTypes dbTypes,
 			String materialNo, String meterialName, String meterialRemark,
-			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
+			Date addTime, Date updateTime, Date deleteTime,
 			Boolean deleteFlag) {
 		this.materialId = materialId;
 		this.material = material;
@@ -131,29 +128,29 @@ public class Material implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time", nullable = false, length = 0)
-	public Timestamp getAddTime() {
+	public Date getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Timestamp addTime) {
+	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "update_time", length = 0)
-	public Timestamp getUpdateTime() {
+	public Date getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Column(name = "delete_time", length = 0)
-	public Timestamp getDeleteTime() {
+	public Date getDeleteTime() {
 		return this.deleteTime;
 	}
 
-	public void setDeleteTime(Timestamp deleteTime) {
+	public void setDeleteTime(Date deleteTime) {
 		this.deleteTime = deleteTime;
 	}
 

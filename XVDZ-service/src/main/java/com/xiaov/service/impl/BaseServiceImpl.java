@@ -26,7 +26,7 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 		dao.delete(entity);
 	}
 
-	public void saveOrUpdate(T entity) {
+	public void update(T entity) {
 		dao.saveOrUpdate(entity);
 	}
 
@@ -37,7 +37,7 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 	public List<T> loadAll(T entity) {
 		Class clazz=entity.getClass();
 		List<SimpleExpression> criterions=new ArrayList<SimpleExpression>();
-		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(clazz);
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(clazz, false);
 		for (Field field : accessibleFields) {
 			Object value = ReflectionUtils.invokeGetterMethod(entity, field.getName());
 			if(value!=null){
@@ -52,22 +52,21 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 	@SuppressWarnings("unchecked")
 	public Page<T> page(Page<T> page) {
 		String name = page.getClass().getName();
-		
-		Field[] declaredFields = page.getClass().getDeclaredFields();
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), true);
 		Object value;
 		Map<String, Object> map=new HashMap<String, Object>();
-		for (Field field : declaredFields) {
+		for (Field field : accessibleFields) {
 			value= ReflectionUtils.invokeGetterMethod(page, field.getName());
 			if(value!=null){
 				map.put(field.getName(), value);
 			}
 		}
-		String hql="select * from "+name;
+		String hql="from "+name;
 		String hql2 = dao.setPageRequestToHql(hql, page);
-		return (Page<T>) dao.createQuery(hql2, map).list();
+		return dao.findPage(page, dao.createQuery(hql2, map));
 	}
 
 	public T getOne(Class clazz,String pk) {
-		return (T) dao.getSession().get(clazz, pk);
+		return (T) dao.getSession().load(clazz, pk);
 	}
 }

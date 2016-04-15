@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xiaov.example.model.UserModel;
 import com.xiaov.orm.core.Page;
-import com.xiaov.orm.core.PropertyFilter;
 
 /**
  * 
@@ -34,14 +32,19 @@ public interface BaseService<T>{
     
     /**
      * 
-     * @Description:保存或更新，如果记录没有ID则保存，有这更新
+     * @Description:保存
      * @param @param entity
      * @param @return
      * @return int
      * @throws
      */
     @Transactional
-    void saveOrUpdate(T entity);
+    void save(T entity);
+    /**
+     * 更新
+     * @param entity
+     */
+    void update(T entity);
 
     /**
      * 查询所有 t中封装所有的查询条件 基于等于 和and

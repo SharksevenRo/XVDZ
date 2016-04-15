@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
-	public void saveOrUpdate(UserInfo entity) {
+	public void save(UserInfo entity) {
 		userDao.saveOrUpdate(entity);
 	}
 	public List<UserInfo> loadAll(UserInfo entity) {
@@ -62,6 +62,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public UserInfo getOne(Class clazz, String pk) {
-		return userDao.get(pk);
+		return userDao.load(pk);
+	}
+
+	public void update(UserInfo entity) {
+		// TODO Auto-generated method stub
+		
 	}
 }

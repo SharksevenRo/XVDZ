@@ -28,54 +28,57 @@
 						<a href="javascript:;">
 							<span class="badge pull-right">10</span>
 							<i class="fa fa-inbox"></i> 
-							<span>Email</span>
+							<span>管理功能</span>
 						</a>
 						<ul class="sub-menu">
-						    <li><a href="#ajax/email_inbox.html">Inbox v1</a></li>
-						    <li><a href="#ajax/email_inbox_v2.html">Inbox v2</a></li>
-						    <li><a href="#ajax/email_compose.html">Compose</a></li>
-						    <li><a href="#ajax/email_detail.html">Detail</a></li>
+						    <li><a href="#ajax/email_inbox.html">管理会员信息</a></li>
+						    <li><a href="#ajax/email_inbox_v2.html">管理产品信息</a></li>
+						    <li><a href="#ajax/email_compose.html">产品留言管理</a></li>
+						    <li><a href="#ajax/email_detail.html">上传产品</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
 						<a href="javascript:;">
 						    <b class="caret pull-right"></b>
 						    <i class="fa fa-suitcase"></i>
-						    <span>UI Elements</span> 
+						    <span>订单管理</span> 
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/ui_general.html">General</a></li>
-							<li><a href="#ajax/ui_typography.html">Typography</a></li>
-							<li><a href="#ajax/ui_tabs_accordions.html">Tabs & Accordions</a></li>
-							<li><a href="#ajax/ui_unlimited_tabs.html">Unlimited Nav Tabs</a></li>
+							<li><a href="#ajax/ui_general.html">查看所有订单（时间顺序）</a></li>
+							<li><a href="#ajax/ui_typography.html">管理某人的订单</a></li>
+							<li><a href="#ajax/ui_tabs_accordions.html">管理某人的购物车</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
 						<a href="javascript:;">
 						    <b class="caret pull-right"></b>
 						    <i class="fa fa-file-o"></i>
-						    <span>Form Stuff</span> 
+						    <span>退款管理</span> 
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/form_elements.html">Form Elements</a></li>
-							<li><a href="#ajax/form_plugins.html">Form Plugins</a></li>
-							<li><a href="#ajax/form_slider_switcher.html">Form Slider + Switcher</a></li>
+							<li><a href="#ajax/form_elements.html">管理有说明退款</a></li>
+							<li><a href="#ajax/form_plugins.html">管理无说明退款</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
 						<a href="javascript:;">
 						    <b class="caret pull-right"></b>
 						    <i class="fa fa-th"></i>
-						    <span>Tables  <span class="label label-theme m-l-5">NEW</span></span>
+						    <span>已购买产品 <span class="label label-theme m-l-5">NEW</span> </span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="table_basic.html">Basic Tables</a></li>
 							<li class="has-sub">
-							    <a href="javascript:;"><b class="caret pull-right"></b> Managed Tables</a>
+							    <a href="javascript:;"><b class="caret pull-right"></b> 已发货</a>
 							    <ul class="sub-menu">
-							        <li><a href="#ajax/table_manage.html">Default</a></li>
-							        <li><a href="#ajax/table_manage_autofill.html">Autofill</a></li>
-							        <li><a href="#ajax/table_manage_buttons.html">Buttons</a></li>
+							        <li><a href="#ajax/table_manage.html">包邮</a></li>
+							        <li><a href="#ajax/table_manage_autofill.html">不包邮</a></li>
+							    </ul>
+							</li>
+							<li class="has-sub">
+							    <a href="javascript:;"><b class="caret pull-right"></b> 未发货</a>
+							    <ul class="sub-menu">
+							        <li><a href="#ajax/table_manage.html">包邮</a></li>
+							        <li><a href="#ajax/table_manage_autofill.html">不包邮</a></li>
 							    </ul>
 							</li>
 						</ul>
