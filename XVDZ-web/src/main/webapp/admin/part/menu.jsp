@@ -25,48 +25,47 @@
 					    </a>
 					</li>
 					<li class="has-sub">
-						<a href="javascript:;">
-							<span class="badge pull-right">10</span>
+						<a href="#ajax/role.html">
+							<span class="badge pull-right">2</span>
 							<i class="fa fa-inbox"></i> 
-							<span>管理功能</span>
+							<span>人员管理</span>
 						</a>
 						<ul class="sub-menu">
+							<li><a href="#ajax/role.html">用户管理</a></li>
+							<li><a href="#ajax/ui_typography.html">公司员工管理</a></li>
+						</ul> 
+					<!--	<ul class="sub-menu">
 						    <li><a href="#ajax/email_inbox.html">管理会员信息</a></li>
 						    <li><a href="#ajax/email_inbox_v2.html">管理产品信息</a></li>
 						    <li><a href="#ajax/email_compose.html">产品留言管理</a></li>
 						    <li><a href="#ajax/email_detail.html">上传产品</a></li>
-						</ul>
+						</ul> -->
 					</li>
 					<li class="has-sub">
-						<a href="javascript:;">
+						<a href="#ajax/enteringgoods.html">
 						    <b class="caret pull-right"></b>
 						    <i class="fa fa-suitcase"></i>
-						    <span>订单管理</span> 
+						    <span>产品管理</span> 
 						</a>
-						<ul class="sub-menu">
-							<li><a href="#ajax/ui_general.html">查看所有订单（时间顺序）</a></li>
-							<li><a href="#ajax/ui_typography.html">管理某人的订单</a></li>
-							<li><a href="#ajax/ui_tabs_accordions.html">管理某人的购物车</a></li>
-						</ul>
 					</li>
 					<li class="has-sub">
 						<a href="javascript:;">
 						    <b class="caret pull-right"></b>
 						    <i class="fa fa-file-o"></i>
-						    <span>退款管理</span> 
+						    <span>订单管理</span> 
 						</a>
-						<ul class="sub-menu">
+					<!--	<ul class="sub-menu">
 							<li><a href="#ajax/form_elements.html">管理有说明退款</a></li>
 							<li><a href="#ajax/form_plugins.html">管理无说明退款</a></li>
-						</ul>
+						</ul> -->
 					</li>
 					<li class="has-sub">
 						<a href="javascript:;">
 						    <b class="caret pull-right"></b>
 						    <i class="fa fa-th"></i>
-						    <span>已购买产品 <span class="label label-theme m-l-5">NEW</span> </span>
+						    <span>销售统计 <span class="label label-theme m-l-5">NEW</span> </span>
 						</a>
-						<ul class="sub-menu">
+					<!--	<ul class="sub-menu">
 							<li class="has-sub">
 							    <a href="javascript:;"><b class="caret pull-right"></b> 已发货</a>
 							    <ul class="sub-menu">
@@ -81,7 +80,7 @@
 							        <li><a href="#ajax/table_manage_autofill.html">不包邮</a></li>
 							    </ul>
 							</li>
-						</ul>
+						</ul>-->
 					</li>
 					
 			        <!-- begin sidebar minify button -->

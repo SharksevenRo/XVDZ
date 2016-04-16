@@ -68,104 +68,82 @@
 				<form id="enteringGoodsForm" class="form-horizontal" method="post">
 					<fieldset>
 						<div class="form-group">
-                            <label class="col-md-2 control-label">投入品类型：</label>
+                            <label class="col-md-2 control-label">投入品编号：</label>
                             <div class="col-md-4">
+                            	<input class="form-control" placeholder="请输入投入品编号"  type="text" name="pdt_no"> 
 <!--                                 <select class="form-control" name="enteringGoodsType.enterGoodsTypeName"> -->
 <!--                                 	<option>1</option> -->
 <!--                                 	<option>2</option> -->
 <!--                                 	<option>3</option> -->
 <!--                                 	<option>4</option> -->
-<!--                                 </select> -->
+<!--                                 </select> 
                                <select id="enterGoodsTypeId" name="enterGoodsTypeId"  class="form-control select2">
                                		
-                               </select>
+                               </select>-->
 <!-- 						   <input class="form-control" placeholder="请输入投入品类型"  type="text" name="enteringGoodsType.enterGoodsTypeName"> -->
                             </div>
 <!--                         </div> -->
 <!--                    		<div class="form-group"> -->
                             <label class="col-md-2 control-label">投入品名称：</label>
                             <div class="col-md-4"> 
-                                <input class="form-control" placeholder="请输入投入品名称"  type="text" name="enteringGoodsName">
+                                <input class="form-control" placeholder="请输入投入品名称"  type="text" name="pdt_name">
                             </div>
                         </div>
          				<div class="form-group">
-                            <label class="col-md-2 control-label">规格型号：</label>
+                            <label class="col-md-2 control-label">投入品正面图</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入规格型号"  type="text" name="enteringTypeNo">
+                                <input class="form-control" multiple="multiple" id="f" type="file" name="pdt_pic_bs">
                             </div>
 <!--                         </div> -->
 <!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">品牌名称：</label>
+                            <label class="col-md-2 control-label">投入品价格：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入品牌名称"  type="text" name="brandName">
+                                <input class="form-control" placeholder="请输入投入品价格"  type="text" name="pdt_prc">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">来源企业：</label>
+                            <label class="col-md-2 control-label">投入品销售总量：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入来源企业"  type="text" name="logEnterprise">
+                                <input class="form-control" placeholder="0"  type="text" name="pdt_sale_count">
                             </div>
 <!--                         </div> -->
 <!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">生产商：</label>
+                            <label class="col-md-2 control-label">投入品点赞数：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入生产商"  type="text" name="manufacturerName">
+                                <input class="form-control" placeholder="0"  type="text" name="pdt_share_count">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">生产许可证号：</label>
+                            <label class="col-md-2 control-label">投入品分享数:</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入生产许可证号"  type="text"  name="licenceNo">
+                                <input class="form-control" placeholder="0"  type="text"  name="licenceNo">
                             </div>
 <!--                         </div> -->
 <!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">适用行业：</label>
+                            <label class="col-md-2 control-label">添加时间:</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入适用行业"  type="text" name="useIndustry">
+                                <input readonly="true" class="form-control" placeholder="点击自动生成" onclick="date = new Date();this.value=1900+date.getYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();"  type="text" name="add_time">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">亩用量：</label>
+                            <label class="col-md-2 control-label">是否开放：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入亩用量"  type="text" name="unitAreaUse">
+                                <select class="form-control" name="pdt_open_state"> -->
+                                 	<option>是</option> 
+                                 	<option>否</option>
+                               </select> 
                             </div>
 <!--                         </div> -->
 <!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">数量单位：</label>
+                            <label class="col-md-2 control-label">删除表示：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入数量单位"  type="text" name="dataUnit">
+                                <select class="form-control" name="delet_flag"> -->
+                                 	<option>是</option> 
+                                 	<option>否</option>
+                               </select> 
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">稀释比：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入稀释比"  type="text" name="attenuationRate">
-                            </div>
-<!--                         </div> -->
-<!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">保质期：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入保质期"  type="text"  name="validPeriod">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">安全间隔期：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入安全间隔期"  type="text"  name="safeTime">
-                            </div>
-<!--                         </div> -->
-<!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">用途：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入用途"  type="text"  name="usageRemark">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">备注：</label>
-                            <div class="col-md-10">
-                                <textarea class="form-control" placeholder="请输入备注"   name="useRemark"></textarea>
-                            </div>
-                        </div> 
+                 
 					<div class="modal-footer">
 						 <div class="form-group">
 <!-- 						    隐藏ID -->
@@ -250,7 +228,7 @@
 	        },
         //高度自动调整
         height : "100%",
-		colNames:["编辑/删除","投入品id","投入品类型id","投入品类型","投入品使用公司", "投入品名称", "规格型号","品牌名称","来源企业","生产商","生产许可证号","适用行业","亩用量","数量单位","稀释比","保质期","安全间隔期","用途","备注"], 
+		colNames:["编辑/删除","商品ID","商品类型ID","布料类型ID","风格类型ID", "颜色类型ID", "尺寸类型ID","创造用户ID","素材ID","商品编号","商品名称","商品溢价","商品标签","商品介绍","商品正面图","商品反面图","商品价格","商品折扣","销售总量","点赞数","分享数","添加时间","修改时间","删除时间","是否开放","备注","删除标识"], 
 		colModel:[ 
 				   {name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,search:false,
 					　　　　formatter: 'actions',
