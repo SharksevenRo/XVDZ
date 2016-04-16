@@ -1,31 +1,31 @@
 package com.xiaov.service.impl;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.hibernate.HibernateSupportDao;
 import com.xiaov.service.BaseService;
 import com.xiaov.utils.ReflectionUtils;
 
-public class BaseServiceImpl<T> implements BaseService<T>{
+@Service
+public class BaseServiceImpl implements BaseService<T>{
 
 	@Autowired
 	@Qualifier(value="hibernateSupportDao")
+	
 	private HibernateSupportDao<T, ?> dao;
 
 	public void Delete(T entity) {
 		dao.delete(entity);
 	}
-
 	public void update(T entity) {
 		dao.saveOrUpdate(entity);
 	}
@@ -33,36 +33,49 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 	public void save(T entity) {
 		dao.save(entity);
 	}
-
 	public List<T> loadAll(T entity) {
-		Class clazz=entity.getClass();
-		List<SimpleExpression> criterions=new ArrayList<SimpleExpression>();
-		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(clazz, false);
+		String name = entity.getClass().getSimpleName();
+		StringBuilder hql=new StringBuilder();
+		hql.append("from "+name+" where 1=1");
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(entity.getClass(), false);
+		Object value = null;
+		Map<String, Object> map=new HashMap<String, Object>();
 		for (Field field : accessibleFields) {
-			Object value = ReflectionUtils.invokeGetterMethod(entity, field.getName());
+			try {
+				value= ReflectionUtils.invokeGetterMethod(entity, field.getName());
+				
+			} catch (Exception e) {
+			}
+			
 			if(value!=null){
-				criterions.add(Restrictions.eq(field.getName(), value));
+				map.put(field.getName(), value);
+				hql.append(" and "+field.getName()+"=:"+field.getName());
 			}
 		}
 		
-		dao.createCriteriaEq(criterions);
-		return null;
+		return dao.createQuery(hql.toString(), map).list();
 	}
 
 	@SuppressWarnings("unchecked")
 	public Page<T> page(Page<T> page) {
-		String name = page.getClass().getName();
-		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), true);
-		Object value;
+		String name = page.getClass().getSimpleName();
+		StringBuilder hql=new StringBuilder();
+		hql.append("from "+name+" where 1=1");
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), false);
+		Object value = null;
 		Map<String, Object> map=new HashMap<String, Object>();
 		for (Field field : accessibleFields) {
-			value= ReflectionUtils.invokeGetterMethod(page, field.getName());
+			try {
+				value= ReflectionUtils.invokeGetterMethod(page, field.getName());
+			} catch (Exception e) {
+			}
+			
 			if(value!=null){
 				map.put(field.getName(), value);
+				hql.append(" and "+field.getName()+"=:"+field.getName());
 			}
 		}
-		String hql="from "+name;
-		String hql2 = dao.setPageRequestToHql(hql, page);
+		String hql2 = dao.setPageRequestToHql(hql.toString(), page);
 		return dao.findPage(page, dao.createQuery(hql2, map));
 	}
 

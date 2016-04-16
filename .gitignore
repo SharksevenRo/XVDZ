@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.project
 *.mymetadata
 XVDZ-web/target
@@ -9,3 +10,17 @@ XVDZ-web/log
 .externalToolBuilders
 XVDZ-web/.externalToolBuilders
 
+=======
+*.project
+*.mymetadata
+XVDZ-web/target
+XVDZ-core/target
+XVDZ-api/target
+XVDZ-web/bin
+XVDZ-web/log
+*.settings
+.externalToolBuilders
+XVDZ-web/.externalToolBuilders
+*.properties
+
+>>>>>>> 757c0e6ab51a53ce040e69ea268861193fe8ba52
