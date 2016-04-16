@@ -2,6 +2,7 @@ package com.xiaov.service.impl;
 
 import com.xiaov.dao.OrdersDao;
 import com.xiaov.model.Orders;
+import com.xiaov.model.Orders;
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.hibernate.support.EntityParamsUtil;
 import com.xiaov.service.interfaces.OrdersService;
@@ -14,46 +15,34 @@ import java.util.List;
 /**
  * Created by zouziyang on 4/16/16.
  */
-public class OrdersServiceImpl implements OrdersService {
+public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements OrdersService {
 
     @Autowired
     private OrdersDao dao;
 
-    public List<Orders> loadAll(Orders entity) {
-        List<SimpleExpression> paramsToEqs = new EntityParamsUtil<Orders>().paramsToEqs(entity);
-        return dao.createCriteriaEq(paramsToEqs).list();
-    }
-
-    public Page<Orders> page(Page<Orders> page) {
-        List<SimpleExpression> paramsToEqs = new EntityParamsUtil<Page<Orders>>().paramsToEqs(page, true);
-        return dao.findPage(page, dao.createCriteriaEq(paramsToEqs));
-    }
-
-    public Orders getOne(Class clazz, String pk) {
-        return dao.load(pk);
-    }
-
-    public void update(Orders entity) {
-        if (entity != null) {
-            entity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-            dao.update(entity);
-        }
-
-    }
-
-    public void Delete(Orders entity) {
-        if (entity != null) {
-            entity.setDeleteTime(new Timestamp(System.currentTimeMillis()));
-            dao.delete(entity);
-        }
-
-    }
-
-    public void save(Orders entity) {
-        if (entity != null) {
-            entity.setAddTime(new Timestamp(System.currentTimeMillis()));
-            dao.save(entity);
-        }
-
-    }
+    @Override
+	public void delete(Orders entity) {
+		
+		super.delete(entity);
+	}
+	@Override
+	public List<Orders> loadAll(Orders entity) {
+		
+		return super.loadAll(entity);
+	}
+	@Override
+	public void save(Orders entity) {
+		
+		super.save(entity);
+	}
+	@Override
+	public void update(Orders entity) {
+		
+		super.update(entity);
+	}
+	@Override
+	public Orders getOne(Class clazz, String pk) {
+		
+		return super.getOne(clazz, pk);
+	}
 }

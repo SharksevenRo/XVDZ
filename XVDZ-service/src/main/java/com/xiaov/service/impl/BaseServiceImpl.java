@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.hibernate.HibernateSupportDao;
@@ -21,14 +22,14 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 	@Qualifier(value="hibernateSupportDao")
 	
 	private HibernateSupportDao<T, ?> dao;
-
-	public void Delete(T entity) {
+	@Transactional
+	public void delete(T entity) {
 		dao.delete(entity);
 	}
 	public void update(T entity) {
-		dao.saveOrUpdate(entity);
+		dao.update(entity);
 	}
-
+	@Transactional
 	public void save(T entity) {
 		dao.save(entity);
 	}
@@ -36,7 +37,7 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 		String name = entity.getClass().getSimpleName();
 		StringBuilder hql=new StringBuilder();
 		hql.append("from "+name+" where 1=1");
-		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(entity.getClass(), false);
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(entity.getClass(), true);
 		Object value = null;
 		Map<String, Object> map=new HashMap<String, Object>();
 		for (Field field : accessibleFields) {
@@ -60,7 +61,7 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 		String name = page.getClass().getSimpleName();
 		StringBuilder hql=new StringBuilder();
 		hql.append("from "+name+" where 1=1");
-		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), false);
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), true);
 		Object value = null;
 		Map<String, Object> map=new HashMap<String, Object>();
 		for (Field field : accessibleFields) {

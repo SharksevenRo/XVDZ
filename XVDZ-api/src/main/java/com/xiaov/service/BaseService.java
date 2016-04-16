@@ -28,7 +28,7 @@ public interface BaseService<T>{
      * @throws
      */
     @Transactional
-    void Delete(T entity);
+    void delete(T entity);
     
     /**
      * 

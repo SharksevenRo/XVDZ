@@ -13,8 +13,8 @@ import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
 
 @Entity
-@Table(name = "receive_address", catalog = "xvdz")
-@StateDelete(propertyName = "isvalid",type = FieldType.B,value="0")
+@Table(name = "test", catalog = "xvdz")
+@StateDelete(propertyName = "isValid",type = FieldType.B,value="0")
 public class Test extends Page<Test>{
 
 	private String testId;
@@ -24,7 +24,7 @@ public class Test extends Page<Test>{
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Id
-	@Column(name = "re_add_id", unique = true, nullable = false, length = 20)
+	@Column(name = "testid", unique = true, nullable = false, length = 20)
 	public String getTestId() {
 		return testId;
 	}
