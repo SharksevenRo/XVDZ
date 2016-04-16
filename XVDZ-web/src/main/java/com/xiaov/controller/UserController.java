@@ -39,7 +39,7 @@ public class UserController {
 	public MessageBean save(UserInfo user){
 		
 		try {
-			userService.saveOrUpdate(user);
+			userService.save(user);
 			return new MessageBean(APPConstant.SUCCESS, "添加成功");
 		} catch (Exception e) {
 			e.printStackTrace();

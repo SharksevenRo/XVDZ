@@ -8,4 +8,5 @@ XVDZ-web/log
 *.settings
 .externalToolBuilders
 XVDZ-web/.externalToolBuilders
+*.properties
 
