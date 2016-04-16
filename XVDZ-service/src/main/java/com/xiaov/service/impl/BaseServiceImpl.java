@@ -1,4 +1,4 @@
-package com.xiaovdingzhi.service.impl;
+package com.xiaov.service.impl;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.Map;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.hibernate.HibernateSupportDao;
@@ -17,14 +18,15 @@ import com.xiaov.utils.ReflectionUtils;
 
 public class BaseServiceImpl<T> implements BaseService<T>{
 
-	//@Autowired
+	@Autowired
+	@Qualifier(value="hibernateSupportDao")
 	private HibernateSupportDao<T, ?> dao;
 
 	public void Delete(T entity) {
 		dao.delete(entity);
 	}
 
-	public void saveOrUpdate(T entity) {
+	public void update(T entity) {
 		dao.saveOrUpdate(entity);
 	}
 
@@ -35,7 +37,7 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 	public List<T> loadAll(T entity) {
 		Class clazz=entity.getClass();
 		List<SimpleExpression> criterions=new ArrayList<SimpleExpression>();
-		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(clazz);
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(clazz, false);
 		for (Field field : accessibleFields) {
 			Object value = ReflectionUtils.invokeGetterMethod(entity, field.getName());
 			if(value!=null){
@@ -47,22 +49,24 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Page<T> page(Page<T> page) {
 		String name = page.getClass().getName();
-		
-		Field[] declaredFields = page.getClass().getDeclaredFields();
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), true);
 		Object value;
 		Map<String, Object> map=new HashMap<String, Object>();
-		for (Field field : declaredFields) {
+		for (Field field : accessibleFields) {
 			value= ReflectionUtils.invokeGetterMethod(page, field.getName());
 			if(value!=null){
 				map.put(field.getName(), value);
 			}
 		}
-		String hql="select * from "+name;
+		String hql="from "+name;
 		String hql2 = dao.setPageRequestToHql(hql, page);
-		return (Page<T>) dao.createQuery(hql2, map).list();
+		return dao.findPage(page, dao.createQuery(hql2, map));
 	}
-	
-	
+
+	public T getOne(Class clazz,String pk) {
+		return (T) dao.getSession().load(clazz, pk);
+	}
 }

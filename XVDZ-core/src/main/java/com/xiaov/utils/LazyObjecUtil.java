@@ -1,5 +1,6 @@
 package com.xiaov.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.xiaov.orm.core.Page;
@@ -42,6 +43,7 @@ public class LazyObjecUtil {
 		}
 		return data;
 	}
+	
 	/**
 	 * Page中的数据延迟加载对象设NULL
 	 * @param page 
@@ -66,5 +68,21 @@ public class LazyObjecUtil {
 			page.setResult(LazySetNull(page.getResult(), string));
 		}
 		 return page;
+	}
+	
+	public static <T> T LazyOneSetNull(T data,String fieldName) throws Exception{
+			List<T> newT=new ArrayList<T>();
+			newT.add(data);
+			newT=LazySetNull(newT, fieldName);
+			return newT.get(0);
+		}
+	public static <T> T LazyOneSetNull(T data,String[] fieldNames) throws Exception{
+		
+		List<T> newT=new ArrayList<T>();
+		newT.add(data);
+		for (String string : fieldNames) {
+			newT=LazySetNull(newT, string);
+		}
+		return newT.get(0);
 	}
 }

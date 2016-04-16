@@ -64,25 +64,48 @@
 					<fieldset>
 						<input type="hidden" name="roleId" value="">
 						<div class="form-group">
-							<label class="col-md-3 col-sm-2 control-label">所属部门：</label>
-							<div class="col-md-3 col-sm-10">
-								<select id="departmentSelect" class="form-control"
-									name="departmentId">
-								</select>
+							<label class="col-md-2 control-label">账户ID：</label>
+							<div class="col-md-4">
+								<input class="form-control" placeholder="账户ID" type="text"
+									name="act_id">
+							</div>
+							<label class="col-md-2 control-label">账号总额：</label>
+							<div class="col-md-4">
+								<input class="form-control" placeholder="账号总额" type="text"
+									name="act_mm">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 col-sm-2 control-label">职位名称：</label>
-							<div class="col-md-8 col-sm-10">
-								<input class="form-control" placeholder="职位名称" type="text"
-									name="roleName">
+							<label class="col-md-2 control-label">总收益：</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" placeholder="总收益"
+									name="act_tt_en"></textarea>
+							</div>
+							<label class="col-md-2 control-label">账号余额：</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" placeholder="账号余额"
+									name="act_blc"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 col-sm-2 control-label">备注：</label>
-							<div class="col-md-8 col-sm-10">
-								<textarea class="form-control" placeholder="备注"
-									name="roleRemark"></textarea>
+							<label class="col-md-2 control-label">冻结资金：</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" placeholder="冻结资金"
+									name="act_fm"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">添加时间：</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" placeholder="添加时间："
+									name="add_time"></textarea>
+							</div>
+							<label class="col-md-2 control-label">删除标识：</label>
+							<div class="col-md-4">
+								<select class="form-control" name="deleteFlag"> -->
+                                 	<option>是</option> 
+                                 	<option>否</option>
+                               </select>
 							</div>
 						</div>
 					</fieldset>
@@ -328,8 +351,8 @@
 					height : "auto",
 					autowidth : true,
 					sortname : "addTime",
-					colNames : [ "编辑/删除","ID", "职位名称", "部门ID", "所在部门",
-							"创建时间", "最后修改时间", "备注" ],
+					colNames : [ "编辑/删除","账户ID", "用户ID", "账号总额", "总收益",
+							"账号余额", "冻结资金", "账号状态", "添加时间", "修改时间", "删除时间", "备注", "删除标识"  ],
 					colModel : [ {
 						name : "role_info",
 						index : "",

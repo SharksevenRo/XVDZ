@@ -1,15 +1,10 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -48,11 +43,11 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private Integer usState;
 	private String usIdCard;
 	private Integer usLoginErrorTimes;
-	private Timestamp usLastLoginTime;
+	private Date usLastLoginTime;
 	private Boolean usLoginState;
-	private Timestamp addTime;
-	private Timestamp updateTime;
-	private Timestamp deleteTime;
+	private Date addTime;
+	private Date updateTime;
+	private Date deleteTime;
 	private String usRemark;
 	private Boolean deleteFlag;
 
@@ -65,7 +60,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	/** minimal constructor */
 	public UserInfo(String usId, String usNcNa, String usLgNa, String usPwd,
 			Integer usState, Integer usLoginErrorTimes, Boolean usLoginState,
-			Timestamp addTime, Boolean deleteFlag) {
+			Date addTime, Boolean deleteFlag) {
 		this.usId = usId;
 		this.usNcNa = usNcNa;
 		this.usLgNa = usLgNa;
@@ -83,8 +78,8 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 			Date usBirth, String usPic, String usPicO, String usTel,
 			String usMail, String usNatrue, String usHobby, Integer usState,
 			String usIdCard, Integer usLoginErrorTimes,
-			Timestamp usLastLoginTime, Boolean usLoginState, Timestamp addTime,
-			Timestamp updateTime, Timestamp deleteTime, String usRemark,
+			Date usLastLoginTime, Boolean usLoginState, Date addTime,
+			Date updateTime, Date deleteTime, String usRemark,
 			Boolean deleteFlag) {
 		this.usId = usId;
 		this.typeId = typeId;
@@ -279,11 +274,11 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	}
 
 	@Column(name = "us_last_login_time", length = 0)
-	public Timestamp getUsLastLoginTime() {
+	public Date getUsLastLoginTime() {
 		return this.usLastLoginTime;
 	}
 
-	public void setUsLastLoginTime(Timestamp usLastLoginTime) {
+	public void setUsLastLoginTime(Date usLastLoginTime) {
 		this.usLastLoginTime = usLastLoginTime;
 	}
 
@@ -297,29 +292,29 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time", nullable = false, length = 0)
-	public Timestamp getAddTime() {
+	public Date getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Timestamp addTime) {
+	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "update_time", length = 0)
-	public Timestamp getUpdateTime() {
+	public Date getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Column(name = "delete_time", length = 0)
-	public Timestamp getDeleteTime() {
+	public Date getDeleteTime() {
 		return this.deleteTime;
 	}
 
-	public void setDeleteTime(Timestamp deleteTime) {
+	public void setDeleteTime(Date deleteTime) {
 		this.deleteTime = deleteTime;
 	}
 

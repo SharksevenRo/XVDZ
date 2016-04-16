@@ -1,4 +1,4 @@
-﻿package com.xiaov.utils;
+package com.xiaov.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
