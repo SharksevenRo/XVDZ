@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,7 +24,6 @@ import com.xiaov.orm.core.FieldType;
 public class ReceiveAddress implements java.io.Serializable {
 
 	// Fields
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String reAddId;
 	private UserInfo userInfo;
 	private String reAddName;
@@ -83,6 +83,8 @@ public class ReceiveAddress implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "re_add_id", unique = true, nullable = false, length = 20)
+	@GeneratedValue(generator="system-uuid") 
+	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getReAddId() {
 		return this.reAddId;
 	}

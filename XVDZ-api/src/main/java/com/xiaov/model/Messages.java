@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,7 +20,6 @@ import org.hibernate.annotations.GenericGenerator;
 public class Messages implements java.io.Serializable {
 
 	// Fields
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String msgId;
 	private UserInfo userInfoBySendId;
 	private UserInfo userInfoByReceiveId;
@@ -59,6 +59,8 @@ public class Messages implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "msg_id", unique = true, nullable = false, length = 20)
+	@GeneratedValue(generator="system-uuid") 
+	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getMsgId() {
 		return this.msgId;
 	}

@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xiaov.model.Test;
 import com.xiaov.orm.core.MessageBean;
+import com.xiaov.orm.core.Page;
 import com.xiaov.service.BaseService;
 
 @Controller
 public class TestController {
 
 	@Autowired
-	@Qualifier("baseService")
+	@Qualifier("baseServiceImpl")
 	private BaseService<Test> baseService;
 	
 	@RequestMapping("/test/save")
@@ -29,5 +30,11 @@ public class TestController {
 	public MessageBean update(Test user){
 		baseService.save(user);
 		return null;
+	}
+	@RequestMapping("/test/page")
+	@ResponseBody
+	public Page<Test> page(Test test){
+		
+		return baseService.page(test);
 	}
 }

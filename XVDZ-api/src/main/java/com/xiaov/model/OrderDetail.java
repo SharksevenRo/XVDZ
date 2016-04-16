@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,7 +26,6 @@ import com.xiaov.orm.core.FieldType;
 public class OrderDetail implements java.io.Serializable {
 
 	// Fields
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String orDtId;
 	private Integer pdtId;
 	private String orDtNo;
@@ -84,6 +84,8 @@ public class OrderDetail implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "or_dt_id", unique = true, nullable = false, length = 20)
+	@GeneratedValue(generator="system-uuid") 
+	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getOrDtId() {
 		return this.orDtId;
 	}

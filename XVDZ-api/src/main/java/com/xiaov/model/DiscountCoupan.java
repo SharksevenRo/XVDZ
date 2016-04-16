@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,7 +28,6 @@ import com.xiaov.orm.core.FieldType;
 public class DiscountCoupan implements java.io.Serializable {
 
 	// Fields
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String disCouId;
 	private UserInfo userInfo;
 	private String disCouNo;
@@ -76,6 +76,8 @@ public class DiscountCoupan implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "dis_cou_id", unique = true, nullable = false, length = 20)
+	@GeneratedValue(generator="system-uuid") 
+	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getDisCouId() {
 		return this.disCouId;
 	}

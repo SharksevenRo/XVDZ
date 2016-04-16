@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ import com.xiaov.service.BaseService;
 import com.xiaov.utils.ReflectionUtils;
 
 @Service
-public class BaseServiceImpl implements BaseService<T>{
+public class BaseServiceImpl<T> implements BaseService<T>{
 
 	@Autowired
 	@Qualifier(value="hibernateSupportDao")

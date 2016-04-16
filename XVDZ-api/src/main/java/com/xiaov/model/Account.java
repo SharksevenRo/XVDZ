@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,7 +26,6 @@ public class Account implements java.io.Serializable {
 
 	// Fields
 
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String actId;
 	private UserInfo userInfo;
 	private Double actMm;
@@ -79,6 +79,8 @@ public class Account implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "act_id", unique = true, nullable = false, length = 20)
+	@GeneratedValue(generator="system-uuid") 
+	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getActId() {
 		return this.actId;
 	}
