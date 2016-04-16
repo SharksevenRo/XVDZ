@@ -199,10 +199,10 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 
 	/**
 	 * 删除对象.
-	 * 
+	 *
 	 * @param entity 对象必须是session中的对象或含PK属性的transient对象.
 	 */
-	public void delete(T entity) {
+	public void delete(Order entity) {
 		
 		if (entity == null) {
 			logger.warn("要删除的对象为:null");
