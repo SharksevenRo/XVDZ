@@ -1,4 +1,4 @@
-package org.XVDZ.service;
+package org.xiaov.baseoper.test;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

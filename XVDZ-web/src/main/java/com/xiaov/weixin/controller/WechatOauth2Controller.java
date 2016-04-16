@@ -57,7 +57,7 @@ public class WechatOauth2Controller{
 					user=new UserInfo();
 					user.setAppId(openId);
 					//跳转到优惠码输入页面，现在暂不考虑
-					userService.saveOrUpdate(user);
+					userService.save(user);
 				}
 				request.getSession().setAttribute("openId", openId);
 			} else {
