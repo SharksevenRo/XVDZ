@@ -20,7 +20,7 @@
 	<mvc:annotation-driven/>  
 	<mvc:resources location="/plugins/" mapping="/plugins/**"></mvc:resources>   
 	<mvc:resources location="/jsp/" mapping="/jsp/**"></mvc:resources>   
-	<mvc:resources location="/admin/" mapping="/admin/**"></mvc:resources>   
+	<mvc:resources location="/admin/" mapping="/admin/**"></mvc:resources>  
 	<mvc:resources location="/" mapping="/**"></mvc:resources>
 	<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
 	<!-- 静态资源访问配置 end-->
@@ -36,7 +36,7 @@
 	
 	<!-- 文件上传 -->
 	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	  	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
 		<!-- 设置上传文件的最大尺寸为5MB -->
 		<property name="maxUploadSize">
 			<value>5242880</value>

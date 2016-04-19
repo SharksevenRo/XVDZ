@@ -1,5 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<script Charset="UTF-8" type="text/javascript" src="../js/plugins/manager/manager.js"></script>
+<script Charset="UTF-8" type="text/javascript" src="../js/plugins/manager/jquery-1.3.min.js"></script>
+<!--
 
+//-->
+</script>
 <div id="sidebar" class="sidebar">
 	<div data-scrollbar="true" data-height="100%">
 		<ul class="nav">
@@ -25,13 +30,13 @@
 					    </a>
 					</li>
 					<li class="has-sub">
-						<a href="#ajax/role.html">
+						<a onclick="getUserInfo();" href="#ajax/role.html">						<!-- /XVDZ-web/main/manager/people?usernmae=zhujie -->
 							<span class="badge pull-right">2</span>
 							<i class="fa fa-inbox"></i> 
 							<span>人员管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/role.html">用户管理</a></li>
+							<li onclick="getUserInfo();"><a href="#ajax/role.html">用户管理</a></li>
 							<li><a href="#ajax/ui_typography.html">公司员工管理</a></li>
 						</ul> 
 					<!--	<ul class="sub-menu">

@@ -1,6 +1,5 @@
-package com.xiaov.filter ;
- 
- 
+package com.xiaov.filter;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -15,18 +14,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
  
 /**
- * ä¹±ç è¿‡æ»¤å™¨
+
+ * ÂÒÂë¹ıÂËÆ÷
+
  * @author shark
- * @update 2015ä¸‹åˆ7:16:26
+
+ * @update 2015ÏÂÎç7:16:26
+
  * @function
+
  *
+
  */
 public class EncodeFilter implements Filter { 
 	
 	@SuppressWarnings("unused") 
 	private FilterConfig config = null;
 	private ServletContext context = null;
-	//ç³»ç»Ÿç¼–ç 
+	//ÏµÍ³±àÂë
+
+
 	private String encode = null;
 	public void destroy() { 
 		 
@@ -35,10 +42,14 @@ public class EncodeFilter implements Filter {
  
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		//--å“åº”ä¹±ç è§£å†³ 
+		//--ÏìÓ¦ÂÒÂë½â¾ö 
+
+
 		request.setCharacterEncoding(encode);
 		response.setContentType("text/html;charset="+encode);
-		//--åˆ©ç”¨è£…é¥°è®¾è®¡æ¨¡å¼æ”¹å˜requestå¯¹è±¡å’Œè·å–è¯·æ±‚å‚æ•°ç›¸å…³çš„æ–¹æ³•,ä»è€Œè§£å†³è¯·æ±‚å‚æ•°ä¹±ç é—®é¢˜ 
+		//--ÀûÓÃ×°ÊÎÉè¼ÆÄ£Ê½¸Ä±ärequest¶ÔÏóºÍ»ñÈ¡ÇëÇó²ÎÊıÏà¹ØµÄ·½·¨,´Ó¶ø½â¾öÇëÇó²ÎÊıÂÒÂëÎÊÌâ 
+
+
 		chain.doFilter(new MyHttpServletRequest((HttpServletRequest) request), response);
 	} 
  
@@ -47,17 +58,25 @@ public class EncodeFilter implements Filter {
 		
 		this.config = filterConfig;
 		this.context = filterConfig.getServletContext();
-		//è·å–ç³»ç»Ÿç¼–ç è®¾ç½®
+		//»ñÈ¡ÏµÍ³±àÂëÉèÖÃ
+
+
 		this.encode = context.getInitParameter("encode");
 	} 
  
  
 	/**
-	 * HttpServletRequeståŒ…è£…ç±»
+
+	 * HttpServletRequest°ü×°Àà
+
 	 * @author shark
-	 * @update 2015ä¸‹åˆ7:19:41
+
+	 * @update 2015ÏÂÎç7:19:41
+
 	 * @function
+
 	 *
+
 	 */
 	private class MyHttpServletRequest extends HttpServletRequestWrapper{ 
 		
@@ -68,11 +87,15 @@ public class EncodeFilter implements Filter {
 			this.request = request;
 		} 
 		 
-		//é‡å†™æ–¹æ³•
+		//ÖØĞ´·½·¨
+
+
 		@Override 
 		public Map<String,String[]> getParameterMap() {
 			try{ 
-				//åˆ¤æ–­å˜æ·¡æäº¤ç±»å‹
+				//ÅĞ¶Ï±äµ­Ìá½»ÀàĞÍ
+
+
 				if(request.getMethod().equalsIgnoreCase("POST")){
 					request.setCharacterEncoding(encode);
 					return request.getParameterMap();
@@ -83,7 +106,9 @@ public class EncodeFilter implements Filter {
 							String [] vs = entry.getValue();
 							for(int i=0;i<vs.length;i++){
 								
-								//å¯¹requeståŸŸé‡Œçš„å‚æ•°è¿›è¡Œç¡¬è§£ç 
+								//¶ÔrequestÓòÀïµÄ²ÎÊı½øĞĞÓ²½âÂë
+
+
 								vs[i] = new String(vs[i].getBytes("iso8859-1"),encode);
 							} 
 						} 
@@ -99,13 +124,17 @@ public class EncodeFilter implements Filter {
 			} 
 		} 
 		 
-		//é‡å†™
+		//ÖØĞ´
+
+
 		@Override 
 		public String[] getParameterValues(String name) {
 			return getParameterMap().get(name);
 		} 
 		 
-		//é‡å†™
+		//ÖØĞ´
+
+
 		@Override 
 		public String getParameter(String name) {
 			return getParameterValues(name) == null ? null : getParameterValues(name)[0];

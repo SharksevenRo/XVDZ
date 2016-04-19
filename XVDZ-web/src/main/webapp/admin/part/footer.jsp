@@ -8,6 +8,6 @@
 
 <footer class="footer text-center navbar navbar-fixed-bottom" style="margin-right:0px;margin-left:220px">
 	<strong>
-		Copyright &copy; 深圳市 <a href="http://www.0755axecom.com" target="blank">XXX有限公司</a>.
+		Copyright &copy; 南昌市 <a href="http://www.0755axecom.com" target="blank">竹新有限公司</a>.
 	</strong> 版权所有. <b>Version</b>1.0.0
 </footer>
