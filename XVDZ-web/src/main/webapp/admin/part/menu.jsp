@@ -30,14 +30,14 @@
 					    </a>
 					</li>
 					<li class="has-sub">
-						<a onclick="getUserInfo();" href="#ajax/role.html">						<!-- /XVDZ-web/main/manager/people?usernmae=zhujie -->
+						<a onclick="getUserInfo('User');" href="#ajax/role.html">						<!-- /XVDZ-web/main/manager/people?usernmae=zhujie -->
 							<span class="badge pull-right">2</span>
 							<i class="fa fa-inbox"></i> 
 							<span>人员管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li onclick="getUserInfo();"><a href="#ajax/role.html">用户管理</a></li>
-							<li><a href="#ajax/ui_typography.html">公司员工管理</a></li>
+							<li onclick="getUserInfo('User');"><a href="#ajax/role.html">用户管理</a></li>
+							<li><a onclick="getUserInfo('Staff')" href="#ajax/managerStaff.html">公司员工管理</a></li>
 						</ul> 
 					<!--	<ul class="sub-menu">
 						    <li><a href="#ajax/email_inbox.html">管理会员信息</a></li>
@@ -48,14 +48,14 @@
 					</li>
 					<li class="has-sub">
 						<a href="#ajax/enteringgoods.html">
-						    <b class="caret pull-right"></b>
+						 <!--    <b class="caret pull-right"></b>--> 
 						    <i class="fa fa-suitcase"></i>
 						    <span>产品管理</span> 
 						</a>
 					</li>
 					<li class="has-sub">
 						<a href="javascript:;">
-						    <b class="caret pull-right"></b>
+						 <!--     <b class="caret pull-right"></b> -->
 						    <i class="fa fa-file-o"></i>
 						    <span>订单管理</span> 
 						</a>

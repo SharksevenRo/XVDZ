@@ -234,19 +234,18 @@
 
 		//编辑
 		$("#saveButton").click(function() {
-			debugger;
 			//获取选中行
 			var rowId = $("#grid-table").jqGrid("getGridParam", "selrow");
 			//获取选中行数据
 			//var rowData = $("#grid-table").jqGrid("getRowData",rowId);
 			//获取选中行数据的ID
 			//var id=rowData.enteringGoodsId;
-			var url = "";
+			var url = "/XVDZ-web/main/manager/saveUserInfo";
 			if(rowId == null){
 				url = "../main/role/adrl";
 			}else{
 				url = "../main/role/updtrl";
-			}
+			} 
 			//ajax提交保存
 			$.ajax({
 				async : true,
@@ -255,11 +254,11 @@
 				dataType : "json",
 				url : url,
 				//序列化form表单
-				data : $("#roleForm").serializeArray(),
+			var	data : $("#roleForm").serializeArray(),
 				error : function() {//请求失败处理函数 
 					$(".manhuaTip").attr({
 						"ty":"error",
-						"msg":"网络错误，可能是网速有点慢!",
+						"msg": data,
 						"value":"失败"
 					}).trigger("click");	 
 				},

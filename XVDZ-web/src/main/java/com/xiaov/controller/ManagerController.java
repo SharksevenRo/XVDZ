@@ -18,10 +18,21 @@ public class ManagerController {
 	
 	@RequestMapping("/manager/getAllUser")
 	@ResponseBody
-	public List<UserInfo> test(String username, HttpServletResponse response ){
-		response.setContentType("text/html;charset=UTF-8");
-		UserServiceImpl user = new UserServiceImpl();
-		List<UserInfo> users = user.loadAll(new UserInfo());
-		return users;
+	public List<UserInfo> AllUser(String username, HttpServletResponse response ){
+		System.out.println(username);
+		if(username.equals("User")) {
+			UserServiceImpl user = new UserServiceImpl();
+			List<UserInfo> users = user.loadAll(new UserInfo());
+			return users;
+		}else if(username.equals("Staff")) {
+			//获取所有的员工信息
+		}
+		return null;
+	}
+	
+	@RequestMapping("/manager/saveUserInfo")
+	@ResponseBody
+	public void saveUser() {
+		System.out.println("OK");
 	}
 }

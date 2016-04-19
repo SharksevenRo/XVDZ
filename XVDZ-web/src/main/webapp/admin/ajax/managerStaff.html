@@ -8,7 +8,7 @@
 		<li class="active">分页表格</li>
 	</ol>
 	<h1 class="page-header">
-		职位列表<small></small>
+		员工列表<small></small>
 	</h1>
 	<div class="row">
 		<div class="col-md-12">
@@ -28,7 +28,7 @@
 							class="btn btn-xs btn-icon btn-circle btn-danger"
 							data-click="panel-remove"> <i class="fa fa-times"></i> </a>
 					</div>
-					<h4 class="panel-title">职位信息表</h4>
+					<h4 class="panel-title">员工信息表</h4>
 				</div>
 
 				<div class="panel-body-reset">
@@ -234,7 +234,6 @@
 
 		//编辑
 		$("#saveButton").click(function() {
-			debugger;
 			//获取选中行
 			var rowId = $("#grid-table").jqGrid("getGridParam", "selrow");
 			//获取选中行数据

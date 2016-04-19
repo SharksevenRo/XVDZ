@@ -1,7 +1,7 @@
-function getUserInfo() {
+function getUserInfo(info) {
 	obj=$.ajax({url:"/XVDZ-web/main/manager/getAllUser",
 		data : {
-					"username" : "朱杰"
+					"username" : info
 				},
 		success: handle,
 		async:true
