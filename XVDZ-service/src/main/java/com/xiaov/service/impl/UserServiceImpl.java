@@ -14,7 +14,7 @@ import com.xiaov.orm.hibernate.support.EntityParamsUtil;
 import com.xiaov.service.interfaces.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl extends BaseServiceImpl<UserInfo> implements UserService{
 
 	@Autowired
 	private UserDao userDao;
@@ -34,39 +34,29 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
-	public void Delete(UserInfo entity) {
-		userDao.delete(entity);
+	@Override
+	public void delete(UserInfo entity) {
 		
+		super.delete(entity);
 	}
-
-	public void save(UserInfo entity) {
-		userDao.saveOrUpdate(entity);
-	}
+	@Override
 	public List<UserInfo> loadAll(UserInfo entity) {
-	
-		Map<String, Object> params = new EntityParamsUtil<UserInfo>().paramsToMap(entity);
-		String hql="from UserInfo";
-		return userDao.createQuery(hql, params).list();
-	}
-
-	public Page<UserInfo> page(Page<UserInfo> page) {
 		
-		/**
-		 * 分页对象打包参数
-		 */
-		Map<String, Object> params = new EntityParamsUtil<Page<UserInfo>>().paramsToMap(page,true);
-		String hql="from UserInfo";
-		//计算总记录数（总条数）
-		page.setCountTotal(true);
-		return userDao.findPage(page, userDao.createQuery(hql, params)) ;
+		return super.loadAll(entity);
 	}
-
-	public UserInfo getOne(Class clazz, String pk) {
-		return userDao.load(pk);
+	@Override
+	public void save(UserInfo entity) {
+		
+		super.save(entity);
 	}
-
+	@Override
 	public void update(UserInfo entity) {
-		// TODO Auto-generated method stub
 		
+		super.update(entity);
+	}
+	@Override
+	public UserInfo getOne(Class clazz, String pk) {
+		
+		return super.getOne(clazz, pk);
 	}
 }

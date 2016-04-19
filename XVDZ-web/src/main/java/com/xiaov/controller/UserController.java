@@ -83,7 +83,7 @@ public class UserController {
 	@ResponseBody
 	public MessageBean deleteAjax(UserInfo user){
 		try {
-			userService.Delete(user);
+			userService.delete(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new MessageBean(APPConstant.ERROR,"删除失败");

@@ -21,7 +21,7 @@ public class ManagerController {
 	public List<UserInfo> test(String username, HttpServletResponse response ){
 		response.setContentType("text/html;charset=UTF-8");
 		UserServiceImpl user = new UserServiceImpl();
-		List<UserInfo> users = user.loadAll(null);
+		List<UserInfo> users = user.loadAll(new UserInfo());
 		return users;
 	}
 }

@@ -125,6 +125,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 */
 	public void insert(T entity) {
 		getSession().save(entity);
+		this.flush();
 	}
 	
 	/**
@@ -141,6 +142,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 		for (Iterator<T> it = list.iterator(); it.hasNext();) {
 			insert(it.next());
 		}
+		this.flush();
 		
 	}
 	
@@ -150,6 +152,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 */
 	public void update(T entity) {
 		getSession().update(entity);
+		this.flush();
 	}
 	
 	/**
@@ -158,6 +161,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 */
 	public void saveOrUpdate(T entity) {
 		getSession().saveOrUpdate(entity);
+		this.flush();
 	}
 	
 	/**
@@ -171,6 +175,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 		for (Iterator<T> it = list.iterator(); it.hasNext();) {
 			update(it.next());
 		}
+		this.flush();
 	}
 	
 	/**
@@ -179,7 +184,8 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 * @param entity orm实体
 	 */
 	public void save(T entity) {
-		getSession().saveOrUpdate(entity);
+		getSession().save(entity);
+		this.flush();
 	}
 	
 	/**
@@ -195,6 +201,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 		for (Iterator<T> it = list.iterator(); it.hasNext();) {
 			save(it.next());
 		}
+		this.flush();
 	}
 
 	/**
@@ -217,7 +224,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 		} else {
 			getSession().delete(entity);
 		}
-		
+		this.flush();
 	}
 
 	/**
@@ -227,6 +234,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 */
 	public void delete(PK id) {
 		delete(get(id));
+		this.flush();
 	}
 
 	/**
@@ -241,7 +249,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 		for (Iterator<PK> it = ids.iterator(); it.hasNext();) {
 			delete(it.next());
 		}
-		
+		this.flush();
 	}
 	
 	/**
@@ -256,6 +264,7 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 		for (Iterator<T> it = list.iterator(); it.hasNext();) {
 			delete(it.next());
 		}
+		this.flush();
 	}
 	
 

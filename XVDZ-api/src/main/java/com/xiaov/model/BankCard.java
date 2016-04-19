@@ -24,7 +24,6 @@ import com.xiaov.orm.core.FieldType;
 public class BankCard implements java.io.Serializable {
 
 	// Fields
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String bkCdId;
 	private DbTypes dbTypes;
 	private Account account;
