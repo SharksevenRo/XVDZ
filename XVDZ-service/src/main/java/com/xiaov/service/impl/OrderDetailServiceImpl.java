@@ -4,12 +4,14 @@ import com.xiaov.dao.OrderDetailDao;
 import com.xiaov.model.OrderDetail;
 import com.xiaov.service.interfaces.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by zouziyang on 4/18/16.
  */
+@Service
 public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail> implements OrderDetailService {
     @Autowired
     private OrderDetailDao orderdetaildao;

@@ -14,6 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
+import com.xiaov.orm.core.Page;
 
 /**
  * Orders entity. @author MyEclipse Persistence Tools
@@ -21,7 +22,7 @@ import com.xiaov.orm.core.FieldType;
 @Entity
 @Table(name = "orders", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class Orders implements java.io.Serializable {
+public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	// Fields
 	private String orId;
@@ -82,7 +83,7 @@ public class Orders implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "or_id", unique = true, nullable = false, length = 20)
+	@Column(name = "or_id", unique = true, nullable = false, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getOrId() {

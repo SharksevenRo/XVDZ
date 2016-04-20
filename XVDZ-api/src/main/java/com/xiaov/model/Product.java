@@ -13,8 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
+import com.xiaov.orm.core.Page;
 
 /**
  * Product entity. @author MyEclipse Persistence Tools
@@ -22,11 +25,11 @@ import com.xiaov.orm.core.FieldType;
 @Entity
 @Table(name = "product", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class Product implements java.io.Serializable {
+public class Product extends Page<Product> implements java.io.Serializable {
 
 	// Fields
 
-	private Integer pdtId;
+	private String pdtId;
 	private DbTypes dbTypesByColorTypeId;
 	private DbTypes dbTypesBySizeTypeId;
 	private DbTypes dbTypesByClothTypeId;
@@ -60,7 +63,7 @@ public class Product implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Product(Integer pdtId, String pdtNo, String pdtName,
+	public Product(String pdtId, String pdtNo, String pdtName,
 			String pdtPicBs, Double pdtPrc, Integer pdtSaleCount,
 			Integer pdtGdCount, Integer pdtShareCount, Date addTime,
 			Boolean pdtOpenState, Boolean deletFlag) {
@@ -78,7 +81,7 @@ public class Product implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Product(Integer pdtId, DbTypes dbTypesByColorTypeId,
+	public Product(String pdtId, DbTypes dbTypesByColorTypeId,
 			DbTypes dbTypesBySizeTypeId, DbTypes dbTypesByClothTypeId,
 			DbTypes dbTypesByPdtTypeId, Material material,
 			DbTypes dbTypesByStyleTypeId, String usId, String pdtNo,
@@ -117,13 +120,14 @@ public class Product implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "pdt_id", unique = true, nullable = false)
-	@GeneratedValue(strategy = IDENTITY)
-	public Integer getPdtId() {
+	@Column(name = "pdt_id", unique = true, nullable = false, length = 33)
+	@GeneratedValue(generator="system-uuid") 
+	@GenericGenerator(name="system-uuid",strategy="uuid")
+	public String getPdtId() {
 		return this.pdtId;
 	}
 
-	public void setPdtId(Integer pdtId) {
+	public void setPdtId(String pdtId) {
 		this.pdtId = pdtId;
 	}
 

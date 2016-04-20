@@ -8,6 +8,7 @@ import com.xiaov.orm.hibernate.support.EntityParamsUtil;
 import com.xiaov.service.interfaces.OrdersService;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * Created by zouziyang on 4/16/16.
  */
+@Service
 public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements OrdersService {
 
     @Autowired

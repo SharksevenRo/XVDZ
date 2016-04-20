@@ -1,15 +1,18 @@
 package com.xiaov.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.xiaov.dao.DiscountCodeDao;
 import com.xiaov.model.DiscountCode;
 import com.xiaov.service.interfaces.DiscountCodeService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  * Created by zouziyang on 4/18/16.
  */
+@Service
 public class DiscountCodeServiceImpl extends BaseServiceImpl<DiscountCode> implements DiscountCodeService {
     @Autowired
     private DiscountCodeDao discountCodeDao;

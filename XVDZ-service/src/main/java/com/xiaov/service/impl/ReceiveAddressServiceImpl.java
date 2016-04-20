@@ -4,12 +4,14 @@ import com.xiaov.dao.ReceiveAddressDao;
 import com.xiaov.model.ReceiveAddress;
 import com.xiaov.service.interfaces.ReceiveAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by zouziyang on 4/18/16.
  */
+@Service
 public class ReceiveAddressServiceImpl extends BaseServiceImpl<ReceiveAddress> implements ReceiveAddressService {
 
     @Autowired

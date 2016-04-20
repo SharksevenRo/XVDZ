@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -110,7 +111,9 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "us_id", unique = true, nullable = false, length = 20)
+	@Column(name = "us_id", unique = true, nullable = false, length = 33)
+	@GeneratedValue(generator="system-uuid") 
+	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getUsId() {
 		return this.usId;
 	}

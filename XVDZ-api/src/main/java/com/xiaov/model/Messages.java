@@ -1,6 +1,7 @@
 package com.xiaov.model;
 
 import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,12 +13,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.xiaov.orm.core.Page;
+
 /**
  * Messages entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "messages", catalog = "xvdz")
-public class Messages implements java.io.Serializable {
+public class Messages extends Page<Messages> implements java.io.Serializable {
 
 	// Fields
 	private String msgId;
@@ -58,7 +61,7 @@ public class Messages implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "msg_id", unique = true, nullable = false, length = 20)
+	@Column(name = "msg_id", unique = true, nullable = false, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getMsgId() {

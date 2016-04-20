@@ -14,6 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
+import com.xiaov.orm.core.Page;
 
 /**
  * BankCard entity. @author MyEclipse Persistence Tools
@@ -21,7 +22,7 @@ import com.xiaov.orm.core.FieldType;
 @Entity
 @Table(name = "bank_card", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class BankCard implements java.io.Serializable {
+public class BankCard extends Page<BankCard> implements java.io.Serializable {
 
 	// Fields
 	private String bkCdId;
@@ -75,7 +76,7 @@ public class BankCard implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "bk_cd_id", unique = true, nullable = false, length = 20)
+	@Column(name = "bk_cd_id", unique = true, nullable = false, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getBkCdId() {

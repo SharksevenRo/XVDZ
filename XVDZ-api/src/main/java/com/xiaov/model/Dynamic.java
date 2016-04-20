@@ -14,6 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
+import com.xiaov.orm.core.Page;
 
 /**
  * Dynamic entity. @author MyEclipse Persistence Tools
@@ -21,7 +22,7 @@ import com.xiaov.orm.core.FieldType;
 @Entity
 @Table(name = "dynamic", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class Dynamic implements java.io.Serializable {
+public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 
 	// Fields
 	private String dynmcId;
@@ -65,6 +66,7 @@ public class Dynamic implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@GeneratedValue(generator="system-uuid") 
+	@Column(name = "dynmc_id", unique = true, nullable = false, length = 33)
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getDynmcId() {
 		return this.dynmcId;

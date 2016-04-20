@@ -2,9 +2,12 @@ package com.xiaov.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.xiaov.model.Material;
 import com.xiaov.service.interfaces.MaterialService;
 
+@Service
 public class MaterialServiceImpl extends BaseServiceImpl<Material> implements MaterialService{
 
 	@Override

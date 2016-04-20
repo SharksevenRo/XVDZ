@@ -68,7 +68,7 @@ public class ProductComment implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "cmt_id", unique = true, nullable = false, length = 20)
+	@Column(name = "cmt_id", unique = true, nullable = false, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getCmtId() {
