@@ -5,6 +5,8 @@ import com.xiaov.model.DiscountCoupan;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.DiscountCoupanService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class DiscountCoupanController {
+	@Autowired
     private DiscountCoupanService discountCoupanService;
 
     @RequestMapping("/admin/DiscountCoupan/saveAjax")

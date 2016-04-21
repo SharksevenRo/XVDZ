@@ -58,7 +58,7 @@ public class DiscountCodeController {
         }
     }
 
-    @RequestMapping(value = "/admin/Orders/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/DiscountCode/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public DiscountCode getOne(DiscountCode discountCode) {
         try {

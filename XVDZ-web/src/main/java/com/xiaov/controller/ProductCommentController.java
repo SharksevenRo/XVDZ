@@ -57,7 +57,7 @@ public class ProductCommentController {
         }
     }
 
-    @RequestMapping(value = "/admin/Orders/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/ProductComment/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public ProductComment getOne(ProductComment productComment) {
         try {
