@@ -80,7 +80,8 @@ public class ProductController {
 		}
 	}
 	@RequestMapping("/admin/product/picUploadAjax")
-	public MessageBean saveProductImage(ImageCutModel imgCut,String sort,HttpServletRequest request){
+	@ResponseBody
+	public MessageBean saveProductImage(ImageCutModel imgCut,HttpServletRequest request){
 		
 		System.out.println("11");
 		try {
@@ -90,17 +91,17 @@ public class ProductController {
 				String contextPath = request.getRealPath("/");
 				//获取公司ID
 				//设置正常保存路径域
-				String[] normalScope = {"normal",sort,new Date().getYear()+"",new Date().getMonth()+"","product"}; 
+				String[] normalScope = {"normal",imgCut.getType(),new Date().getYear()+"",new Date().getMonth()+"","product"}; 
 				//创建图片上传对象，这是正常路径
 				UploadFileUtil fileUtil = new UploadFileUtil(contextPath,normalScope);
 				
 				//设置压缩保存路径域
-				String[] compressScope = {"normal",sort,new Date().getYear()+"",new Date().getMonth()+"","product"};
+				String[] compressScope = {"normal",imgCut.getType(),new Date().getYear()+"",new Date().getMonth()+"","product"};
 				//压缩
 				String compressTargetPath = fileUtil.savePicWithCompress(imgCut.getImageFile(), newFileName,compressScope, false);
 				String dbCompressUrl = fileUtil.getSmallRelativeFolderPath()+newFileName;
 				//剪切保存域
-				String[] cutScope = {"normal",sort,new Date().getYear()+"",new Date().getMonth()+"","product"};
+				String[] cutScope = {"normal",imgCut.getType(),new Date().getYear()+"",new Date().getMonth()+"","product"};
 				//剪切
 				String cutTargetPath = fileUtil.cutImg(imgCut, newFileName ,cutScope);
 				String dbCutUrl = fileUtil.getCutRelativeFolderPath()+newFileName;
