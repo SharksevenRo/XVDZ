@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.xiaov.orm.core.Page;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -21,7 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "product_comment", catalog = "xvdz")
-public class ProductComment implements java.io.Serializable {
+public class ProductComment extends Page<Orders> implements java.io.Serializable {
 
 	// Fields
 	private String cmtId;
