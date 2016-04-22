@@ -459,7 +459,7 @@ public class HibernateSupportDao<T,PK extends Serializable> extends BasicHiberna
 			}
 			if (eqs != null) {
 
-				for (SimpleExpression eq : eqs) {
+				for (Criterion eq : eqs) {
 					criteria.add(eq);
 				}
 			}
