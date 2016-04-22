@@ -447,7 +447,7 @@ public class HibernateSupportDao<T,PK extends Serializable> extends BasicHiberna
 	 * @return
 	 */
 	public <T> List<T> getEntitiestNotLazy(T t, String[] fields,
-			SimpleExpression[] eqs) {
+			Criterion[] eqs) {
 
 		try {
 			Criteria criteria = getSession().createCriteria(t.getClass());
