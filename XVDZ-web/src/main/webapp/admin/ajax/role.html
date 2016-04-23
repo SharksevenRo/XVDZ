@@ -32,9 +32,9 @@
 				</div>
 
 				<div class="panel-body-reset">
-					<div class="table-responsive" style="overflow: hidden;">
+					<div class="table-responsive" >
 						<div class="btn-group" data-toggle="buttons-checkbox" style="margin-bottom:10px">
-							<button type="button" class="btn btn-info" id="new_button">添加</button>
+							<button type="button" class="btn btn-info" >添加</button> <!-- id="new_button" -->
 							<button type="button" class="btn btn-primary" id="edit_button">修改</button>
 							<button type="button" class="btn btn-danger" id="dele_button">删除</button>
 						</div>
@@ -57,7 +57,7 @@
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">×</span><span class="sr-only">Close</span>
 				</button>
-				<h4 class="modal-title">添加职位</h4>
+				<h4 class="modal-title">添加用户</h4>
 			</div>
 			<div class="modal-body">
 				<form id="roleForm" class="form-horizontal form-bordered">
@@ -103,8 +103,8 @@
 							<label class="col-md-2 control-label">删除标识：</label>
 							<div class="col-md-4">
 								<select class="form-control" name="deleteFlag"> -->
-                                 	<option>是</option> 
-                                 	<option>否</option>
+                                 	<option>true</option> 
+                                 	<option>false</option>
                                </select>
 							</div>
 						</div>
@@ -175,7 +175,7 @@
 				}
 			},
 			error : function() {
-				alert("网络错误！");
+			//	alert("网络错误！");
 				$.jstree.rollback(data.rlbk);
 			}
 		});
@@ -240,27 +240,27 @@
 			//var rowData = $("#grid-table").jqGrid("getRowData",rowId);
 			//获取选中行数据的ID
 			//var id=rowData.enteringGoodsId;
-			var url = "/XVDZ-web/main/manager/saveUserInfo";
-			if(rowId == null){
+			var url = "";
+	/*		if(rowId == null){
 				url = "../main/role/adrl";
 			}else{
 				url = "../main/role/updtrl";
-			} 
+			} */
 			//ajax提交保存
 			$.ajax({
 				async : true,
 				cache : false,
 				type : "POST",
 				dataType : "json",
-				url : url,
+				url : "/XVDZ-web/main/manager/saveUserInfo",
 				//序列化form表单
-			var	data : $("#roleForm").serializeArray(),
+				data : $("#roleForm").serializeArray(),
 				error : function() {//请求失败处理函数 
 					$(".manhuaTip").attr({
 						"ty":"error",
-						"msg": data,
+						"msg":"网络错误，可能是网速有点慢!",
 						"value":"失败"
-					}).trigger("click");	 
+					}).trigger("click"); 
 				},
 				success : function(data) { //请求成功后处理函数。
 					if(data.status=="1"){
@@ -346,16 +346,16 @@
 		$(grid_selector).jqGrid(
 				{
 					datatype : "json",
-					url : "../main/role/findRolesByCompanyId",
+					url : "/main/XVDZ-web/manager/getAllUser",
 					height : "auto",
 					autowidth : true,
 					sortname : "addTime",
-					colNames : [ "编辑/删除","账户ID", "用户ID", "账号总额", "总收益",
-							"账号余额", "冻结资金", "账号状态", "添加时间", "修改时间", "删除时间", "备注", "删除标识"  ],
+					colNames : [ "编辑/删除","账户ID", "用户ID", "总额", "总收益",
+							"余额", "冻结资金", "账号状态","修改时间", "备注","添加时间", "删除时间"],  //, "修改时间", "删除时间", "备注", "删除标识"  
 					colModel : [ {
-						name : "role_info",
+						name : "",
 						index : "",
-						width : 80,
+						width : "80px",
 						fixed : true,
 						sortable : false,
 						resize : false,
@@ -370,66 +370,99 @@
 						//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
 						}
 					}, {
-						name : "roleId",
-						index : "roleId",
+						name : "act_id",
+						index : "act_id",
 						editable : true,
-						hidden : true,
-						width : "50px",
+						hidden : false,
+						width : "10px",
+						sorttype : "text",
+						search : true,
+						align : "center"
+					},{
+						name : "us_id",
+						index : "us_id",
+						editable : true,
+						hidden : false,
+						width : "10px",
 						sorttype : "text",
 						search : true,
 						align : "center"
 					}, {
-						name : "roleName",
-						index : "roleName",
+						name : "act_mm",
+						index : "act_mm",
 						editable : true,
-						width : "30px",
+						width : "10px",
 						sorttype : "text",
 						search : true,
 						align : "center"
 					}, {
-						name : "departmentId",
-						index : "departmentId",
-						hidden : true,
+						name : "act_tt_en",
+						index : "act_tt_en",
+						hidden : false,
 						editable : true,
-						width : "50px",
+						width : "10px",
 						sorttype : "text",
 						align : "center"
 					}, {
-						name : "department.departmentName",
-						index : "departmentName",
+						name : "act_blc",
+						index : "act_blc",
 						editable : true,
-						width : "30px",
+						width : "10px",
 						sorttype : "text",
 						align : "center"
 					}, {
-						name : "addTime",
-						index : "addTime",
+						name : "act_fm",
+						index : "act_fm",
 						editable : true,
-						width : "50px",
+						width : "10px",
 						sorttype : "date",
 						align : "center",
 						unformat : pickDate
 					}, {
-						name : "updateTime",
-						index : "updateTime",
+						name : "act_state",
+						index : "act_state",
 						editable : true,
-						width : "50px",
+						width : "10px",
 						sorttype : "date",
 						align : "center",
 						unformat : pickDate
-					}, {
-						name : "roleRemark",
-						index : "roleRemark",
+					} ,{
+						name : "update_time",
+						index : "update_time",
+						hidden : false,
+						editable : true,
+						width : "10px",
+						sorttype : "text",
+						align : "center"
+					},{
+						name : "remark",
+						index : "remark",
+						hidden : false,
+						editable : true,
+						width : "10px",
+						sorttype : "text",
+						align : "center"
+					},{
+						name : "add_time",
+						index : "add_time",
+						hidden : false,
+						editable : true,
+						width : "10px",
+						sorttype : "text",
+						align : "center"
+					},{
+						name : "delete_time",
+						index : "delete_time",
 						sortable : false,
 						editable : true,
-						width : "100px",
+						width : "10px",
 						edittype : "textarea",
 						editoptions : {
 							rows : "2",
 							cols : "20"
 						},
 						align : "center"
-					}, ],
+					} ],
 					viewrecords : true,
 					rowNum : 10,
 					rowList : [ 10, 20, 30 ],
@@ -449,7 +482,7 @@
 							enableTooltips(table);
 						}, 0);
 					},
-					editurl : "../../main/user/editUser",//nothing is saved
+					editurl : "/main/XVDZ-web/manager/getAllUser",//nothing is saved
 					//caption : "职位信息",
 
 					prmNames : {

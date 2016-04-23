@@ -1,4 +1,5 @@
 function getUserInfo(info) {
+
 	obj=$.ajax({url:"/XVDZ-web/main/manager/getAllUser",
 		data : {
 					"username" : info
