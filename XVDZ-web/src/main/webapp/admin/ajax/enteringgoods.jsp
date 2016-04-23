@@ -1,3 +1,9 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <!-- begin #content -->
@@ -10,7 +16,7 @@
 		<li class="active">分页表格</li>
 	</ol>
 	<h1 class="page-header">
-		投入品备案<small></small>
+		商品备案<small></small>
 	</h1>
 	<div class="row">
 		<div class="col-md-12">
@@ -31,7 +37,7 @@
 							data-click="panel-remove"><i class="fa fa-times"></i>
 						</a>
 					</div>
-					<h4 class="panel-title">投入品备案</h4>			
+					<h4 class="panel-title">商品备案</h4>			
 				</div>
 				<div class="panel-body">
 				
@@ -61,16 +67,16 @@
         <div class="modal-content" style="width: 700px">
             <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">添加投入品备案</h4>
+				<h4 class="modal-title">添加商品备案</h4>
 			</div>
 			<div class="modal-body">
 <!-- 				<form action="../main/enterGoods/saveOrUpdateEnterGoods" class="form-horizontal" method="post"> -->
 				<form id="enteringGoodsForm" class="form-horizontal" method="post">
 					<fieldset>
 						<div class="form-group">
-                            <label class="col-md-2 control-label">投入品编号：</label>
+                            <label class="col-md-2 control-label">商品编号：</label>
                             <div class="col-md-4">
-                            	<input class="form-control" placeholder="请输入投入品编号"  type="text" name="pdt_no"> 
+                            	<input class="form-control" placeholder="请输入商品编号"  type="text" name="pdt_no"> 
 <!--                                 <select class="form-control" name="enteringGoodsType.enterGoodsTypeName"> -->
 <!--                                 	<option>1</option> -->
 <!--                                 	<option>2</option> -->
@@ -80,41 +86,41 @@
                                <select id="enterGoodsTypeId" name="enterGoodsTypeId"  class="form-control select2">
                                		
                                </select>-->
-<!-- 						   <input class="form-control" placeholder="请输入投入品类型"  type="text" name="enteringGoodsType.enterGoodsTypeName"> -->
+<!-- 						   <input class="form-control" placeholder="请输入商品类型"  type="text" name="enteringGoodsType.enterGoodsTypeName"> -->
                             </div>
 <!--                         </div> -->
 <!--                    		<div class="form-group"> -->
-                            <label class="col-md-2 control-label">投入品名称：</label>
+                            <label class="col-md-2 control-label">商品名称：</label>
                             <div class="col-md-4"> 
-                                <input class="form-control" placeholder="请输入投入品名称"  type="text" name="pdt_name">
+                                <input class="form-control" placeholder="请输入商品名称"  type="text" name="pdt_name">
                             </div>
                         </div>
          				<div class="form-group">
-                            <label class="col-md-2 control-label">投入品正面图</label>
+                            <label class="col-md-2 control-label">商品正面图</label>
                             <div class="col-md-4">
                                 <input class="form-control" multiple="multiple" id="f" type="file" name="pdt_pic_bs">
                             </div>
 <!--                         </div> -->
 <!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">投入品价格：</label>
+                            <label class="col-md-2 control-label">商品价格：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入投入品价格"  type="text" name="pdt_prc">
+                                <input class="form-control" placeholder="请输入商品价格"  type="text" name="pdt_prc">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">投入品销售总量：</label>
+                            <label class="col-md-2 control-label">商品销售总量：</label>
                             <div class="col-md-4">
                                 <input class="form-control" placeholder="0"  type="text" name="pdt_sale_count">
                             </div>
 <!--                         </div> -->
 <!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">投入品点赞数：</label>
+                            <label class="col-md-2 control-label">商品点赞数：</label>
                             <div class="col-md-4">
                                 <input class="form-control" placeholder="0"  type="text" name="pdt_share_count">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">投入品分享数:</label>
+                            <label class="col-md-2 control-label">商品分享数:</label>
                             <div class="col-md-4">
                                 <input class="form-control" placeholder="0"  type="text"  name="licenceNo">
                             </div>
@@ -165,19 +171,18 @@
 
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-<!-- jqGrid -->
-<script src="../js/plugins/jqGrid/i18n/grid.locale-en.js"></script>
-<script src="../js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
-<script src="../js/bootbox.js"></script>
-<script src="../js/bootstrap-dialog.js"></script>
-<script type="text/javascript">
-	App.restartGlobalFunction();
-	App.setPageTitle("安鑫宝 | 企业追溯平台");
+<script src="${pageContext.request.contextPath }/js/jquery-2.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="${pageContext.request.contextPath }/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
-	$.getScript("../js/assets/js/table-manage-default.demo.js").done(function() {
-		//initiate dataTables plugin
-		TableManageDefault.init();
-	});
+<!-- jqGrid -->
+
+<script src="${pageContext.request.contextPath }/js/plugins/jqGrid/i18n/grid.locale-en.js"></script>
+<script src="${pageContext.request.contextPath }/js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/bootbox.js"></script>
+<script src="${pageContext.request.contextPath }/js/bootstrap-dialog.js"></script>
+<script type="text/javascript">
 </script>
 
 <script type="text/javascript">
@@ -186,7 +191,7 @@
 		$("select[name=enterGoodsTypeId]").html("");
 		$.ajax({
 			type : "get",
-			url : "../main/etgdstp/gtetgstp",
+			url : "${pageContext.request.contextPath }/",
 			dataType : "json",
 			async : true,
 			success : function(data) {
@@ -266,11 +271,11 @@
 							 }
 						} 
 					}, 
-				   {name:"enteringGoodsId",index:"投入品id",hidden : true, editable: true, width:90, align:"center"},
-				   {name:"enterGoodsTypeId",index:"投入品类型id",hidden : true, editable: true, width:90, align:"center"},
-				   {name:"enteringGoodsType.enterGoodsTypeName",index:"投入品类型", editable: false, width:90, align:"center"}, 
-				   {name:"company.companyName",index:"投入品使用公司",hidden : true, editable: false, width:150, align:"center"}, 
-				   {name:"enteringGoodsName",index:"投入品名称",  editable: true,width:80, align:"center"}, 
+				   {name:"enteringGoodsId",index:"商品id",hidden : true, editable: true, width:90, align:"center"},
+				   {name:"enterGoodsTypeId",index:"商品类型id",hidden : true, editable: true, width:90, align:"center"},
+				   {name:"enteringGoodsType.enterGoodsTypeName",index:"商品类型", editable: false, width:90, align:"center"}, 
+				   {name:"company.companyName",index:"商品使用公司",hidden : true, editable: false, width:150, align:"center"}, 
+				   {name:"enteringGoodsName",index:"商品名称",  editable: true,width:80, align:"center"}, 
 				   {name:"enteringTypeNo",index:"规格型号",  editable: true,width:80, align:"center"}, 
 				   {name:"brandName",index:"品牌名称",  editable: true,width:80, align:"center"}, 
 				   {name:"logEnterprise",index:"来源企业",  editable: true,width:80, align:"center"},
@@ -310,7 +315,7 @@
    		 viewrecords: true, 
    		 sortorder: "desc",
    		 //jqgrid名称 
-//    	 caption:"投入品备案", 
+//    	 caption:"商品备案", 
    	});
    
    	//加载底部操作按钮及页码
@@ -369,7 +374,7 @@
 // 	 	$("#grid-table").jqGrid('editGridRow', "new", { height : 500,width:500, reloadAfterSubmit : false });
 		//清空表单数据
 		$("input[type=reset]").trigger("click");
-		//加载投入品类型
+		//加载商品类型
 		loadDepartment(null, null);
 		//手动加载模态框
 	 	$("#mymodal").modal("toggle");
