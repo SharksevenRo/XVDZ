@@ -5,6 +5,10 @@
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
+<<<<<<< HEAD
+=======
+			<attribute name="maven.pomderived" value="true"/>
+>>>>>>> 2645eecdacf8d39b0ad4b1c36303d4a08b6ae194
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>

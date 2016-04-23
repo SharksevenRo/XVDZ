@@ -15,6 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
+import com.xiaov.orm.core.Page;
 
 /**
  * Material entity. @author MyEclipse Persistence Tools
@@ -22,7 +23,7 @@ import com.xiaov.orm.core.FieldType;
 @Entity
 @Table(name = "material", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class Material implements java.io.Serializable {
+public class Material extends Page<Material> implements java.io.Serializable {
 
 	// Fields
 	private Integer materialId;
@@ -71,7 +72,7 @@ public class Material implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "material_id", unique = true, nullable = false)
+	@Column(name = "material_id", unique = true, nullable = false,length=33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public Integer getMaterialId() {

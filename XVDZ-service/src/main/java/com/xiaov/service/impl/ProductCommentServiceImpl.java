@@ -4,12 +4,14 @@ import com.xiaov.dao.ProductCommentDao;
 import com.xiaov.model.ProductComment;
 import com.xiaov.service.interfaces.ProductCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by zouziyang on 4/18/16.
  */
+@Service
 public class ProductCommentServiceImpl extends BaseServiceImpl<ProductComment> implements ProductCommentService {
 
     @Autowired

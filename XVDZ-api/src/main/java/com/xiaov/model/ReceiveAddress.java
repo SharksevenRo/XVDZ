@@ -82,7 +82,7 @@ public class ReceiveAddress implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "re_add_id", unique = true, nullable = false, length = 20)
+	@Column(name = "re_add_id", unique = true, nullable = false, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getReAddId() {

@@ -3,11 +3,12 @@ package com.xiaov.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.xiaov.dao.ProductDao;
 import com.xiaov.model.Product;
 import com.xiaov.service.interfaces.ProductService;
-
+@Service
 public class ProductServiceImpl extends BaseServiceImpl<Product> implements ProductService{
 
 	@Autowired
@@ -38,5 +39,9 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		
 		return super.getOne(clazz, pk);
 	}
-
+	
+	public Product getOneInteger(Class clazz, Integer pk) {
+		
+		return null;
+	}
 }

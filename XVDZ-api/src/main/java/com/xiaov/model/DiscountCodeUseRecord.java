@@ -12,12 +12,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.xiaov.orm.core.Page;
+
 /**
  * DiscountCodeUseRecord entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "discount_code_use_record", catalog = "xvdz")
-public class DiscountCodeUseRecord implements java.io.Serializable {
+public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implements java.io.Serializable {
 
 	// Fields
 	private String codeUseRcdId;
@@ -50,7 +52,7 @@ public class DiscountCodeUseRecord implements java.io.Serializable {
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Id
-	@Column(name = "code_use_rcd_id", unique = true, nullable = false, length = 20)
+	@Column(name = "code_use_rcd_id", unique = true, nullable = false, length = 33)
 	public String getCodeUseRcdId() {
 		return this.codeUseRcdId;
 	}

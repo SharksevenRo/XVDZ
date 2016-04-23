@@ -4,12 +4,14 @@ import com.xiaov.dao.MessagesDao;
 import com.xiaov.model.Messages;
 import com.xiaov.service.interfaces.MessagesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by zouziyang on 4/18/16.
  */
+@Service
 public class MessagesServiceImpl extends BaseServiceImpl<Messages> implements MessagesService {
 
     @Autowired

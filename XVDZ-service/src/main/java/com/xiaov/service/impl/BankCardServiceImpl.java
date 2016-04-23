@@ -1,15 +1,18 @@
 package com.xiaov.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.xiaov.dao.BankCardDao;
 import com.xiaov.model.BankCard;
 import com.xiaov.service.interfaces.BankCardService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/4/18.
  */
+@Service
 public class BankCardServiceImpl extends BaseServiceImpl<BankCard> implements BankCardService {
 
     @Autowired

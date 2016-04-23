@@ -31,15 +31,15 @@ public class TestController {
 	@RequestMapping("/test/update")
 	@ResponseBody
 	public MessageBean update(Test user){
-		//url:http://localhost:8080/XVDZ-web/test/update?testId=1&name=1&isValid=0,就是更新主键为1记录的name和isValid，更新更多的字段只要前台带过来就可以
+		//url:http://localhost:8080/XVDZ-web/xiaov/test/update?testId=1&name=1&isValid=0,就是更新主键为1记录的name和isValid，更新更多的字段只要前台带过来就可以
 		baseService.update(user);
 		return null;
 	}
 	@RequestMapping("/test/page")
 	@ResponseBody
 	public Page<Test> page(Test test){
-		//没有查询条件：（以pageSize=2，pageNo=1的方式分页）http://localhost:8080/XVDZ-web/test/page?pageSize=2&pageNo=1
-		//以name=1条件查询，可多条件（暂时只支持等于和and的逻辑）http://localhost:8080/XVDZ-web/test/page?pageSize=2&pageNo=1&name=1
+		//没有查询条件：（以pageSize=2，pageNo=1的方式分页）http://localhost:8080/XVDZ-web/xiaov/test/page?pageSize=2&pageNo=1
+		//以name=1条件查询，可多条件（暂时只支持等于和and的逻辑）http://localhost:8080/XVDZ-web/xiaov/test/page?pageSize=2&pageNo=1&name=1
 		//设置返回总条数（将存储在test.totalItems中）
 		/**
 		 * 返回的json：{"pageNo":1,"pageSize":2,"orderBy":null,"orderDir":null,"countTotal":true,"code":null,"message":null,"result":
@@ -54,7 +54,7 @@ public class TestController {
 	@ResponseBody
 	public List<Test> all(Test test){
 		/**
-		 * http://localhost:8080/XVDZ-web/test/all
+		 * http://localhost:8080/XVDZ-web/xiaov/test/all
 		 * 不带参数查询所有
 		 * 带参数，根据条件过滤（暂不支持ordeby，待扩展）
 		 */
@@ -64,7 +64,7 @@ public class TestController {
 	@ResponseBody
 	public MessageBean delete(Test test){
 		/**
-		 * http://localhost:8080/XVDZ-web/test/all
+		 * http://localhost:8080/XVDZ-web/xiaov/test/all
 		 * 不带参数查询所有
 		 * 带参数，根据条件过滤（暂不支持ordeby，待扩展）
 		 */

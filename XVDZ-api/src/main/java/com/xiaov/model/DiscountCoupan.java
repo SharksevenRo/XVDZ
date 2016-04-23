@@ -18,6 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
+import com.xiaov.orm.core.Page;
 
 /**
  * DiscountCoupan entity. @author MyEclipse Persistence Tools
@@ -25,7 +26,7 @@ import com.xiaov.orm.core.FieldType;
 @Entity
 @Table(name = "discount_coupan", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class DiscountCoupan implements java.io.Serializable {
+public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Serializable {
 
 	// Fields
 	private String disCouId;
@@ -75,7 +76,7 @@ public class DiscountCoupan implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "dis_cou_id", unique = true, nullable = false, length = 20)
+	@Column(name = "dis_cou_id", unique = true, nullable = false, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getDisCouId() {

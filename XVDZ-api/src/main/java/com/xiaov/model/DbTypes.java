@@ -13,8 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
+import com.xiaov.orm.core.Page;
 
 /**
  * DbTypes entity. @author MyEclipse Persistence Tools
@@ -22,11 +25,11 @@ import com.xiaov.orm.core.FieldType;
 @Entity
 @Table(name = "db_types", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class DbTypes implements java.io.Serializable {
+public class DbTypes extends Page<DbTypes> implements java.io.Serializable {
 
 	// Fields
 
-	private Integer typeId;
+	private String typeId;
 	private DbTypes dbTypes;
 	private String typeName;
 	private Timestamp addTime;
@@ -63,13 +66,14 @@ public class DbTypes implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(generator="system-uuid") 
+	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Column(name = "type_id", unique = true, nullable = false)
-	public Integer getTypeId() {
+	public String getTypeId() {
 		return this.typeId;
 	}
 
-	public void setTypeId(Integer typeId) {
+	public void setTypeId(String typeId) {
 		this.typeId = typeId;
 	}
 
@@ -83,7 +87,7 @@ public class DbTypes implements java.io.Serializable {
 		this.dbTypes = dbTypes;
 	}
 
-	@Column(name = "type_name", nullable = false, length = 20)
+	@Column(name = "type_name", nullable = false, length = 33)
 	public String getTypeName() {
 		return this.typeName;
 	}
