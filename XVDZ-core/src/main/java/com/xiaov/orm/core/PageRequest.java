@@ -46,19 +46,20 @@ public class PageRequest implements java.io.Serializable {
 	/**
 	 * 排序字段
 	 */
-	protected String orderBy = null;
+	protected String sidx = null;
 	
 	/**
 	 * 排序方式
 	 * @see Sort
 	 */
-	protected String orderDir = null;
+	protected String sord = null;
 
 	/**
 	 * 是否默认计算总记录数.
 	 */
 	protected boolean countTotal = true;
 	
+	protected Integer totalPages=0;	
 	/**
 	 * 响应码
 	 */
@@ -138,46 +139,46 @@ public class PageRequest implements java.io.Serializable {
 	/**
 	 * 获得排序字段, 无默认值. 多个排序字段时用','分隔.
 	 */
-	public String getOrderBy() {
-		return orderBy;
+	public String getSidx() {
+		return sidx;
 	}
 
 	/**
 	 * 设置排序字段, 多个排序字段时用','分隔.
 	 */
-	public void setOrderBy(final String orderBy) {
-		this.orderBy = orderBy;
+	public void setSidx(final String sidx) {
+		this.sidx = sidx;
 	}
 
 	/**
 	 * 获得排序方向, 无默认值.
 	 */
-	public String getOrderDir() {
-		return orderDir;
+	public String getSord() {
+		return sord;
 	}
 
 	/**
 	 * 设置排序方式向.
 	 * 
-	 * @param orderDir 可选值为desc或asc,多个排序字段时用','分隔.
+	 * @param sord 可选值为desc或asc,多个排序字段时用','分隔.
 	 */
-	public void setOrderDir(final String orderDir) {
-		String lowcaseOrderDir = StringUtils.lowerCase(orderDir);
+	public void setSord(final String sord) {
+		String lowcasesord = StringUtils.lowerCase(sord);
 
 		//检查order字符串的合法值
-		String[] orderDirs = StringUtils.split(lowcaseOrderDir, ',');
+		String[] sords = StringUtils.split(lowcasesord, ',');
 		
-		if (ArrayUtils.isEmpty(orderDirs)) {
+		if (ArrayUtils.isEmpty(sords)) {
 			return ;
 		}
 		
-		for (String orderDirStr : orderDirs) {
-			if (!StringUtils.equals(Sort.DESC, orderDirStr) && !StringUtils.equals(Sort.ASC, orderDirStr)) {
-				throw new IllegalArgumentException("排序方向" + orderDirStr + "不是合法值");
+		for (String sordStr : sords) {
+			if (!StringUtils.equals(Sort.DESC, sordStr) && !StringUtils.equals(Sort.ASC, sordStr)) {
+				throw new IllegalArgumentException("排序方向" + sordStr + "不是合法值");
 			}
 		}
 
-		this.orderDir = lowcaseOrderDir;
+		this.sord = lowcasesord;
 	}
 
 	/**
@@ -185,16 +186,16 @@ public class PageRequest implements java.io.Serializable {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Sort> getSort() {
-		if (orderBy == null || orderDir == null) {
+		if (sidx == null || sord == null) {
 			return Collections.EMPTY_LIST;
 		}
-		String[] orderBys = StringUtils.split(orderBy, ',');
-		String[] orderDirs = StringUtils.split(orderDir, ',');
-		Assert.isTrue(orderBys.length == orderDirs.length, "分页多重排序参数中,排序字段与排序方向的个数不相等");
+		String[] sidxs = StringUtils.split(sidx, ',');
+		String[] sords = StringUtils.split(sord, ',');
+		Assert.isTrue(sidxs.length == sords.length, "分页多重排序参数中,排序字段与排序方向的个数不相等");
 
 		List<Sort> orders = new ArrayList<PageRequest.Sort>();
-		for (int i = 0; i < orderBys.length; i++) {
-			orders.add(new Sort(orderBys[i], orderDirs[i]));
+		for (int i = 0; i < sidxs.length; i++) {
+			orders.add(new Sort(sidxs[i], sords[i]));
 		}
 
 		return orders;
@@ -204,7 +205,7 @@ public class PageRequest implements java.io.Serializable {
 	 * 是否已设置排序字段,无默认值.
 	 */
 	public boolean isOrderBySetted() {
-		return (StringUtils.isNotBlank(orderBy) && StringUtils.isNotBlank(orderDir));
+		return (StringUtils.isNotBlank(sidx) && StringUtils.isNotBlank(sord));
 	}
 
 	/**

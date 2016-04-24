@@ -41,7 +41,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public List<T> loadAll(T entity) {
 		String name = entity.getClass().getSimpleName();
 		StringBuilder hql = new StringBuilder();
-		hql.append("from " + name + " where 1=1");
+		hql.append("from " + name + " where deleteFlag=0");
 		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(entity.getClass(), true);
 		Object value = null;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -66,7 +66,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public Page<T> page(Page<T> page) {
 		String name = page.getClass().getSimpleName();
 		StringBuilder hql = new StringBuilder();
-		hql.append("from " + name + " where 1=1");
+		hql.append("from " + name + " where deleteFlag=0");
 		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), true);
 		Object value = null;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -84,14 +84,15 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 			} catch (Exception e) {
 			}
 		}
-		String hql2 = dao.setPageRequestToHql(hql.toString(), page);
-		return dao.findPage(page, dao.createQuery(hql2, map));
+		page= dao.findPage(page, dao.createQuery(hql.toString(), map));
+		//设置总页数
+		page.setTotalPages();
+		return page;
 	}
 
 	public T getOne(Class clazz, String pk) {
 		return (T) dao.getSession().load(clazz, pk);
 	}
-
 	private boolean isBase(Class clazz) {
 
 		if (clazz.equals(Boolean.class) || clazz.equals(String.class) || clazz.equals(Integer.class)

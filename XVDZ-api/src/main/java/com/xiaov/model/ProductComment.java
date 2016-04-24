@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.xiaov.orm.core.Page;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * ProductComment entity. @author MyEclipse Persistence Tools
@@ -25,7 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class ProductComment extends Page<Orders> implements java.io.Serializable {
 
 	// Fields
-	private String cmtId;
+	private String id;
 	private Product product;
 	private Material material;
 	private ProductComment productComment;
@@ -33,6 +34,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	private Integer cmtQtSt;
 	private Integer cmtLogisticsSt;
 	private Integer cmtWrapSt;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp cmtTime;
 
 	// Constructors
@@ -42,9 +44,9 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	}
 
 	/** minimal constructor */
-	public ProductComment(String cmtId, String cmtContent, Integer cmtQtSt,
+	public ProductComment(String id, String cmtContent, Integer cmtQtSt,
 			Integer cmtLogisticsSt, Integer cmtWrapSt, Timestamp cmtTime) {
-		this.cmtId = cmtId;
+		this.id = id;
 		this.cmtContent = cmtContent;
 		this.cmtQtSt = cmtQtSt;
 		this.cmtLogisticsSt = cmtLogisticsSt;
@@ -53,10 +55,10 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	}
 
 	/** full constructor */
-	public ProductComment(String cmtId, Product product, Material material,
+	public ProductComment(String id, Product product, Material material,
 			ProductComment productComment, String cmtContent, Integer cmtQtSt,
 			Integer cmtLogisticsSt, Integer cmtWrapSt, Timestamp cmtTime) {
-		this.cmtId = cmtId;
+		this.id = id;
 		this.product = product;
 		this.material = material;
 		this.productComment = productComment;
@@ -69,15 +71,15 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 
 	// Property accessors
 	@Id
-	@Column(name = "cmt_id", unique = true, nullable = false, length = 33)
+	@Column(name = "cmt_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getCmtId() {
-		return this.cmtId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setCmtId(String cmtId) {
-		this.cmtId = cmtId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -110,7 +112,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 		this.productComment = productComment;
 	}
 
-	@Column(name = "cmt_content", nullable = false, length = 200)
+	@Column(name = "cmt_content", nullable = true, length = 200)
 	public String getCmtContent() {
 		return this.cmtContent;
 	}
@@ -119,7 +121,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 		this.cmtContent = cmtContent;
 	}
 
-	@Column(name = "cmt_qt_st", nullable = false)
+	@Column(name = "cmt_qt_st", nullable = true)
 	public Integer getCmtQtSt() {
 		return this.cmtQtSt;
 	}
@@ -128,7 +130,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 		this.cmtQtSt = cmtQtSt;
 	}
 
-	@Column(name = "cmt_logistics_st", nullable = false)
+	@Column(name = "cmt_logistics_st", nullable = true)
 	public Integer getCmtLogisticsSt() {
 		return this.cmtLogisticsSt;
 	}
@@ -137,7 +139,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 		this.cmtLogisticsSt = cmtLogisticsSt;
 	}
 
-	@Column(name = "cmt_wrap_st", nullable = false)
+	@Column(name = "cmt_wrap_st", nullable = true)
 	public Integer getCmtWrapSt() {
 		return this.cmtWrapSt;
 	}
@@ -146,7 +148,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 		this.cmtWrapSt = cmtWrapSt;
 	}
 
-	@Column(name = "cmt_time", nullable = false, length = 0)
+	@Column(name = "cmt_time", nullable = true, length = 0)
 	public Timestamp getCmtTime() {
 		return this.cmtTime;
 	}

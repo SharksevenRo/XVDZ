@@ -61,7 +61,7 @@ public class ProductCommentController {
     @ResponseBody
     public ProductComment getOne(ProductComment productComment) {
         try {
-            return ProductCommentService.getOne(productComment.getClass(), productComment.getCmtId());
+            return ProductCommentService.getOne(productComment.getClass(), productComment.getId());
 
         } catch (Exception e) {
             ProductComment page = new ProductComment();

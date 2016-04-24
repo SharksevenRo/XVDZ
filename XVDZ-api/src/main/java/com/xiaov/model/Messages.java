@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.core.Page;
 
@@ -23,11 +24,12 @@ import com.xiaov.orm.core.Page;
 public class Messages extends Page<Messages> implements java.io.Serializable {
 
 	// Fields
-	private String msgId;
+	private String id;
 	private UserInfo userInfoBySendId;
 	private UserInfo userInfoByReceiveId;
 	private Integer typeId;
 	private String msgContent;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp msgTime;
 	private Boolean msgReadState;
 
@@ -38,19 +40,19 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Messages(String msgId, String msgContent, Timestamp msgTime,
+	public Messages(String id, String msgContent, Timestamp msgTime,
 			Boolean msgReadState) {
-		this.msgId = msgId;
+		this.id = id;
 		this.msgContent = msgContent;
 		this.msgTime = msgTime;
 		this.msgReadState = msgReadState;
 	}
 
 	/** full constructor */
-	public Messages(String msgId, UserInfo userInfoBySendId,
+	public Messages(String id, UserInfo userInfoBySendId,
 			UserInfo userInfoByReceiveId, Integer typeId, String msgContent,
 			Timestamp msgTime, Boolean msgReadState) {
-		this.msgId = msgId;
+		this.id = id;
 		this.userInfoBySendId = userInfoBySendId;
 		this.userInfoByReceiveId = userInfoByReceiveId;
 		this.typeId = typeId;
@@ -61,15 +63,15 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "msg_id", unique = true, nullable = false, length = 33)
+	@Column(name = "msg_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getMsgId() {
-		return this.msgId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setMsgId(String msgId) {
-		this.msgId = msgId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -101,7 +103,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 		this.typeId = typeId;
 	}
 
-	@Column(name = "msg_content", nullable = false, length = 200)
+	@Column(name = "msg_content", nullable = true, length = 200)
 	public String getMsgContent() {
 		return this.msgContent;
 	}
@@ -110,7 +112,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 		this.msgContent = msgContent;
 	}
 
-	@Column(name = "msg_time", nullable = false, length = 0)
+	@Column(name = "msg_time", nullable = true, length = 0)
 	public Timestamp getMsgTime() {
 		return this.msgTime;
 	}
@@ -119,7 +121,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 		this.msgTime = msgTime;
 	}
 
-	@Column(name = "msg_read_state", nullable = false)
+	@Column(name = "msg_read_state", nullable = true)
 	public Boolean getMsgReadState() {
 		return this.msgReadState;
 	}

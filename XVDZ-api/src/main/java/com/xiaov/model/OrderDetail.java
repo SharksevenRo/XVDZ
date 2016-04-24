@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -23,11 +24,11 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "order_detail", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class OrderDetail extends Page<OrderDetail> implements java.io.Serializable {
 
 	// Fields
-	private String orDtId;
+	private String id;
 	private Integer pdtId;
 	private String orDtNo;
 	private Double orDtPrc;
@@ -36,8 +37,11 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	private Double orDtItmeTotal;
 	private Double orDtRlTotal;
 	private String orDtRemark;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp addTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp deleteTime;
 	private Boolean deleteFlag;
 
@@ -48,10 +52,10 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	}
 
 	/** minimal constructor */
-	public OrderDetail(String orDtId, String orDtNo, Double orDtPrc,
+	public OrderDetail(String id, String orDtNo, Double orDtPrc,
 			Integer orDtMount, Double orDtItmeTotal, Double orDtRlTotal,
 			Timestamp addTime, Boolean deleteFlag) {
-		this.orDtId = orDtId;
+		this.id = id;
 		this.orDtNo = orDtNo;
 		this.orDtPrc = orDtPrc;
 		this.orDtMount = orDtMount;
@@ -62,12 +66,12 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	}
 
 	/** full constructor */
-	public OrderDetail(String orDtId, Integer pdtId, String orDtNo,
+	public OrderDetail(String id, Integer pdtId, String orDtNo,
 			Double orDtPrc, Integer orDtMount, Double orDtDsct,
 			Double orDtItmeTotal, Double orDtRlTotal, String orDtRemark,
 			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
 			Boolean deleteFlag) {
-		this.orDtId = orDtId;
+		this.id = id;
 		this.pdtId = pdtId;
 		this.orDtNo = orDtNo;
 		this.orDtPrc = orDtPrc;
@@ -84,15 +88,15 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 
 	// Property accessors
 	@Id
-	@Column(name = "or_dt_id", unique = true, nullable = false, length = 33)
+	@Column(name = "or_dt_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getOrDtId() {
-		return this.orDtId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setOrDtId(String orDtId) {
-		this.orDtId = orDtId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Column(name = "pdt_id")
@@ -104,7 +108,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 		this.pdtId = pdtId;
 	}
 
-	@Column(name = "or_dt_no", nullable = false, length = 20)
+	@Column(name = "or_dt_no", nullable = true, length = 20)
 	public String getOrDtNo() {
 		return this.orDtNo;
 	}
@@ -113,7 +117,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 		this.orDtNo = orDtNo;
 	}
 
-	@Column(name = "or_dt_prc", nullable = false, precision = 22, scale = 0)
+	@Column(name = "or_dt_prc", nullable = true, precision = 22, scale = 0)
 	public Double getOrDtPrc() {
 		return this.orDtPrc;
 	}
@@ -122,7 +126,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 		this.orDtPrc = orDtPrc;
 	}
 
-	@Column(name = "or_dt_mount", nullable = false)
+	@Column(name = "or_dt_mount", nullable = true)
 	public Integer getOrDtMount() {
 		return this.orDtMount;
 	}
@@ -140,7 +144,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 		this.orDtDsct = orDtDsct;
 	}
 
-	@Column(name = "or_dt_itme_total", nullable = false, precision = 22, scale = 0)
+	@Column(name = "or_dt_itme_total", nullable = true, precision = 22, scale = 0)
 	public Double getOrDtItmeTotal() {
 		return this.orDtItmeTotal;
 	}
@@ -149,7 +153,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 		this.orDtItmeTotal = orDtItmeTotal;
 	}
 
-	@Column(name = "or_dt_rl_total", nullable = false, precision = 22, scale = 0)
+	@Column(name = "or_dt_rl_total", nullable = true, precision = 22, scale = 0)
 	public Double getOrDtRlTotal() {
 		return this.orDtRlTotal;
 	}
@@ -167,7 +171,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 		this.orDtRemark = orDtRemark;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Timestamp getAddTime() {
 		return this.addTime;
 	}
@@ -194,7 +198,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 		this.deleteTime = deleteTime;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

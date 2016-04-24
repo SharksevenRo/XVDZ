@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -21,13 +22,14 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "dynamic", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 
 	// Fields
-	private String dynmcId;
+	private String id;
 	private UserInfo userInfo;
 	private String dynmcContent;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp dynmcTime;
 	private Integer dynmcGdCnt;
 	private Integer dynmcCmmCnt;
@@ -40,9 +42,9 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Dynamic(String dynmcId, String dynmcContent, Timestamp dynmcTime,
+	public Dynamic(String id, String dynmcContent, Timestamp dynmcTime,
 			Integer dynmcGdCnt, Integer dynmcCmmCnt, Boolean deleteFlag) {
-		this.dynmcId = dynmcId;
+		this.id = id;
 		this.dynmcContent = dynmcContent;
 		this.dynmcTime = dynmcTime;
 		this.dynmcGdCnt = dynmcGdCnt;
@@ -51,10 +53,10 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Dynamic(String dynmcId, UserInfo userInfo, String dynmcContent,
+	public Dynamic(String id, UserInfo userInfo, String dynmcContent,
 			Timestamp dynmcTime, Integer dynmcGdCnt, Integer dynmcCmmCnt,
 			Boolean deleteFlag) {
-		this.dynmcId = dynmcId;
+		this.id = id;
 		this.userInfo = userInfo;
 		this.dynmcContent = dynmcContent;
 		this.dynmcTime = dynmcTime;
@@ -66,14 +68,14 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@GeneratedValue(generator="system-uuid") 
-	@Column(name = "dynmc_id", unique = true, nullable = false, length = 33)
+	@Column(name = "dynmc_id", unique = true, nullable = true, length = 33)
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getDynmcId() {
-		return this.dynmcId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setDynmcId(String dynmcId) {
-		this.dynmcId = dynmcId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -86,7 +88,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.userInfo = userInfo;
 	}
 
-	@Column(name = "dynmc_content", nullable = false, length = 200)
+	@Column(name = "dynmc_content", nullable = true, length = 200)
 	public String getDynmcContent() {
 		return this.dynmcContent;
 	}
@@ -95,7 +97,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.dynmcContent = dynmcContent;
 	}
 
-	@Column(name = "dynmc_time", nullable = false, length = 0)
+	@Column(name = "dynmc_time", nullable = true, length = 0)
 	public Timestamp getDynmcTime() {
 		return this.dynmcTime;
 	}
@@ -104,7 +106,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.dynmcTime = dynmcTime;
 	}
 
-	@Column(name = "dynmc_gd_cnt", nullable = false)
+	@Column(name = "dynmc_gd_cnt", nullable = true)
 	public Integer getDynmcGdCnt() {
 		return this.dynmcGdCnt;
 	}
@@ -113,7 +115,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.dynmcGdCnt = dynmcGdCnt;
 	}
 
-	@Column(name = "dynmc_cmm_cnt", nullable = false)
+	@Column(name = "dynmc_cmm_cnt", nullable = true)
 	public Integer getDynmcCmmCnt() {
 		return this.dynmcCmmCnt;
 	}
@@ -122,7 +124,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.dynmcCmmCnt = dynmcCmmCnt;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

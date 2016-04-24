@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -21,15 +22,17 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "discount_code", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class DiscountCode extends Page<DiscountCode> implements java.io.Serializable {
 
 	// Fields
-	private String disCodeId;
+	private String id;
 	private UserInfo userInfoByGnrtUId;
 	private UserInfo userInfoByProUId;
 	private String disCodeNo;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp disCodeTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp disCodeValidTime;
 	private Integer disCodeNum;
 	private String disCodeRemark;
@@ -42,10 +45,10 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	}
 
 	/** minimal constructor */
-	public DiscountCode(String disCodeId, String disCodeNo,
+	public DiscountCode(String id, String disCodeNo,
 			Timestamp disCodeTime, Timestamp disCodeValidTime,
 			Integer disCodeNum, Boolean deleteFlag) {
-		this.disCodeId = disCodeId;
+		this.id = id;
 		this.disCodeNo = disCodeNo;
 		this.disCodeTime = disCodeTime;
 		this.disCodeValidTime = disCodeValidTime;
@@ -54,11 +57,11 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	}
 
 	/** full constructor */
-	public DiscountCode(String disCodeId, UserInfo userInfoByGnrtUId,
+	public DiscountCode(String id, UserInfo userInfoByGnrtUId,
 			UserInfo userInfoByProUId, String disCodeNo, Timestamp disCodeTime,
 			Timestamp disCodeValidTime, Integer disCodeNum,
 			String disCodeRemark, Boolean deleteFlag) {
-		this.disCodeId = disCodeId;
+		this.id = id;
 		this.userInfoByGnrtUId = userInfoByGnrtUId;
 		this.userInfoByProUId = userInfoByProUId;
 		this.disCodeNo = disCodeNo;
@@ -73,13 +76,13 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Id
-	@Column(name = "dis_code_id", unique = true, nullable = false, length = 33)
-	public String getDisCodeId() {
-		return this.disCodeId;
+	@Column(name = "dis_code_id", unique = true, nullable = true, length = 33)
+	public String getId() {
+		return this.id;
 	}
 
-	public void setDisCodeId(String disCodeId) {
-		this.disCodeId = disCodeId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -102,7 +105,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 		this.userInfoByProUId = userInfoByProUId;
 	}
 
-	@Column(name = "dis_code_no", nullable = false, length = 20)
+	@Column(name = "dis_code_no", nullable = true, length = 20)
 	public String getDisCodeNo() {
 		return this.disCodeNo;
 	}
@@ -111,7 +114,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 		this.disCodeNo = disCodeNo;
 	}
 
-	@Column(name = "dis_code_time", nullable = false, length = 0)
+	@Column(name = "dis_code_time", nullable = true, length = 0)
 	public Timestamp getDisCodeTime() {
 		return this.disCodeTime;
 	}
@@ -120,7 +123,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 		this.disCodeTime = disCodeTime;
 	}
 
-	@Column(name = "dis_code_valid_time", nullable = false, length = 0)
+	@Column(name = "dis_code_valid_time", nullable = true, length = 0)
 	public Timestamp getDisCodeValidTime() {
 		return this.disCodeValidTime;
 	}
@@ -129,7 +132,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 		this.disCodeValidTime = disCodeValidTime;
 	}
 
-	@Column(name = "dis_code_num", nullable = false)
+	@Column(name = "dis_code_num", nullable = true)
 	public Integer getDisCodeNum() {
 		return this.disCodeNum;
 	}
@@ -147,7 +150,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 		this.disCodeRemark = disCodeRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

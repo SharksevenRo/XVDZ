@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -21,13 +22,13 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "advertisment", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class Advertisment extends Page<Advertisment> implements java.io.Serializable {
 
 	// Fields
 
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
-	private String adsId;
+	private String id;
 	private UserInfo userInfoByDeleteId;
 	private UserInfo userInfoByUpdateId;
 	private String addId;
@@ -35,9 +36,13 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	private String adsContent;
 	private String adsPic;
 	private Boolean adsState;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp addTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp adsOnme;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp deleteTime;
 	private Boolean deleteFlag;
 
@@ -48,21 +53,21 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	}
 
 	/** minimal constructor */
-	public Advertisment(String adsId, String adsContent, Boolean adsState,
+	public Advertisment(String id, String adsContent, Boolean adsState,
 			Timestamp addTime) {
-		this.adsId = adsId;
+		this.id = id;
 		this.adsContent = adsContent;
 		this.adsState = adsState;
 		this.addTime = addTime;
 	}
 
 	/** full constructor */
-	public Advertisment(String adsId, UserInfo userInfoByDeleteId,
+	public Advertisment(String id, UserInfo userInfoByDeleteId,
 			UserInfo userInfoByUpdateId, String addId, String adsTt,
 			String adsContent, String adsPic, Boolean adsState,
 			Timestamp addTime, Timestamp adsOnme, Timestamp updateTime,
 			Timestamp deleteTime, Boolean deleteFlag) {
-		this.adsId = adsId;
+		this.id = id;
 		this.userInfoByDeleteId = userInfoByDeleteId;
 		this.userInfoByUpdateId = userInfoByUpdateId;
 		this.addId = addId;
@@ -79,15 +84,15 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 
 	// Property accessors
 	@Id
-	@Column(name = "ads_id", unique = true, nullable = false ,length=33)
+	@Column(name = "ads_id", unique = true, nullable = true ,length=33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getAdsId() {
-		return this.adsId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setAdsId(String adsId) {
-		this.adsId = adsId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -128,7 +133,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 		this.adsTt = adsTt;
 	}
 
-	@Column(name = "ads_content", nullable = false, length = 0)
+	@Column(name = "ads_content", nullable = true, length = 0)
 	public String getAdsContent() {
 		return this.adsContent;
 	}
@@ -146,7 +151,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 		this.adsPic = adsPic;
 	}
 
-	@Column(name = "ads_state", nullable = false)
+	@Column(name = "ads_state", nullable = true)
 	public Boolean getAdsState() {
 		return this.adsState;
 	}
@@ -155,7 +160,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 		this.adsState = adsState;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Timestamp getAddTime() {
 		return this.addTime;
 	}

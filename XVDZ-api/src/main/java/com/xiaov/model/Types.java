@@ -14,26 +14,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
 
 /**
- * DbTypes entity. @author MyEclipse Persistence Tools
+ * parentType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "db_types", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class DbTypes extends Page<DbTypes> implements java.io.Serializable {
+@Table(name = "types", catalog = "xvdz")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+public class Types extends Page<Types> implements java.io.Serializable {
 
 	// Fields
 
-	private String typeId;
-	private DbTypes dbTypes;
+	private String id;
+	private Types parentType;
 	private String typeName;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp addTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp deleteTime;
 	private String typeRemark;
 	private Boolean deleteFlage;
@@ -41,21 +45,21 @@ public class DbTypes extends Page<DbTypes> implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public DbTypes() {
+	public Types() {
 	}
 
 	/** minimal constructor */
-	public DbTypes(String typeName, Timestamp addTime, Boolean deleteFlage) {
+	public Types(String typeName, Timestamp addTime, Boolean deleteFlage) {
 		this.typeName = typeName;
 		this.addTime = addTime;
 		this.deleteFlage = deleteFlage;
 	}
 
 	/** full constructor */
-	public DbTypes(DbTypes dbTypes, String typeName, Timestamp addTime,
+	public Types(Types parentType, String typeName, Timestamp addTime,
 			Timestamp updateTime, Timestamp deleteTime, String typeRemark,
 			Boolean deleteFlage) {
-		this.dbTypes = dbTypes;
+		this.parentType = parentType;
 		this.typeName = typeName;
 		this.addTime = addTime;
 		this.updateTime = updateTime;
@@ -68,26 +72,26 @@ public class DbTypes extends Page<DbTypes> implements java.io.Serializable {
 	@Id
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	@Column(name = "type_id", unique = true, nullable = false)
-	public String getTypeId() {
-		return this.typeId;
+	@Column(name = "type_id", unique = true, nullable = true)
+	public String getId() {
+		return this.id;
 	}
 
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "father_type_id")
-	public DbTypes getDbTypes() {
-		return this.dbTypes;
+	@JoinColumn(name = "parent_type_id")
+	public Types getParentType() {
+		return this.parentType;
 	}
 
-	public void setDbTypes(DbTypes dbTypes) {
-		this.dbTypes = dbTypes;
+	public void setParentType(Types parentType) {
+		this.parentType = parentType;
 	}
 
-	@Column(name = "type_name", nullable = false, length = 33)
+	@Column(name = "type_name", nullable = true, length = 33)
 	public String getTypeName() {
 		return this.typeName;
 	}
@@ -96,7 +100,7 @@ public class DbTypes extends Page<DbTypes> implements java.io.Serializable {
 		this.typeName = typeName;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Timestamp getAddTime() {
 		return this.addTime;
 	}
@@ -132,7 +136,7 @@ public class DbTypes extends Page<DbTypes> implements java.io.Serializable {
 		this.typeRemark = typeRemark;
 	}
 
-	@Column(name = "delete_flage", nullable = false)
+	@Column(name = "delete_flage", nullable = true)
 	public Boolean getDeleteFlage() {
 		return this.deleteFlage;
 	}

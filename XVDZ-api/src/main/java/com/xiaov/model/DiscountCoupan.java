@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -25,15 +26,17 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "discount_coupan", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Serializable {
 
 	// Fields
-	private String disCouId;
+	private String id;
 	private UserInfo userInfo;
 	private String disCouNo;
 	private Double disCouPrice;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp disCouTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp disCouValidTime;
 	private Integer disCouState;
 	private String disCouRemark;
@@ -46,10 +49,10 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	}
 
 	/** minimal constructor */
-	public DiscountCoupan(String disCouId, String disCouNo, Double disCouPrice,
+	public DiscountCoupan(String id, String disCouNo, Double disCouPrice,
 			Timestamp disCouTime, Timestamp disCouValidTime,
 			Integer disCouState, Boolean deleteFlag) {
-		this.disCouId = disCouId;
+		this.id = id;
 		this.disCouNo = disCouNo;
 		this.disCouPrice = disCouPrice;
 		this.disCouTime = disCouTime;
@@ -59,11 +62,11 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	}
 
 	/** full constructor */
-	public DiscountCoupan(String disCouId, UserInfo userInfo, String disCouNo,
+	public DiscountCoupan(String id, UserInfo userInfo, String disCouNo,
 			Double disCouPrice, Timestamp disCouTime,
 			Timestamp disCouValidTime, Integer disCouState,
 			String disCouRemark, Boolean deleteFlag) {
-		this.disCouId = disCouId;
+		this.id = id;
 		this.userInfo = userInfo;
 		this.disCouNo = disCouNo;
 		this.disCouPrice = disCouPrice;
@@ -76,15 +79,15 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 
 	// Property accessors
 	@Id
-	@Column(name = "dis_cou_id", unique = true, nullable = false, length = 33)
+	@Column(name = "dis_cou_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getDisCouId() {
-		return this.disCouId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setDisCouId(String disCouId) {
-		this.disCouId = disCouId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -97,7 +100,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.userInfo = userInfo;
 	}
 
-	@Column(name = "dis_cou_no", nullable = false, length = 20)
+	@Column(name = "dis_cou_no", nullable = true, length = 20)
 	public String getDisCouNo() {
 		return this.disCouNo;
 	}
@@ -106,7 +109,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouNo = disCouNo;
 	}
 
-	@Column(name = "dis_cou_price", nullable = false, precision = 22, scale = 0)
+	@Column(name = "dis_cou_price", nullable = true, precision = 22, scale = 0)
 	public Double getDisCouPrice() {
 		return this.disCouPrice;
 	}
@@ -115,7 +118,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouPrice = disCouPrice;
 	}
 
-	@Column(name = "dis_cou_time", nullable = false, length = 0)
+	@Column(name = "dis_cou_time", nullable = true, length = 0)
 	public Timestamp getDisCouTime() {
 		return this.disCouTime;
 	}
@@ -124,7 +127,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouTime = disCouTime;
 	}
 
-	@Column(name = "dis_cou_valid_time", nullable = false, length = 0)
+	@Column(name = "dis_cou_valid_time", nullable = true, length = 0)
 	public Timestamp getDisCouValidTime() {
 		return this.disCouValidTime;
 	}
@@ -133,7 +136,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouValidTime = disCouValidTime;
 	}
 
-	@Column(name = "dis_cou_state", nullable = false)
+	@Column(name = "dis_cou_state", nullable = true)
 	public Integer getDisCouState() {
 		return this.disCouState;
 	}
@@ -151,7 +154,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouRemark = disCouRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

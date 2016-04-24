@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -22,18 +23,21 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "material", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class Material extends Page<Material> implements java.io.Serializable {
 
 	// Fields
-	private Integer materialId;
+	private String id;
 	private Material material;
-	private DbTypes dbTypes;
+	private Types dbTypes;
 	private String materialNo;
 	private String meterialName;
 	private String meterialRemark;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private Boolean deleteFlag;
 
@@ -44,9 +48,9 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Material(Integer materialId, String materialNo, String meterialName,
+	public Material(String id, String materialNo, String meterialName,
 			Date addTime, Boolean deleteFlag) {
-		this.materialId = materialId;
+		this.id = id;
 		this.materialNo = materialNo;
 		this.meterialName = meterialName;
 		this.addTime = addTime;
@@ -54,11 +58,11 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Material(Integer materialId, Material material, DbTypes dbTypes,
+	public Material(String id, Material material, Types dbTypes,
 			String materialNo, String meterialName, String meterialRemark,
 			Date addTime, Date updateTime, Date deleteTime,
 			Boolean deleteFlag) {
-		this.materialId = materialId;
+		this.id = id;
 		this.material = material;
 		this.dbTypes = dbTypes;
 		this.materialNo = materialNo;
@@ -72,15 +76,15 @@ public class Material extends Page<Material> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "material_id", unique = true, nullable = false,length=33)
+	@Column(name = "material_id", unique = true, nullable = true,length=33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public Integer getMaterialId() {
-		return this.materialId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setMaterialId(Integer materialId) {
-		this.materialId = materialId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -95,15 +99,15 @@ public class Material extends Page<Material> implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "type_id")
-	public DbTypes getDbTypes() {
+	public Types getDbTypes() {
 		return this.dbTypes;
 	}
 
-	public void setDbTypes(DbTypes dbTypes) {
+	public void setDbTypes(Types dbTypes) {
 		this.dbTypes = dbTypes;
 	}
 
-	@Column(name = "material_no", nullable = false, length = 20)
+	@Column(name = "material_no", nullable = true, length = 20)
 	public String getMaterialNo() {
 		return this.materialNo;
 	}
@@ -112,7 +116,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 		this.materialNo = materialNo;
 	}
 
-	@Column(name = "meterial_name", nullable = false, length = 20)
+	@Column(name = "meterial_name", nullable = true, length = 20)
 	public String getMeterialName() {
 		return this.meterialName;
 	}
@@ -130,7 +134,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 		this.meterialRemark = meterialRemark;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Date getAddTime() {
 		return this.addTime;
 	}
@@ -157,7 +161,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 		this.deleteTime = deleteTime;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

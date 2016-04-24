@@ -42,6 +42,9 @@
 			<value>5242880</value>
 		</property>
 	</bean>
+    <mvc:annotation-driven />  
+      
+    <bean id="customObjectMapper" class="com.xiaov.web.support.CustomObjectMapper"></bean>   
 	<!-- <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/adminLogin"/>

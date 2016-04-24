@@ -62,7 +62,7 @@ public class OrderDetailController {
     @ResponseBody
     public OrderDetail getOne(OrderDetail orderDetail) {
         try {
-            return orderDetailService.getOne(orderDetail.getClass(), orderDetail.getOrDtId());
+            return orderDetailService.getOne(orderDetail.getClass(), orderDetail.getId());
 
         } catch (Exception e) {
             OrderDetail page = new OrderDetail();

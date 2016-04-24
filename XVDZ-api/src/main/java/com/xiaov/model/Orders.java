@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -21,13 +22,13 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "orders", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	// Fields
-	private String orId;
+	private String id;
 	private OrderDetail orderDetail;
-	private DbTypes dbTypes;
+	private Types dbTypes;
 	private DiscountCoupan discountCoupan;
 	private String ueId;
 	private String orNo;
@@ -35,8 +36,10 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	private Double orDiscount;
 	private Double orRealCost;
 	private Integer orState;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp addTime;
 	private Timestamp updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp deleteTime;
 	private String orRemark;
 	private Boolean deleteFlag;
@@ -48,9 +51,9 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Orders(String orId, String orNo, Double orTotal, Integer orState,
+	public Orders(String id, String orNo, Double orTotal, Integer orState,
 			Timestamp addTime, Boolean deleteFlag) {
-		this.orId = orId;
+		this.id = id;
 		this.orNo = orNo;
 		this.orTotal = orTotal;
 		this.orState = orState;
@@ -59,12 +62,12 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Orders(String orId, OrderDetail orderDetail, DbTypes dbTypes,
+	public Orders(String id, OrderDetail orderDetail, Types dbTypes,
 			DiscountCoupan discountCoupan, String ueId, String orNo,
 			Double orTotal, Double orDiscount, Double orRealCost,
 			Integer orState, Timestamp addTime, Timestamp updateTime,
 			Timestamp deleteTime, String orRemark, Boolean deleteFlag) {
-		this.orId = orId;
+		this.id = id;
 		this.orderDetail = orderDetail;
 		this.dbTypes = dbTypes;
 		this.discountCoupan = discountCoupan;
@@ -83,15 +86,15 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "or_id", unique = true, nullable = false, length = 33)
+	@Column(name = "or_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getOrId() {
-		return this.orId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setOrId(String orId) {
-		this.orId = orId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -106,11 +109,11 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pay_type_id")
-	public DbTypes getDbTypes() {
+	public Types getDbTypes() {
 		return this.dbTypes;
 	}
 
-	public void setDbTypes(DbTypes dbTypes) {
+	public void setDbTypes(Types dbTypes) {
 		this.dbTypes = dbTypes;
 	}
 
@@ -133,7 +136,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.ueId = ueId;
 	}
 
-	@Column(name = "or_no", nullable = false, length = 20)
+	@Column(name = "or_no", nullable = true, length = 20)
 	public String getOrNo() {
 		return this.orNo;
 	}
@@ -142,7 +145,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.orNo = orNo;
 	}
 
-	@Column(name = "or_total", nullable = false, precision = 22, scale = 0)
+	@Column(name = "or_total", nullable = true, precision = 22, scale = 0)
 	public Double getOrTotal() {
 		return this.orTotal;
 	}
@@ -169,7 +172,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.orRealCost = orRealCost;
 	}
 
-	@Column(name = "or_state", nullable = false)
+	@Column(name = "or_state", nullable = true)
 	public Integer getOrState() {
 		return this.orState;
 	}
@@ -178,7 +181,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.orState = orState;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Timestamp getAddTime() {
 		return this.addTime;
 	}
@@ -214,7 +217,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.orRemark = orRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

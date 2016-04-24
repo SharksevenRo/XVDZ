@@ -1,11 +1,10 @@
 package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
-import com.xiaov.model.DiscountCode;
+import com.xiaov.model.BankCard;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
-
-import com.xiaov.service.interfaces.DiscountCodeService;
+import com.xiaov.service.interfaces.BankCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,63 +12,63 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by zouziyang on 4/21/16.
+ * Created by zouziyang on 4/24/16.
  */
 @Controller
-public class DiscountCodeController {
+public class BankCardController {
     @Autowired
-    private DiscountCodeService discountCodeService;
+    private BankCardService bankCardService;
 
-    @RequestMapping("/admin/DiscountCode/saveAjax")
+    @RequestMapping("/admin/BankCard/saveAjax")
     @ResponseBody
-    public MessageBean saveAjax(DiscountCode discountCode) {
+    public MessageBean saveAjax(BankCard bankCard) {
 
         try {
-            discountCodeService.save(discountCode);
+            bankCardService.save(bankCard);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
 
-    @RequestMapping("/admin/DiscountCode/updateAjax")
+    @RequestMapping("/admin/BankCard/updateAjax")
     @ResponseBody
-    public MessageBean updateAjax(DiscountCode discountCode) {
+    public MessageBean updateAjax(BankCard bankCard) {
 
         try {
-            discountCodeService.update(discountCode);
+            bankCardService.update(bankCard);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
 
-    @RequestMapping("/admin/DiscountCode/page")
+    @RequestMapping("/admin/BankCard/page")
     @ResponseBody
-    public Page<DiscountCode> page(Page<DiscountCode> discountCode) {
+    public Page<BankCard> page(Page<BankCard> bankCard) {
+
         try {
 
-            return discountCodeService.page(discountCode);
+            return bankCardService.page(bankCard);
         } catch (Exception e) {
-            Page<DiscountCode> page = new Page<DiscountCode>();
+            Page<BankCard> page = new Page<BankCard>();
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;
         }
     }
 
-    @RequestMapping(value = "/admin/DiscountCode/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/BankCard/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
-    public DiscountCode getOne(DiscountCode discountCode) {
+    public BankCard getOne(BankCard bankCard) {
         try {
-            return discountCodeService.getOne(discountCode.getClass(), discountCode.getId());
+            return bankCardService.getOne(bankCard.getClass(), bankCard.getId());
 
         } catch (Exception e) {
-            DiscountCode page = new DiscountCode();
+            BankCard page = new BankCard();
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;
         }
     }
-
 }

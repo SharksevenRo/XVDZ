@@ -10,7 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.xiaov.orm.core.Page;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -20,11 +22,11 @@ import com.xiaov.orm.core.FieldType;
  */
 @Entity
 @Table(name = "receive_address", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class ReceiveAddress implements java.io.Serializable {
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Serializable {
 
 	// Fields
-	private String reAddId;
+	private String id;
 	private UserInfo userInfo;
 	private String reAddName;
 	private String reAddPro;
@@ -34,8 +36,11 @@ public class ReceiveAddress implements java.io.Serializable {
 	private String reAddTo;
 	private String reAddTel;
 	private Boolean addDefault;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp addTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp deleteTime;
 	private String reAddRemark;
 	private Boolean deleteFlag;
@@ -47,9 +52,9 @@ public class ReceiveAddress implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ReceiveAddress(String reAddId, String reAddDet, String reAddTo,
+	public ReceiveAddress(String id, String reAddDet, String reAddTo,
 			String reAddTel, Boolean addDefault, Timestamp addTime) {
-		this.reAddId = reAddId;
+		this.id = id;
 		this.reAddDet = reAddDet;
 		this.reAddTo = reAddTo;
 		this.reAddTel = reAddTel;
@@ -58,12 +63,12 @@ public class ReceiveAddress implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ReceiveAddress(String reAddId, UserInfo userInfo, String reAddName,
+	public ReceiveAddress(String id, UserInfo userInfo, String reAddName,
 			String reAddPro, String reAddCity, String reAddArea,
 			String reAddDet, String reAddTo, String reAddTel,
 			Boolean addDefault, Timestamp addTime, Timestamp updateTime,
 			Timestamp deleteTime, String reAddRemark, Boolean deleteFlag) {
-		this.reAddId = reAddId;
+		this.id = id;
 		this.userInfo = userInfo;
 		this.reAddName = reAddName;
 		this.reAddPro = reAddPro;
@@ -82,15 +87,15 @@ public class ReceiveAddress implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "re_add_id", unique = true, nullable = false, length = 33)
+	@Column(name = "re_add_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getReAddId() {
-		return this.reAddId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setReAddId(String reAddId) {
-		this.reAddId = reAddId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -139,7 +144,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.reAddArea = reAddArea;
 	}
 
-	@Column(name = "re_add_det", nullable = false, length = 200)
+	@Column(name = "re_add_det", nullable = true, length = 200)
 	public String getReAddDet() {
 		return this.reAddDet;
 	}
@@ -148,7 +153,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.reAddDet = reAddDet;
 	}
 
-	@Column(name = "re_add_to", nullable = false, length = 20)
+	@Column(name = "re_add_to", nullable = true, length = 20)
 	public String getReAddTo() {
 		return this.reAddTo;
 	}
@@ -157,7 +162,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.reAddTo = reAddTo;
 	}
 
-	@Column(name = "re_add_tel", nullable = false, length = 12)
+	@Column(name = "re_add_tel", nullable = true, length = 12)
 	public String getReAddTel() {
 		return this.reAddTel;
 	}
@@ -166,7 +171,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.reAddTel = reAddTel;
 	}
 
-	@Column(name = "add_default", nullable = false)
+	@Column(name = "add_default", nullable = true)
 	public Boolean getAddDefault() {
 		return this.addDefault;
 	}
@@ -175,7 +180,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.addDefault = addDefault;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Timestamp getAddTime() {
 		return this.addTime;
 	}

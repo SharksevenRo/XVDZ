@@ -24,21 +24,21 @@ public class Test extends Page<Test>{
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Id
-	@Column(name = "testid", unique = true, nullable = false, length = 20)
+	@Column(name = "testid", unique = true, nullable = true, length = 20)
 	public String getTestId() {
 		return testId;
 	}
 	public void setTestId(String testId) {
 		this.testId = testId;
 	}
-	@Column(name = "name", nullable = false, length = 50)
+	@Column(name = "name", nullable = true, length = 50)
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	@Column(name = "isvalid", nullable = false)
+	@Column(name = "isvalid", nullable = true)
 	public Boolean getIsValid() {
 		return isValid;
 	}

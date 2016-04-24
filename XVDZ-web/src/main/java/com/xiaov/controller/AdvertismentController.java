@@ -1,11 +1,10 @@
 package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
-import com.xiaov.model.DiscountCode;
+import com.xiaov.model.Advertisment;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
-
-import com.xiaov.service.interfaces.DiscountCodeService;
+import com.xiaov.service.interfaces.AdvertismentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,63 +12,63 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by zouziyang on 4/21/16.
+ * Created by zouziyang on 4/24/16.
  */
 @Controller
-public class DiscountCodeController {
+public class AdvertismentController {
     @Autowired
-    private DiscountCodeService discountCodeService;
+    private AdvertismentService advertismentService;
 
-    @RequestMapping("/admin/DiscountCode/saveAjax")
+    @RequestMapping("/admin/Advertisment/saveAjax")
     @ResponseBody
-    public MessageBean saveAjax(DiscountCode discountCode) {
+    public MessageBean saveAjax(Advertisment advertisment) {
 
         try {
-            discountCodeService.save(discountCode);
+            advertismentService.save(advertisment);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
 
-    @RequestMapping("/admin/DiscountCode/updateAjax")
+    @RequestMapping("/admin/Advertisment/updateAjax")
     @ResponseBody
-    public MessageBean updateAjax(DiscountCode discountCode) {
+    public MessageBean updateAjax(Advertisment advertisment) {
 
         try {
-            discountCodeService.update(discountCode);
+            advertismentService.update(advertisment);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
 
-    @RequestMapping("/admin/DiscountCode/page")
+    @RequestMapping("/admin/Advertisment/page")
     @ResponseBody
-    public Page<DiscountCode> page(Page<DiscountCode> discountCode) {
+    public Page<Advertisment> page(Page<Advertisment> advertisment) {
+
         try {
 
-            return discountCodeService.page(discountCode);
+            return advertismentService.page(advertisment);
         } catch (Exception e) {
-            Page<DiscountCode> page = new Page<DiscountCode>();
+            Page<Advertisment> page = new Page<Advertisment>();
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;
         }
     }
 
-    @RequestMapping(value = "/admin/DiscountCode/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/Advertisment/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
-    public DiscountCode getOne(DiscountCode discountCode) {
+    public Advertisment getOne(Advertisment advertisment) {
         try {
-            return discountCodeService.getOne(discountCode.getClass(), discountCode.getId());
+            return advertismentService.getOne(advertisment.getClass(), advertisment.getAddId());
 
         } catch (Exception e) {
-            DiscountCode page = new DiscountCode();
+            Advertisment page = new Advertisment();
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;
         }
     }
-
 }

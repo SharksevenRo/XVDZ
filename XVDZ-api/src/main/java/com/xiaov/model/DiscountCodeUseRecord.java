@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.core.Page;
 
@@ -22,9 +23,10 @@ import com.xiaov.orm.core.Page;
 public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implements java.io.Serializable {
 
 	// Fields
-	private String codeUseRcdId;
+	private String id;
 	private UserInfo userInfo;
 	private String disCodeId;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp useTime;
 
 	// Constructors
@@ -34,15 +36,15 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 	}
 
 	/** minimal constructor */
-	public DiscountCodeUseRecord(String codeUseRcdId, Timestamp useTime) {
-		this.codeUseRcdId = codeUseRcdId;
+	public DiscountCodeUseRecord(String id, Timestamp useTime) {
+		this.id = id;
 		this.useTime = useTime;
 	}
 
 	/** full constructor */
-	public DiscountCodeUseRecord(String codeUseRcdId, UserInfo userInfo,
+	public DiscountCodeUseRecord(String id, UserInfo userInfo,
 			String disCodeId, Timestamp useTime) {
-		this.codeUseRcdId = codeUseRcdId;
+		this.id = id;
 		this.userInfo = userInfo;
 		this.disCodeId = disCodeId;
 		this.useTime = useTime;
@@ -52,13 +54,13 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Id
-	@Column(name = "code_use_rcd_id", unique = true, nullable = false, length = 33)
-	public String getCodeUseRcdId() {
-		return this.codeUseRcdId;
+	@Column(name = "code_use_rcd_id", unique = true, nullable = true, length = 33)
+	public String getId() {
+		return this.id;
 	}
 
-	public void setCodeUseRcdId(String codeUseRcdId) {
-		this.codeUseRcdId = codeUseRcdId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -80,7 +82,7 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 		this.disCodeId = disCodeId;
 	}
 
-	@Column(name = "use_time", nullable = false, length = 0)
+	@Column(name = "use_time", nullable = true, length = 0)
 	public Timestamp getUseTime() {
 		return this.useTime;
 	}

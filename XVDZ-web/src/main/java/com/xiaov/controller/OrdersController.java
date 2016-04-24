@@ -62,7 +62,7 @@ public class OrdersController {
     @ResponseBody
     public Orders getOne(Orders orders) {
         try {
-            return ordersService.getOne(orders.getClass(), orders.getOrId());
+            return ordersService.getOne(orders.getClass(), orders.getId());
 
         } catch (Exception e) {
             Orders page = new Orders();

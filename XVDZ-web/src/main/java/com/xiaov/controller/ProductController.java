@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xiaov.constant.APPConstant;
@@ -16,6 +15,7 @@ import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.ProductService;
 import com.xiaov.utils.ImageCutModel;
+import com.xiaov.utils.LazyObjecUtil;
 import com.xiaov.utils.UploadFileUtil;
 
 @Controller
@@ -33,9 +33,11 @@ public class ProductController {
 	public MessageBean saveAjax(Product product){
 		
 		try {
+			product.setAddTime(new Date());
 			productService.save(product);
 			return new MessageBean(APPConstant.SUCCESS, "上传成功");
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new MessageBean(APPConstant.SUCCESS, "上传失败");
 		}
 	}
@@ -52,12 +54,18 @@ public class ProductController {
 	}
 	@RequestMapping("/admin/product/page")
 	@ResponseBody
-	public Page<Product> page(Page<Product> product){
+	public Page<Product> page(Product product){
 		
 		try {
 			
-			return productService.page(product);
+		Page<Product> page = productService.page(product);
+		
+		String [] fileName={"material","productType"};
+		page = LazyObjecUtil.LazyPageSetNull(page, fileName);
+		
+		return page;
 		} catch (Exception e) {
+			e.printStackTrace();
 			Page<Product> page=new Page<Product>();
 			page.setCode(APPConstant.ERROR);
 			page.setMessage("服务器忙");
@@ -65,13 +73,26 @@ public class ProductController {
 		}
 	}
 	
-	@RequestMapping(value="/admin/product/getOneAjax",method=RequestMethod.POST)
+	@RequestMapping("/admin/product/deleteAjax")
+	@ResponseBody
+	public MessageBean deleteAjax(Product product){
+		
+		try {
+			product=productService.getOne(product.getClass(), product.getId());
+			productService.delete(product);
+			return new MessageBean(APPConstant.ERROR, "删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new MessageBean(APPConstant.ERROR, "删除失败");
+		}
+	}
+	@RequestMapping("/admin/product/getOneAjax")
 	@ResponseBody
 	public Product getOne(Product product){
 		
 		try {
 			
-			return productService.getOne(product.getClass(),product.getPdtId());
+			return productService.getOne(product.getClass(),product.getId());
 		} catch (Exception e) {
 			Product page=new Product();
 			page.setCode(APPConstant.ERROR);
@@ -79,7 +100,7 @@ public class ProductController {
 			return page;
 		}
 	}
-	@RequestMapping("/admin/product/picUploadAjax")
+	@RequestMapping("/admin/product/picUploadAjax.do")
 	@ResponseBody
 	public MessageBean saveProductImage(ImageCutModel imgCut,HttpServletRequest request){
 		

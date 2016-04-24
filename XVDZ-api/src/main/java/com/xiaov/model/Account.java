@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -22,20 +23,23 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "account", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class Account extends Page<Account> implements java.io.Serializable {
 
 	// Fields
 
-	private String actId;
+	private String id;
 	private UserInfo userInfo;
 	private Double actMm;
 	private Double actTtEn;
 	private Double actBlc;
 	private Double actFm;
 	private Integer actState;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp addTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp deleteTime;
 	private String remark;
 	private Boolean deleteFlag;
@@ -47,9 +51,9 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Account(String actId, Double actMm, Double actTtEn, Double actBlc,
+	public Account(String id, Double actMm, Double actTtEn, Double actBlc,
 			Double actFm, Timestamp addTime, Boolean deleteFlag) {
-		this.actId = actId;
+		this.id = id;
 		this.actMm = actMm;
 		this.actTtEn = actTtEn;
 		this.actBlc = actBlc;
@@ -59,11 +63,11 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Account(String actId, UserInfo userInfo, Double actMm,
+	public Account(String id, UserInfo userInfo, Double actMm,
 			Double actTtEn, Double actBlc, Double actFm, Integer actState,
 			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
 			String remark, Boolean deleteFlag) {
-		this.actId = actId;
+		this.id = id;
 		this.userInfo = userInfo;
 		this.actMm = actMm;
 		this.actTtEn = actTtEn;
@@ -79,15 +83,15 @@ public class Account extends Page<Account> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "act_id", unique = true, nullable = false, length = 33)
+	@Column(name = "act_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getActId() {
-		return this.actId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setActId(String actId) {
-		this.actId = actId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -100,7 +104,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.userInfo = userInfo;
 	}
 
-	@Column(name = "act_mm", nullable = false, precision = 22, scale = 0)
+	@Column(name = "act_mm", nullable = true, precision = 22, scale = 0)
 	public Double getActMm() {
 		return this.actMm;
 	}
@@ -109,7 +113,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.actMm = actMm;
 	}
 
-	@Column(name = "act_tt_en", nullable = false, precision = 22, scale = 0)
+	@Column(name = "act_tt_en", nullable = true, precision = 22, scale = 0)
 	public Double getActTtEn() {
 		return this.actTtEn;
 	}
@@ -118,7 +122,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.actTtEn = actTtEn;
 	}
 
-	@Column(name = "act_blc", nullable = false, precision = 22, scale = 0)
+	@Column(name = "act_blc", nullable = true, precision = 22, scale = 0)
 	public Double getActBlc() {
 		return this.actBlc;
 	}
@@ -127,7 +131,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.actBlc = actBlc;
 	}
 
-	@Column(name = "act_fm", nullable = false, precision = 22, scale = 0)
+	@Column(name = "act_fm", nullable = true, precision = 22, scale = 0)
 	public Double getActFm() {
 		return this.actFm;
 	}
@@ -145,7 +149,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.actState = actState;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Timestamp getAddTime() {
 		return this.addTime;
 	}
@@ -181,7 +185,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.remark = remark;
 	}
 
-	@Column(name = "deleteFlag", nullable = false)
+	@Column(name = "deleteFlag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

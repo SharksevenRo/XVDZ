@@ -40,8 +40,8 @@ public class Page<T> extends PageRequest implements Serializable {
 		this.pageNo = request.getPageNo();
 		this.pageSize = request.getPageSize();
 		this.countTotal = request.isCountTotal();
-		this.orderBy = request.getOrderBy();
-		this.orderDir = request.getOrderDir();
+		this.sidx = request.getSidx();
+		this.sord = request.getSord();
 	}
 
 	/**
@@ -77,6 +77,10 @@ public class Page<T> extends PageRequest implements Serializable {
 	 */
 	public int getTotalPages() {
 		return (int) Math.ceil((double) totalItems / (double) getPageSize());
+
+	}
+	public void setTotalPages() {
+		totalPages=getTotalPages();
 
 	}
 
