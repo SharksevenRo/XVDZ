@@ -25,7 +25,7 @@ import com.xiaov.orm.core.Page;
 public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 
 	// Fields
-	private String dynmcId;
+	private String id;
 	private UserInfo userInfo;
 	private String dynmcContent;
 	private Timestamp dynmcTime;
@@ -40,9 +40,9 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Dynamic(String dynmcId, String dynmcContent, Timestamp dynmcTime,
+	public Dynamic(String id, String dynmcContent, Timestamp dynmcTime,
 			Integer dynmcGdCnt, Integer dynmcCmmCnt, Boolean deleteFlag) {
-		this.dynmcId = dynmcId;
+		this.id = id;
 		this.dynmcContent = dynmcContent;
 		this.dynmcTime = dynmcTime;
 		this.dynmcGdCnt = dynmcGdCnt;
@@ -51,10 +51,10 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Dynamic(String dynmcId, UserInfo userInfo, String dynmcContent,
+	public Dynamic(String id, UserInfo userInfo, String dynmcContent,
 			Timestamp dynmcTime, Integer dynmcGdCnt, Integer dynmcCmmCnt,
 			Boolean deleteFlag) {
-		this.dynmcId = dynmcId;
+		this.id = id;
 		this.userInfo = userInfo;
 		this.dynmcContent = dynmcContent;
 		this.dynmcTime = dynmcTime;
@@ -68,12 +68,12 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	@GeneratedValue(generator="system-uuid") 
 	@Column(name = "dynmc_id", unique = true, nullable = true, length = 33)
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getDynmcId() {
-		return this.dynmcId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setDynmcId(String dynmcId) {
-		this.dynmcId = dynmcId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

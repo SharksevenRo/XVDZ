@@ -204,7 +204,7 @@ public class PageRequest implements java.io.Serializable {
 	/**
 	 * 是否已设置排序字段,无默认值.
 	 */
-	public boolean issidxSetted() {
+	public boolean isOrderBySetted() {
 		return (StringUtils.isNotBlank(sidx) && StringUtils.isNotBlank(sord));
 	}
 

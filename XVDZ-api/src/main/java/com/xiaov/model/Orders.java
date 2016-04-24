@@ -25,7 +25,7 @@ import com.xiaov.orm.core.Page;
 public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	// Fields
-	private String orId;
+	private String id;
 	private OrderDetail orderDetail;
 	private Types dbTypes;
 	private DiscountCoupan discountCoupan;
@@ -48,9 +48,9 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Orders(String orId, String orNo, Double orTotal, Integer orState,
+	public Orders(String id, String orNo, Double orTotal, Integer orState,
 			Timestamp addTime, Boolean deleteFlag) {
-		this.orId = orId;
+		this.id = id;
 		this.orNo = orNo;
 		this.orTotal = orTotal;
 		this.orState = orState;
@@ -59,12 +59,12 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Orders(String orId, OrderDetail orderDetail, Types dbTypes,
+	public Orders(String id, OrderDetail orderDetail, Types dbTypes,
 			DiscountCoupan discountCoupan, String ueId, String orNo,
 			Double orTotal, Double orDiscount, Double orRealCost,
 			Integer orState, Timestamp addTime, Timestamp updateTime,
 			Timestamp deleteTime, String orRemark, Boolean deleteFlag) {
-		this.orId = orId;
+		this.id = id;
 		this.orderDetail = orderDetail;
 		this.dbTypes = dbTypes;
 		this.discountCoupan = discountCoupan;
@@ -86,12 +86,12 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	@Column(name = "or_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getOrId() {
-		return this.orId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setOrId(String orId) {
-		this.orId = orId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

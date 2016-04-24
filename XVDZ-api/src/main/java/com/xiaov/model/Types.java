@@ -29,7 +29,7 @@ public class Types extends Page<Types> implements java.io.Serializable {
 
 	// Fields
 
-	private String typeId;
+	private String id;
 	private Types parentType;
 	private String typeName;
 	private Timestamp addTime;
@@ -69,12 +69,12 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Column(name = "type_id", unique = true, nullable = true)
-	public String getTypeId() {
-		return this.typeId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

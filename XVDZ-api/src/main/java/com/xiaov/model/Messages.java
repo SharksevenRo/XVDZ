@@ -23,7 +23,7 @@ import com.xiaov.orm.core.Page;
 public class Messages extends Page<Messages> implements java.io.Serializable {
 
 	// Fields
-	private String msgId;
+	private String id;
 	private UserInfo userInfoBySendId;
 	private UserInfo userInfoByReceiveId;
 	private Integer typeId;
@@ -38,19 +38,19 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Messages(String msgId, String msgContent, Timestamp msgTime,
+	public Messages(String id, String msgContent, Timestamp msgTime,
 			Boolean msgReadState) {
-		this.msgId = msgId;
+		this.id = id;
 		this.msgContent = msgContent;
 		this.msgTime = msgTime;
 		this.msgReadState = msgReadState;
 	}
 
 	/** full constructor */
-	public Messages(String msgId, UserInfo userInfoBySendId,
+	public Messages(String id, UserInfo userInfoBySendId,
 			UserInfo userInfoByReceiveId, Integer typeId, String msgContent,
 			Timestamp msgTime, Boolean msgReadState) {
-		this.msgId = msgId;
+		this.id = id;
 		this.userInfoBySendId = userInfoBySendId;
 		this.userInfoByReceiveId = userInfoByReceiveId;
 		this.typeId = typeId;
@@ -64,12 +64,12 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 	@Column(name = "msg_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getMsgId() {
-		return this.msgId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setMsgId(String msgId) {
-		this.msgId = msgId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -27,7 +27,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	// Fields
 
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
-	private String adsId;
+	private String id;
 	private UserInfo userInfoByDeleteId;
 	private UserInfo userInfoByUpdateId;
 	private String addId;
@@ -48,21 +48,21 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	}
 
 	/** minimal constructor */
-	public Advertisment(String adsId, String adsContent, Boolean adsState,
+	public Advertisment(String id, String adsContent, Boolean adsState,
 			Timestamp addTime) {
-		this.adsId = adsId;
+		this.id = id;
 		this.adsContent = adsContent;
 		this.adsState = adsState;
 		this.addTime = addTime;
 	}
 
 	/** full constructor */
-	public Advertisment(String adsId, UserInfo userInfoByDeleteId,
+	public Advertisment(String id, UserInfo userInfoByDeleteId,
 			UserInfo userInfoByUpdateId, String addId, String adsTt,
 			String adsContent, String adsPic, Boolean adsState,
 			Timestamp addTime, Timestamp adsOnme, Timestamp updateTime,
 			Timestamp deleteTime, Boolean deleteFlag) {
-		this.adsId = adsId;
+		this.id = id;
 		this.userInfoByDeleteId = userInfoByDeleteId;
 		this.userInfoByUpdateId = userInfoByUpdateId;
 		this.addId = addId;
@@ -82,12 +82,12 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	@Column(name = "ads_id", unique = true, nullable = true ,length=33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getAdsId() {
-		return this.adsId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setAdsId(String adsId) {
-		this.adsId = adsId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

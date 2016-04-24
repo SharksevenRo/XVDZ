@@ -25,7 +25,7 @@ import com.xiaov.orm.core.FieldType;
 public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Serializable {
 
 	// Fields
-	private String reAddId;
+	private String id;
 	private UserInfo userInfo;
 	private String reAddName;
 	private String reAddPro;
@@ -48,9 +48,9 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	}
 
 	/** minimal constructor */
-	public ReceiveAddress(String reAddId, String reAddDet, String reAddTo,
+	public ReceiveAddress(String id, String reAddDet, String reAddTo,
 			String reAddTel, Boolean addDefault, Timestamp addTime) {
-		this.reAddId = reAddId;
+		this.id = id;
 		this.reAddDet = reAddDet;
 		this.reAddTo = reAddTo;
 		this.reAddTel = reAddTel;
@@ -59,12 +59,12 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	}
 
 	/** full constructor */
-	public ReceiveAddress(String reAddId, UserInfo userInfo, String reAddName,
+	public ReceiveAddress(String id, UserInfo userInfo, String reAddName,
 			String reAddPro, String reAddCity, String reAddArea,
 			String reAddDet, String reAddTo, String reAddTel,
 			Boolean addDefault, Timestamp addTime, Timestamp updateTime,
 			Timestamp deleteTime, String reAddRemark, Boolean deleteFlag) {
-		this.reAddId = reAddId;
+		this.id = id;
 		this.userInfo = userInfo;
 		this.reAddName = reAddName;
 		this.reAddPro = reAddPro;
@@ -86,12 +86,12 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	@Column(name = "re_add_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getReAddId() {
-		return this.reAddId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setReAddId(String reAddId) {
-		this.reAddId = reAddId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

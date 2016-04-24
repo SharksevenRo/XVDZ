@@ -26,7 +26,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	// Fields
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
-	private String usId;
+	private String id;
 	private Integer typeId;
 	private String appId;
 	private String usNcNa;
@@ -62,7 +62,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	public UserInfo(String usId, String usNcNa, String usLgNa, String usPwd,
 			Integer usState, Integer usLoginErrorTimes, Boolean usLoginState,
 			Date addTime, Boolean deleteFlag) {
-		this.usId = usId;
+		this.id = usId;
 		this.usNcNa = usNcNa;
 		this.usLgNa = usLgNa;
 		this.usPwd = usPwd;
@@ -82,7 +82,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 			Date usLastLoginTime, Boolean usLoginState, Date addTime,
 			Date updateTime, Date deleteTime, String usRemark,
 			Boolean deleteFlag) {
-		this.usId = usId;
+		this.id = usId;
 		this.typeId = typeId;
 		this.appId = appId;
 		this.usNcNa = usNcNa;
@@ -114,12 +114,12 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	@Column(name = "us_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getUsId() {
-		return this.usId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setUsId(String usId) {
-		this.usId = usId;
+	public void setId(String usId) {
+		this.id = usId;
 	}
 
 	@Column(name = "type_id")

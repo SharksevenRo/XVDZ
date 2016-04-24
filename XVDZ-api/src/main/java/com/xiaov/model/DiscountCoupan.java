@@ -29,7 +29,7 @@ import com.xiaov.orm.core.Page;
 public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Serializable {
 
 	// Fields
-	private String disCouId;
+	private String id;
 	private UserInfo userInfo;
 	private String disCouNo;
 	private Double disCouPrice;
@@ -46,10 +46,10 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	}
 
 	/** minimal constructor */
-	public DiscountCoupan(String disCouId, String disCouNo, Double disCouPrice,
+	public DiscountCoupan(String id, String disCouNo, Double disCouPrice,
 			Timestamp disCouTime, Timestamp disCouValidTime,
 			Integer disCouState, Boolean deleteFlag) {
-		this.disCouId = disCouId;
+		this.id = id;
 		this.disCouNo = disCouNo;
 		this.disCouPrice = disCouPrice;
 		this.disCouTime = disCouTime;
@@ -59,11 +59,11 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	}
 
 	/** full constructor */
-	public DiscountCoupan(String disCouId, UserInfo userInfo, String disCouNo,
+	public DiscountCoupan(String id, UserInfo userInfo, String disCouNo,
 			Double disCouPrice, Timestamp disCouTime,
 			Timestamp disCouValidTime, Integer disCouState,
 			String disCouRemark, Boolean deleteFlag) {
-		this.disCouId = disCouId;
+		this.id = id;
 		this.userInfo = userInfo;
 		this.disCouNo = disCouNo;
 		this.disCouPrice = disCouPrice;
@@ -79,12 +79,12 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	@Column(name = "dis_cou_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getDisCouId() {
-		return this.disCouId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setDisCouId(String disCouId) {
-		this.disCouId = disCouId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

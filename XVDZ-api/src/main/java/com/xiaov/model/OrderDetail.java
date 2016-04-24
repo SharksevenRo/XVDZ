@@ -27,7 +27,7 @@ import com.xiaov.orm.core.Page;
 public class OrderDetail extends Page<OrderDetail> implements java.io.Serializable {
 
 	// Fields
-	private String orDtId;
+	private String id;
 	private Integer pdtId;
 	private String orDtNo;
 	private Double orDtPrc;
@@ -48,10 +48,10 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	}
 
 	/** minimal constructor */
-	public OrderDetail(String orDtId, String orDtNo, Double orDtPrc,
+	public OrderDetail(String id, String orDtNo, Double orDtPrc,
 			Integer orDtMount, Double orDtItmeTotal, Double orDtRlTotal,
 			Timestamp addTime, Boolean deleteFlag) {
-		this.orDtId = orDtId;
+		this.id = id;
 		this.orDtNo = orDtNo;
 		this.orDtPrc = orDtPrc;
 		this.orDtMount = orDtMount;
@@ -62,12 +62,12 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	}
 
 	/** full constructor */
-	public OrderDetail(String orDtId, Integer pdtId, String orDtNo,
+	public OrderDetail(String id, Integer pdtId, String orDtNo,
 			Double orDtPrc, Integer orDtMount, Double orDtDsct,
 			Double orDtItmeTotal, Double orDtRlTotal, String orDtRemark,
 			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
 			Boolean deleteFlag) {
-		this.orDtId = orDtId;
+		this.id = id;
 		this.pdtId = pdtId;
 		this.orDtNo = orDtNo;
 		this.orDtPrc = orDtPrc;
@@ -87,12 +87,12 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	@Column(name = "or_dt_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getOrDtId() {
-		return this.orDtId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setOrDtId(String orDtId) {
-		this.orDtId = orDtId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Column(name = "pdt_id")

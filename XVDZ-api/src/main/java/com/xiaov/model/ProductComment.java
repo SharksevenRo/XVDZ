@@ -25,7 +25,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class ProductComment extends Page<Orders> implements java.io.Serializable {
 
 	// Fields
-	private String cmtId;
+	private String id;
 	private Product product;
 	private Material material;
 	private ProductComment productComment;
@@ -42,9 +42,9 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	}
 
 	/** minimal constructor */
-	public ProductComment(String cmtId, String cmtContent, Integer cmtQtSt,
+	public ProductComment(String id, String cmtContent, Integer cmtQtSt,
 			Integer cmtLogisticsSt, Integer cmtWrapSt, Timestamp cmtTime) {
-		this.cmtId = cmtId;
+		this.id = id;
 		this.cmtContent = cmtContent;
 		this.cmtQtSt = cmtQtSt;
 		this.cmtLogisticsSt = cmtLogisticsSt;
@@ -53,10 +53,10 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	}
 
 	/** full constructor */
-	public ProductComment(String cmtId, Product product, Material material,
+	public ProductComment(String id, Product product, Material material,
 			ProductComment productComment, String cmtContent, Integer cmtQtSt,
 			Integer cmtLogisticsSt, Integer cmtWrapSt, Timestamp cmtTime) {
-		this.cmtId = cmtId;
+		this.id = id;
 		this.product = product;
 		this.material = material;
 		this.productComment = productComment;
@@ -72,12 +72,12 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	@Column(name = "cmt_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getCmtId() {
-		return this.cmtId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setCmtId(String cmtId) {
-		this.cmtId = cmtId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

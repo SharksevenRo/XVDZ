@@ -25,7 +25,7 @@ import com.xiaov.orm.core.Page;
 public class DiscountCode extends Page<DiscountCode> implements java.io.Serializable {
 
 	// Fields
-	private String disCodeId;
+	private String id;
 	private UserInfo userInfoByGnrtUId;
 	private UserInfo userInfoByProUId;
 	private String disCodeNo;
@@ -42,10 +42,10 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	}
 
 	/** minimal constructor */
-	public DiscountCode(String disCodeId, String disCodeNo,
+	public DiscountCode(String id, String disCodeNo,
 			Timestamp disCodeTime, Timestamp disCodeValidTime,
 			Integer disCodeNum, Boolean deleteFlag) {
-		this.disCodeId = disCodeId;
+		this.id = id;
 		this.disCodeNo = disCodeNo;
 		this.disCodeTime = disCodeTime;
 		this.disCodeValidTime = disCodeValidTime;
@@ -54,11 +54,11 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	}
 
 	/** full constructor */
-	public DiscountCode(String disCodeId, UserInfo userInfoByGnrtUId,
+	public DiscountCode(String id, UserInfo userInfoByGnrtUId,
 			UserInfo userInfoByProUId, String disCodeNo, Timestamp disCodeTime,
 			Timestamp disCodeValidTime, Integer disCodeNum,
 			String disCodeRemark, Boolean deleteFlag) {
-		this.disCodeId = disCodeId;
+		this.id = id;
 		this.userInfoByGnrtUId = userInfoByGnrtUId;
 		this.userInfoByProUId = userInfoByProUId;
 		this.disCodeNo = disCodeNo;
@@ -74,12 +74,12 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Id
 	@Column(name = "dis_code_id", unique = true, nullable = true, length = 33)
-	public String getDisCodeId() {
-		return this.disCodeId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setDisCodeId(String disCodeId) {
-		this.disCodeId = disCodeId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

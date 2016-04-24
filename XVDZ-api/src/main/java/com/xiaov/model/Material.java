@@ -26,7 +26,7 @@ import com.xiaov.orm.core.Page;
 public class Material extends Page<Material> implements java.io.Serializable {
 
 	// Fields
-	private Integer materialId;
+	private String id;
 	private Material material;
 	private Types dbTypes;
 	private String materialNo;
@@ -44,9 +44,9 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Material(Integer materialId, String materialNo, String meterialName,
+	public Material(String id, String materialNo, String meterialName,
 			Date addTime, Boolean deleteFlag) {
-		this.materialId = materialId;
+		this.id = id;
 		this.materialNo = materialNo;
 		this.meterialName = meterialName;
 		this.addTime = addTime;
@@ -54,11 +54,11 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Material(Integer materialId, Material material, Types dbTypes,
+	public Material(String id, Material material, Types dbTypes,
 			String materialNo, String meterialName, String meterialRemark,
 			Date addTime, Date updateTime, Date deleteTime,
 			Boolean deleteFlag) {
-		this.materialId = materialId;
+		this.id = id;
 		this.material = material;
 		this.dbTypes = dbTypes;
 		this.materialNo = materialNo;
@@ -75,12 +75,12 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	@Column(name = "material_id", unique = true, nullable = true,length=33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public Integer getMaterialId() {
-		return this.materialId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setMaterialId(Integer materialId) {
-		this.materialId = materialId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

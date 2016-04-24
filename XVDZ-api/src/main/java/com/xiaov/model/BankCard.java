@@ -25,7 +25,7 @@ import com.xiaov.orm.core.Page;
 public class BankCard extends Page<BankCard> implements java.io.Serializable {
 
 	// Fields
-	private String bkCdId;
+	private String id;
 	private Types dbTypes;
 	private Account account;
 	private String bkCdNo;
@@ -44,10 +44,10 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public BankCard(String bkCdId, Types dbTypes, String bkCdNo,
+	public BankCard(String id, Types dbTypes, String bkCdNo,
 			String bcForName, String bcBdTel, Timestamp addTime,
 			Boolean deleteFlag) {
-		this.bkCdId = bkCdId;
+		this.id = id;
 		this.dbTypes = dbTypes;
 		this.bkCdNo = bkCdNo;
 		this.bcForName = bcForName;
@@ -57,11 +57,11 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BankCard(String bkCdId, Types dbTypes, Account account,
+	public BankCard(String id, Types dbTypes, Account account,
 			String bkCdNo, String bcForName, String bcBdTel, Timestamp addTime,
 			Timestamp updateTime, Timestamp deleteTime, String bcRemark,
 			Boolean deleteFlag) {
-		this.bkCdId = bkCdId;
+		this.id = id;
 		this.dbTypes = dbTypes;
 		this.account = account;
 		this.bkCdNo = bkCdNo;
@@ -79,12 +79,12 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	@Column(name = "bk_cd_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getBkCdId() {
-		return this.bkCdId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setBkCdId(String bkCdId) {
-		this.bkCdId = bkCdId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
