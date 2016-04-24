@@ -51,7 +51,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		return super.getOne(clazz, pk);
 	}
 	
-	
+
 	public List<Orders> example(){
 		
 		/*Restrictions.eq
@@ -118,6 +118,14 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		
 		Criterion [] criterions={eq1,eq2,ge};
 		return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
+	}
+
+	public List<Orders> getByColumn(Criterion[] criterions) {
+
+		String[] fields = new String[]{"orderDetail", "dbTypes", "discountCoupan"};
+
+		return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
+
 	}
 }
 

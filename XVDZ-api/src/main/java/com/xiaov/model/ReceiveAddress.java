@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.xiaov.orm.core.Page;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.xiaov.orm.annotation.StateDelete;
@@ -21,7 +22,7 @@ import com.xiaov.orm.core.FieldType;
 @Entity
 @Table(name = "receive_address", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
-public class ReceiveAddress implements java.io.Serializable {
+public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Serializable {
 
 	// Fields
 	private String reAddId;
