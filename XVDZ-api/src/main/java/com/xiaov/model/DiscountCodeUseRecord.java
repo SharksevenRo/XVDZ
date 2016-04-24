@@ -52,7 +52,7 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Id
-	@Column(name = "code_use_rcd_id", unique = true, nullable = false, length = 33)
+	@Column(name = "code_use_rcd_id", unique = true, nullable = true, length = 33)
 	public String getCodeUseRcdId() {
 		return this.codeUseRcdId;
 	}
@@ -80,7 +80,7 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 		this.disCodeId = disCodeId;
 	}
 
-	@Column(name = "use_time", nullable = false, length = 0)
+	@Column(name = "use_time", nullable = true, length = 0)
 	public Timestamp getUseTime() {
 		return this.useTime;
 	}

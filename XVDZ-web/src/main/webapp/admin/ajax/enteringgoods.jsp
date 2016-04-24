@@ -16,7 +16,7 @@
 		<li class="active">分页表格</li>
 	</ol>
 	<h1 class="page-header">
-		商品备案<small></small>
+		商品<small></small>
 	</h1>
 	<div class="row">
 		<div class="col-md-12">
@@ -37,7 +37,7 @@
 							data-click="panel-remove"><i class="fa fa-times"></i>
 						</a>
 					</div>
-					<h4 class="panel-title">商品备案</h4>			
+					<h4 class="panel-title">商品</h4>			
 				</div>
 				<div class="panel-body">
 				
@@ -67,90 +67,35 @@
         <div class="modal-content" style="width: 700px">
             <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">添加商品备案</h4>
+				<h4 class="modal-title">添加商品</h4>
 			</div>
 			<div class="modal-body">
 <!-- 				<form action="../main/enterGoods/saveOrUpdateEnterGoods" class="form-horizontal" method="post"> -->
 				<form id="enteringGoodsForm" class="form-horizontal" method="post">
 					<fieldset>
 						<div class="form-group">
-                            <label class="col-md-2 control-label">商品编号：</label>
-                            <div class="col-md-4">
-                            	<input class="form-control" placeholder="请输入商品编号"  type="text" name="pdt_no"> 
-<!--                                 <select class="form-control" name="enteringGoodsType.enterGoodsTypeName"> -->
-<!--                                 	<option>1</option> -->
-<!--                                 	<option>2</option> -->
-<!--                                 	<option>3</option> -->
-<!--                                 	<option>4</option> -->
-<!--                                 </select> 
-                               <select id="enterGoodsTypeId" name="enterGoodsTypeId"  class="form-control select2">
-                               		
-                               </select>-->
-<!-- 						   <input class="form-control" placeholder="请输入商品类型"  type="text" name="enteringGoodsType.enterGoodsTypeName"> -->
-                            </div>
 <!--                         </div> -->
 <!--                    		<div class="form-group"> -->
                             <label class="col-md-2 control-label">商品名称：</label>
                             <div class="col-md-4"> 
-                                <input class="form-control" placeholder="请输入商品名称"  type="text" name="pdt_name">
+                                <input class="form-control" placeholder="请输入商品名称"  type="text" name="pdtName">
                             </div>
-                        </div>
-         				<div class="form-group">
-                            <label class="col-md-2 control-label">商品正面图</label>
-                            <div class="col-md-4">
-                                <input class="form-control" multiple="multiple" id="f" type="file" name="pdt_pic_bs">
-                            </div>
-<!--                         </div> -->
-<!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">商品价格：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入商品价格"  type="text" name="pdt_prc">
+                             <label class="col-md-2 control-label">商品介绍：</label>
+                            <div class="col-md-4"> 
+                                <input class="form-control" placeholder="请输入商品名称"  type="text" name="pdtPc">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">商品销售总量：</label>
+                         	<label class="col-md-2 control-label">商品标签：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="0"  type="text" name="pdt_sale_count">
+                                <input class="form-control" placeholder="请输入标签"  type="text" name="pdtLabel">
                             </div>
-<!--                         </div> -->
-<!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">商品点赞数：</label>
+                            <label class="col-md-2 control-label">单价：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="0"  type="text" name="pdt_share_count">
+                                <input class="form-control" placeholder="0"  type="text" name="pdtPrc">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">商品分享数:</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="0"  type="text"  name="licenceNo">
-                            </div>
-<!--                         </div> -->
-<!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">添加时间:</label>
-                            <div class="col-md-4">
-                                <input readonly="true" class="form-control" placeholder="点击自动生成" onclick="date = new Date();this.value=1900+date.getYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();"  type="text" name="add_time">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">是否开放：</label>
-                            <div class="col-md-4">
-                                <select class="form-control" name="pdt_open_state"> -->
-                                 	<option>是</option> 
-                                 	<option>否</option>
-                               </select> 
-                            </div>
-<!--                         </div> -->
-<!--                         <div class="form-group"> -->
-                            <label class="col-md-2 control-label">删除表示：</label>
-                            <div class="col-md-4">
-                                <select class="form-control" name="delet_flag"> -->
-                                 	<option>是</option> 
-                                 	<option>否</option>
-                               </select> 
-                            </div>
-                        </div>
-                 
-					<div class="modal-footer">
+						</div>
+						<div class="modal-footer">
 						 <div class="form-group">
 <!-- 						    隐藏ID -->
 						 	<input style="display:none;"  type="text"  name="enteringGoodsId">
@@ -186,15 +131,17 @@
 </script>
 
 <script type="text/javascript">
+
 	//表单类下拉列表加载department,并根据oper是否是更新来设置deparmentId为对应选中状态
 	function loadDepartment(oper, enterGoodsTypeId) {
 		$("select[name=enterGoodsTypeId]").html("");
 		$.ajax({
 			type : "get",
-			url : "${pageContext.request.contextPath }/",
+			url : "${pageContext.request.contextPath}/admin/product/page.do",
 			dataType : "json",
 			async : true,
 			success : function(data) {
+				debugger;
 				var list = data.data;
 				for ( var i = 0; i < list.length; i++) {
 					$("select[name=enterGoodsTypeId]").append(
@@ -225,15 +172,15 @@
 	$("#grid-table").jqGrid({ 
 		//提交类型
 		type:"post",
-        url: "../main/enterGoods/showEnterGoods",
+        url: "${pageContext.request.contextPath}/admin/product/page.do",
         //数据类型
         datatype: "json", 
          jsonReader: {  
-	        	root:"rows", page:"page", total:"total", records:"records", repeatitems : false,//userdata: "userdata",
+	        	root:"result", page:"pageNo", total:"totalItems", records:"10", repeatitems : false,//userdata: "userdata",
 	        },
         //高度自动调整
         height : "100%",
-		colNames:["编辑/删除","商品ID","商品类型ID","布料类型ID","风格类型ID", "颜色类型ID", "尺寸类型ID","创造用户ID","素材ID","商品编号","商品名称","商品溢价","商品标签","商品介绍","商品正面图","商品反面图","商品价格","商品折扣","销售总量"], //,"点赞数","分享数","添加时间","修改时间","删除时间","是否开放","备注","删除标识"
+		colNames:["编辑/删除","","商品名称","商品编号","商品价格","折扣","销售数量","标签","商品介绍","上架时间","点赞数","分享数"], //,"点赞数","分享数","添加时间","修改时间","删除时间","是否开放","备注","删除标识"
 		colModel:[ 
 				   {name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,search:false,
 					　　　　formatter: 'actions',
@@ -247,12 +194,12 @@
 						     			   onclickSubmit : function(params, postdata) { //提交数据结构后触发
 											    var rowId = $("#grid-table").jqGrid("getGridParam", "selrow");
 											    var rowData = $("#grid-table").jqGrid("getRowData",rowId);
-											    var id=rowData.enteringGoodsId;
-											    postdata = {"enteringGoodsId":id};
+											    var id=rowData.id;
+											    postdata = {"id":id};
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "../main/enterGoods/deleteEnterGoods",/* beforeShowForm: beforeDeleteCallback */ 
+											url : "${pageContext.request.contextPath}/admin/product/deleteAjax",/* beforeShowForm: beforeDeleteCallback */ 
 										},
 							 editbutton:true, 
 							 editformbutton: true,
@@ -262,33 +209,27 @@
 							 				onclickSubmit : function(params, postdata) { //提交数据结构后触发
 											    var rowId = $("#grid-table").jqGrid("getGridParam", "selrow");
 											    var rowData = $("#grid-table").jqGrid("getRowData",rowId);
-											    var id=rowData.customerId;
-											    postdata = {"enteringGoodsId":id};
+											    var id=rowData.pdtId;
+											    debugger;
+											    postdata = {"id":id};
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "../main/enterGoods/updateEnterGoods",
+											url : "${pageContext.request.contextPath}/admin/product/updateAjax.do",
 							 }
 						} 
 					}, 
-				   {name:"enteringGoodsId",index:"商品id",hidden : true, editable: true, width:90, align:"center"},
-				   {name:"enterGoodsTypeId",index:"商品类型id",hidden : true, editable: true, width:90, align:"center"},
-				   {name:"enteringGoodsType.enterGoodsTypeName",index:"商品类型", editable: false, width:90, align:"center"}, 
-				   {name:"company.companyName",index:"商品使用公司",hidden : true, editable: false, width:150, align:"center"}, 
-				   {name:"enteringGoodsName",index:"商品名称",  editable: true,width:80, align:"center"}, 
-				   {name:"enteringTypeNo",index:"规格型号",  editable: true,width:80, align:"center"}, 
-				   {name:"brandName",index:"品牌名称",  editable: true,width:80, align:"center"}, 
-				   {name:"logEnterprise",index:"来源企业",  editable: true,width:80, align:"center"},
-				   {name:"manufacturerName",index:"生产商", editable: true, width:80, align:"center"},
-				   {name:"licenceNo",index:"生产许可证号",  editable: true,width:100, align:"center"},
-				   {name:"useIndustry",index:"适用行业",  editable: true,width:80, align:"center"},
-				   {name:"unitAreaUse",index:"亩用量",  editable: true,width:80, align:"center"},
-				   {name:"dataUnit",index:"数量单位",  editable: true,width:80, align:"center"},
-				   {name:"attenuationRate",index:"稀释比", editable: true, width:80, align:"center"},
-				   {name:"validPeriod",index:"保质期", editable: true, width:80, align:"center"},
-				   {name:"safeTime",index:"安全间隔期",  editable: true,width:80, align:"center"},
-				   {name:"usageRemark",index:"用途",  editable: true,width:150, align:"center"},
-				   {name:"useRemark",index:"备注",  editable: true,width:250, align:"center"} 
+					{name:"id",index:"id",hidden : true, editable: true, width:90, align:"center"},
+				   {name:"pdtName",index:"pdtName",hidden : false, editable: true, width:90, align:"center"},
+				   {name:"pdtNo",index:"pdtNo",hidden : false, editable: true, width:90, align:"center"},
+				   {name:"pdtPrc",index:"pdtPrc", editable: false, width:90, align:"center"}, 
+				   {name:"pdtDsct",index:"pdtDsct",hidden : false, editable: false, width:90, align:"center"}, 
+				   {name:"pdtSaleCount",index:"pdtSaleCount",  editable: true,width:80, align:"center"}, 
+				   {name:"pdtLabel",index:"pdtLabel",  editable: true,width:80, align:"center"}, 
+				   {name:"pdtPc",index:"pdtPc",  editable: true,width:80, align:"center"},
+				   {name:"addTime",index:"addTime",  editable: true,width:80, align:"center"}, 
+				   {name:"pdtGdCount",index:"pdtGdCount",  editable: true,width:80, align:"center"}, 
+				   {name:"pdtShareCount",index:"pdtShareCount",  editable: true,width:80, align:"center"}
 				  ],
    		 rowNum:10, 
    		 rowList:[10,20,30],
@@ -307,15 +248,15 @@
 //    		 toolbar : [ true, "top" ],
    		 prmNames : {
 						search : "search",
-						rows : "pageCount",//每页多少条
-						page : "pageNum",//页码
+						rows : "pageSize",//每页多少条
+						page : "pageNo",//页码
 					},
    		 pager: "#grid-pager", 
-   		 sortname: "id", 
+   		 sortname: "addTime", 
    		 viewrecords: true, 
    		 sortorder: "desc",
    		 //jqgrid名称 
-//    	 caption:"商品备案", 
+//    	 caption:"商品", 
    	});
    
    	//加载底部操作按钮及页码
@@ -414,7 +355,7 @@
 			        cache:false,  
 			        type: 'POST',  
 			        dataType : 'text', 
-                    url: "../main/enterGoods/saveOrUpdateEnterGoods",
+                    url: "${pageContext.request.contextPath}/admin/product/saveAjax.do",
                     //序列化form表单
 			    	data: $("#enteringGoodsForm").serializeArray(),
 			        error: function () {//请求失败处理函数 

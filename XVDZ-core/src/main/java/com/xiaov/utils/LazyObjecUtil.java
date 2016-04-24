@@ -11,6 +11,18 @@ import com.xiaov.orm.core.Page;
  */
 public class LazyObjecUtil {
 
+	
+	public static <T>  List<T> AllLazySetNull(List<T> data,String fieldName) throws Exception{
+		
+		if(data.size()>0){
+				for (T t : data) {
+					ReflectionUtils.setFieldValue(t, fieldName, null);
+				}
+		}else{
+			new RuntimeException("list 为空");
+		}
+		return data;
+	}
 	/**
 	 * 将结果集中的延迟加载对象设NULL,解决无法打包成json数据
 	 * @param data

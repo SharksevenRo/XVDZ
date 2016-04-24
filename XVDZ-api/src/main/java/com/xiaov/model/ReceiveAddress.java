@@ -82,7 +82,7 @@ public class ReceiveAddress implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "re_add_id", unique = true, nullable = false, length = 33)
+	@Column(name = "re_add_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getReAddId() {
@@ -139,7 +139,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.reAddArea = reAddArea;
 	}
 
-	@Column(name = "re_add_det", nullable = false, length = 200)
+	@Column(name = "re_add_det", nullable = true, length = 200)
 	public String getReAddDet() {
 		return this.reAddDet;
 	}
@@ -148,7 +148,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.reAddDet = reAddDet;
 	}
 
-	@Column(name = "re_add_to", nullable = false, length = 20)
+	@Column(name = "re_add_to", nullable = true, length = 20)
 	public String getReAddTo() {
 		return this.reAddTo;
 	}
@@ -157,7 +157,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.reAddTo = reAddTo;
 	}
 
-	@Column(name = "re_add_tel", nullable = false, length = 12)
+	@Column(name = "re_add_tel", nullable = true, length = 12)
 	public String getReAddTel() {
 		return this.reAddTel;
 	}
@@ -166,7 +166,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.reAddTel = reAddTel;
 	}
 
-	@Column(name = "add_default", nullable = false)
+	@Column(name = "add_default", nullable = true)
 	public Boolean getAddDefault() {
 		return this.addDefault;
 	}
@@ -175,7 +175,7 @@ public class ReceiveAddress implements java.io.Serializable {
 		this.addDefault = addDefault;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Timestamp getAddTime() {
 		return this.addTime;
 	}

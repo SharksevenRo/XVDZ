@@ -79,7 +79,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 
 	// Property accessors
 	@Id
-	@Column(name = "ads_id", unique = true, nullable = false ,length=33)
+	@Column(name = "ads_id", unique = true, nullable = true ,length=33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getAdsId() {
@@ -128,7 +128,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 		this.adsTt = adsTt;
 	}
 
-	@Column(name = "ads_content", nullable = false, length = 0)
+	@Column(name = "ads_content", nullable = true, length = 0)
 	public String getAdsContent() {
 		return this.adsContent;
 	}
@@ -146,7 +146,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 		this.adsPic = adsPic;
 	}
 
-	@Column(name = "ads_state", nullable = false)
+	@Column(name = "ads_state", nullable = true)
 	public Boolean getAdsState() {
 		return this.adsState;
 	}
@@ -155,7 +155,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 		this.adsState = adsState;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Timestamp getAddTime() {
 		return this.addTime;
 	}

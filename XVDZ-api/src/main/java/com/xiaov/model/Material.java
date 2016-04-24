@@ -28,7 +28,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	// Fields
 	private Integer materialId;
 	private Material material;
-	private DbTypes dbTypes;
+	private Types dbTypes;
 	private String materialNo;
 	private String meterialName;
 	private String meterialRemark;
@@ -54,7 +54,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Material(Integer materialId, Material material, DbTypes dbTypes,
+	public Material(Integer materialId, Material material, Types dbTypes,
 			String materialNo, String meterialName, String meterialRemark,
 			Date addTime, Date updateTime, Date deleteTime,
 			Boolean deleteFlag) {
@@ -72,7 +72,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "material_id", unique = true, nullable = false,length=33)
+	@Column(name = "material_id", unique = true, nullable = true,length=33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public Integer getMaterialId() {
@@ -95,15 +95,15 @@ public class Material extends Page<Material> implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "type_id")
-	public DbTypes getDbTypes() {
+	public Types getDbTypes() {
 		return this.dbTypes;
 	}
 
-	public void setDbTypes(DbTypes dbTypes) {
+	public void setDbTypes(Types dbTypes) {
 		this.dbTypes = dbTypes;
 	}
 
-	@Column(name = "material_no", nullable = false, length = 20)
+	@Column(name = "material_no", nullable = true, length = 20)
 	public String getMaterialNo() {
 		return this.materialNo;
 	}
@@ -112,7 +112,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 		this.materialNo = materialNo;
 	}
 
-	@Column(name = "meterial_name", nullable = false, length = 20)
+	@Column(name = "meterial_name", nullable = true, length = 20)
 	public String getMeterialName() {
 		return this.meterialName;
 	}
@@ -130,7 +130,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 		this.meterialRemark = meterialRemark;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Date getAddTime() {
 		return this.addTime;
 	}
@@ -157,7 +157,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 		this.deleteTime = deleteTime;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

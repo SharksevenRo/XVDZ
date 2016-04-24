@@ -66,7 +66,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@GeneratedValue(generator="system-uuid") 
-	@Column(name = "dynmc_id", unique = true, nullable = false, length = 33)
+	@Column(name = "dynmc_id", unique = true, nullable = true, length = 33)
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getDynmcId() {
 		return this.dynmcId;
@@ -86,7 +86,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.userInfo = userInfo;
 	}
 
-	@Column(name = "dynmc_content", nullable = false, length = 200)
+	@Column(name = "dynmc_content", nullable = true, length = 200)
 	public String getDynmcContent() {
 		return this.dynmcContent;
 	}
@@ -95,7 +95,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.dynmcContent = dynmcContent;
 	}
 
-	@Column(name = "dynmc_time", nullable = false, length = 0)
+	@Column(name = "dynmc_time", nullable = true, length = 0)
 	public Timestamp getDynmcTime() {
 		return this.dynmcTime;
 	}
@@ -104,7 +104,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.dynmcTime = dynmcTime;
 	}
 
-	@Column(name = "dynmc_gd_cnt", nullable = false)
+	@Column(name = "dynmc_gd_cnt", nullable = true)
 	public Integer getDynmcGdCnt() {
 		return this.dynmcGdCnt;
 	}
@@ -113,7 +113,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.dynmcGdCnt = dynmcGdCnt;
 	}
 
-	@Column(name = "dynmc_cmm_cnt", nullable = false)
+	@Column(name = "dynmc_cmm_cnt", nullable = true)
 	public Integer getDynmcCmmCnt() {
 		return this.dynmcCmmCnt;
 	}
@@ -122,7 +122,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.dynmcCmmCnt = dynmcCmmCnt;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

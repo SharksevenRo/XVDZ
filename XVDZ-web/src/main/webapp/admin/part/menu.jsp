@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/xml; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script Charset="UTF-8" type="text/javascript" src="../js/plugins/manager/manager.js"></script>
 <script Charset="UTF-8" type="text/javascript" src="../js/plugins/manager/jquery-1.3.min.js"></script>
 <!--
@@ -47,7 +48,7 @@
 						</ul> -->
 					</li>
 					<li class="has-sub">
-						<a href="#ajax/enteringgoods.html">
+						<a href="#ajax/enteringgoods.jsp">
 						 <!--    <b class="caret pull-right"></b>--> 
 						    <i class="fa fa-suitcase"></i>
 						    <span>产品管理</span> 

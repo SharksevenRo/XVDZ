@@ -76,7 +76,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 
 	// Property accessors
 	@Id
-	@Column(name = "dis_cou_id", unique = true, nullable = false, length = 33)
+	@Column(name = "dis_cou_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getDisCouId() {
@@ -97,7 +97,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.userInfo = userInfo;
 	}
 
-	@Column(name = "dis_cou_no", nullable = false, length = 20)
+	@Column(name = "dis_cou_no", nullable = true, length = 20)
 	public String getDisCouNo() {
 		return this.disCouNo;
 	}
@@ -106,7 +106,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouNo = disCouNo;
 	}
 
-	@Column(name = "dis_cou_price", nullable = false, precision = 22, scale = 0)
+	@Column(name = "dis_cou_price", nullable = true, precision = 22, scale = 0)
 	public Double getDisCouPrice() {
 		return this.disCouPrice;
 	}
@@ -115,7 +115,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouPrice = disCouPrice;
 	}
 
-	@Column(name = "dis_cou_time", nullable = false, length = 0)
+	@Column(name = "dis_cou_time", nullable = true, length = 0)
 	public Timestamp getDisCouTime() {
 		return this.disCouTime;
 	}
@@ -124,7 +124,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouTime = disCouTime;
 	}
 
-	@Column(name = "dis_cou_valid_time", nullable = false, length = 0)
+	@Column(name = "dis_cou_valid_time", nullable = true, length = 0)
 	public Timestamp getDisCouValidTime() {
 		return this.disCouValidTime;
 	}
@@ -133,7 +133,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouValidTime = disCouValidTime;
 	}
 
-	@Column(name = "dis_cou_state", nullable = false)
+	@Column(name = "dis_cou_state", nullable = true)
 	public Integer getDisCouState() {
 		return this.disCouState;
 	}
@@ -151,7 +151,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouRemark = disCouRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

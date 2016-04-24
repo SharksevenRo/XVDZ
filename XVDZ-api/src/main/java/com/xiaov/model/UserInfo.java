@@ -111,7 +111,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "us_id", unique = true, nullable = false, length = 33)
+	@Column(name = "us_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getUsId() {
@@ -140,7 +140,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 		this.appId = appId;
 	}
 
-	@Column(name = "us_nc_na", nullable = false, length = 20)
+	@Column(name = "us_nc_na", nullable = true, length = 20)
 	public String getUsNcNa() {
 		return this.usNcNa;
 	}
@@ -149,7 +149,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 		this.usNcNa = usNcNa;
 	}
 
-	@Column(name = "us_lg_na", nullable = false, length = 20)
+	@Column(name = "us_lg_na", nullable = true, length = 20)
 	public String getUsLgNa() {
 		return this.usLgNa;
 	}
@@ -167,7 +167,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 		this.usName = usName;
 	}
 
-	@Column(name = "us_pwd", nullable = false, length = 20)
+	@Column(name = "us_pwd", nullable = true, length = 20)
 	public String getUsPwd() {
 		return this.usPwd;
 	}
@@ -249,7 +249,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 		this.usHobby = usHobby;
 	}
 
-	@Column(name = "us_state", nullable = false)
+	@Column(name = "us_state", nullable = true)
 	public Integer getUsState() {
 		return this.usState;
 	}
@@ -267,7 +267,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 		this.usIdCard = usIdCard;
 	}
 
-	@Column(name = "us_login_error_times", nullable = false)
+	@Column(name = "us_login_error_times", nullable = true)
 	public Integer getUsLoginErrorTimes() {
 		return this.usLoginErrorTimes;
 	}
@@ -285,7 +285,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 		this.usLastLoginTime = usLastLoginTime;
 	}
 
-	@Column(name = "us_login_state", nullable = false)
+	@Column(name = "us_login_state", nullable = true)
 	public Boolean getUsLoginState() {
 		return this.usLoginState;
 	}
@@ -294,7 +294,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 		this.usLoginState = usLoginState;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Date getAddTime() {
 		return this.addTime;
 	}
@@ -330,7 +330,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 		this.usRemark = usRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}

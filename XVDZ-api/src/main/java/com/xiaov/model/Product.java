@@ -1,7 +1,5 @@
 package com.xiaov.model;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,11 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * Product entity. @author MyEclipse Persistence Tools
@@ -29,13 +30,9 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 	// Fields
 
-	private String pdtId;
-	private DbTypes dbTypesByColorTypeId;
-	private DbTypes dbTypesBySizeTypeId;
-	private DbTypes dbTypesByClothTypeId;
-	private DbTypes dbTypesByPdtTypeId;
+	private String id;
+	private Types productType;
 	private Material material;
-	private DbTypes dbTypesByStyleTypeId;
 	private String usId;
 	private String pdtNo;
 	private String pdtName;
@@ -49,12 +46,13 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Integer pdtSaleCount;
 	private Integer pdtGdCount;
 	private Integer pdtShareCount;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
 	private Date updateTime;
 	private Date deleteTime;
-	private Boolean pdtOpenState;
+	private Boolean pdtOpenState=true;
 	private String remark;
-	private Boolean deletFlag;
+	private Boolean deletFlag=false;
 
 	// Constructors
 
@@ -63,11 +61,11 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Product(String pdtId, String pdtNo, String pdtName,
+	public Product(String id, String pdtNo, String pdtName,
 			String pdtPicBs, Double pdtPrc, Integer pdtSaleCount,
 			Integer pdtGdCount, Integer pdtShareCount, Date addTime,
 			Boolean pdtOpenState, Boolean deletFlag) {
-		this.pdtId = pdtId;
+		this.id = id;
 		this.pdtNo = pdtNo;
 		this.pdtName = pdtName;
 		this.pdtPicBs = pdtPicBs;
@@ -81,22 +79,16 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Product(String pdtId, DbTypes dbTypesByColorTypeId,
-			DbTypes dbTypesBySizeTypeId, DbTypes dbTypesByClothTypeId,
-			DbTypes dbTypesByPdtTypeId, Material material,
-			DbTypes dbTypesByStyleTypeId, String usId, String pdtNo,
+	public Product(String id, Types productType,
+			 Material material,String usId, String pdtNo,
 			String pdtName, Double pdtIntRat, String pdtLabel, String pdtPc,
 			String pdtPicBs, String pdtPicBp, Double pdtPrc, Double pdtDsct,
 			Integer pdtSaleCount, Integer pdtGdCount, Integer pdtShareCount,
 			Date addTime, Date updateTime, Date deleteTime,
 			Boolean pdtOpenState, String remark, Boolean deletFlag) {
-		this.pdtId = pdtId;
-		this.dbTypesByColorTypeId = dbTypesByColorTypeId;
-		this.dbTypesBySizeTypeId = dbTypesBySizeTypeId;
-		this.dbTypesByClothTypeId = dbTypesByClothTypeId;
-		this.dbTypesByPdtTypeId = dbTypesByPdtTypeId;
+		this.id = id;
+		this.productType = productType;
 		this.material = material;
-		this.dbTypesByStyleTypeId = dbTypesByStyleTypeId;
 		this.usId = usId;
 		this.pdtNo = pdtNo;
 		this.pdtName = pdtName;
@@ -120,55 +112,25 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "pdt_id", unique = true, nullable = false, length = 33)
+	@Column(name = "pdt_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
-	public String getPdtId() {
-		return this.pdtId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setPdtId(String pdtId) {
-		this.pdtId = pdtId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "color_type_id")
-	public DbTypes getDbTypesByColorTypeId() {
-		return this.dbTypesByColorTypeId;
-	}
-
-	public void setDbTypesByColorTypeId(DbTypes dbTypesByColorTypeId) {
-		this.dbTypesByColorTypeId = dbTypesByColorTypeId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "size_type_id")
-	public DbTypes getDbTypesBySizeTypeId() {
-		return this.dbTypesBySizeTypeId;
+	@JoinColumn(name = "type_id")
+	public Types getProductType() {
+		return this.productType;
 	}
 
-	public void setDbTypesBySizeTypeId(DbTypes dbTypesBySizeTypeId) {
-		this.dbTypesBySizeTypeId = dbTypesBySizeTypeId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cloth_type_id")
-	public DbTypes getDbTypesByClothTypeId() {
-		return this.dbTypesByClothTypeId;
-	}
-
-	public void setDbTypesByClothTypeId(DbTypes dbTypesByClothTypeId) {
-		this.dbTypesByClothTypeId = dbTypesByClothTypeId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pdt_type_id")
-	public DbTypes getDbTypesByPdtTypeId() {
-		return this.dbTypesByPdtTypeId;
-	}
-
-	public void setDbTypesByPdtTypeId(DbTypes dbTypesByPdtTypeId) {
-		this.dbTypesByPdtTypeId = dbTypesByPdtTypeId;
+	public void setProductType(Types productType) {
+		this.productType = productType;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -180,17 +142,6 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public void setMaterial(Material material) {
 		this.material = material;
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "style_type_id")
-	public DbTypes getDbTypesByStyleTypeId() {
-		return this.dbTypesByStyleTypeId;
-	}
-
-	public void setDbTypesByStyleTypeId(DbTypes dbTypesByStyleTypeId) {
-		this.dbTypesByStyleTypeId = dbTypesByStyleTypeId;
-	}
-
 	@Column(name = "us_id", length = 20)
 	public String getUsId() {
 		return this.usId;
@@ -200,7 +151,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.usId = usId;
 	}
 
-	@Column(name = "pdt_no", nullable = false, length = 20)
+	@Column(name = "pdt_no", nullable = true, length = 20)
 	public String getPdtNo() {
 		return this.pdtNo;
 	}
@@ -209,7 +160,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.pdtNo = pdtNo;
 	}
 
-	@Column(name = "pdt_name", nullable = false, length = 50)
+	@Column(name = "pdt_name", nullable = true, length = 50)
 	public String getPdtName() {
 		return this.pdtName;
 	}
@@ -245,7 +196,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.pdtPc = pdtPc;
 	}
 
-	@Column(name = "pdt_pic_bs", nullable = false, length = 50)
+	@Column(name = "pdt_pic_bs", nullable = true, length = 50)
 	public String getPdtPicBs() {
 		return this.pdtPicBs;
 	}
@@ -263,7 +214,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.pdtPicBp = pdtPicBp;
 	}
 
-	@Column(name = "pdt_prc", nullable = false, precision = 22, scale = 0)
+	@Column(name = "pdt_prc", nullable = true, precision = 22, scale = 0)
 	public Double getPdtPrc() {
 		return this.pdtPrc;
 	}
@@ -281,7 +232,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.pdtDsct = pdtDsct;
 	}
 
-	@Column(name = "pdt_sale_count", nullable = false)
+	@Column(name = "pdt_sale_count", nullable = true)
 	public Integer getPdtSaleCount() {
 		return this.pdtSaleCount;
 	}
@@ -290,7 +241,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.pdtSaleCount = pdtSaleCount;
 	}
 
-	@Column(name = "pdt_gd_count", nullable = false)
+	@Column(name = "pdt_gd_count", nullable = true)
 	public Integer getPdtGdCount() {
 		return this.pdtGdCount;
 	}
@@ -299,7 +250,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.pdtGdCount = pdtGdCount;
 	}
 
-	@Column(name = "pdt_share_count", nullable = false)
+	@Column(name = "pdt_share_count", nullable = true)
 	public Integer getPdtShareCount() {
 		return this.pdtShareCount;
 	}
@@ -308,7 +259,8 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.pdtShareCount = pdtShareCount;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)  
 	public Date getAddTime() {
 		return this.addTime;
 	}
@@ -335,7 +287,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.deleteTime = deleteTime;
 	}
 
-	@Column(name = "pdt_open_state", nullable = false)
+	@Column(name = "pdt_open_state", nullable = true)
 	public Boolean getPdtOpenState() {
 		return this.pdtOpenState;
 	}
@@ -353,7 +305,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.remark = remark;
 	}
 
-	@Column(name = "delet_flag", nullable = false)
+	@Column(name = "delet_flag", nullable = true)
 	public Boolean getDeletFlag() {
 		return this.deletFlag;
 	}

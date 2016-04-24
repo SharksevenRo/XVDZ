@@ -61,7 +61,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "msg_id", unique = true, nullable = false, length = 33)
+	@Column(name = "msg_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getMsgId() {
@@ -101,7 +101,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 		this.typeId = typeId;
 	}
 
-	@Column(name = "msg_content", nullable = false, length = 200)
+	@Column(name = "msg_content", nullable = true, length = 200)
 	public String getMsgContent() {
 		return this.msgContent;
 	}
@@ -110,7 +110,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 		this.msgContent = msgContent;
 	}
 
-	@Column(name = "msg_time", nullable = false, length = 0)
+	@Column(name = "msg_time", nullable = true, length = 0)
 	public Timestamp getMsgTime() {
 		return this.msgTime;
 	}
@@ -119,7 +119,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 		this.msgTime = msgTime;
 	}
 
-	@Column(name = "msg_read_state", nullable = false)
+	@Column(name = "msg_read_state", nullable = true)
 	public Boolean getMsgReadState() {
 		return this.msgReadState;
 	}

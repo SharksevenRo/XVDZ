@@ -26,7 +26,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 
 	// Fields
 	private String bkCdId;
-	private DbTypes dbTypes;
+	private Types dbTypes;
 	private Account account;
 	private String bkCdNo;
 	private String bcForName;
@@ -44,7 +44,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public BankCard(String bkCdId, DbTypes dbTypes, String bkCdNo,
+	public BankCard(String bkCdId, Types dbTypes, String bkCdNo,
 			String bcForName, String bcBdTel, Timestamp addTime,
 			Boolean deleteFlag) {
 		this.bkCdId = bkCdId;
@@ -57,7 +57,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BankCard(String bkCdId, DbTypes dbTypes, Account account,
+	public BankCard(String bkCdId, Types dbTypes, Account account,
 			String bkCdNo, String bcForName, String bcBdTel, Timestamp addTime,
 			Timestamp updateTime, Timestamp deleteTime, String bcRemark,
 			Boolean deleteFlag) {
@@ -76,7 +76,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "bk_cd_id", unique = true, nullable = false, length = 33)
+	@Column(name = "bk_cd_id", unique = true, nullable = true, length = 33)
 	@GeneratedValue(generator="system-uuid") 
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	public String getBkCdId() {
@@ -88,12 +88,12 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "type_id", nullable = false)
-	public DbTypes getDbTypes() {
+	@JoinColumn(name = "type_id", nullable = true)
+	public Types getDbTypes() {
 		return this.dbTypes;
 	}
 
-	public void setDbTypes(DbTypes dbTypes) {
+	public void setDbTypes(Types dbTypes) {
 		this.dbTypes = dbTypes;
 	}
 
@@ -107,7 +107,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 		this.account = account;
 	}
 
-	@Column(name = "bk_cd_no", nullable = false, length = 20)
+	@Column(name = "bk_cd_no", nullable = true, length = 20)
 	public String getBkCdNo() {
 		return this.bkCdNo;
 	}
@@ -116,7 +116,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 		this.bkCdNo = bkCdNo;
 	}
 
-	@Column(name = "bc_for_name", nullable = false, length = 20)
+	@Column(name = "bc_for_name", nullable = true, length = 20)
 	public String getBcForName() {
 		return this.bcForName;
 	}
@@ -125,7 +125,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 		this.bcForName = bcForName;
 	}
 
-	@Column(name = "bc_bd_tel", nullable = false, length = 12)
+	@Column(name = "bc_bd_tel", nullable = true, length = 12)
 	public String getBcBdTel() {
 		return this.bcBdTel;
 	}
@@ -134,7 +134,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 		this.bcBdTel = bcBdTel;
 	}
 
-	@Column(name = "add_time", nullable = false, length = 0)
+	@Column(name = "add_time", nullable = true, length = 0)
 	public Timestamp getAddTime() {
 		return this.addTime;
 	}
@@ -170,7 +170,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 		this.bcRemark = bcRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = false)
+	@Column(name = "delete_flag", nullable = true)
 	public Boolean getDeleteFlag() {
 		return this.deleteFlag;
 	}
