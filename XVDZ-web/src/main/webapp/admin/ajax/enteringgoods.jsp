@@ -176,10 +176,11 @@
         //数据类型
         datatype: "json", 
          jsonReader: {  
-	        	root:"result", page:"pageNo", total:"totalItems", records:"10", repeatitems : false,//userdata: "userdata",
+	        	root:"result", page:"pageNo", total:"totalPages", records:"10", repeatitems : false,//userdata: "userdata",
 	        },
         //高度自动调整
         height : "100%",
+        width : "100%",
 		colNames:["编辑/删除","","商品名称","商品编号","商品价格","折扣","销售数量","标签","商品介绍","上架时间","点赞数","分享数"], //,"点赞数","分享数","添加时间","修改时间","删除时间","是否开放","备注","删除标识"
 		colModel:[ 
 				   {name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,search:false,

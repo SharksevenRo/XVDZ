@@ -84,7 +84,10 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 			} catch (Exception e) {
 			}
 		}
-		return dao.findPage(page, dao.createQuery(hql.toString(), map));
+		page= dao.findPage(page, dao.createQuery(hql.toString(), map));
+		//设置总页数
+		page.setTotalPages();
+		return page;
 	}
 
 	public T getOne(Class clazz, String pk) {

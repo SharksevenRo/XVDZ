@@ -1,6 +1,7 @@
 package com.xiaov.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,7 +54,10 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Boolean pdtOpenState=true;
 	private String remark;
 	private Boolean deletFlag=false;
-
+	
+	private List<ProductDetail> colors;
+	private List<ProductDetail> sizes;
+	private List<ProductDetail> materials;
 	// Constructors
 
 	/** default constructor */
@@ -312,5 +316,29 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 	public void setDeletFlag(Boolean deletFlag) {
 		this.deletFlag = deletFlag;
+	}
+
+	public List<ProductDetail> getColors() {
+		return colors;
+	}
+
+	public void setColors(List<ProductDetail> colors) {
+		this.colors = colors;
+	}
+
+	public List<ProductDetail> getSizes() {
+		return sizes;
+	}
+
+	public void setSizes(List<ProductDetail> sizes) {
+		this.sizes = sizes;
+	}
+
+	public List<ProductDetail> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(List<ProductDetail> materials) {
+		this.materials = materials;
 	}
 }

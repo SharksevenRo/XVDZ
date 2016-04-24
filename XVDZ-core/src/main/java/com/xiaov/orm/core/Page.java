@@ -79,6 +79,10 @@ public class Page<T> extends PageRequest implements Serializable {
 		return (int) Math.ceil((double) totalItems / (double) getPageSize());
 
 	}
+	public void setTotalPages() {
+		totalPages=getTotalPages();
+
+	}
 
 	/**
 	 * 是否还有下一页.

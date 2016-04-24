@@ -59,7 +59,7 @@ public class PageRequest implements java.io.Serializable {
 	 */
 	protected boolean countTotal = true;
 	
-	
+	protected Integer totalPages=0;	
 	/**
 	 * 响应码
 	 */
