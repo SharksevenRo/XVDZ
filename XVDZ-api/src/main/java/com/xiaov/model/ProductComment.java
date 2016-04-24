@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.xiaov.orm.core.Page;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * ProductComment entity. @author MyEclipse Persistence Tools
@@ -33,6 +34,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	private Integer cmtQtSt;
 	private Integer cmtLogisticsSt;
 	private Integer cmtWrapSt;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp cmtTime;
 
 	// Constructors

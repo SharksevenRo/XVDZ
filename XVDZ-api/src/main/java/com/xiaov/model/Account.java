@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -22,7 +23,7 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "account", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class Account extends Page<Account> implements java.io.Serializable {
 
 	// Fields
@@ -34,8 +35,11 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	private Double actBlc;
 	private Double actFm;
 	private Integer actState;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp addTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp deleteTime;
 	private String remark;
 	private Boolean deleteFlag;

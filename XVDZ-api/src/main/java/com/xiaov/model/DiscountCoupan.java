@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -25,7 +26,7 @@ import com.xiaov.orm.core.Page;
  */
 @Entity
 @Table(name = "discount_coupan", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Serializable {
 
 	// Fields
@@ -33,7 +34,9 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	private UserInfo userInfo;
 	private String disCouNo;
 	private Double disCouPrice;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp disCouTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp disCouValidTime;
 	private Integer disCouState;
 	private String disCouRemark;

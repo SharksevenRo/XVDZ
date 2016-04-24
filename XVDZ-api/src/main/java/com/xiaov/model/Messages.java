@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.core.Page;
 
@@ -28,6 +29,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 	private UserInfo userInfoByReceiveId;
 	private Integer typeId;
 	private String msgContent;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp msgTime;
 	private Boolean msgReadState;
 

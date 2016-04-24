@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xiaov.constant.APPConstant;
@@ -74,6 +73,19 @@ public class ProductController {
 		}
 	}
 	
+	@RequestMapping("/admin/product/deleteAjax")
+	@ResponseBody
+	public MessageBean deleteAjax(Product product){
+		
+		try {
+			product=productService.getOne(product.getClass(), product.getId());
+			productService.delete(product);
+			return new MessageBean(APPConstant.ERROR, "删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new MessageBean(APPConstant.ERROR, "删除失败");
+		}
+	}
 	@RequestMapping("/admin/product/getOneAjax")
 	@ResponseBody
 	public Product getOne(Product product){

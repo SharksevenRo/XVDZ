@@ -41,7 +41,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public List<T> loadAll(T entity) {
 		String name = entity.getClass().getSimpleName();
 		StringBuilder hql = new StringBuilder();
-		hql.append("from " + name + " where deletFlag=0");
+		hql.append("from " + name + " where deleteFlag=0");
 		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(entity.getClass(), true);
 		Object value = null;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -66,7 +66,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public Page<T> page(Page<T> page) {
 		String name = page.getClass().getSimpleName();
 		StringBuilder hql = new StringBuilder();
-		hql.append("from " + name + " where deletFlag=0");
+		hql.append("from " + name + " where deleteFlag=0");
 		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), true);
 		Object value = null;
 		Map<String, Object> map = new HashMap<String, Object>();

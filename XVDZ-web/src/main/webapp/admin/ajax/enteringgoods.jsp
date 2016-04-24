@@ -180,7 +180,7 @@
 	        },
         //高度自动调整
         height : "100%",
-        width : "100%",
+        width : "100%",//下面那个第一个列名为空时存储某个记录的id，为了实现删除和修改操作
 		colNames:["编辑/删除","","商品名称","商品编号","商品价格","折扣","销售数量","标签","商品介绍","上架时间","点赞数","分享数"], //,"点赞数","分享数","添加时间","修改时间","删除时间","是否开放","备注","删除标识"
 		colModel:[ 
 				   {name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,search:false,
@@ -200,7 +200,7 @@
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "${pageContext.request.contextPath}/admin/product/deleteAjax",/* beforeShowForm: beforeDeleteCallback */ 
+											url : "${pageContext.request.contextPath}/admin/product/deleteAjax.do",/* 删除Product的URL */ 
 										},
 							 editbutton:true, 
 							 editformbutton: true,
@@ -216,10 +216,11 @@
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "${pageContext.request.contextPath}/admin/product/updateAjax.do",
+											url : "${pageContext.request.contextPath}/admin/product/updateAjax.do",/* 修改Product的URL */ 
 							 }
 						} 
 					}, 
+					//index 和name一致必须，为了实现点击表头以当前列排序所依赖的规范
 					{name:"id",index:"id",hidden : true, editable: true, width:90, align:"center"},
 				   {name:"pdtName",index:"pdtName",hidden : false, editable: true, width:90, align:"center"},
 				   {name:"pdtNo",index:"pdtNo",hidden : false, editable: true, width:90, align:"center"},

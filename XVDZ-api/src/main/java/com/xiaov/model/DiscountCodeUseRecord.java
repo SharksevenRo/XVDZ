@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.core.Page;
 
@@ -25,6 +26,7 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 	private String id;
 	private UserInfo userInfo;
 	private String disCodeId;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp useTime;
 
 	// Constructors

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
@@ -26,7 +27,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "product", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class Product extends Page<Product> implements java.io.Serializable {
 
 	// Fields
@@ -49,11 +50,13 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Integer pdtShareCount;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private Boolean pdtOpenState=true;
 	private String remark;
-	private Boolean deletFlag=false;
+	private Boolean deleteFlag=false;
 	
 	private List<ProductDetail> colors;
 	private List<ProductDetail> sizes;
@@ -68,7 +71,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public Product(String id, String pdtNo, String pdtName,
 			String pdtPicBs, Double pdtPrc, Integer pdtSaleCount,
 			Integer pdtGdCount, Integer pdtShareCount, Date addTime,
-			Boolean pdtOpenState, Boolean deletFlag) {
+			Boolean pdtOpenState, Boolean deleteFlag) {
 		this.id = id;
 		this.pdtNo = pdtNo;
 		this.pdtName = pdtName;
@@ -79,7 +82,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.pdtShareCount = pdtShareCount;
 		this.addTime = addTime;
 		this.pdtOpenState = pdtOpenState;
-		this.deletFlag = deletFlag;
+		this.deleteFlag = deleteFlag;
 	}
 
 	/** full constructor */
@@ -89,7 +92,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 			String pdtPicBs, String pdtPicBp, Double pdtPrc, Double pdtDsct,
 			Integer pdtSaleCount, Integer pdtGdCount, Integer pdtShareCount,
 			Date addTime, Date updateTime, Date deleteTime,
-			Boolean pdtOpenState, String remark, Boolean deletFlag) {
+			Boolean pdtOpenState, String remark, Boolean deleteFlag) {
 		this.id = id;
 		this.productType = productType;
 		this.material = material;
@@ -111,7 +114,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.deleteTime = deleteTime;
 		this.pdtOpenState = pdtOpenState;
 		this.remark = remark;
-		this.deletFlag = deletFlag;
+		this.deleteFlag = deleteFlag;
 	}
 
 	// Property accessors
@@ -310,14 +313,14 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	}
 
 	@Column(name = "delet_flag", nullable = true)
-	public Boolean getDeletFlag() {
-		return this.deletFlag;
+	public Boolean getDeleteFlag() {
+		return this.deleteFlag;
 	}
 
-	public void setDeletFlag(Boolean deletFlag) {
-		this.deletFlag = deletFlag;
+	public void setDeleteFlag(Boolean deleteFlag) {
+		this.deleteFlag = deleteFlag;
 	}
-
+	@Transient
 	public List<ProductDetail> getColors() {
 		return colors;
 	}
@@ -325,7 +328,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public void setColors(List<ProductDetail> colors) {
 		this.colors = colors;
 	}
-
+	@Transient
 	public List<ProductDetail> getSizes() {
 		return sizes;
 	}
@@ -333,7 +336,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public void setSizes(List<ProductDetail> sizes) {
 		this.sizes = sizes;
 	}
-
+	@Transient
 	public List<ProductDetail> getMaterials() {
 		return materials;
 	}

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.xiaov.orm.core.Page;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
@@ -21,7 +22,7 @@ import com.xiaov.orm.core.FieldType;
  */
 @Entity
 @Table(name = "receive_address", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="0")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
 public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Serializable {
 
 	// Fields
@@ -35,8 +36,11 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	private String reAddTo;
 	private String reAddTel;
 	private Boolean addDefault;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp addTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp updateTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp deleteTime;
 	private String reAddRemark;
 	private Boolean deleteFlag;
