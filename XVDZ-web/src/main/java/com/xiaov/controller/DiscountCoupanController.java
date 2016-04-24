@@ -62,7 +62,7 @@ public class DiscountCoupanController {
     @ResponseBody
     public DiscountCoupan getOne(DiscountCoupan discountCoupan) {
         try {
-            return discountCoupanService.getOne(discountCoupan.getClass(), discountCoupan.getDisCouId());
+            return discountCoupanService.getOne(discountCoupan.getClass(), discountCoupan.getId());
 
         } catch (Exception e) {
             DiscountCoupan page = new DiscountCoupan();

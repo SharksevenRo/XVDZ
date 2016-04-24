@@ -93,7 +93,7 @@ public class UserController {
 	@RequestMapping("/user/getOne")
 	@ResponseBody
 	public UserInfo getOne(UserInfo user){
-		user = userService.getOne(user.getClass(),user.getUsId());
+		user = userService.getOne(user.getClass(),user.getId());
 		//results=LazyObjecUtil.LazyPageSetNull(user,"role" );无关联对象，注释
 		System.out.println("11");
 		return user;

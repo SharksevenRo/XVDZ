@@ -62,7 +62,7 @@ public class DiscountCodeController {
     @ResponseBody
     public DiscountCode getOne(DiscountCode discountCode) {
         try {
-            return discountCodeService.getOne(discountCode.getClass(), discountCode.getDisCodeId());
+            return discountCodeService.getOne(discountCode.getClass(), discountCode.getId());
 
         } catch (Exception e) {
             DiscountCode page = new DiscountCode();

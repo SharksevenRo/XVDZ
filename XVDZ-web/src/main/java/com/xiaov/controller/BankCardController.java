@@ -62,7 +62,7 @@ public class BankCardController {
     @ResponseBody
     public BankCard getOne(BankCard bankCard) {
         try {
-            return bankCardService.getOne(bankCard.getClass(), bankCard.getBkCdId());
+            return bankCardService.getOne(bankCard.getClass(), bankCard.getId());
 
         } catch (Exception e) {
             BankCard page = new BankCard();

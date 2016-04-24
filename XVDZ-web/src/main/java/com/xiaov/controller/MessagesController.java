@@ -62,7 +62,7 @@ public class MessagesController {
     @ResponseBody
     public Messages getOne(Messages messages) {
         try {
-            return messagesService.getOne(messages.getClass(), messages.getMsgId());
+            return messagesService.getOne(messages.getClass(), messages.getId());
 
         } catch (Exception e) {
             Messages page = new Messages();

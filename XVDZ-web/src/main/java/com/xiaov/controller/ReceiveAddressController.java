@@ -62,7 +62,7 @@ public class ReceiveAddressController {
     @ResponseBody
     public ReceiveAddress getOne(ReceiveAddress receiveAddress) {
         try {
-            return receiveAddressService.getOne(receiveAddress.getClass(), receiveAddress.getReAddId());
+            return receiveAddressService.getOne(receiveAddress.getClass(), receiveAddress.getId());
 
         } catch (Exception e) {
             ReceiveAddress page = new ReceiveAddress();
