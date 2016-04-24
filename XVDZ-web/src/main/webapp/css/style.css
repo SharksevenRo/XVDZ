@@ -1,15 +1,39 @@
 .customer{
 	width:20%;
 	text-align: center;
-	margin-top: -23px;
+	margin-top: -15px;
 	float: left;
 }
 .nav-item{
 	float: left;
-    /*padding: 13px 12px;*/
     font-size: 18px;
-    line-height: 20px;
+    line-height: 41px;
+    height: 41px;
     width:20%;
     text-align: center;
 }
+#jqt ul li.arrow:after,
+#jqt ul li.forward:after,
+.base-chevron {
+	content: '›';
+	width: 12px;
+	height: 50%;
+	vertical-align: middle;
+	font-size: 12px;
+	line-height: 36px;
+	font-family: Futura, "Futura Condensed", Helvetica, Arial, sans-serif;
+	font-weight: 700;
+	filter: alpha(Opacity=60);
+	opacity: .6;
+	position: absolute;
+	right: 0;
+	top: 0;
+	pointer-events: none;
+	z-index: 10
+}
 
+#jqt ul {
+    padding: 0;
+    margin: 0px;
+    -webkit-margin-collapse: separate;
+}

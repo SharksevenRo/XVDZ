@@ -1,0 +1,112 @@
+<div id="voice">
+	<div class="toolbar">
+		<h1>来分享分享吧</h1>
+		<a href="#person" class="back">
+			<i class="icon-reply icon-large"></i>
+		</a>
+	</div>
+	<div class="scroll">
+		<div class="voiceitem">
+			<div style="height:100px;width: 100%;padding: 4px;font-size: 12px;">
+				<div style="float:left;width: 16%;display: inline;height:100px;line-height: 92px">
+					<a href="#">
+						<img width="48px" height="48px" src="img/avatar1.png" alt="...">
+					</a>
+				</div>
+				<div style="float: right;width:80%;height: 100%;display: inline;padding: 4px 0px;">
+					<label>Media heading</label>
+					<p>divdivMedia headingMedia headingMedia heading</p>
+					<span class="glyphicon glyphicon-time" style="float: right;">2016-05-05 12:12:12</span>
+				</div>
+			</div>
+			<hr class="divline">
+			<div style="height:100px;width: 100%;padding: 4px;font-size: 12px;">
+				<div style="float:left;width: 16%;display: inline;height:100px;line-height: 92px">
+					<a href="#">
+						<img width="48px" height="48px" src="img/avatar1.png" alt="...">
+					</a>
+				</div>
+				<div style="float: right;width:80%;height: 100%;display: inline;padding: 4px 0px;">
+					<label>Media heading</label>
+					<p>divdivMedia headingMedia headingMedia heading</p>
+					<span class="glyphicon glyphicon-time" style="float: right;">2016-05-05 12:12:12</span>
+				</div>
+			</div>
+			<hr class="divline">
+			<div style="height:100px;width: 100%;padding: 4px;font-size: 12px;">
+				<div style="float:left;width: 16%;display: inline;height:100px;line-height: 92px">
+					<a href="#">
+						<img width="48px" height="48px" src="img/avatar1.png" alt="...">
+					</a>
+				</div>
+				<div style="float: right;width:80%;height: 100%;display: inline;padding: 4px 0px;">
+					<label>Media heading</label>
+					<p>divdivMedia headingMedia headingMedia heading</p>
+					<span class="glyphicon glyphicon-time" style="float: right;">2016-05-05 12:12:12</span>
+				</div>
+			</div>
+			<hr class="divline">
+			<div style="height:100px;width: 100%;padding: 4px;font-size: 12px;">
+				<div style="float:left;width: 16%;display: inline;height:100px;line-height: 92px">
+					<a href="#">
+						<img width="48px" height="48px" src="img/avatar1.png" alt="...">
+					</a>
+				</div>
+				<div style="float: right;width:80%;height: 100%;display: inline;padding: 4px 0px;">
+					<label>Media heading</label>
+					<p>divdivMedia headingMedia headingMedia heading</p>
+					<span class="glyphicon glyphicon-time" style="float: right;">2016-05-05 12:12:12</span>
+				</div>
+			</div>
+			<hr class="divline">
+			<div style="height:100px;width: 100%;padding: 4px;font-size: 12px;">
+				<div style="float:left;width: 16%;display: inline;height:100px;line-height: 92px">
+					<a href="#">
+						<img width="48px" height="48px" src="img/avatar1.png" alt="...">
+					</a>
+				</div>
+				<div style="float: right;width:80%;height: 100%;display: inline;padding: 4px 0px;">
+					<label>Media heading</label>
+					<p>divdivMedia headingMedia headingMedia heading</p>
+					<span class="glyphicon glyphicon-time" style="float: right;">2016-05-05 12:12:12</span>
+				</div>
+			</div>
+		</div>
+		<div><i class="share-button glyphicon glyphicon-plus-sign font-20"></i></div>
+		<div class="hidden share-div">
+			<form action="main/dynamic/add" class="form-horizontal">
+				<div class="form-group">
+					<label class="col-xs-2 control-label">内容:</label>
+					<div class="col-xs-10">
+						<textarea autofocus="autofocus" data-bv-notempty="true" data-bv-notempty-message="内容不能为空" style="background: #E6D9E1;" class="form-control" name="dynmcContent" maxlength="200" placeholder="快来分享吧！">
+						</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> 是否让他人看到？
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-10">
+						<button type="submit" class="btn btn-info2 btn-block">发表</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	if (window.navigator.standalone) {
+		$("meta[name='apple-mobile-web-app-status-bar-style']").remove();
+	}
+	$(function() {
+		$(".share-button").click(function() {
+			$(".share-div").removeClass("hidden").toggle();
+		});
+	});
+</script>

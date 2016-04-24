@@ -623,17 +623,6 @@ body {
 	text-shadow: #e8ebee 0 1px 0
 }
 
-#jqt .toolbar {
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	background-color: #768ba7;
-	border-bottom: 1px solid #2a3441;
-	z-index: 10;
-	position: relative;
-	padding: 10px;
-	height: 44px
-}
-
 #jqt .toolbar>h1 {
 	position: absolute;
 	overflow: hidden;
@@ -661,41 +650,7 @@ body {
 	width: 250px
 }
 
-#jqt .add,
-#jqt .back,
-#jqt .button,
-#jqt .cancel {
-	position: absolute;
-	overflow: hidden;
-	width: auto;
-	height: 30px;
-	font-family: inherit;
-	font-size: 12px;
-	font-weight: 700;
-	line-height: 30px;
-	text-overflow: ellipsis;
-	text-decoration: none;
-	white-space: nowrap;
-	background: 0 0;
-	bottom: 6px;
-	right: 10px;
-	margin: 0;
-	padding: 0 10px;
-	color: #fff;
-	text-shadow: #3e5779 0 -1px 0;
-	border: 1px solid #2d3f57;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-	background-color: #50709a;
-	background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #7c97bb), color-stop(50%, #5a7caa), color-stop(51%, #50709a), color-stop(100%, #476489));
-	background-image: -webkit-linear-gradient(top, #7c97bb, #5a7caa 50%, #50709a 51%, #476489);
-	background-image: linear-gradient(top, #7c97bb, #5a7caa 50%, #50709a 51%, #476489);
-	-webkit-box-shadow: rgba(255, 255, 255, .2) 0 1px 0, rgba(0, 0, 0, .2) 0 1px 2px inset;
-	box-shadow: rgba(255, 255, 255, .2) 0 1px 0, rgba(0, 0, 0, .2) 0 1px 2px inset
-}
-
 #jqt .add.active,
-#jqt .back.active,
 #jqt .button.active,
 #jqt .cancel.active {
 	border-color: #243346;
@@ -707,58 +662,6 @@ body {
 	text-shadow: #364b68 0 -1px 0
 }
 
-#jqt .back {
-	max-width: 60px;
-	margin-left: 15px;
-	overflow: visible;
-	padding-left: 5px
-}
-
-#jqt .back:after,
-#jqt .back:before {
-	content: '';
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	top: 1px;
-	left: 1px;
-	-webkit-transform: rotate(45deg) translate3d(0.2px, 0, 0);
-	transform: rotate(45deg) translate3d(0.2px, 0, 0);
-	-webkit-transform-origin: 0 0;
-	transform-origin: 0 0;
-	background-color: #50709a;
-	background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0%, #7c97bb), color-stop(50%, #5a7caa), color-stop(51%, #50709a), color-stop(100%, #476489));
-	background-image: -webkit-linear-gradient(top left, #7c97bb, #5a7caa 50%, #50709a 51%, #476489);
-	background-image: linear-gradient(top left, #7c97bb, #5a7caa 50%, #50709a 51%, #476489);
-	background-size: 100% 98%;
-	-webkit-border-radius: 0 0 0 2px;
-	border-radius: 0 0 0 2px;
-	-webkit-mask-image: -webkit-linear-gradient(45deg, #000, #000 15px, rgba(0, 0, 0, 0) 15px);
-	-webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000), color-stop(50%, #000), color-stop(50%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0)));
-	-webkit-mask-clip: border-box;
-	-webkit-background-clip: content-box
-}
-
-#jqt .back:after {
-	-webkit-box-shadow: rgba(0, 0, 0, .2) 1px 0 0 inset, rgba(0, 0, 0, .2) 0 -1px 0 inset;
-	box-shadow: rgba(0, 0, 0, .2) 1px 0 0 inset, rgba(0, 0, 0, .2) 0 -1px 0 inset
-}
-
-#jqt .back:before {
-	margin-left: -1px;
-	background: #243346 none
-}
-
-#jqt .back.active:after {
-	background-color: #476489;
-	background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0%, #6b89b2), color-stop(50%, #50709a), color-stop(51%, #476489), color-stop(100%, #3e5779));
-	background-image: -webkit-linear-gradient(left top, #6b89b2, #50709a 50%, #476489 51%, #3e5779);
-	background-image: linear-gradient(left top, #6b89b2, #50709a 50%, #476489 51%, #3e5779)
-}
-
-#jqt .back.active:before {
-	background-color: #243346
-}
 
 #jqt .blueButton,
 #jqt .grayButton,
@@ -861,7 +764,6 @@ body {
 	text-shadow: #295900 0 -1px 0
 }
 
-#jqt .back,
 #jqt .cancel,
 #jqt .leftButton {
 	left: 10px;
@@ -1310,14 +1212,6 @@ body {
 	background-size: 7px
 }
 
-#jqt .toolbar {
-	background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, rgba(255, 255, 255, .15)), color-stop(100%, rgba(255, 255, 255, 0))), -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #92a3b9), color-stop(50%, #7f93ad), color-stop(51%, #768ba7), color-stop(100%, #6d83a1));
-	background-image: -webkit-linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, 0)), -webkit-linear-gradient(top, #92a3b9, #7f93ad 50%, #768ba7 51%, #6d83a1);
-	background-image: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, 0)), linear-gradient(top, #92a3b9, #7f93ad 50%, #768ba7 51%, #6d83a1);
-	-webkit-box-shadow: rgba(255, 255, 255, .3) 0 1px 0 inset;
-	box-shadow: rgba(255, 255, 255, .3) 0 1px 0 inset
-}
-
 #jqt ul li input[type=checkbox],
 #jqt ul li input[type=radio] {
 	color: #324f85
@@ -1335,7 +1229,7 @@ body {
 #jqt ul.edgetoedge li.sep {
 	background-color: #cbd2d8;
 	background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #aeb9c2), color-stop(10%, #bcc5cd), color-stop(65%, #cbd2d8), color-stop(100%, #ccd3d9));
-	background-image: -webkit-linear-gradient(top, #aeb9c2, #bcc5cd 10%, #cbd2d8 65%, #ccd3d9);
+	background-image: -webkit-linear-gradient(top, #aeb9c2, #f5f5f5 10%, #cbd2d8 65%, #ccd3d9);
 	background-image: linear-gradient(top, #aeb9c2, #bcc5cd 10%, #cbd2d8 65%, #ccd3d9);
 	color: #000;
 	text-shadow: #e8ebee 0 1px 0;

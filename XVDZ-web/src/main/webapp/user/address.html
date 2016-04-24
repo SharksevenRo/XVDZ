@@ -1,0 +1,81 @@
+<div id="address">
+	<div class="toolbar">
+		<h1>收货地址</h1>
+		<a class="back" href="#person">
+			<i class="icon-reply icon-large"></i>
+		</a>
+		<i class="address-add icon-plus-sign icon-2x right" style="position: absolute;top:5px;right: 5px;color: #356336;"></i>
+	</div>
+	<ul class="edgetoedge scroll">
+		<li class="arrow" style="font-size: 12px;border-bottom: 1px solid #D8D5D3;">
+			<div style="padding: 0px 15px;">
+				<span style="font-size: 12px;" class="block">
+								<span class="font-16">凤姐</span>
+				<i class="icon-phone right">15082365784</i>
+				</span>
+				<label style="font-size: 12px;margin-top: 4px;" class="green">
+					苍穹宇宙浩瀚银河系太阳之美丽地球的一个逍遥岛
+				</label>
+			</div>
+		</li>
+		<li class="arrow" style="font-size: 12px;border-bottom: 1px solid #D8D5D3;">
+			<div style="padding: 0px 15px;">
+				<span style="font-size: 12px;" class="block">
+								<span class="font-16">春哥</span>
+				<i class="icon-phone right">15082365784</i>
+				</span>
+				<label style="font-size: 12px;margin-top: 4px;" class="green">
+					苍穹宇宙浩瀚银河系太阳之美丽地球的一个逍遥岛
+				</label>
+			</div>
+		</li>
+		<li class="arrow" style="font-size: 12px;border-bottom: 1px solid #D8D5D3;">
+			<div style="padding: 0px 15px;">
+				<span style="font-size: 12px;" class="block">
+								<span class="font-16">苍老师</span>
+				<i class="icon-phone right">15082365784</i>
+				</span>
+				<label style="font-size: 12px;margin-top: 4px;" class="green">
+					苍穹宇宙浩瀚银河系太阳之美丽地球的一个逍遥岛
+				</label>
+			</div>
+		</li>
+	</ul>
+	<div class="hidden address-div">
+		<form action="main/address/add" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-xs-3" style="padding-top: 7px;margin-bottom: 0;text-align: right;">收货人:</label>
+				<div class="col-xs-9">
+					<input data-bv-notempty="true" data-bv-notempty-message="内容不能为空" class="form-control" name="reAddTo" placeholder="收货人" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3" style="padding-top: 7px;margin-bottom: 0;text-align: right;">详细地址:</label>
+				<div class="col-xs-9">
+					<input data-bv-notempty="true" data-bv-notempty-message="内容不能为空" class="form-control" name="reAddDet" placeholder="详细地址">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3" style="padding-top: 7px;margin-bottom: 0;text-align: right;">联系电话:</label>
+				<div class="col-xs-9">
+					<input data-bv-notempty="true" data-bv-notempty-message="内容不能为空" class="form-control" name="reAddTel" placeholder="联系电话">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-1 col-sm-10">
+					<button type="submit" class="btn btn-info2 btn-block">提交</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	if (window.navigator.standalone) {
+		$("meta[name='apple-mobile-web-app-status-bar-style']").remove();
+	}
+	$(function() {
+		$(".address-add").click(function() {
+			$(".address-div").removeClass("hidden").toggle();
+		});
+	});
+</script>
