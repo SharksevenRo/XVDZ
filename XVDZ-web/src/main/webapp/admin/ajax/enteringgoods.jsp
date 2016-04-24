@@ -220,16 +220,16 @@
 							 }
 						} 
 					}, 
-					//index 和name一致必须，为了实现点击表头以当前列排序所依赖的规范
+					//index 和name一致必须，为了实现点击表头以当前列排序所依赖的规范(后面属性的定义字面意思很明显，按自己的需求设置值即可)
 					{name:"id",index:"id",hidden : true, editable: true, width:90, align:"center"},
 				   {name:"pdtName",index:"pdtName",hidden : false, editable: true, width:90, align:"center"},
-				   {name:"pdtNo",index:"pdtNo",hidden : false, editable: true, width:90, align:"center"},
-				   {name:"pdtPrc",index:"pdtPrc", editable: false, width:90, align:"center"}, 
-				   {name:"pdtDsct",index:"pdtDsct",hidden : false, editable: false, width:90, align:"center"}, 
+				   {name:"pdtNo",index:"pdtNo",hidden : true, editable: true, width:90, align:"center"},
+				   {name:"pdtPrc",index:"pdtPrc", editable: true, width:90, align:"center"}, 
+				   {name:"pdtDsct",index:"pdtDsct",hidden : false, editable: true, width:90, align:"center"}, 
 				   {name:"pdtSaleCount",index:"pdtSaleCount",  editable: true,width:80, align:"center"}, 
 				   {name:"pdtLabel",index:"pdtLabel",  editable: true,width:80, align:"center"}, 
 				   {name:"pdtPc",index:"pdtPc",  editable: true,width:80, align:"center"},
-				   {name:"addTime",index:"addTime",  editable: true,width:80, align:"center"}, 
+				   {name:"addTime",index:"addTime",  editable: false,width:80, align:"center"}, 
 				   {name:"pdtGdCount",index:"pdtGdCount",  editable: true,width:80, align:"center"}, 
 				   {name:"pdtShareCount",index:"pdtShareCount",  editable: true,width:80, align:"center"}
 				  ],
