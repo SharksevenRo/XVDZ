@@ -25,7 +25,7 @@ public class UserController {
 	private UserService userService;
 	
 	//获取所有
-	@RequestMapping("/user/all")
+	@RequestMapping("/admin/user/all")
 	@ResponseBody
 	public List<UserInfo> getAll(UserInfo user){
 		List<UserInfo> users = userService.loadAll(user);
@@ -34,7 +34,7 @@ public class UserController {
 		return users;
 	}
 	//添加
-	@RequestMapping("/user/save")
+	@RequestMapping("/admin/user/save")
 	@ResponseBody
 	public MessageBean save(UserInfo user){
 		
@@ -57,9 +57,9 @@ public class UserController {
 	 * @return
 	 */
 	//分页查询
-	@RequestMapping("/user/page")
+	@RequestMapping("/admin/user/page")
 	@ResponseBody
-	public Page<UserInfo> page(HttpServletRequest request,UserInfo page){
+	public Page<UserInfo> page(UserInfo page){
 		
 		//Hibnernate 的延迟加载默认是打开的，例如UserInfo有个成员是RoleModel 也是个持久化对象，正常查询是只能得到一个代理对象，里面只有主键id
 		//但是有的时候需要得到完整的RoleModel对象，在userService里有动态关闭某一属性的延迟加载的实例
@@ -79,10 +79,11 @@ public class UserController {
 		
 	}
 	//删除
-	@RequestMapping("/user/delete")
+	@RequestMapping("/admin/user/delete")
 	@ResponseBody
 	public MessageBean deleteAjax(UserInfo user){
 		try {
+			user=userService.getOne(user.getClass(), user.getId());
 			userService.delete(user);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,7 +91,20 @@ public class UserController {
 		}
 		return new MessageBean(APPConstant.SUCCESS, "删除成功");
 	}
-	@RequestMapping("/user/getOne")
+	//删除
+		@RequestMapping("/admin/user/update")
+		@ResponseBody
+		public MessageBean updateAjax(UserInfo user){
+			try {
+				user=userService.getOne(user.getClass(), user.getId());
+				userService.delete(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new MessageBean(APPConstant.ERROR,"删除失败");
+			}
+			return new MessageBean(APPConstant.SUCCESS, "删除成功");
+		}
+	@RequestMapping("/admin/user/getOne")
 	@ResponseBody
 	public UserInfo getOne(UserInfo user){
 		user = userService.getOne(user.getClass(),user.getId());

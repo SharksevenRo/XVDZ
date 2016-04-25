@@ -37,7 +37,7 @@
 							<span>人员管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li onclick="getUserInfo('User');"><a href="#ajax/role.jsp">用户管理</a></li>
+							<li onclick="getUserInfo('User');"><a href="#ajax/userList.jsp">用户管理</a></li>
 							<li><a onclick="getUserInfo('Staff')" href="#ajax/managerStaff.html">公司员工管理</a></li>
 						</ul> 
 					<!--	<ul class="sub-menu">
