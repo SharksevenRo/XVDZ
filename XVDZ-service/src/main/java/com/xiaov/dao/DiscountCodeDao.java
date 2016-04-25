@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by zouziyang on 4/18/16.
  */
 @Repository
-public class DiscountCodeDao extends HibernateSupportDao<DiscountCode, String> {
+public class DiscountCodeDao<DiscountCode, String> extends HibernateSupportDao {
 }

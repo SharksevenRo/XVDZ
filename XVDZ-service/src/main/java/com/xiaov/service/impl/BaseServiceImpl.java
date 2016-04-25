@@ -30,8 +30,8 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	public void update(T entity) {
-		
-		T t = dao.get(ReflectionUtils.invokeGetterMethod(entity, "id").toString());
+		String string = ReflectionUtils.invokeGetterMethod(entity, "id").toString();
+		T t = dao.get(entity.getClass(),string);
 		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(entity.getClass(), true);
 		Object value;
 		for (Field field : accessibleFields) {
