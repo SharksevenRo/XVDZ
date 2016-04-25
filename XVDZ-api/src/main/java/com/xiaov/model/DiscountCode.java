@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,9 +31,9 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	private UserInfo userInfoByProUId;
 	private String disCodeNo;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp disCodeTime;
+	private Date disCodeTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp disCodeValidTime;
+	private Date disCodeValidTime;
 	private Integer disCodeNum;
 	private String disCodeRemark;
 	private Boolean deleteFlag;
@@ -46,7 +46,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 
 	/** minimal constructor */
 	public DiscountCode(String id, String disCodeNo,
-			Timestamp disCodeTime, Timestamp disCodeValidTime,
+			Date disCodeTime, Date disCodeValidTime,
 			Integer disCodeNum, Boolean deleteFlag) {
 		this.id = id;
 		this.disCodeNo = disCodeNo;
@@ -58,8 +58,8 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 
 	/** full constructor */
 	public DiscountCode(String id, UserInfo userInfoByGnrtUId,
-			UserInfo userInfoByProUId, String disCodeNo, Timestamp disCodeTime,
-			Timestamp disCodeValidTime, Integer disCodeNum,
+			UserInfo userInfoByProUId, String disCodeNo, Date disCodeTime,
+			Date disCodeValidTime, Integer disCodeNum,
 			String disCodeRemark, Boolean deleteFlag) {
 		this.id = id;
 		this.userInfoByGnrtUId = userInfoByGnrtUId;
@@ -115,20 +115,20 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	}
 
 	@Column(name = "dis_code_time", nullable = true, length = 0)
-	public Timestamp getDisCodeTime() {
+	public Date getDisCodeTime() {
 		return this.disCodeTime;
 	}
 
-	public void setDisCodeTime(Timestamp disCodeTime) {
+	public void setDisCodeTime(Date disCodeTime) {
 		this.disCodeTime = disCodeTime;
 	}
 
 	@Column(name = "dis_code_valid_time", nullable = true, length = 0)
-	public Timestamp getDisCodeValidTime() {
+	public Date getDisCodeValidTime() {
 		return this.disCodeValidTime;
 	}
 
-	public void setDisCodeValidTime(Timestamp disCodeValidTime) {
+	public void setDisCodeValidTime(Date disCodeValidTime) {
 		this.disCodeValidTime = disCodeValidTime;
 	}
 

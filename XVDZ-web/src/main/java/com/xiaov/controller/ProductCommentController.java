@@ -45,7 +45,7 @@ public class ProductCommentController {
 
     @RequestMapping("/admin/ProductComment/page")
     @ResponseBody
-    public Page<ProductComment> page(Page<ProductComment> productComment) {
+    public Page<ProductComment> page(ProductComment productComment) {
         try {
 
             return ProductCommentService.page(productComment);

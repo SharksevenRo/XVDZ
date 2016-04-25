@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -35,9 +35,9 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	private String disCouNo;
 	private Double disCouPrice;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp disCouTime;
+	private Date disCouTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp disCouValidTime;
+	private Date disCouValidTime;
 	private Integer disCouState;
 	private String disCouRemark;
 	private Boolean deleteFlag;
@@ -50,7 +50,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 
 	/** minimal constructor */
 	public DiscountCoupan(String id, String disCouNo, Double disCouPrice,
-			Timestamp disCouTime, Timestamp disCouValidTime,
+			Date disCouTime, Date disCouValidTime,
 			Integer disCouState, Boolean deleteFlag) {
 		this.id = id;
 		this.disCouNo = disCouNo;
@@ -63,8 +63,8 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 
 	/** full constructor */
 	public DiscountCoupan(String id, UserInfo userInfo, String disCouNo,
-			Double disCouPrice, Timestamp disCouTime,
-			Timestamp disCouValidTime, Integer disCouState,
+			Double disCouPrice, Date disCouTime,
+			Date disCouValidTime, Integer disCouState,
 			String disCouRemark, Boolean deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
@@ -119,20 +119,20 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	}
 
 	@Column(name = "dis_cou_time", nullable = true, length = 0)
-	public Timestamp getDisCouTime() {
+	public Date getDisCouTime() {
 		return this.disCouTime;
 	}
 
-	public void setDisCouTime(Timestamp disCouTime) {
+	public void setDisCouTime(Date disCouTime) {
 		this.disCouTime = disCouTime;
 	}
 
 	@Column(name = "dis_cou_valid_time", nullable = true, length = 0)
-	public Timestamp getDisCouValidTime() {
+	public Date getDisCouValidTime() {
 		return this.disCouValidTime;
 	}
 
-	public void setDisCouValidTime(Timestamp disCouValidTime) {
+	public void setDisCouValidTime(Date disCouValidTime) {
 		this.disCouValidTime = disCouValidTime;
 	}
 

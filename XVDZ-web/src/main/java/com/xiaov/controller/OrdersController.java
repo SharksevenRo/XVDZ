@@ -5,6 +5,8 @@ import com.xiaov.model.Orders;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.OrdersService;
+import com.xiaov.utils.LazyObjecUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,13 +60,15 @@ public class OrdersController {
 
     @RequestMapping("/admin/Orders/page")
     @ResponseBody
-    public Page<Orders> page(Page<Orders> orders) {
-
+    public Page<Orders> page(Orders orders) {
+    	Page<Orders> page = new Page<Orders>();
         try {
 
-            return ordersService.page(orders);
+        	page= ordersService.page(orders);
+        	LazyObjecUtil.LazyPageSetNull(page, new String[]{"orderDetail","discountCoupan","dbTypes"});
+        	return page;
         } catch (Exception e) {
-            Page<Orders> page = new Page<Orders>();
+            
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;

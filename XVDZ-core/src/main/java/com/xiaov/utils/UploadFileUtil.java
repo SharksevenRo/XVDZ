@@ -36,7 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class UploadFileUtil {
 
-	private static final int PIC_WITH_TIMESTAMP = 1;
+	private static final int PIC_WITH_Date = 1;
 	private static final int PIC_WITH_FORMATDATE = 2;
 	private static final int PIC_WITH_UUID = 3;
 	
@@ -230,7 +230,7 @@ public class UploadFileUtil {
 			// 旧文件名
 			String oldFileName = picFile.getOriginalFilename();
 			// 新文件名，时间戳形式
-			newFileName = generateFileName(oldFileName, PIC_WITH_TIMESTAMP);
+			newFileName = generateFileName(oldFileName, PIC_WITH_Date);
 		}
 		try {
 			String srcFilePath=srcPath + newFileName;
@@ -283,7 +283,7 @@ public class UploadFileUtil {
 			// 旧文件名
 			String oldFileName = picFile.getOriginalFilename();
 			// 新文件名，时间戳形式
-			newFileName = generateFileName(oldFileName, PIC_WITH_TIMESTAMP);
+			newFileName = generateFileName(oldFileName, PIC_WITH_Date);
 		}
 		try {
 			String srcFilePath=srcPath + newFileName;
@@ -549,7 +549,7 @@ public class UploadFileUtil {
 			String fileName, boolean isGenerateFn) throws Exception {
 		String newFn = fileName;
 		if (isGenerateFn) {
-			newFn = generateFileName(fileName, PIC_WITH_TIMESTAMP);
+			newFn = generateFileName(fileName, PIC_WITH_Date);
 		}
 		String fileUrl = uploadFile(savePath, file, newFn);
 		return fileUrl;
@@ -622,7 +622,7 @@ public class UploadFileUtil {
 	private static String generateFileName(String fileName, int nameStyle) {
 		String newFileName = "";
 		switch (nameStyle) {
-			case PIC_WITH_TIMESTAMP:
+			case PIC_WITH_Date:
 				newFileName = new Date().getTime() + "";
 				break;
 			case PIC_WITH_FORMATDATE:

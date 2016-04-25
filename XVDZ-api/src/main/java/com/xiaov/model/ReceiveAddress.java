@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,11 +37,11 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	private String reAddTel;
 	private Boolean addDefault;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp addTime;
+	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp updateTime;
+	private Date updateTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp deleteTime;
+	private Date deleteTime;
 	private String reAddRemark;
 	private Boolean deleteFlag;
 
@@ -53,7 +53,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 
 	/** minimal constructor */
 	public ReceiveAddress(String id, String reAddDet, String reAddTo,
-			String reAddTel, Boolean addDefault, Timestamp addTime) {
+			String reAddTel, Boolean addDefault, Date addTime) {
 		this.id = id;
 		this.reAddDet = reAddDet;
 		this.reAddTo = reAddTo;
@@ -66,8 +66,8 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	public ReceiveAddress(String id, UserInfo userInfo, String reAddName,
 			String reAddPro, String reAddCity, String reAddArea,
 			String reAddDet, String reAddTo, String reAddTel,
-			Boolean addDefault, Timestamp addTime, Timestamp updateTime,
-			Timestamp deleteTime, String reAddRemark, Boolean deleteFlag) {
+			Boolean addDefault, Date addTime, Date updateTime,
+			Date deleteTime, String reAddRemark, Boolean deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
 		this.reAddName = reAddName;
@@ -181,29 +181,29 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
-	public Timestamp getAddTime() {
+	public Date getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Timestamp addTime) {
+	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "update_time", length = 0)
-	public Timestamp getUpdateTime() {
+	public Date getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Column(name = "delete_time", length = 0)
-	public Timestamp getDeleteTime() {
+	public Date getDeleteTime() {
 		return this.deleteTime;
 	}
 
-	public void setDeleteTime(Timestamp deleteTime) {
+	public void setDeleteTime(Date deleteTime) {
 		this.deleteTime = deleteTime;
 	}
 

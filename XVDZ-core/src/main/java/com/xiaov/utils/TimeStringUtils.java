@@ -1,6 +1,6 @@
 package com.xiaov.utils;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  * 获取时间字符串
@@ -15,7 +15,7 @@ public class TimeStringUtils {
 		String id = "";
 		synchronized (TimeStringUtils.class) {
 
-			String[] ids = new Timestamp(System.currentTimeMillis())
+			String[] ids = new Date(System.currentTimeMillis())
 					.toLocaleString().split(" ");
 			String[] arrayOfString1 = ids;
 			int j = ids.length;

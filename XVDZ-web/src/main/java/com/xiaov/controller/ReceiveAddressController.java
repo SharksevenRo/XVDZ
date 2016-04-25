@@ -59,7 +59,7 @@ public class ReceiveAddressController {
 
     @RequestMapping("/admin/ReceiveAddress/page")
     @ResponseBody
-    public Page<ReceiveAddress> page(Page<ReceiveAddress> receiveAddress) {
+    public Page<ReceiveAddress> page(ReceiveAddress receiveAddress) {
 
         try {
 

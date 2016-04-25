@@ -5,6 +5,8 @@ import com.xiaov.model.Advertisment;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.AdvertismentService;
+import com.xiaov.utils.LazyObjecUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,13 +61,15 @@ public class AdvertismentController {
 
     @RequestMapping("/admin/Advertisment/page")
     @ResponseBody
-    public Page<Advertisment> page(Page<Advertisment> advertisment) {
-
+    public Page<Advertisment> page(Advertisment advertisment) {
+    	 Page<Advertisment> page = new Page<Advertisment>();
         try {
 
-            return advertismentService.page(advertisment);
+        	page= advertismentService.page(advertisment);
+        	LazyObjecUtil.LazyPageSetNull(page, new String[]{"userInfoByDeleteId","userInfoByUpdateId"});
+        	return page;
         } catch (Exception e) {
-            Page<Advertisment> page = new Page<Advertisment>();
+           
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;

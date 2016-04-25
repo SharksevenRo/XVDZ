@@ -60,7 +60,7 @@ public interface BaseService<T>{
      * @param filter
      * @return
      */
-    public Page<T> page(Page<T> page);
+    public Page<T> page(Page page);
     
     /**
      * 用主键获取对象

@@ -50,9 +50,9 @@ public class WechatController {
  
 			String signature = request.getParameter("signature");
 			String nonce = request.getParameter("nonce");
-			String timestamp = request.getParameter("timestamp");
+			String Date = request.getParameter("Date");
  
-			if (!wxMpService.checkSignature(timestamp, nonce, signature)) {
+			if (!wxMpService.checkSignature(Date, nonce, signature)) {
 				// 消息签名不正确，说明不是公众平台发过来的消息 
 				response.getWriter().println("非法请求");
 				return; 

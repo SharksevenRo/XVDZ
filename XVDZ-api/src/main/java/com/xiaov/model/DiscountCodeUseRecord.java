@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +27,7 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 	private UserInfo userInfo;
 	private String disCodeId;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp useTime;
+	private Date useTime;
 
 	// Constructors
 
@@ -36,14 +36,14 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 	}
 
 	/** minimal constructor */
-	public DiscountCodeUseRecord(String id, Timestamp useTime) {
+	public DiscountCodeUseRecord(String id, Date useTime) {
 		this.id = id;
 		this.useTime = useTime;
 	}
 
 	/** full constructor */
 	public DiscountCodeUseRecord(String id, UserInfo userInfo,
-			String disCodeId, Timestamp useTime) {
+			String disCodeId, Date useTime) {
 		this.id = id;
 		this.userInfo = userInfo;
 		this.disCodeId = disCodeId;
@@ -83,11 +83,11 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 	}
 
 	@Column(name = "use_time", nullable = true, length = 0)
-	public Timestamp getUseTime() {
+	public Date getUseTime() {
 		return this.useTime;
 	}
 
-	public void setUseTime(Timestamp useTime) {
+	public void setUseTime(Date useTime) {
 		this.useTime = useTime;
 	}
 

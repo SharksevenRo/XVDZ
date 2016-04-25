@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,11 +33,11 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	private String bcForName;
 	private String bcBdTel;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp addTime;
+	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp updateTime;
+	private Date updateTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp deleteTime;
+	private Date deleteTime;
 	private String bcRemark;
 	private Boolean deleteFlag;
 
@@ -49,7 +49,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 
 	/** minimal constructor */
 	public BankCard(String id, Types dbTypes, String bkCdNo,
-			String bcForName, String bcBdTel, Timestamp addTime,
+			String bcForName, String bcBdTel, Date addTime,
 			Boolean deleteFlag) {
 		this.id = id;
 		this.dbTypes = dbTypes;
@@ -62,8 +62,8 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 
 	/** full constructor */
 	public BankCard(String id, Types dbTypes, Account account,
-			String bkCdNo, String bcForName, String bcBdTel, Timestamp addTime,
-			Timestamp updateTime, Timestamp deleteTime, String bcRemark,
+			String bkCdNo, String bcForName, String bcBdTel, Date addTime,
+			Date updateTime, Date deleteTime, String bcRemark,
 			Boolean deleteFlag) {
 		this.id = id;
 		this.dbTypes = dbTypes;
@@ -139,29 +139,29 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
-	public Timestamp getAddTime() {
+	public Date getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Timestamp addTime) {
+	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "update_time", length = 0)
-	public Timestamp getUpdateTime() {
+	public Date getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Column(name = "delete_time", length = 0)
-	public Timestamp getDeleteTime() {
+	public Date getDeleteTime() {
 		return this.deleteTime;
 	}
 
-	public void setDeleteTime(Timestamp deleteTime) {
+	public void setDeleteTime(Date deleteTime) {
 		this.deleteTime = deleteTime;
 	}
 

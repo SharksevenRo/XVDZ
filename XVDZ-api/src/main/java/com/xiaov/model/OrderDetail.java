@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -38,11 +38,11 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	private Double orDtRlTotal;
 	private String orDtRemark;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp addTime;
+	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp updateTime;
+	private Date updateTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp deleteTime;
+	private Date deleteTime;
 	private Boolean deleteFlag;
 
 	// Constructors
@@ -54,7 +54,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	/** minimal constructor */
 	public OrderDetail(String id, String orDtNo, Double orDtPrc,
 			Integer orDtMount, Double orDtItmeTotal, Double orDtRlTotal,
-			Timestamp addTime, Boolean deleteFlag) {
+			Date addTime, Boolean deleteFlag) {
 		this.id = id;
 		this.orDtNo = orDtNo;
 		this.orDtPrc = orDtPrc;
@@ -69,7 +69,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	public OrderDetail(String id, Integer pdtId, String orDtNo,
 			Double orDtPrc, Integer orDtMount, Double orDtDsct,
 			Double orDtItmeTotal, Double orDtRlTotal, String orDtRemark,
-			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
+			Date addTime, Date updateTime, Date deleteTime,
 			Boolean deleteFlag) {
 		this.id = id;
 		this.pdtId = pdtId;
@@ -172,29 +172,29 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
-	public Timestamp getAddTime() {
+	public Date getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Timestamp addTime) {
+	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "update_time", length = 0)
-	public Timestamp getUpdateTime() {
+	public Date getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Column(name = "delete_time", length = 0)
-	public Timestamp getDeleteTime() {
+	public Date getDeleteTime() {
 		return this.deleteTime;
 	}
 
-	public void setDeleteTime(Timestamp deleteTime) {
+	public void setDeleteTime(Date deleteTime) {
 		this.deleteTime = deleteTime;
 	}
 

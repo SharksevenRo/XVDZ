@@ -63,7 +63,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Page<T> page(Page<T> page) {
+	public Page<T> page(Page page) {
 		String name = page.getClass().getSimpleName();
 		StringBuilder hql = new StringBuilder();
 		hql.append("from " + name + " where deleteFlag=0");
