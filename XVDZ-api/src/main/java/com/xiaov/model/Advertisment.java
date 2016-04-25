@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * Advertisment entity. @author MyEclipse Persistence Tools
@@ -161,6 +163,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getAddTime() {
 		return this.addTime;
 	}
@@ -170,6 +173,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	}
 
 	@Column(name = "ads_onme", length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getAdsOnme() {
 		return this.adsOnme;
 	}
@@ -179,6 +183,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	}
 
 	@Column(name = "update_time", length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getUpdateTime() {
 		return this.updateTime;
 	}
@@ -188,6 +193,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	}
 
 	@Column(name = "delete_time", length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getDeleteTime() {
 		return this.deleteTime;
 	}

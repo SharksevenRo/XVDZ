@@ -1,6 +1,6 @@
 package com.xiaov.utils;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 获取时间字符串

@@ -22,7 +22,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	@Autowired
 	@Qualifier(value = "hibernateSupportDao")
 
-	private HibernateSupportDao<T, ?> dao;
+	private HibernateSupportDao<T, String> dao;
 
 	@Transactional
 	public void delete(T entity) {
@@ -30,7 +30,23 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	public void update(T entity) {
-		dao.update(entity);
+		
+		T t = dao.get(ReflectionUtils.invokeGetterMethod(entity, "id").toString());
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(entity.getClass(), true);
+		Object value;
+		for (Field field : accessibleFields) {
+			try {
+				if (isBase(field.getType())) {
+					value = ReflectionUtils.invokeGetterMethod(entity, field.getName());
+					if (value != null) {
+						ReflectionUtils.invokeSetterMethod(t, field.getName(), value, field.getType());
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		dao.update(t);
 	}
 
 	@Transactional

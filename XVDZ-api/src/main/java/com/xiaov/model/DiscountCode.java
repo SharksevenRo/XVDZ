@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * DiscountCode entity. @author MyEclipse Persistence Tools
@@ -115,6 +117,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	}
 
 	@Column(name = "dis_code_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getDisCodeTime() {
 		return this.disCodeTime;
 	}
@@ -124,6 +127,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	}
 
 	@Column(name = "dis_code_valid_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getDisCodeValidTime() {
 		return this.disCodeValidTime;
 	}
