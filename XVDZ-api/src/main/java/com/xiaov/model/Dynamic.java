@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * Dynamic entity. @author MyEclipse Persistence Tools
@@ -98,6 +100,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	}
 
 	@Column(name = "dynmc_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getDynmcTime() {
 		return this.dynmcTime;
 	}

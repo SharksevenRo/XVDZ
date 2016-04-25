@@ -10,10 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * DiscountCodeUseRecord entity. @author MyEclipse Persistence Tools
@@ -83,6 +85,7 @@ public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implement
 	}
 
 	@Column(name = "use_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getUseTime() {
 		return this.useTime;
 	}

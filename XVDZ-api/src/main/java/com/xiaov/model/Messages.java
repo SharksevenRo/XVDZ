@@ -11,10 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * Messages entity. @author MyEclipse Persistence Tools
@@ -113,6 +115,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 	}
 
 	@Column(name = "msg_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getMsgTime() {
 		return this.msgTime;
 	}

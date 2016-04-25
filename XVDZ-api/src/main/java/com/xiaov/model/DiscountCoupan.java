@@ -14,12 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * DiscountCoupan entity. @author MyEclipse Persistence Tools
@@ -119,6 +121,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	}
 
 	@Column(name = "dis_cou_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getDisCouTime() {
 		return this.disCouTime;
 	}
@@ -128,6 +131,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	}
 
 	@Column(name = "dis_cou_valid_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getDisCouValidTime() {
 		return this.disCouValidTime;
 	}

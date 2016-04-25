@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -181,6 +184,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getAddTime() {
 		return this.addTime;
 	}
@@ -190,6 +194,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	}
 
 	@Column(name = "update_time", length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getUpdateTime() {
 		return this.updateTime;
 	}
@@ -199,6 +204,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	}
 
 	@Column(name = "delete_time", length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getDeleteTime() {
 		return this.deleteTime;
 	}
