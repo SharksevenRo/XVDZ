@@ -44,6 +44,20 @@ public class DiscountCodeController {
         }
     }
 
+    @RequestMapping("/admin/DiscountCode/deleteAjax")
+    @ResponseBody
+    public MessageBean deleteAjax(DiscountCode discountCode){
+
+        try {
+            discountCode=discountCodeService.getOne(discountCode.getClass(), discountCode.getId());
+            discountCodeService.delete(discountCode);
+            return new MessageBean(APPConstant.ERROR, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "删除失败");
+        }
+    }
+
     @RequestMapping("/admin/DiscountCode/page")
     @ResponseBody
     public Page<DiscountCode> page(Page<DiscountCode> discountCode) {

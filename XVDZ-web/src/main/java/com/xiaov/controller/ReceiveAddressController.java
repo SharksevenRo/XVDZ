@@ -43,6 +43,20 @@ public class ReceiveAddressController {
         }
     }
 
+    @RequestMapping("/admin/ReceiveAddress/deleteAjax")
+    @ResponseBody
+    public MessageBean deleteAjax(ReceiveAddress receiveAddress){
+
+        try {
+            receiveAddress=receiveAddressService.getOne(receiveAddress.getClass(), receiveAddress.getId());
+            receiveAddressService.delete(receiveAddress);
+            return new MessageBean(APPConstant.ERROR, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "删除失败");
+        }
+    }
+
     @RequestMapping("/admin/ReceiveAddress/page")
     @ResponseBody
     public Page<ReceiveAddress> page(Page<ReceiveAddress> receiveAddress) {

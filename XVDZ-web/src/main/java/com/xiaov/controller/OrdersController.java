@@ -42,6 +42,19 @@ public class OrdersController {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
+    @RequestMapping("/admin/Orders/deleteAjax")
+    @ResponseBody
+    public MessageBean deleteAjax(Orders orders){
+
+        try {
+            orders=ordersService.getOne(orders.getClass(), orders.getId());
+            ordersService.delete(orders);
+            return new MessageBean(APPConstant.ERROR, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "删除失败");
+        }
+    }
 
     @RequestMapping("/admin/Orders/page")
     @ResponseBody

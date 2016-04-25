@@ -76,7 +76,7 @@ public class ProductController {
 	@RequestMapping("/admin/product/deleteAjax")
 	@ResponseBody
 	public MessageBean deleteAjax(Product product){
-		
+
 		try {
 			product=productService.getOne(product.getClass(), product.getId());
 			productService.delete(product);
@@ -86,6 +86,7 @@ public class ProductController {
 			return new MessageBean(APPConstant.ERROR, "删除失败");
 		}
 	}
+
 	@RequestMapping("/admin/product/getOneAjax")
 	@ResponseBody
 	public Product getOne(Product product){

@@ -43,6 +43,20 @@ public class AdvertismentController {
         }
     }
 
+    @RequestMapping("/admin/Advertisment/deleteAjax")
+    @ResponseBody
+    public MessageBean deleteAjax(Advertisment advertisment){
+
+        try {
+            advertisment=advertismentService.getOne(advertisment.getClass(), advertisment.getId());
+            advertismentService.delete(advertisment);
+            return new MessageBean(APPConstant.ERROR, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "删除失败");
+        }
+    }
+
     @RequestMapping("/admin/Advertisment/page")
     @ResponseBody
     public Page<Advertisment> page(Page<Advertisment> advertisment) {
