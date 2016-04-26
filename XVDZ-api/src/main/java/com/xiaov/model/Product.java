@@ -277,6 +277,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	}
 
 	@Column(name = "update_time", length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getUpdateTime() {
 		return this.updateTime;
 	}
@@ -286,6 +287,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	}
 
 	@Column(name = "delete_time", length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getDeleteTime() {
 		return this.deleteTime;
 	}

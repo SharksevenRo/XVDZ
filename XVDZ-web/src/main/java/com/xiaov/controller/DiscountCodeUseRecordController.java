@@ -45,7 +45,7 @@ public class DiscountCodeUseRecordController {
 
     @RequestMapping("/admin/DiscountCodeUseRecord/page")
     @ResponseBody
-    public Page<DiscountCodeUseRecord> page(Page<DiscountCodeUseRecord> discountCodeUseRecord) {
+    public Page<DiscountCodeUseRecord> page(DiscountCodeUseRecord discountCodeUseRecord) {
 
         try {
 

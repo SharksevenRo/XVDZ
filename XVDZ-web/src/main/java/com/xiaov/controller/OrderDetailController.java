@@ -46,7 +46,7 @@ public class OrderDetailController {
 
     @RequestMapping("/admin/OrderDetail/page")
     @ResponseBody
-    public Page<OrderDetail> page(Page<OrderDetail> orderDetail) {
+    public Page<OrderDetail> page(OrderDetail orderDetail) {
         try {
 
             return orderDetailService.page(orderDetail);

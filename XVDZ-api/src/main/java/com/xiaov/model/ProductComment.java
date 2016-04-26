@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,7 +38,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	private Integer cmtLogisticsSt;
 	private Integer cmtWrapSt;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp cmtTime;
+	private Date cmtTime;
 
 	// Constructors
 
@@ -45,7 +48,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 
 	/** minimal constructor */
 	public ProductComment(String id, String cmtContent, Integer cmtQtSt,
-			Integer cmtLogisticsSt, Integer cmtWrapSt, Timestamp cmtTime) {
+			Integer cmtLogisticsSt, Integer cmtWrapSt, Date cmtTime) {
 		this.id = id;
 		this.cmtContent = cmtContent;
 		this.cmtQtSt = cmtQtSt;
@@ -57,7 +60,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	/** full constructor */
 	public ProductComment(String id, Product product, Material material,
 			ProductComment productComment, String cmtContent, Integer cmtQtSt,
-			Integer cmtLogisticsSt, Integer cmtWrapSt, Timestamp cmtTime) {
+			Integer cmtLogisticsSt, Integer cmtWrapSt, Date cmtTime) {
 		this.id = id;
 		this.product = product;
 		this.material = material;
@@ -149,11 +152,12 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 	}
 
 	@Column(name = "cmt_time", nullable = true, length = 0)
-	public Timestamp getCmtTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getCmtTime() {
 		return this.cmtTime;
 	}
 
-	public void setCmtTime(Timestamp cmtTime) {
+	public void setCmtTime(Date cmtTime) {
 		this.cmtTime = cmtTime;
 	}
 

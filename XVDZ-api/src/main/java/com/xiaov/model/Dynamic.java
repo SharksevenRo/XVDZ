@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * Dynamic entity. @author MyEclipse Persistence Tools
@@ -30,7 +32,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	private UserInfo userInfo;
 	private String dynmcContent;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp dynmcTime;
+	private Date dynmcTime;
 	private Integer dynmcGdCnt;
 	private Integer dynmcCmmCnt;
 	private Boolean deleteFlag;
@@ -42,7 +44,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Dynamic(String id, String dynmcContent, Timestamp dynmcTime,
+	public Dynamic(String id, String dynmcContent, Date dynmcTime,
 			Integer dynmcGdCnt, Integer dynmcCmmCnt, Boolean deleteFlag) {
 		this.id = id;
 		this.dynmcContent = dynmcContent;
@@ -54,7 +56,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 
 	/** full constructor */
 	public Dynamic(String id, UserInfo userInfo, String dynmcContent,
-			Timestamp dynmcTime, Integer dynmcGdCnt, Integer dynmcCmmCnt,
+			Date dynmcTime, Integer dynmcGdCnt, Integer dynmcCmmCnt,
 			Boolean deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
@@ -98,11 +100,12 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	}
 
 	@Column(name = "dynmc_time", nullable = true, length = 0)
-	public Timestamp getDynmcTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getDynmcTime() {
 		return this.dynmcTime;
 	}
 
-	public void setDynmcTime(Timestamp dynmcTime) {
+	public void setDynmcTime(Date dynmcTime) {
 		this.dynmcTime = dynmcTime;
 	}
 

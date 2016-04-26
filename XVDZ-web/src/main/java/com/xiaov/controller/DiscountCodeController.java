@@ -6,6 +6,8 @@ import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 
 import com.xiaov.service.interfaces.DiscountCodeService;
+import com.xiaov.utils.LazyObjecUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,18 +42,35 @@ public class DiscountCodeController {
             discountCodeService.update(discountCode);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
+        	e.printStackTrace();
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
+        }
+    }
+
+    @RequestMapping("/admin/DiscountCode/deleteAjax")
+    @ResponseBody
+    public MessageBean deleteAjax(DiscountCode discountCode){
+
+        try {
+            discountCode=discountCodeService.getOne(discountCode.getClass(), discountCode.getId());
+            discountCodeService.delete(discountCode);
+            return new MessageBean(APPConstant.ERROR, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "删除失败");
         }
     }
 
     @RequestMapping("/admin/DiscountCode/page")
     @ResponseBody
-    public Page<DiscountCode> page(Page<DiscountCode> discountCode) {
+    public Page<DiscountCode> page(DiscountCode discountCode) {
+    	  Page<DiscountCode> page = new Page<DiscountCode>();
         try {
 
-            return discountCodeService.page(discountCode);
+        	page=discountCodeService.page(discountCode);
+        	page=LazyObjecUtil.LazyPageSetNull(page, new String []{"userInfoByGnrtUId","userInfoByProUId"});
+            return page;
         } catch (Exception e) {
-            Page<DiscountCode> page = new Page<DiscountCode>();
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;

@@ -44,7 +44,7 @@ public class ProductDetailController {
 
 	    @RequestMapping("/admin/productDetail/page")
 	    @ResponseBody
-	    public Page<ProductDetail> page(Page<ProductDetail> productDetail) {
+	    public Page<ProductDetail> page(ProductDetail productDetail) {
 	        try {
 
 	            return productDetailService.page(productDetail);

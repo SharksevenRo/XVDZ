@@ -22,7 +22,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	@Autowired
 	@Qualifier(value = "hibernateSupportDao")
 
-	private HibernateSupportDao<T, ?> dao;
+	private HibernateSupportDao<T, String> dao;
 
 	@Transactional
 	public void delete(T entity) {
@@ -30,7 +30,23 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	public void update(T entity) {
-		dao.update(entity);
+		String string = ReflectionUtils.invokeGetterMethod(entity, "id").toString();
+		T t = dao.get(entity.getClass(),string);
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(entity.getClass(), true);
+		Object value;
+		for (Field field : accessibleFields) {
+			try {
+				if (isBase(field.getType())) {
+					value = ReflectionUtils.invokeGetterMethod(entity, field.getName());
+					if (value != null) {
+						ReflectionUtils.invokeSetterMethod(t, field.getName(), value, field.getType());
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		dao.update(t);
 	}
 
 	@Transactional
@@ -63,7 +79,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Page<T> page(Page<T> page) {
+	public Page<T> page(Page page) {
 		String name = page.getClass().getSimpleName();
 		StringBuilder hql = new StringBuilder();
 		hql.append("from " + name + " where deleteFlag=0");

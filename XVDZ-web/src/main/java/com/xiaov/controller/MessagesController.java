@@ -45,7 +45,7 @@ public class MessagesController {
 
     @RequestMapping("/admin/Messages/page")
     @ResponseBody
-    public Page<Messages> page(Page<Messages> messages) {
+    public Page<Messages> page(Messages messages) {
 
         try {
 

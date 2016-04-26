@@ -11,12 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * Material entity. @author MyEclipse Persistence Tools
@@ -135,6 +137,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getAddTime() {
 		return this.addTime;
 	}
@@ -144,6 +147,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	}
 
 	@Column(name = "update_time", length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getUpdateTime() {
 		return this.updateTime;
 	}

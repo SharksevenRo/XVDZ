@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,11 +40,11 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	private String reAddTel;
 	private Boolean addDefault;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp addTime;
+	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp updateTime;
+	private Date updateTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp deleteTime;
+	private Date deleteTime;
 	private String reAddRemark;
 	private Boolean deleteFlag;
 
@@ -53,7 +56,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 
 	/** minimal constructor */
 	public ReceiveAddress(String id, String reAddDet, String reAddTo,
-			String reAddTel, Boolean addDefault, Timestamp addTime) {
+			String reAddTel, Boolean addDefault, Date addTime) {
 		this.id = id;
 		this.reAddDet = reAddDet;
 		this.reAddTo = reAddTo;
@@ -66,8 +69,8 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	public ReceiveAddress(String id, UserInfo userInfo, String reAddName,
 			String reAddPro, String reAddCity, String reAddArea,
 			String reAddDet, String reAddTo, String reAddTel,
-			Boolean addDefault, Timestamp addTime, Timestamp updateTime,
-			Timestamp deleteTime, String reAddRemark, Boolean deleteFlag) {
+			Boolean addDefault, Date addTime, Date updateTime,
+			Date deleteTime, String reAddRemark, Boolean deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
 		this.reAddName = reAddName;
@@ -181,29 +184,32 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
-	public Timestamp getAddTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Timestamp addTime) {
+	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "update_time", length = 0)
-	public Timestamp getUpdateTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Column(name = "delete_time", length = 0)
-	public Timestamp getDeleteTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getDeleteTime() {
 		return this.deleteTime;
 	}
 
-	public void setDeleteTime(Timestamp deleteTime) {
+	public void setDeleteTime(Date deleteTime) {
 		this.deleteTime = deleteTime;
 	}
 

@@ -45,7 +45,7 @@ public class BankCardController {
 
     @RequestMapping("/admin/BankCard/page")
     @ResponseBody
-    public Page<BankCard> page(Page<BankCard> bankCard) {
+    public Page<BankCard> page(BankCard bankCard) {
 
         try {
 

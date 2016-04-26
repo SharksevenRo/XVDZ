@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * Messages entity. @author MyEclipse Persistence Tools
@@ -30,7 +32,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 	private Integer typeId;
 	private String msgContent;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp msgTime;
+	private Date msgTime;
 	private Boolean msgReadState;
 
 	// Constructors
@@ -40,7 +42,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Messages(String id, String msgContent, Timestamp msgTime,
+	public Messages(String id, String msgContent, Date msgTime,
 			Boolean msgReadState) {
 		this.id = id;
 		this.msgContent = msgContent;
@@ -51,7 +53,7 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 	/** full constructor */
 	public Messages(String id, UserInfo userInfoBySendId,
 			UserInfo userInfoByReceiveId, Integer typeId, String msgContent,
-			Timestamp msgTime, Boolean msgReadState) {
+			Date msgTime, Boolean msgReadState) {
 		this.id = id;
 		this.userInfoBySendId = userInfoBySendId;
 		this.userInfoByReceiveId = userInfoByReceiveId;
@@ -113,11 +115,12 @@ public class Messages extends Page<Messages> implements java.io.Serializable {
 	}
 
 	@Column(name = "msg_time", nullable = true, length = 0)
-	public Timestamp getMsgTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getMsgTime() {
 		return this.msgTime;
 	}
 
-	public void setMsgTime(Timestamp msgTime) {
+	public void setMsgTime(Date msgTime) {
 		this.msgTime = msgTime;
 	}
 

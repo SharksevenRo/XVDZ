@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,12 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * Account entity. @author MyEclipse Persistence Tools
@@ -36,11 +38,11 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	private Double actFm;
 	private Integer actState;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp addTime;
+	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp updateTime;
+	private Date updateTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp deleteTime;
+	private Date deleteTime;
 	private String remark;
 	private Boolean deleteFlag;
 
@@ -52,7 +54,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Account(String id, Double actMm, Double actTtEn, Double actBlc,
-			Double actFm, Timestamp addTime, Boolean deleteFlag) {
+			Double actFm, Date addTime, Boolean deleteFlag) {
 		this.id = id;
 		this.actMm = actMm;
 		this.actTtEn = actTtEn;
@@ -65,7 +67,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	/** full constructor */
 	public Account(String id, UserInfo userInfo, Double actMm,
 			Double actTtEn, Double actBlc, Double actFm, Integer actState,
-			Timestamp addTime, Timestamp updateTime, Timestamp deleteTime,
+			Date addTime, Date updateTime, Date deleteTime,
 			String remark, Boolean deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
@@ -150,29 +152,32 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
-	public Timestamp getAddTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Timestamp addTime) {
+	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "update_time", length = 0)
-	public Timestamp getUpdateTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Column(name = "delete_time", length = 0)
-	public Timestamp getDeleteTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getDeleteTime() {
 		return this.deleteTime;
 	}
 
-	public void setDeleteTime(Timestamp deleteTime) {
+	public void setDeleteTime(Date deleteTime) {
 		this.deleteTime = deleteTime;
 	}
 

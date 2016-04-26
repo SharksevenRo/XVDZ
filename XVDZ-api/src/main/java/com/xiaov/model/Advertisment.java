@@ -1,6 +1,6 @@
 package com.xiaov.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * Advertisment entity. @author MyEclipse Persistence Tools
@@ -37,13 +39,13 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	private String adsPic;
 	private Boolean adsState;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp addTime;
+	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp adsOnme;
+	private Date adsOnme;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp updateTime;
+	private Date updateTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Timestamp deleteTime;
+	private Date deleteTime;
 	private Boolean deleteFlag;
 
 	// Constructors
@@ -54,7 +56,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 
 	/** minimal constructor */
 	public Advertisment(String id, String adsContent, Boolean adsState,
-			Timestamp addTime) {
+			Date addTime) {
 		this.id = id;
 		this.adsContent = adsContent;
 		this.adsState = adsState;
@@ -65,8 +67,8 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	public Advertisment(String id, UserInfo userInfoByDeleteId,
 			UserInfo userInfoByUpdateId, String addId, String adsTt,
 			String adsContent, String adsPic, Boolean adsState,
-			Timestamp addTime, Timestamp adsOnme, Timestamp updateTime,
-			Timestamp deleteTime, Boolean deleteFlag) {
+			Date addTime, Date adsOnme, Date updateTime,
+			Date deleteTime, Boolean deleteFlag) {
 		this.id = id;
 		this.userInfoByDeleteId = userInfoByDeleteId;
 		this.userInfoByUpdateId = userInfoByUpdateId;
@@ -161,38 +163,42 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
-	public Timestamp getAddTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getAddTime() {
 		return this.addTime;
 	}
 
-	public void setAddTime(Timestamp addTime) {
+	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
 	@Column(name = "ads_onme", length = 0)
-	public Timestamp getAdsOnme() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getAdsOnme() {
 		return this.adsOnme;
 	}
 
-	public void setAdsOnme(Timestamp adsOnme) {
+	public void setAdsOnme(Date adsOnme) {
 		this.adsOnme = adsOnme;
 	}
 
 	@Column(name = "update_time", length = 0)
-	public Timestamp getUpdateTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Column(name = "delete_time", length = 0)
-	public Timestamp getDeleteTime() {
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getDeleteTime() {
 		return this.deleteTime;
 	}
 
-	public void setDeleteTime(Timestamp deleteTime) {
+	public void setDeleteTime(Date deleteTime) {
 		this.deleteTime = deleteTime;
 	}
 

@@ -70,6 +70,14 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 
 	public Class<T> entityClass;
 	
+	public Class<T> getEntityClass() {
+		return entityClass;
+	}
+
+	public void setEntityClass(Class<T> entityClass) {
+		this.entityClass = entityClass;
+	}
+
 	public final String DEFAULT_ALIAS = "X";
 	
 	private static Logger logger = LoggerFactory.getLogger(BasicHibernateDao.class); 
@@ -284,7 +292,14 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 		
 		return (T) getSession().get(entityClass, id);
 	}
-	
+	public T get(Class clazz,PK id) {
+		
+		if (id == null) {
+			return null;
+		}
+		
+		return (T) getSession().get(clazz, id);
+	}
 	/**
 	 * 按PK获取对象代理.如果id为null，返回null。参考{@link Session#load(Class, Serializable)}
 	 * 

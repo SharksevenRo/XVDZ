@@ -1,55 +1,53 @@
 package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
-import com.xiaov.model.ReceiveAddress;
+import com.xiaov.model.Account;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
-import com.xiaov.service.interfaces.ReceiveAddressService;
+import com.xiaov.service.interfaces.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by zouziyang on 4/24/16.
+ * Created by yymao on 2016/4/25.
  */
-@Controller
-public class ReceiveAddressController {
+public class AccountController {
     @Autowired
-    private ReceiveAddressService receiveAddressService;
+    private AccountService accountService;
 
-    @RequestMapping("/admin/ReceiveAddress/saveAjax")
+    @RequestMapping("/admin/Account/saveAjax")
     @ResponseBody
-    public MessageBean saveAjax(ReceiveAddress receiveAddress) {
+    public MessageBean saveAjax(Account account) {
 
         try {
-            receiveAddressService.save(receiveAddress);
+            accountService.save(account);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
 
-    @RequestMapping("/admin/ReceiveAddress/updateAjax")
+    @RequestMapping("/admin/Account/updateAjax")
     @ResponseBody
-    public MessageBean updateAjax(ReceiveAddress receiveAddress) {
+    public MessageBean updateAjax(Account account) {
 
         try {
-            receiveAddressService.update(receiveAddress);
+            accountService.update(account);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
 
-    @RequestMapping("/admin/ReceiveAddress/deleteAjax")
+    @RequestMapping("/admin/Account/deleteAjax")
     @ResponseBody
-    public MessageBean deleteAjax(ReceiveAddress receiveAddress){
+    public MessageBean deleteAjax(Account account) {
 
         try {
-            receiveAddress=receiveAddressService.getOne(receiveAddress.getClass(), receiveAddress.getId());
-            receiveAddressService.delete(receiveAddress);
+            account = accountService.getOne(account.getClass(), account.getId());
+            accountService.delete(account);
             return new MessageBean(APPConstant.ERROR, "删除成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,29 +55,29 @@ public class ReceiveAddressController {
         }
     }
 
-    @RequestMapping("/admin/ReceiveAddress/page")
+    @RequestMapping("/admin/Account/page")
     @ResponseBody
-    public Page<ReceiveAddress> page(ReceiveAddress receiveAddress) {
+    public Page<Account> page(Page<Account> accountPage) {
 
         try {
 
-            return receiveAddressService.page(receiveAddress);
+            return accountService.page(accountPage);
         } catch (Exception e) {
-            Page<ReceiveAddress> page = new Page<ReceiveAddress>();
+            Page<Account> page = new Page<Account>();
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;
         }
     }
 
-    @RequestMapping(value = "/admin/ReceiveAddress/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/Account/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
-    public ReceiveAddress getOne(ReceiveAddress receiveAddress) {
+    public Account getOne(Account account) {
         try {
-            return receiveAddressService.getOne(receiveAddress.getClass(), receiveAddress.getId());
+            return accountService.getOne(account.getClass(), account.getId());
 
         } catch (Exception e) {
-            ReceiveAddress page = new ReceiveAddress();
+            Account page = new Account();
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;

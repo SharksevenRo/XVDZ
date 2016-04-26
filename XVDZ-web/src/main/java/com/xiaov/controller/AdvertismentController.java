@@ -5,6 +5,8 @@ import com.xiaov.model.Advertisment;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.AdvertismentService;
+import com.xiaov.utils.LazyObjecUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,15 +45,31 @@ public class AdvertismentController {
         }
     }
 
-    @RequestMapping("/admin/Advertisment/page")
+    @RequestMapping("/admin/Advertisment/deleteAjax")
     @ResponseBody
-    public Page<Advertisment> page(Page<Advertisment> advertisment) {
+    public MessageBean deleteAjax(Advertisment advertisment){
 
         try {
-
-            return advertismentService.page(advertisment);
+            advertisment=advertismentService.getOne(advertisment.getClass(), advertisment.getId());
+            advertismentService.delete(advertisment);
+            return new MessageBean(APPConstant.ERROR, "删除成功");
         } catch (Exception e) {
-            Page<Advertisment> page = new Page<Advertisment>();
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "删除失败");
+        }
+    }
+
+    @RequestMapping("/admin/Advertisment/page")
+    @ResponseBody
+    public Page<Advertisment> page(Advertisment advertisment) {
+    	 Page<Advertisment> page = new Page<Advertisment>();
+        try {
+
+        	page= advertismentService.page(advertisment);
+        	LazyObjecUtil.LazyPageSetNull(page, new String[]{"userInfoByDeleteId","userInfoByUpdateId"});
+        	return page;
+        } catch (Exception e) {
+           
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;

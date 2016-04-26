@@ -37,7 +37,7 @@
 							<span>人员管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li onclick="getUserInfo('User');"><a href="#ajax/role.html">用户管理</a></li>
+							<li onclick="getUserInfo('User');"><a href="#ajax/userList.jsp">用户管理</a></li>
 							<li><a onclick="getUserInfo('Staff')" href="#ajax/managerStaff.html">公司员工管理</a></li>
 						</ul> 
 					<!--	<ul class="sub-menu">
@@ -55,15 +55,25 @@
 						</a>
 					</li>
 					<li class="has-sub">
-						<a href="javascript:;">
+						<a href="#ajax/Order.jsp">
 						 <!--     <b class="caret pull-right"></b> -->
 						    <i class="fa fa-file-o"></i>
 						    <span>订单管理</span> 
 						</a>
-					<!--	<ul class="sub-menu">
-							<li><a href="#ajax/form_elements.html">管理有说明退款</a></li>
-							<li><a href="#ajax/form_plugins.html">管理无说明退款</a></li>
-						</ul> -->
+					</li>
+					<li class="has-sub">
+						<a href="#ajax/DiscountCode.jsp">
+						 <!--     <b class="caret pull-right"></b> -->
+						    <i class="fa fa-file-o"></i>
+						    <span>优惠码管理</span> 
+						</a>
+					</li>
+					<li class="has-sub">
+						<a href="#ajax/Advertisment.jsp">
+						 <!--     <b class="caret pull-right"></b> -->
+						    <i class="fa fa-file-o"></i>
+						    <span>广告管理</span> 
+						</a>
 					</li>
 					<li class="has-sub">
 						<a href="javascript:;">

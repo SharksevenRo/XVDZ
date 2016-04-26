@@ -46,7 +46,7 @@ public class DiscountCoupanController {
 
     @RequestMapping("/admin/DiscountCoupan/page")
     @ResponseBody
-    public Page<DiscountCoupan> page(Page<DiscountCoupan> discountCoupan) {
+    public Page<DiscountCoupan> page(DiscountCoupan discountCoupan) {
         try {
 
             return discountCoupanService.page(discountCoupan);
