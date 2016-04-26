@@ -670,7 +670,7 @@ var handleLoadPage = function(hash) {
     Pace.restart();
     var targetUrl = hash.replace('#','');
     $('.jvectormap-label, .jvector-label, .AutoFill_border ,#gritter-notice-wrapper, .ui-autocomplete, .colorpicker, .FixedHeader_Header, .FixedHeader_Cloned .lightboxOverlay, .lightbox').remove();
-    debugger;$.ajax({
+    $.ajax({
         type: 'GET',
         url: targetUrl+"?t=new Date().getTime()",	//with the page number as a parameter
         dataType: 'html',	//expect html to be returned
