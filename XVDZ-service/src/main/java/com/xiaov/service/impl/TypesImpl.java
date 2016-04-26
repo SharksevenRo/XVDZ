@@ -37,10 +37,7 @@ public class TypesImpl extends BaseServiceImpl<Types> implements TypesService {
         return super.loadAll(entity);
     }
 
-    @Override
-    public Page<Types> page(Page<Types> page) {
-        return super.page(page);
-    }
+
 
     @Override
     public Types getOne(Class clazz, String pk) {
