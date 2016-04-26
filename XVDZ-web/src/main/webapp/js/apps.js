@@ -672,7 +672,7 @@ var handleLoadPage = function(hash) {
     $('.jvectormap-label, .jvector-label, .AutoFill_border ,#gritter-notice-wrapper, .ui-autocomplete, .colorpicker, .FixedHeader_Header, .FixedHeader_Cloned .lightboxOverlay, .lightbox').remove();
     debugger;$.ajax({
         type: 'GET',
-        url: targetUrl,	//with the page number as a parameter
+        url: targetUrl+"?t=new Date().getTime()",	//with the page number as a parameter
         dataType: 'html',	//expect html to be returned
         success: function(data) {
             $('#ajax-content').html(data);
