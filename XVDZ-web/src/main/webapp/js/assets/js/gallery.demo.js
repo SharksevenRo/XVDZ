@@ -6,13 +6,13 @@ Website: http://www.seantheme.com/color-admin-v1.7/admin/
 */
 
 function calculateDivider() {
-    var dividerValue = 4;
+    var dividerValue = 5;
     if ($(this).width() <= 480) {
-        dividerValue = 1;
-    } else if ($(this).width() <= 767) {
         dividerValue = 2;
-    } else if ($(this).width() <= 980) {
+    } else if ($(this).width() <= 767) {
         dividerValue = 3;
+    } else if ($(this).width() <= 980) {
+        dividerValue = 4;
     }
     return dividerValue;
 }
@@ -40,8 +40,8 @@ var handleIsotopesGallery = function() {
         });
     });
     
-    var $optionSets = $('#options .gallery-option-set'),
-    $optionLinks = $optionSets.find('a');
+    var $optionSets = $('.gallery-option-set'),
+    $optionLinks = $optionSets.find('option');
     
     $optionLinks.click( function(){
         var $this = $(this);

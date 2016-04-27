@@ -20,6 +20,9 @@
 .ui-first-th-ltr {border-right: 1px solid; }
 .ui-first-th-rtl {border-left: 1px solid; }
 .ui-jqgrid .ui-th-div-ie {white-space: nowrap; zoom :1; height:17px;}
+/*各行变色 start xlf*/
+.ui-jqgrid .ui-priority-secondary{background:#eee}
+/*各行变色 end xlf*/
 .ui-jqgrid .ui-jqgrid-resize {height:20px !important;position: relative; cursor :e-resize;display: inline;overflow: hidden;}
 .ui-jqgrid .ui-grid-ico-sort {overflow:hidden;position:absolute;display:inline; cursor: pointer !important;}
 .ui-jqgrid .ui-icon-asc {margin-top:-3px; height:12px;}

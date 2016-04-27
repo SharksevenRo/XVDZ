@@ -1,8 +1,3 @@
-* {
-	padding: 0;
-	margin: 0
-}
-
 .msgbox_layer,.msgbox_layer .gtl_ico_succ,.msgbox_layer .gtl_ico_fail,.msgbox_layer .gtl_ico_hits,.msgbox_layer .gtl_ico_clear,.msgbox_layer .gtl_end
 	{
 	background-image: url("../images/gb_tip_layer.png");

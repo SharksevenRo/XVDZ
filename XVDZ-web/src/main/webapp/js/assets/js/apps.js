@@ -671,7 +671,7 @@ var handleLoadPage = function(hash) {
     var targetUrl = hash.replace('#','');
     $('.jvectormap-label, .jvector-label, .AutoFill_border ,#gritter-notice-wrapper, .ui-autocomplete, .colorpicker, .FixedHeader_Header, .FixedHeader_Cloned .lightboxOverlay, .lightbox').remove();
     $.ajax({
-        type: 'POST',
+        type: 'get',
         url: targetUrl,	//with the page number as a parameter
         dataType: 'html',	//expect html to be returned
         success: function(data) {
@@ -690,8 +690,6 @@ var handleLoadPage = function(hash) {
 /* 17. Handle Ajax Page Load Url - added in V1.5
 ------------------------------------------------ */
 var handleCheckPageLoadUrl = function(hash) {
-    hash = (hash) ? hash : '#ajax/index.html';
-    
     if (hash === '') {
         $('#ajax-content').html(default_content);
     } else {
