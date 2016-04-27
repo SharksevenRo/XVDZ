@@ -23,10 +23,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/创蓝VIP接口文件（2016.4.21新版）/创蓝VIP接口文件（2016新版）/DEMO(新)/JAVA/bcloud-1.8.jar"/>
-	<classpathentry kind="lib" path="D:/创蓝VIP接口文件（2016.4.21新版）/创蓝VIP接口文件（2016新版）/DEMO(新)/JAVA/commons.httpclient-3.1.0.jar"/>
-	<classpathentry kind="lib" path="D:/创蓝VIP接口文件（2016.4.21新版）/创蓝VIP接口文件（2016新版）/DEMO(新)/JAVA/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="D:/创蓝VIP接口文件（2016.4.21新版）/创蓝VIP接口文件（2016新版）/DEMO(新)/JAVA/commons-logging-1.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/bcloud-1.8.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
