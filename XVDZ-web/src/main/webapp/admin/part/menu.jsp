@@ -55,9 +55,8 @@
 							<span>产品管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/.jsp">所有产品</a></li>
-							<li><a href="#ajax/managerStaff.html">公司员工管理</a></li>
-							<li><a href="#ajax/role.html">角色管理</a></li>
+							<li><a href="#ajax/goods.html">所有产品</a></li>
+							<li><a href="#">产品类型</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -67,9 +66,8 @@
 							<span>订单管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/userList.jsp">所有产品</a></li>
-							<li><a href="#ajax/managerStaff.html">公司员工管理</a></li>
-							<li><a href="#ajax/role.html">角色管理</a></li>
+						<li><a href="#ajax/order.html">新订单</a></li>
+							<li><a href="#ajax/order.html">所有订单</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -79,7 +77,9 @@
 							<span>优惠管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/advertisment.html">所有广告</a></li>
+							<li><a href="#ajax/discountcode.html">优惠码管理</a></li>
+							<li><a href="#">优惠券管理</a></li>
+							<li><a href="#">业务员和优惠码</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -89,9 +89,7 @@
 							<span>广告管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/userList.jsp">#ajax/advertisment.html</a></li>
-							<li><a href="#ajax/managerStaff.html">公司员工管理</a></li>
-							<li><a href="#ajax/role.html">角色管理</a></li>
+							<li><a href="#ajax/advertisment.html">所有广告</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
