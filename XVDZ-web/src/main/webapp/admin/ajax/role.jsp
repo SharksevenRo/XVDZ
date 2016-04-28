@@ -352,7 +352,7 @@
 		$(grid_selector).jqGrid(
 				{
 					datatype : "json",
-					url : "/main/XVDZ-web/manager/getAllUser",
+					url : "",
 					height : "auto",
 					autowidth : true,
 					sortname : "addTime",

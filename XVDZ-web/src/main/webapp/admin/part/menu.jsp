@@ -31,14 +31,15 @@
 					    </a>
 					</li>
 					<li class="has-sub">
-						<a onclick="getUserInfo('User');" href="#ajax/role.html">						<!-- /XVDZ-web/main/manager/people?usernmae=zhujie -->
+						<a>						
 							<span class="badge pull-right">2</span>
 							<i class="fa fa-inbox"></i> 
 							<span>人员管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li onclick="getUserInfo('User');"><a href="#ajax/userList.jsp">用户管理</a></li>
-							<li><a onclick="getUserInfo('Staff')" href="#ajax/managerStaff.html">公司员工管理</a></li>
+							<li><a href="#ajax/userList.html">用户管理</a></li>
+							<li><a href="#ajax/managerStaff.html">公司员工管理</a></li>
+							<li><a href="#ajax/addr.html">用户收货地址</a></li>
 						</ul> 
 					<!--	<ul class="sub-menu">
 						    <li><a href="#ajax/email_inbox.html">管理会员信息</a></li>

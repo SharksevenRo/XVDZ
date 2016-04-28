@@ -38,10 +38,10 @@
 			<li class="dropdown">
 	          <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
 	            <i class="fa fa-flag-o"></i>
-	            <span class="label label-danger">9</span>
+	            <!-- <span class="label label-danger">9</span> -->
 	          </a>
-	          <ul class="dropdown-menu media-list pull-right animated fadeInDown">
-	            <li class="dropdown-header">任务（9）</li>
+	   <!--        <ul class="dropdown-menu media-list pull-right animated fadeInDown">
+	            <li class="dropdown-header">任务（0）</li>
 	            <li class="media">
 	            	<a href="javascript:;">
 	                    <div class="media-left">
@@ -58,14 +58,14 @@
 	            <li class="dropdown-footer text-center">
 					<a href="javascript:;">查看更多</a>
 				</li>
-	          </ul>
+	          </ul> -->
 	        </li>
 			<li class="dropdown">
 				<a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
 					<i class="fa fa-envelope-o"></i>
-					<span class="label">5</span>
+					<!-- <span class="label">5</span>  -->
 				</a>
-				<ul class="dropdown-menu media-list pull-right animated fadeInDown">
+		<!-- 		<ul class="dropdown-menu media-list pull-right animated fadeInDown">
 					<li class="dropdown-header">邮件消息(2)</li>
 					<li class="media">
 						<a href="javascript:;">
@@ -93,14 +93,14 @@
 					<li class="dropdown-footer text-center">
 						<a href="javascript:;">查看更多</a>
 					</li>
-				</ul>
+				</ul> -->
 			</li>
 			<li class="dropdown">
 				<a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
 					<i class="fa fa-bell-o"></i>
-					<span class="label">5</span>
+				<!-- 	<span class="label">5</span> -->
 				</a>
-				<ul class="dropdown-menu media-list pull-right animated fadeInDown">
+	<!-- 			<ul class="dropdown-menu media-list pull-right animated fadeInDown">
 					<li class="dropdown-header">通知 (2)</li>
 					<li class="media">
 						<a href="javascript:;">
@@ -128,7 +128,7 @@
 					<li class="dropdown-footer text-center">
 						<a href="javascript:;">查看更多</a>
 					</li>
-				</ul>
+				</ul>  -->
 			</li>
 			<li class="dropdown navbar-user">
 				<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
@@ -141,7 +141,7 @@
 					<li><a href="javascript:;">个人信息</a>
 					</li>
 					<li><a href="javascript:;"><span
-							class="badge badge-danger pull-right">2</span>收件箱</a>
+							class="badge badge-danger pull-right">0</span>收件箱</a>
 					</li>
 					<li><a href="javascript:;">日历</a>
 					</li>
