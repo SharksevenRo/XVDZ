@@ -227,57 +227,57 @@ var FormPlugins = function () {
         //main function
         init: function () {
         
-            $.getScript('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js').done(function() {
+            $.getScript('../js/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js').done(function() {
                 handleDatepicker();
             });
             
-            $.getScript('assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js').done(function() {
+            $.getScript('../js/assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js').done(function() {
 			    handleIonRangeSlider();
             });
             
-            $.getScript('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js').done(function() {
+            $.getScript('../js/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js').done(function() {
 			    handleFormColorPicker();
 			});
 			
-            $.getScript('assets/plugins/masked-input/masked-input.min.js').done(function() {
+            $.getScript('../js/assets/plugins/masked-input/masked-input.min.js').done(function() {
 			    handleFormMaskedInput();
 			});
 			
-            $.getScript('assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js').done(function() {
+            $.getScript('../js/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js').done(function() {
 			    handleFormTimePicker();
             });
             
-            $.getScript('assets/plugins/password-indicator/js/password-indicator.js').done(function() {
+            $.getScript('../js/assets/plugins/password-indicator/js/password-indicator.js').done(function() {
 			    handleFormPasswordIndicator();
             });
             
-            $.getScript('assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js').done(function() {
+            $.getScript('../js/assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js').done(function() {
 			    handleBootstrapCombobox();
             });
             
-            $.getScript('assets/plugins/bootstrap-select/bootstrap-select.min.js').done(function() {
+            $.getScript('../js/assets/plugins/bootstrap-select/bootstrap-select.min.js').done(function() {
 			    handleSelectpicker();
             });
             
-            $.getScript('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js').done(function() {
+            $.getScript('../js/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js').done(function() {
 			    handleTagsInput();
             });
             
-            $.getScript('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js').done(function() {
+            $.getScript('../js/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js').done(function() {
 			    handleJqueryAutocomplete();
             });
             
-            $.getScript('assets/plugins/jquery-tag-it/js/tag-it.min.js').done(function() {
+            $.getScript('../js/assets/plugins/jquery-tag-it/js/tag-it.min.js').done(function() {
 			    handleJqueryTagIt();
             });
             
-            $.getScript('assets/plugins/bootstrap-daterangepicker/moment.js').done(function() {
-                $.getScript('assets/plugins/bootstrap-daterangepicker/daterangepicker.js').done(function() {
+            $.getScript('../js/assets/plugins/bootstrap-daterangepicker/moment.js').done(function() {
+                $.getScript('../js/assets/plugins/bootstrap-daterangepicker/daterangepicker.js').done(function() {
                     handleDateRangePicker();
                 });
             });
             
-            $.getScript('assets/plugins/select2/dist/js/select2.min.js').done(function() {
+            $.getScript('../js/assets/plugins/select2/dist/js/select2.min.js').done(function() {
                 handleSelect2();
             });
         }

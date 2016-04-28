@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
 Template Name: Color Admin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.4
 Version: 1.7.0
 Author: Sean Ngu
@@ -671,8 +670,8 @@ var handleLoadPage = function(hash) {
     var targetUrl = hash.replace('#','');
     $('.jvectormap-label, .jvector-label, .AutoFill_border ,#gritter-notice-wrapper, .ui-autocomplete, .colorpicker, .FixedHeader_Header, .FixedHeader_Cloned .lightboxOverlay, .lightbox').remove();
     $.ajax({
-        type: 'GET',
-        url: targetUrl+"?t=new Date().getTime()",	//with the page number as a parameter
+        type: 'get',
+        url: targetUrl,	//with the page number as a parameter
         dataType: 'html',	//expect html to be returned
         success: function(data) {
             $('#ajax-content').html(data);

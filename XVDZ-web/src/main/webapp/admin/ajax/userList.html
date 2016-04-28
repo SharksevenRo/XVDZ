@@ -1,10 +1,8 @@
 <!-- begin #content -->
 <div id="content" class="content" style="margin-bottom: 25px">
 	<ol class="breadcrumb pull-right">
-		<li><a href="javascript:;">首页</a>
-		</li>
-		<li><a href="javascript:;">表格</a>
-		</li>
+		<li><a href="javascript:;">首页</a></li>
+		<li><a href="javascript:;">表格</a></li>
 		<li class="active">分页表格</li>
 	</ol>
 	<h1 class="page-header">
@@ -17,33 +15,33 @@
 					<div class="panel-heading-btn">
 						<a href="javascript:;"
 							class="btn btn-xs btn-icon btn-circle btn-default"
-							data-click="panel-expand"><i class="fa fa-expand"></i>
-						</a> <a href="javascript:;"
+							data-click="panel-expand"><i class="fa fa-expand"></i> </a> <a
+							href="javascript:;"
 							class="btn btn-xs btn-icon btn-circle btn-success"
-							data-click="panel-reload"><i class="fa fa-repeat"></i>
-						</a> <a href="javascript:;"
+							data-click="panel-reload"><i class="fa fa-repeat"></i> </a> <a
+							href="javascript:;"
 							class="btn btn-xs btn-icon btn-circle btn-warning"
-							data-click="panel-collapse"><i class="fa fa-minus"></i>
-						</a> <a href="javascript:;"
+							data-click="panel-collapse"><i class="fa fa-minus"></i> </a> <a
+							href="javascript:;"
 							class="btn btn-xs btn-icon btn-circle btn-danger"
-							data-click="panel-remove"><i class="fa fa-times"></i>
-						</a>
+							data-click="panel-remove"><i class="fa fa-times"></i> </a>
 					</div>
-					<h4 class="panel-title">用户</h4>			
+					<h4 class="panel-title">用户</h4>
 				</div>
 				<div class="panel-body">
-				
-		        <div class="btn-group" data-toggle="buttons-checkbox"  style="margin-bottom:10px">
-			      <button type="button" class="btn btn-primary" id="new_button">添加</button>
-			      <button type="button" class="btn btn-primary" id="edit_button">修改</button>
-			      <button type="button" class="btn btn-primary" id="select_button">查看</button>
-			      <button type="button" class="btn btn-primary" id="dele_button">删除</button>
-			    </div>
+
+					<div class="btn-group" data-toggle="buttons-checkbox"
+						style="margin-bottom: 10px">
+						<button type="button" class="btn btn-primary" id="new_button">添加</button>
+						<button type="button" class="btn btn-primary" id="edit_button">修改</button>
+						<button type="button" class="btn btn-primary" id="select_button">查看</button>
+						<button type="button" class="btn btn-primary" id="dele_button">删除</button>
+					</div>
 					<div class="table-responsive" style="overflow: hidden;">
 						<div class="jqGrid_wrapper">
-                        	<table id="grid-table"></table>
-                            <div id="grid-pager"></div>
-                        </div>
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -53,58 +51,68 @@
 
 
 
- 
+
 <div class="modal" id="mymodal" style="padding-top: 150px;">
-    <div class="modal-dialog" style="width: 800px">
-        <div class="modal-content" style="width: 700px">
-            <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	<div class="modal-dialog" style="width: 800px">
+		<div class="modal-content" style="width: 700px">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+				</button>
 				<h4 class="modal-title">添加用户</h4>
 			</div>
 			<div class="modal-body">
-<!-- 				<form action="../main/enterGoods/saveOrUpdateEnterGoods" class="form-horizontal" method="post"> -->
+				<!-- 				<form action="../main/enterGoods/saveOrUpdateEnterGoods" class="form-horizontal" method="post"> -->
 				<form id="enteringGoodsForm" class="form-horizontal" method="post">
 					<fieldset>
 						<div class="form-group">
-<!--                         </div> -->
-<!--                    		<div class="form-group"> -->
-                            <label class="col-md-2 control-label">用户名称：</label>
-                            <div class="col-md-4"> 
-                                <input class="form-control" placeholder="请输入用户名称"  type="text" name="pdtName">
-                            </div>
-                             <label class="col-md-2 control-label">用户介绍：</label>
-                            <div class="col-md-4"> 
-                                <input class="form-control" placeholder="请输入用户名称"  type="text" name="pdtPc">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                         	<label class="col-md-2 control-label">用户标签：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入标签"  type="text" name="pdtLabel">
-                            </div>
-                            <label class="col-md-2 control-label">单价：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="0"  type="text" name="pdtPrc">
-                            </div>
-						</div>
-						<div class="modal-footer">
-						 <div class="form-group">
-<!-- 						    隐藏ID -->
-						 	<input style="display:none;"  type="text"  name="enteringGoodsId">
-                        	<div class="col-md-12" style="text-align: right;">	
-								<button id="closeButton" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button id="saveButton" type="button" class="btn btn-primary">保存</button>
-<!-- 								隐藏重置按钮 -->
-								<input type="reset" style="display:none;" /> 
+							<!--                         </div> -->
+							<!--                    		<div class="form-group"> -->
+							<label class="col-md-2 control-label">用户名称：</label>
+							<div class="col-md-4">
+								<input class="form-control" placeholder="请输入用户名称" type="text"
+									name="pdtName">
+							</div>
+							<label class="col-md-2 control-label">用户介绍：</label>
+							<div class="col-md-4">
+								<input class="form-control" placeholder="请输入用户名称" type="text"
+									name="pdtPc">
 							</div>
 						</div>
-					</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">用户标签：</label>
+							<div class="col-md-4">
+								<input class="form-control" placeholder="请输入标签" type="text"
+									name="pdtLabel">
+							</div>
+							<label class="col-md-2 control-label">单价：</label>
+							<div class="col-md-4">
+								<input class="form-control" placeholder="0" type="text"
+									name="pdtPrc">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="form-group">
+								<!-- 						    隐藏ID -->
+								<input style="display: none;" type="text" name="enteringGoodsId">
+								<div class="col-md-12" style="text-align: right;">
+									<button id="closeButton" type="button" class="btn btn-default"
+										data-dismiss="modal">关闭</button>
+									<button id="saveButton" type="button" class="btn btn-primary">保存</button>
+									<!-- 								隐藏重置按钮 -->
+									<input type="reset" style="display: none;" />
+								</div>
+							</div>
+						</div>
 					</fieldset>
-				</form>	
-					</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+				</form>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
@@ -119,8 +127,6 @@
 <script src="../js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
 <script src="../js/bootbox.js"></script>
 <script src="../js/bootstrap-dialog.js"></script>
-<script type="text/javascript">
-</script>
 
 <script type="text/javascript">
 
@@ -129,7 +135,7 @@
 		$("select[name=enterGoodsTypeId]").html("");
 		$.ajax({
 			type : "get",
-			url : "/admin/product/page.do",
+			url : "${pageContext.request.contextPath}/admin/product/page.do",
 			dataType : "json",
 			async : true,
 			success : function(data) {
@@ -154,8 +160,7 @@
 	}
 
 	$(function($) {
-	
-	//调整适应于页面大小的最合适大小
+		//调整适应于页面大小的最合适大小
 		$(window).on("resize.jqGrid", function () {
 			$("#grid-table").jqGrid( "setGridWidth", $(".jqGrid_wrapper").width() );
 		});
@@ -164,18 +169,19 @@
 	$("#grid-table").jqGrid({ 
 		//提交类型
 		type:"post",
-        url: "/admin/user/page.do",
+        url: "../admin/user/page.do",
         //数据类型
         datatype: "json", 
          jsonReader: {  
 	        	root:"result", page:"pageNo", total:"totalPages", records:"10", repeatitems : false,//userdata: "userdata",
 	        },
         //高度自动调整
-        height : "100%",
-        width : "100%",//下面那个第一个列名为空时存储某个记录的id，为了实现删除和修改操作
-		colNames:["编辑/删除","","用户姓名","用户类型","用户昵称","用户性别","用户手机","用户邮箱","注册时间"], //,"点赞数","分享数","添加时间","修改时间","删除时间","是否开放","备注","删除标识"
+        height : "auto",
+        autowidth : true,//下面那个第一个列名为空时存储某个记录的id，为了实现删除和修改操作
+		colNames:["编辑/删除","ID","用户姓名","用户类型","用户昵称","用户性别","用户手机","用户邮箱","注册时间"], //,"点赞数","分享数","添加时间","修改时间","删除时间","是否开放","备注","删除标识"
 		colModel:[ 
-				   {name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,search:false,
+				   {name: 'myac', index: '', width: "", fixed: true, sortable: false, resize: false,search:false,
+						align:"center",
 					　　　　formatter: 'actions',
 					　　　　formatoptions: {
 							 //设置为true可以使用 [Enter]保存数据或者[Esc] 取消编辑
@@ -192,9 +198,9 @@
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "/admin/user/deleteAjax.do",/* 删除Product的URL */ 
+											url : "../admin/user/deleteAjax.do",/* 删除Product的URL */ 
 										},
-							 editbutton:true, 
+							 editbutton:true,
 							 editformbutton: false,
 							 editOptions:{  closeOnEscape: true,
 					                        closeAfterAdd: true,
@@ -208,19 +214,19 @@
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "/admin/user/updateAjax.do",/* 修改Product的URL */ 
+											url : "../admin/user/updateAjax.do",/* 修改Product的URL */ 
 							 }
 						} 
 					}, 
 					//index 和name一致必须，为了实现点击表头以当前列排序所依赖的规范(后面属性的定义字面意思很明显，按自己的需求设置值即可)
-					{name:"id",index:"id",hidden : true, editable: true, width:90, align:"center"},
-					{name:"usName",index:"usName",hidden : false, editable: true, width:90, align:"center"},
-					 {name:"typeId",index:"typeId", editable: true, width:90, align:"center"},
-				   {name:"usNcNa",index:"usNcNa",hidden : true, editable: true, width:90, align:"center"},
-				   {name:"usSex",index:"usSex",hidden : false, editable: true, width:90, align:"center"}, 
-				   {name:"usTel",index:"usTel",  editable: true,width:80, align:"center"}, 
-				   {name:"usMail",index:"usMail",  editable: true,width:80, align:"center"}, 
-				   {name:"addTime",index:"addTime",  editable: true,width:80, align:"center"}
+					{name:"id",index:"id", editable: true, width:"", align:"center"},
+					{name:"usName",index:"usName", editable: true, width:"", align:"center"},
+					 {name:"typeId",index:"typeId", editable: true, width:"", align:"center"},
+				   {name:"usNcNa",index:"usNcNa", editable: true, width:"", align:"center"},
+				   {name:"usSex",index:"usSex", editable: true, width:"", align:"center"}, 
+				   {name:"usTel",index:"usTel",  editable: true,width:"", align:"center"}, 
+				   {name:"usMail",index:"usMail",  editable: true,width:"", align:"center"}, 
+				   {name:"addTime",index:"addTime",  editable: true,width:"", align:"center"}
 				  ],
    		 rowNum:10, 
    		 rowList:[10,20,30],
@@ -231,12 +237,12 @@
    		 //只有当multiselect = true.起作用，当multiboxonly 为ture时只有选择checkbox才会起作用
    		 multiboxonly: true,
    		 //此属性用来说明当初始化列宽度时候的计算类型，如果为ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
-   		 shrinkToFit: false,
+   		 shrinkToFit: true,
    		 //自动滚动条
-   		 autoScroll: false,
+   		 autoScroll: true,
    		 //是否要显示总记录数
    		 viewrecords: true,
-//    		 toolbar : [ true, "top" ],
+		//toolbar : [ true, "top" ],
    		 prmNames : {
 						search : "search",
 						rows : "pageSize",//每页多少条
@@ -249,6 +255,7 @@
    		 //jqgrid名称 
 //    	 caption:"用户", 
    	});
+	$("#grid-table").jqGrid( "setGridWidth", $(".jqGrid_wrapper").width() );
    
    	//加载底部操作按钮及页码
 //    	$("#grid-table").jqGrid("navGrid","#grid-pager",{
@@ -346,7 +353,7 @@
 			        cache:false,  
 			        type: 'POST',  
 			        dataType : 'text', 
-                    url: "/admin/product/saveAjax.do",
+                    url: "${pageContext.request.contextPath}/admin/product/saveAjax.do",
                     //序列化form表单
 			    	data: $("#enteringGoodsForm").serializeArray(),
 			        error: function () {//请求失败处理函数 

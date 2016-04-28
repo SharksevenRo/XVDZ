@@ -57,21 +57,21 @@ var FormMultipleUpload = function () {
     return {
         //main function
         init: function () {
-            $.getScript('assets/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js').done(function() {
-                $.getScript('assets/plugins/jquery-file-upload/js/vendor/tmpl.min.js').done(function() {
-                    $.getScript('assets/plugins/jquery-file-upload/js/vendor/load-image.min.js').done(function() {
-                        $.getScript('assets/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js').done(function() {
-                            $.getScript('assets/plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js').done(function() {
-                                $.getScript('assets/plugins/jquery-file-upload/js/jquery.iframe-transport.js').done(function() {
-                                    $.getScript('assets/plugins/jquery-file-upload/js/jquery.fileupload.js').done(function() {
-                                        $.getScript('assets/plugins/jquery-file-upload/js/jquery.fileupload-process.js').done(function() {
-                                            $.getScript('assets/plugins/jquery-file-upload/js/jquery.fileupload-image.js').done(function() {
-                                                $.getScript('assets/plugins/jquery-file-upload/js/jquery.fileupload-audio.js').done(function() {
-                                                    $.getScript('assets/plugins/jquery-file-upload/js/jquery.fileupload-video.js').done(function() {
-                                                        $.getScript('assets/plugins/jquery-file-upload/js/jquery.fileupload-validate.js').done(function() {
-                                                            $.getScript('assets/plugins/jquery-file-upload/js/jquery.fileupload-ui.js').done(function() {
+            $.getScript('../js/assets/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js').done(function() {
+                $.getScript('../js/assets/plugins/jquery-file-upload/js/vendor/tmpl.min.js').done(function() {
+                    $.getScript('../js/assets/plugins/jquery-file-upload/js/vendor/load-image.min.js').done(function() {
+                        $.getScript('../js/assets/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js').done(function() {
+                            $.getScript('../js/assets/plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js').done(function() {
+                                $.getScript('../js/assets/plugins/jquery-file-upload/js/jquery.iframe-transport.js').done(function() {
+                                    $.getScript('../js/assets/plugins/jquery-file-upload/js/jquery.fileupload.js').done(function() {
+                                        $.getScript('../js/assets/plugins/jquery-file-upload/js/jquery.fileupload-process.js').done(function() {
+                                            $.getScript('../js/assets/plugins/jquery-file-upload/js/jquery.fileupload-image.js').done(function() {
+                                                $.getScript('../js/assets/plugins/jquery-file-upload/js/jquery.fileupload-audio.js').done(function() {
+                                                    $.getScript('../js/assets/plugins/jquery-file-upload/js/jquery.fileupload-video.js').done(function() {
+                                                        $.getScript('../js/assets/plugins/jquery-file-upload/js/jquery.fileupload-validate.js').done(function() {
+                                                            $.getScript('../js/assets/plugins/jquery-file-upload/js/jquery.fileupload-ui.js').done(function() {
                                                                 if ($.browser.msie && parseFloat($.browser.version) >= 8 && parseFloat($.browser.version) < 10) {
-                                                                    $.getScript('assets/plugins/jquery-file-upload/js/cors/jquery.xdr-transport.js').done(function() {
+                                                                    $.getScript('../js/assets/plugins/jquery-file-upload/js/cors/jquery.xdr-transport.js').done(function() {
                                                                         handleJqueryFileUpload();
                                                                     });
                                                                 } else {
