@@ -30,32 +30,23 @@
 					    </a>
 					</li>
 					<li class="has-sub">
-<<<<<<< HEAD
-						<a>						
-							<span class="badge pull-right">2</span>
-=======
 						<a href="javascript:;">
 							<b class="caret pull-right"></b>
->>>>>>> 4b03ae6afb8a81f2aa8c3436668c48a85ec506e2
 							<i class="fa fa-inbox"></i> 
 							<span>人员管理</span>
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#ajax/userList.html">用户管理</a></li>
 							<li><a href="#ajax/managerStaff.html">公司员工管理</a></li>
-<<<<<<< HEAD
 							<li><a href="#ajax/addr.html">用户收货地址</a></li>
-						</ul> 
 					<!--	<ul class="sub-menu">
 						    <li><a href="#ajax/email_inbox.html">管理会员信息</a></li>
 						    <li><a href="#ajax/email_inbox_v2.html">管理产品信息</a></li>
 						    <li><a href="#ajax/email_compose.html">产品留言管理</a></li>
 						    <li><a href="#ajax/email_detail.html">上传产品</a></li>
 						</ul> -->
-=======
 							<li><a href="#ajax/role.html">角色管理</a></li>
 						</ul>
->>>>>>> 4b03ae6afb8a81f2aa8c3436668c48a85ec506e2
 					</li>
 					<li class="has-sub">
 						<a href="javascript:;">
@@ -64,7 +55,7 @@
 							<span>产品管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/userList.jsp">所有产品</a></li>
+							<li><a href="#ajax/.jsp">所有产品</a></li>
 							<li><a href="#ajax/managerStaff.html">公司员工管理</a></li>
 							<li><a href="#ajax/role.html">角色管理</a></li>
 						</ul>
@@ -88,9 +79,7 @@
 							<span>优惠管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/userList.jsp">所有产品</a></li>
-							<li><a href="#ajax/managerStaff.html">公司员工管理</a></li>
-							<li><a href="#ajax/role.html">角色管理</a></li>
+							<li><a href="#ajax/advertisment.html">所有广告</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -100,7 +89,7 @@
 							<span>广告管理</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#ajax/userList.jsp">所有产品</a></li>
+							<li><a href="#ajax/userList.jsp">#ajax/advertisment.html</a></li>
 							<li><a href="#ajax/managerStaff.html">公司员工管理</a></li>
 							<li><a href="#ajax/role.html">角色管理</a></li>
 						</ul>
