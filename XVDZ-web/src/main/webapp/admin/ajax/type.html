@@ -45,7 +45,7 @@
 		</div>
 	</div>
 </div>
-<div id="menuDialog" class="modal">
+<div id="typeDialog" class="modal">
 	<div class="modal-dialog" style="margin-top:200px">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -74,10 +74,10 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4 col-sm-4 font-14">菜单图标:</label>
+							<label class="control-label col-md-4 col-sm-4 font-14">类型图标:</label>
 							<div class="col-md-5 col-sm-5">
 								<div class="input-group">
-									<input name="menuIcon" value="" placeholder="菜单图标" type="text" class="form-control ">
+									<input name="typeTag" value="" placeholder="菜单图标" type="text" class="form-control ">
 									<span class="input-group-addon">
 										<span class="fa fa-flag-o"></span>
 									</span>
@@ -1142,34 +1142,12 @@
 						  </div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4 col-sm-4 font-14">菜单URL:</label>
-							<div class="col-md-6 col-sm-6">
-								<div class="input-group">
-									<input name="menuUrl" value="" placeholder="菜单Url" type="text" class="form-control">
-									<span class="input-group-addon">
-										<span class="fa fa-star-o"></span>
-									</span>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
 							<label class="control-label col-md-4 col-sm-4 font-14">说明:</label>
 							<div class="col-md-6 col-sm-6">
 								<div class="input-group">
-									<textarea  class="form-control" roles="3" name="menuRemark" value="" placeholder="菜单说明"></textarea>
+									<textarea  class="form-control" roles="3" name="typeName" value="" placeholder="说明"></textarea>
 								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-4 col-sm-4 font-14">立即启用:</label>
-							<div class="col-md-7 col-sm-7">
-                                 <label class="radio-inline">
-                                    <input type="radio" name="useState" value="true" checked="checked">启用
-                                 </label>
-                                 <label class="radio-inline">
-                                    <input type="radio" name="useState" value="false">不启用
-                                 </label>
-                            </div>
 						</div>
 					</div>
 				</form>
@@ -1206,7 +1184,7 @@
 <script>
 	//重新加载树
 	function reloadTree(treeId) {
-		$("#menuDialog").modal("hide");
+		$("#typeDialog").modal("hide");
 		$("#" + treeId).jstree("refresh");
 	}
 	//显示修改框
@@ -1426,101 +1404,69 @@
 								"check_callback" : true,
 								"data" : {
 									"dataType" : "json",
-									"url" : "../main/menus/gtcpnsystmu?showIcon=1"
+									"url" : "../admin/type/getSliderAds.do"
 								}
 							},
 							"contextmenu" : {
 								"items" : {
 									"create" : {
-										"label" : "新建菜单",
+										"label" : "新建类型",
 										"action" : function(data) {
 											var inst = jQuery.jstree
 													.reference(data.reference), obj = inst
 													.get_node(data.reference);
 											showDialog(
-													"menuDialog",
+													"typeDialog",
 													{
 														"id" : obj.id,
-														"title" : "新建-"+ obj.text + "的子菜单",
+														"title" : "新建-"+ obj.text + "的子类型",
 														"url" : "../main/menu/edit",
 														"oper":"add"
 													});
 										}
 									},
 									"rename" : {
-										"label" : "修改菜单",
+										"label" : "修改类型",
 										"action" : function(data) {
 											var inst = jQuery.jstree
 													.reference(data.reference), obj = inst
 													.get_node(data.reference);
 											showDialog(
-													"menuDialog",
+													"typeDialog",
 													{
 														"id" : obj.id,
-														"title" : "修改-" + obj.text + "菜单",
+														"title" : "修改-" + obj.text + "类型",
 														"url" : "../main/menu/edit",
 														"oper":"update"
 													});
 										}
 									},
-									"启用菜单" : {
-										"label" : "启用菜单",
-										"action" : function(data) {
-											var inst = jQuery.jstree
-													.reference(data.reference), obj = inst
-													.get_node(data.reference);
-											showDialog(
-													"menuDialog",
-													{
-														"id" : obj.id,
-														"title" : "启用-" + obj.text + "菜单",
-														"url" : "../main/menu/edit",
-														"oper":"reuse"
-													});
-										}
-									},
-									"禁用菜单" : {
-										"label" : "禁用菜单",
-										"action" : function(data) {
-											var inst = jQuery.jstree
-													.reference(data.reference), obj = inst
-													.get_node(data.reference);
-											showDialog(
-													"menuDialog",
-													{
-														"id" : obj.id,
-														"title" : "禁用-" + obj.text + "菜单",
-														"url" : "../main/menu/edit",
-														"oper":"ban"
-													});
-										}
-									},
 									"remove" : {
-										"label" : "<font color='red'>删除菜单</font>",
+										"label" : "<font color='red'>删除类型</font>",
 										"action" : function(data) {
 											var inst = jQuery.jstree
 													.reference(data.reference), obj = inst
 													.get_node(data.reference);
 											showDialog(
-													"menuDialog",
+													"typeDialog",
 													{
 														"id" : obj.id,
-														"title" : "删除-" + obj.text + "菜单",
+														"title" : "删除-" + obj.text + "类型",
 														"url" : "../main/menu/edit",
 														"oper":"delete"
 													});
 										}
 									},
-									"添加一级菜单" : {
-										"label" : "添加一级菜单",
+									"添加一级类型" : {
+										"label" : "添加一级类型",
 										"action" : function(data) {
 											var inst = jQuery.jstree
 													.reference(data.reference), obj = inst
 													.get_node(data.reference);
-											showDialog( "menuDialog",
+											showDialog( "typeDialog",
 													{
 														"id" : null,
-														"title" : "添加根菜单",
+														"title" : "添加根类型",
 														"url" : "../main/menu/edit",
 														"oper":"add"
 													});
