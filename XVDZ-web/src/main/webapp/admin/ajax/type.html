@@ -1,0 +1,1534 @@
+<link href="../js/assets/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
+
+<div id="content" class="content" style="margin-bottom: 20px">
+	<ol class="breadcrumb pull-right">
+		<li><a href="javascript:void(0);">首页</a>
+		</li>
+		<li><a href="javascript:void(0);">类型管理</a>
+		</li>
+		<li class="active">类型编辑</li>
+	</ol>
+	<h1 class="page-header">
+		类型编辑 <small>类型的修改与删除,请务必小心处理!</small>
+	</h1>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<div class="panel panel-inverse" data-sortable-id="tree-view-3">
+				<div class="panel-heading">
+					<div class="panel-heading-btn">
+						<a href="javascript:void(0);"
+							class="btn btn-xs btn-icon btn-circle btn-default"
+							data-click="panel-expand"><i class="fa fa-expand"></i>
+						</a> <a href="javascript:void(0);"
+							class="btn btn-xs btn-icon btn-circle btn-success"
+							data-click="panel-reload"><i class="fa fa-repeat"></i>
+						</a> <a href="javascript:void(0);"
+							class="btn btn-xs btn-icon btn-circle btn-warning"
+							data-click="panel-collapse"><i class="fa fa-minus"></i>
+						</a> <a href="javascript:void(0);"
+							class="btn btn-xs btn-icon btn-circle btn-danger"
+							data-click="panel-remove"><i class="fa fa-times"></i>
+						</a>
+					</div>
+					<h4 class="panel-title">类型编辑</h4>
+				</div>
+				<div class="alert alert-info">
+					<i class="fa fa-info-circle fa-fw"></i>&nbsp;不同的图标对应不同的状态&nbsp;&nbsp;
+					<i class="fa fa-circle-o fa-lg"></i>&nbsp;可用&nbsp;&nbsp;
+					<i class="fa fa-circle fa-lg text-warning"></i>&nbsp;不可用
+				</div>
+				<div class="panel-body">
+					<div id="treeMenu"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="menuDialog" class="modal">
+	<div class="modal-dialog" style="margin-top:200px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">标题</h4>
+			</div>
+			<div class="modal-body">				
+				<form id="menuForm" class="form-horizontal form-bordered">
+					<input id="typeId" value="" type="hidden" name="typeId">
+					<input id="parentTypeId" value="" type="hidden" name="parentTypeId">
+					<input id="oper" name="oper" type="hidden" value="">
+					<div id="content-input">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 font-14">类型名称:</label>
+							<div class="col-md-6 col-sm-7">
+								<div class="input-group">
+									<input name="typeName" type="text" value="" placeholder="类型名称" 
+										data-bv-notempty="true" data-bv-notempty-message="请输入类型名称" class="form-control">
+									<span class="input-group-addon">
+										<span class="fa fa-at"></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 font-14">菜单图标:</label>
+							<div class="col-md-5 col-sm-5">
+								<div class="input-group">
+									<input name="menuIcon" value="" placeholder="菜单图标" type="text" class="form-control ">
+									<span class="input-group-addon">
+										<span class="fa fa-flag-o"></span>
+									</span>
+								</div>
+							
+													<div class="bs-glyphicons" align="center">
+													    <ul id="iconlist">
+													        <li>
+													          <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-eur" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-headphones" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-barcode" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-bold" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-italic" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-text-height" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-text-width" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-indent-right" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-adjust" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-resize-small" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-magnet" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-gbp" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-expand" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-import" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-export" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-header" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-compressed" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sd-video" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-hd-video" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-subtitles" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sound-stereo" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sound-dolby" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sound-5-1" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sound-6-1" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sound-7-1" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-registration-mark" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-tree-deciduous" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-cd" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-level-up" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-paste" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-king" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-queen" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-pawn" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-bishop" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-knight" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-baby-formula" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-tent" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-bed" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-apple" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-lamp" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-scissors" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-bitcoin" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-btc" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-xbt" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-yen" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-jpy" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-ruble" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-rub" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-ice-lolly" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-oil" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-grain" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-text-size" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-text-color" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-object-align-top" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-object-align-bottom" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-object-align-horizontal" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-object-align-left" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-object-align-vertical" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-object-align-right" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-superscript" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-subscript" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+													        </li>
+													      
+													        <li>
+													          <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+													        </li>
+													      
+													    </ul>
+						  </div>
+						  </div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 font-14">菜单URL:</label>
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<input name="menuUrl" value="" placeholder="菜单Url" type="text" class="form-control">
+									<span class="input-group-addon">
+										<span class="fa fa-star-o"></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 font-14">说明:</label>
+							<div class="col-md-6 col-sm-6">
+								<div class="input-group">
+									<textarea  class="form-control" roles="3" name="menuRemark" value="" placeholder="菜单说明"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 font-14">立即启用:</label>
+							<div class="col-md-7 col-sm-7">
+                                 <label class="radio-inline">
+                                    <input type="radio" name="useState" value="true" checked="checked">启用
+                                 </label>
+                                 <label class="radio-inline">
+                                    <input type="radio" name="useState" value="false">不启用
+                                 </label>
+                            </div>
+						</div>
+					</div>
+				</form>
+				<div id="deleteInfo" class="font-14" style="text-indent: 2em;"></div>
+			</div>
+			<div class="modal-footer">
+				<div id="success" class="left" style="height: 32px;line-height: 32px;position: relative;left: 40%;width: 20%;">
+					<span class="fa-stack fa-1x text-success">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-check fa-stack-1x fa-inverse"></i>
+					</span>
+					<label class="font-14 green"></label>
+				</div>
+				<div id="fail" class="left" style="height: 32px;line-height: 32px;position: relative;left: 40%;width: 20%;">
+					<span class="fa-stack fa-1x text-danger">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-times fa-stack-1x fa-inverse"></i>
+					</span>
+					<label class="font-12 red"></label>
+				</div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button id="resetBtn" type="button" class="btn btn-info">重置</button>
+				<button id="menuSubmit" type="button" class="btn btn-primary">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="../js/assets/plugins/jstree/dist/jstree.min.js"></script>
+<script src="../js/assets/plugins/select2/dist/js/select2.min.js"></script>
+<script src="../js/assets/js/form-plugins.demo.min.js"></script>
+<script src="../js/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="../js/assets/plugins/masked-input/masked-input.min.js"></script>
+<script src="../js/apps.js"></script>
+<script>
+	//重新加载树
+	function reloadTree(treeId) {
+		$("#menuDialog").modal("hide");
+		$("#" + treeId).jstree("refresh");
+	}
+	//显示修改框
+	function showDialog(dialog, obj) {
+		$("#fail").addClass("hide");
+		$("#success").addClass("hide");
+		$("#resetBtn").addClass("hide");
+		$("#menuType").addClass("hide");
+		$("#deleteInfo").addClass("hide");
+		$("#content-input").removeClass("hide");
+		$("#menuId").attr("disabled",false);
+		var dialogName = dialog;
+		$("#" + dialogName + " .modal-title").text(obj.title);
+		$("#" + dialogName + " form")[0].reset();
+		$("#oper").val(obj.oper);
+		var text="";
+		if(obj.oper=="update"){
+			$.ajax({
+				type : "get",
+				async : false,
+			    url : "../main/menus/gtmbid",
+			    dataType : "json",
+			    data : {"menuId":obj.id},
+			    success: function (data) {
+			    	var menu = data.data;
+			    	$("#resetBtn").removeClass("hide");
+			    	$("select[name=menuScope]").val(menu.menuScope)
+			    	$("input[name=menuId]").val(menu.menuId);
+			    	$("input[name=menuName]").val(menu.menuName);
+			    	$("input[name=menuUrl]").val(menu.menuUrl);
+			    	$("input[name=menuIcon]").val(menu.menuIcon);
+			    	$("input[name=useState]").val(menu.useState);
+			    	$("textarea[name=menuRemark]").val(menu.menuRemark);
+			    },
+			    error: function () {
+			        $.jstree.rollback(data.rlbk);
+			    }
+			});
+		}else if(obj.oper=="delete"){
+			$("#content-input").addClass("hide");
+			$("input[name=menuId]").val(obj.id);
+			var text = "您确定要删除所选菜单吗？(此操作会将该菜单下的子菜单删除)";
+		}else if(obj.oper=="add"){
+			$("#menuId").attr("disabled",true);
+			$("input[name=fatherMenuId]").val(obj.id);
+			$("#resetBtn").removeClass("hide");
+		}else if(obj.oper=="reuse"){
+			$("#content-input").addClass("hide");
+			$("input[name=menuId]").val(obj.id);
+			var text = "您确定要启用所选菜单吗？(此操作会将该菜单下的子菜单全部启用)";
+		}else if(obj.oper=="ban"){
+			$("#content-input").addClass("hide");
+			$("input[name=menuId]").val(obj.id);
+			var text = "您确定要禁用所选菜单吗？(此操作会将该菜单下的子菜单全部禁用)";
+		}
+		if(text!=""){
+			$("#deleteInfo").text(text).removeClass("hide");
+		}
+		$("#" + dialogName).modal("show");
+	}
+	
+	//提交表单
+	function formSubmit(formId,url){
+		$.ajax({
+			type:"get",
+			url : url,
+			data : $("#"+formId).serialize(),
+			dataType : "json",
+			contentType : "application/json;charset=utf-8",
+			success : function(data) {
+				if(data.status=="1"){
+					$("#success label").text(data.info);
+					$("#success").removeClass("hide");
+					setTimeout(function(){
+						reloadTree("treeMenu");
+					}, 2000);
+				}else if(data.status=="0"){
+					$("#fail label").text(data.info);
+					$("#fail").removeClass("hide");
+				}
+			}
+		});
+	}
+	
+	
+	function loadTypeById(obj){
+		var all=$(obj).parent(".input-group");
+		$(all).nextAll().remove();
+		var id=$(obj).val();
+		$("input[name=industryTypeId]").val(id);
+		$.ajax({
+			type:"get",
+			url : "../main/industryType/stcdidtpbi",
+			data : {industryTypeId:$(obj).val()},
+			dataType : "json",
+			contentType : "application/json;charset=utf-8",
+			success : function(data) {
+					if(data.data==null)
+						return;
+					var list = data.data;
+					var html = "";
+					//有数据，拼接
+					if(list.length>0){
+						html+="<div class='input-group' style='margin-top:5px;float:left;margin-right:3px'>";
+						html+="<select onchange='loadTypeById(this)' class='form-control'>";
+						html+="<option value=''> </option>";
+						for(var i=0;i<list.length;i++){
+							var id = list[i].industryTypeId;
+							var name = list[i].industryTypeName
+							html+="<option value='"+id+"'>"+name+"</option>";
+						}
+						html+="</select>";
+						html+="</div>";
+						$(".type-group").append(html);
+					}
+			}
+		});
+	}
+	
+	
+	//加载产业类型
+	function loadIndustryType(url,datas){
+		$.ajax({
+			type:"get",
+			url : url,
+			data : datas,
+			dataType : "json",
+			contentType : "application/json;charset=utf-8",
+			success : function(data) {
+					if(data.data==null)
+						return;
+					var list = data.data;
+					var html = "";
+					//有数据，拼接
+					if(list.length>0){
+						html+="<div class='input-group' style='margin-top:5px;float:left;margin-right:3px'>";
+						html+="<select onchange='loadTypeById(this)' class='form-control'>";
+						html+="<option value=''> </option>";
+						for(var i=0;i<list.length;i++){
+							var id = list[i].industryTypeId;
+							var name = list[i].industryTypeName;
+							html+="<option value='"+id+"'>"+name+"</option>";
+						}
+						html+="</select>";
+						html+="</div>";
+						$(".type-group").append(html);
+					}
+			}
+		});
+	}
+	
+	$(function() {
+		//表单重置
+		$("#resetBtn").click(function() {
+	        $("#menuForm").data("bootstrapValidator").resetForm(true);
+	    });
+		
+		//表单提交
+		$("#menuSubmit").click(function(e){
+			//验证表单
+			$("#menuForm").bootstrapValidator("validate");
+			//获取验证状态
+			var valid =$("#menuForm").data("bootstrapValidator").isValid()
+			if(valid){
+				//验证通过，调用提交表单函数提交
+				formSubmit("menuForm","../main/menus/edit");
+			}
+		});
+		
+		$(".bs-glyphicons li span").click(function(){
+			var cla=$(this).attr("class");
+			$("input[name=menuIcon]").val(cla);
+		});
+
+		$("input[name=menuIcon]").focus(function(){
+			$(".bs-glyphicons").css("display","block");
+		}).blur(function(){
+			setTimeout(function(){
+				$(".bs-glyphicons").css("display","none");
+			}, 200)
+		});
+		
+		
+		$("select[name=menuScope]").change(function(){
+			if($(this).val()=="3"){
+				var url = "../main/industryType/tpcdidtp";
+				var data = null;
+				loadIndustryType(url,data);
+				$("#menuType").removeClass("hide");
+			}else{
+				$("#menuType").addClass("hide");
+				$(".type-group").html("");
+			}
+		});
+		$(".type-group select").change(function(){
+			var id=$(this).val();
+			$("input[name=industryTypeId]").val(id);
+		});
+		$("#treeMenu").jstree(
+			{
+							"types" : {
+								"default" : {
+									"icon" : "fa fa-circle text-warning fa-lg"
+								},
+								"file" : {
+									"icon" : "fa fa-file text-warning fa-lg"
+								}
+							},
+							"state" : {
+								"key" : "demo2"
+							},
+							"plugins" : [ "contextmenu" ],
+							"core" : {
+								"themes" : {
+									"responsive" : false
+								},
+								"check_callback" : true,
+								"data" : {
+									"dataType" : "json",
+									"url" : "../main/menus/gtcpnsystmu?showIcon=1"
+								}
+							},
+							"contextmenu" : {
+								"items" : {
+									"create" : {
+										"label" : "新建菜单",
+										"action" : function(data) {
+											var inst = jQuery.jstree
+													.reference(data.reference), obj = inst
+													.get_node(data.reference);
+											showDialog(
+													"menuDialog",
+													{
+														"id" : obj.id,
+														"title" : "新建-"+ obj.text + "的子菜单",
+														"url" : "../main/menu/edit",
+														"oper":"add"
+													});
+										}
+									},
+									"rename" : {
+										"label" : "修改菜单",
+										"action" : function(data) {
+											var inst = jQuery.jstree
+													.reference(data.reference), obj = inst
+													.get_node(data.reference);
+											showDialog(
+													"menuDialog",
+													{
+														"id" : obj.id,
+														"title" : "修改-" + obj.text + "菜单",
+														"url" : "../main/menu/edit",
+														"oper":"update"
+													});
+										}
+									},
+									"启用菜单" : {
+										"label" : "启用菜单",
+										"action" : function(data) {
+											var inst = jQuery.jstree
+													.reference(data.reference), obj = inst
+													.get_node(data.reference);
+											showDialog(
+													"menuDialog",
+													{
+														"id" : obj.id,
+														"title" : "启用-" + obj.text + "菜单",
+														"url" : "../main/menu/edit",
+														"oper":"reuse"
+													});
+										}
+									},
+									"禁用菜单" : {
+										"label" : "禁用菜单",
+										"action" : function(data) {
+											var inst = jQuery.jstree
+													.reference(data.reference), obj = inst
+													.get_node(data.reference);
+											showDialog(
+													"menuDialog",
+													{
+														"id" : obj.id,
+														"title" : "禁用-" + obj.text + "菜单",
+														"url" : "../main/menu/edit",
+														"oper":"ban"
+													});
+										}
+									},
+									"remove" : {
+										"label" : "<font color='red'>删除菜单</font>",
+										"action" : function(data) {
+											var inst = jQuery.jstree
+													.reference(data.reference), obj = inst
+													.get_node(data.reference);
+											showDialog(
+													"menuDialog",
+													{
+														"id" : obj.id,
+														"title" : "删除-" + obj.text + "菜单",
+														"url" : "../main/menu/edit",
+														"oper":"delete"
+													});
+										}
+									},
+									"添加一级菜单" : {
+										"label" : "添加一级菜单",
+										"action" : function(data) {
+											var inst = jQuery.jstree
+													.reference(data.reference), obj = inst
+													.get_node(data.reference);
+											showDialog( "menuDialog",
+													{
+														"id" : null,
+														"title" : "添加根菜单",
+														"url" : "../main/menu/edit",
+														"oper":"add"
+													});
+										}
+									},
+									"ccp" : null
+								}
+							}
+						});
+	});
+</script>

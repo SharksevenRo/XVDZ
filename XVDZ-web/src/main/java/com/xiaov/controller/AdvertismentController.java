@@ -7,6 +7,8 @@ import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.AdvertismentService;
 import com.xiaov.utils.LazyObjecUtil;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,13 @@ public class AdvertismentController {
     @Autowired
     private AdvertismentService advertismentService;
 
+    /**
+     * 
+     * @Description: 添加广告
+     * @param advertisment
+     * @return MessageBean
+     * @throws
+     */
     @RequestMapping("/admin/Advertisment/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(Advertisment advertisment) {
@@ -32,7 +41,13 @@ public class AdvertismentController {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
-
+    
+    /**
+     * 
+     * @Description: 修改广告
+     * @param advertisment
+     * @throws
+     */
     @RequestMapping("/admin/Advertisment/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(Advertisment advertisment) {
@@ -44,7 +59,15 @@ public class AdvertismentController {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
-
+    
+    /**
+     * 
+     * @Description:删除
+     * @param @param advertisment
+     * @param @return
+     * @return MessageBean
+     * @throws
+     */
     @RequestMapping("/admin/Advertisment/deleteAjax")
     @ResponseBody
     public MessageBean deleteAjax(Advertisment advertisment){
@@ -59,6 +82,14 @@ public class AdvertismentController {
         }
     }
 
+    /**
+     * 
+     * @Description:分页查询广告
+     * @param @param advertisment
+     * @param @return
+     * @return Page<Advertisment>
+     * @throws
+     */
     @RequestMapping("/admin/Advertisment/page")
     @ResponseBody
     public Page<Advertisment> page(Advertisment advertisment) {
@@ -76,6 +107,14 @@ public class AdvertismentController {
         }
     }
 
+    /**
+     * 
+     * @Description:根据ID查询广告
+     * @param @param advertisment
+     * @param @return
+     * @return Advertisment
+     * @throws
+     */
     @RequestMapping(value = "/admin/Advertisment/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public Advertisment getOne(Advertisment advertisment) {
@@ -88,5 +127,18 @@ public class AdvertismentController {
             page.setMessage("服务器忙");
             return page;
         }
+    }
+    
+    @RequestMapping(value = "/admin/Advertisment/getSliderAds")
+    @ResponseBody
+    public Page<Advertisment> getSliderAds(Advertisment advertisment) {
+    	Page<Advertisment> page = null;
+    	try {	
+    		page =  advertismentService.page(advertisment);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    	return page;
     }
 }

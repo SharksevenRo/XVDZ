@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>小v定制</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/swiper.min.css">
+    <link rel="stylesheet" href="../css/sm.min.css">
+    <link rel="stylesheet" href="../css/sm-extend.min.css">
+    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+    <link rel="stylesheet" href="../css/animate.min.css" type="text/css">
+</head>
+<body>
+
+	<div class="weui_dialog_confirm" id="comment" style="display:none">
+	    <div class="weui_mask"></div>
+	    <div class="weui_dialog">
+	        <div class="weui_dialog_hd">
+	          <strong class="weui_dialog_title">评论</strong>
+	        </div>
+	        <div class="weui_dialog_bd">
+	        		
+				<div class="weui_cells weui_cells_form">
+				    <div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				            <textarea class="weui_textarea" id="textarea" placeholder="请输入评论" rows="3"></textarea>
+				        </div>
+				    </div>
+				</div>
+
+	        </div>
+	        <div class="weui_dialog_ft">
+	            <a href="javascript:;" id="cancel" class="weui_btn_dialog default">取消</a>
+	            <a href="javascript:;" id="confirm" class="weui_btn_dialog primary">确定</a>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="weui_tab">
+	    <div class="weui_tab_bd">
+	        <div class="weui_tab_bd_item">
+
+	        	<header class="bar bar-nav">
+				  	<h1 class="title">小v定制</h1>
+	                <a href="javascript:window.location.href='about.html'" class="icon icon-me pull-right open-panel" style="z-index:300"></a>
+				</header>
+
+				<div class="swiper-container" style="height:160px;">
+				  	<div id="ads-wraper" class="swiper-wrapper">
+				  	</div>
+				    	<script id="t:ads_temp" type="text/html">
+				    		<%for(var i=0;i<list.length;i++){%>
+								<div class="swiper-slide blue-slide">
+				    				<img alt="" src="../<%=list[i].adsPic%>">
+				    			</div>
+							<%}%>
+				    	</script>
+			        <div class="swiper-pagination"></div>
+				</div>
+				<div class="weui_cells weui_cells_form" style="margin-top:0px">
+				    <div class="weui_cell">
+				        <div class="weui_cell_hd">
+				            <label class="weui_label">搜索</label>
+				        </div>
+				        <div class="weui_cell_bd weui_cell_primary">
+				            <input class="weui_input" id="search_input" type="text" placeholder="搜索商品...">
+				        </div>
+				    </div>
+				</div>
+
+				<div class="weui_grids">
+				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				        <div class="weui_grid_icon">
+				            <img src="../img/icon_nav_button.png" alt="">
+				        </div>
+				        <p class="weui_grid_label">
+				            全部商品
+				        </p>
+				    </a>
+				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				        <div class="weui_grid_icon">
+				            <img src="../img/icon_nav_cell.png" alt="">
+				        </div>
+				        <p class="weui_grid_label">
+				            全球购
+				        </p>
+				    </a>
+				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				        <div class="weui_grid_icon">
+				            <img src="../img/icon_nav_toast.png" alt="">
+				        </div>
+				        <p class="weui_grid_label">
+				            情侣空间
+				        </p>
+				    </a>
+				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				        <div class="weui_grid_icon">
+				            <img src="../img/icon_nav_dialog.png" alt="">
+				        </div>
+				        <p class="weui_grid_label">
+				            好兄弟
+				        </p>
+				    </a>
+				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				        <div class="weui_grid_icon">
+				            <img src="../img/icon_nav_progress.png" alt="">
+				        </div>
+				        <p class="weui_grid_label">
+				            有你真好
+				        </p>
+				    </a>
+				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				        <div class="weui_grid_icon">
+				            <img src="../img/icon_nav_msg.png" alt="">
+				        </div>
+				        <p class="weui_grid_label">
+				            班级
+				        </p>
+				    </a>
+				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				        <div class="weui_grid_icon">
+				            <img src="../img/icon_nav_article.png" alt="">
+				        </div>
+				        <p class="weui_grid_label">
+				            设计师
+				        </p>
+				    </a>
+				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				        <div class="weui_grid_icon">
+				            <img src="../img/icon_nav_actionSheet.png" alt="">
+				        </div>
+				        <p class="weui_grid_label">
+				            其它
+				        </p>
+				    </a>
+				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				        <div class="weui_grid_icon">
+				            <img src="../img/icon_nav_icons.png" alt="">
+				        </div>
+				        <p class="weui_grid_label">
+				            待续
+				        </p>
+				    </a>
+				</div>
+
+			    <div class="buttons-tab fixed-tab" data-offset="44">
+			      <a href="#tab1" class="tab-link active button">最热作品</a>
+			      <a href="#tab2" class="tab-link button">最新作品</a>
+			    </div>
+
+			    <div class="tabs" style="margin-bottom:35px;">
+			      <div id="tab1" class="tab active">
+
+					<div class="card facebook-card">
+					    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
+					    <div class="card-footer no-border">
+					      <a href="#" class="link">赞</a>
+					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
+	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
+					      <a href="#" class="link"><span class="icon icon-share"></span></a>
+					    </div>
+					</div>
+
+					<div class="card facebook-card">
+					    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
+					    <div class="card-footer no-border">
+					      <a href="#" class="link">赞</a>
+					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
+	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
+					      <a href="#" class="link"><span class="icon icon-share"></span></a>
+					    </div>
+					</div>
+
+					<div class="card facebook-card">
+					    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
+					    <div class="card-footer no-border">
+					      <a href="#" class="link">赞</a>
+					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
+	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
+					      <a href="#" class="link"><span class="icon icon-share"></span></a>
+					    </div>
+					</div>
+
+					<div class="card facebook-card">
+					    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
+					    <div class="card-footer no-border">
+					      <a href="#" class="link">赞</a>
+					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
+	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
+					      <a href="#" class="link"><span class="icon icon-share"></span></a>
+					    </div>
+					</div>
+
+			      </div>
+			      <div id="tab2" class="tab">
+
+					<div class="card facebook-card">
+					    <div class="card-content"><img src="http://d02.res.meilishuo.net/pic/_o/e4/d9/d34baa117aa1abb17822337b7bf6_800_800.ch.jpeg" width="100%"></div>
+					    <div class="card-footer no-border">
+					      <a href="#" class="link">赞</a>
+					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
+	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
+					      <a href="#" class="link"><span class="icon icon-share"></span></a>
+					    </div>
+					</div>
+
+					<div class="card facebook-card">
+					    <div class="card-content"><img src="http://d02.res.meilishuo.net/pic/_o/e4/d9/d34baa117aa1abb17822337b7bf6_800_800.ch.jpeg" width="100%"></div>
+					    <div class="card-footer no-border">
+					      <a href="#" class="link">赞</a>
+					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
+	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
+					      <a href="#" class="link"><span class="icon icon-share"></span></a>
+					    </div>
+					</div>
+
+					<div class="card facebook-card">
+					    <div class="card-content"><img src="http://d02.res.meilishuo.net/pic/_o/e4/d9/d34baa117aa1abb17822337b7bf6_800_800.ch.jpeg" width="100%"></div>
+					    <div class="card-footer no-border">
+					      <a href="#" class="link">赞</a>
+					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
+	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
+					      <a href="#" class="link"><span class="icon icon-share"></span></a>
+					    </div>
+					</div>
+
+					<div class="card facebook-card">
+					    <div class="card-content"><img src="http://d02.res.meilishuo.net/pic/_o/e4/d9/d34baa117aa1abb17822337b7bf6_800_800.ch.jpeg" width="100%"></div>
+					    <div class="card-footer no-border">
+					      <a href="#" class="link">赞</a>
+					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
+	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
+					      <a href="#" class="link"><span class="icon icon-share"></span></a>
+					    </div>
+					</div>
+
+			      </div>
+			    </div>
+
+	        </div>
+	        <div class="weui_tab_bd_item">
+
+	        	<header class="bar bar-nav">
+				  <h1 class="title">发现</h1>
+				</header>
+
+	        </div>
+	        <div class="weui_tab_bd_item" style="height:100%;padding-bottom:0px;margin-top: -44px;">
+
+	        	<div class="title-bar" id="back-prev-menu">
+        		  	<span class="icon icon-remove"></span>
+	        	</div>
+
+	        	<div class="title-bar right" id="cart-this">
+        		  	<span class="icon icon-check"></span>
+	        	</div>
+
+	        	<div class="title-bar right-bottom blue" id="down-toolpanel">
+        		  	<span class="icon icon-down"></span>
+	        	</div>
+
+	        	<div class="title-bar right-bottom blue" id="cart-this">
+        		  	<span class="icon icon-search"></span>
+	        	</div>
+
+	        	<div class="title-bar right-bottom blue" id="cart-this">
+        		  	<span class="icon icon-right"></span>
+	        	</div>
+
+				<div class="card diytool-panel" id="clothes">
+				    <div class="card-header" style="border-bottom: 1px solid rgb(231, 231, 231);">款式选择</div>
+				    <div class="card-content">
+				      <div class="card-content-inner" style="min-height:180px;width:100%">sss</div>
+				    </div>
+				</div>
+
+				<div class="card diytool-panel" id="colors">
+				    <div class="card-header" style="border-bottom: 1px solid rgb(231, 231, 231);">颜色选择</div>
+				    <div class="card-content">
+				      <div class="card-content-inner" style="min-height:180px;width:100%">sss</div>
+				    </div>
+				</div>
+
+				<div class="card diytool-panel" id="pictures">
+				    <div class="card-header" style="border-bottom: 1px solid rgb(231, 231, 231);">图案/图片选择</div>
+				    <div class="card-content">
+				      <div class="card-content-inner" style="min-height:180px;width:100%">sss</div>
+				    </div>
+				</div>
+
+				<div class="card diytool-panel" id="text">
+				    <div class="card-header" style="border-bottom: 1px solid rgb(231, 231, 231);">加入文字</div>
+				    <div class="card-content">
+				      <div class="card-content-inner" style="min-height:180px;width:100%">sss</div>
+				    </div>
+				</div>
+
+				<div class="card diytool-panel" id="diy">
+				    <div class="card-header" style="border-bottom: 1px solid rgb(231, 231, 231);">涂鸦</div>
+				    <div class="card-content">
+				      <div class="card-content-inner" style="min-height:180px;width:100%">sss</div>
+				    </div>
+				</div>
+
+				<div class="div-container">
+					<canvas id="c" width="600" height="500"></canvas>
+				</div>
+
+	        	<nav class="bar bar-tab" id="diy-tools">
+				  <a class="tab-item external" href="#" data-open="clothes">
+				    <span class="icon icon-app"></span>
+				    <!-- <span class="tab-label">文案</span> -->
+				  </a>
+				  <a class="tab-item external" href="#" data-open="colors">
+				    <span class="icon icon-me"></span>
+				    <!-- <span class="tab-label">文案</span> -->
+				    <!-- <span class="badge">2</span> -->
+				  </a>
+				  <a class="tab-item external" href="#" data-open="pictures">
+				    <span class="icon icon-picture"></span>
+				    <!-- <span class="tab-label">文案</span> -->
+				  </a>
+				  <a class="tab-item external" href="#" data-open="text">
+				    <span class="icon icon-message"></span>
+				    <!-- <span class="tab-label">文案</span> -->
+				  </a>
+				  <a class="tab-item external" href="#" data-open="diy">
+				    <span class="icon icon-edit"></span>
+				    <!-- <span class="tab-label">文案</span> -->
+				  </a>
+				</nav>
+
+	        </div>
+	        <div class="weui_tab_bd_item">
+
+	        	<header class="bar bar-nav">
+				  	<h1 class="title">购物车</h1>
+			  		<button class="button button-link button-nav pull-right" id="to_pay">
+					    去付款
+					    <span class="icon icon-right"></span>
+					</button>
+				</header>
+
+			    <div class="list-block media-list">
+			      <ul>
+			        <li id="theme-default">
+			          <label class="label-checkbox item-content">
+			            <input type="checkbox" name="my-radio">
+			            <div class="item-media">
+			            	<i class="icon icon-form-checkbox"></i>
+	                      	<div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 3rem;margin-left: 10px'></div>
+			            </div>
+					      <div class="item-inner">
+					        <div class="item-title-row">
+					          <div class="item-title">剪刀</div>
+					          <div class="item-after">17:14</div>
+					        </div>
+					        <div class="item-subtitle">New messages from John Doe</div>
+					        <div class="item-text">Lorem ipsum dolor sit amet...</div>
+					      </div>
+			          </label>
+			        </li>
+			        <li id="theme-dark">
+			          <label class="label-checkbox item-content">
+			            <input type="checkbox" name="my-radio">
+			            <div class="item-media">
+			            	<i class="icon icon-form-checkbox"></i>
+	                      	<div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 3rem;margin-left: 10px'></div>
+			            </div>
+				      	<div class="item-inner">
+					        <div class="item-title-row">
+					          <div class="item-title">剪刀</div>
+					          <div class="item-after">17:14</div>
+					        </div>
+					        <div class="item-subtitle">New messages from John Doe</div>
+					        <div class="item-text">Lorem ipsum dolor sit amet...</div>
+					      </div>
+  			          	</label>
+			        </li>
+			      </ul>
+			    </div>
+
+				<div class="content-block-title">总额</div>
+				  <div class="list-block">
+				    <ul>
+				      <li class="item-content item-link" id="pay">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">233元</div>
+				          <div class="item-after">去付款</div>
+				        </div>
+				      </li>
+				    </ul>
+				</div>
+	        </div>
+	        <div class="weui_tab_bd_item">
+
+	        	<header class="bar bar-nav">
+				  <h1 class="title">个人中心</h1>
+				</header>
+
+				<div class="card" style="margin: 0px;margin-top: .5rem;box-shadow: none;border-bottom:1px solid rgb(231, 231, 231)">
+				    <!-- <div class="card-header">新的公布:</div> -->
+				    <div class="card-content">
+				      <div class="list-block media-list">
+				        <ul>
+				          <li class="item-content">
+				            <div class="item-media">
+				              <img src="../img/icon_nav_button.png" width="44">
+				            </div>
+				            <div class="item-inner">
+				              <div class="item-title-row">
+				                <div class="item-title">请登录</div>
+				              </div>
+				              <!-- <div class="item-subtitle">子标题</div> -->
+				            </div>
+				          </li>
+				        </ul>
+				      </div>
+				    </div>
+					<div class="card-footer no-border">
+						<a href="order.html" class="link">订单</a>
+						<a href="#" id="toMarket" class="link">购物车</a>
+						<a href="#" class="link">退款/售后</a>
+					</div>
+				</div>
+
+				<div class="content-block-title">账户</div>
+				<div class="list-block">
+				    <ul>
+				      <li id="login" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">登录</div>
+				        </div>
+				      </li>
+				      <li id="register" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">注册</div>
+				        </div>
+				      </li>
+				    </ul>
+				</div>
+
+				<div class="content-block-title">基本</div>
+				<div class="list-block">
+				    <ul>
+				      <li id="voice" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">大家的声音</div>
+				        </div>
+				      </li>
+				      <li id="works" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">我的作品</div>
+				        </div>
+				      </li>
+				      <li id="fav" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">我的收藏</div>
+				        </div>
+				      </li>				      
+				      <li id="addr" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">收货地址</div>
+				        </div>
+				      </li>
+				      <li id="themes" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">主题设置</div>
+				        </div>
+				      </li>
+				    </ul>
+				</div>
+
+				<div class="content-block-title">收益</div>
+				<div class="list-block">
+				    <ul>
+				      <li id="finance" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">我的收益</div>
+				        </div>
+				      </li>
+				      <li id="coupon" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">我的优惠券</div>
+				        </div>
+				      </li>
+				    </ul>
+				</div>
+
+				<div class="content-block-title">关于</div>
+				<div class="list-block">
+				    <ul>
+				      <li id="about" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">关于小v</div>
+				        </div>
+				      </li>
+				      <li id="contact" class="item-content item-link">
+				        <div class="item-media"><i class="icon icon-f7"></i></div>
+				        <div class="item-inner">
+				          <div class="item-title">联系客服</div>
+				        </div>
+				      </li>
+				    </ul>
+				</div>
+
+				<div class="padding" style="margin-bottom:30px;padding-top:0px">
+					<a href="javascript:;" id="logout" class="weui_btn weui_btn_warn">退出</a>					
+				</div>
+
+	        </div>
+	    </div>
+	    <div class="weui_tabbar">
+	        <a href="javascript:;" class="weui_tabbar_item">
+	            <div class="weui_tabbar_icon">
+	                <img src="../img/icon_nav_button.png" alt="">
+	            </div>
+	            <p class="weui_tabbar_label">主页</p>
+	        </a>
+	        <a href="javascript:;" class="weui_tabbar_item">
+	            <div class="weui_tabbar_icon">
+	                <img src="../img/icon_nav_msg.png" alt="">
+	            </div>
+	            <p class="weui_tabbar_label">发现</p>
+	        </a>
+	        <a href="javascript:;" class="weui_tabbar_item">
+	            <div class="weui_tabbar_icon">
+	                <img src="../img/icon_nav_tab.png" alt="">
+	            </div>
+	            <p class="weui_tabbar_label">定制</p>
+	        </a>
+	        <a href="javascript:;" class="weui_tabbar_item">
+	            <div class="weui_tabbar_icon">
+	                <img src="../img/icon_nav_article.png" alt="">
+	            </div>
+	            <p class="weui_tabbar_label">购物车</p>
+	        </a>
+	        <a href="javascript:;" class="weui_tabbar_item">
+	            <div class="weui_tabbar_icon">
+	                <img src="../img/icon_nav_cell.png" alt="">
+	            </div>
+	            <p class="weui_tabbar_label">个人中心</p>
+	        </a>
+	    </div>
+	</div>
+	
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/weui.js"></script>
+	<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
+    <script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
+	<script type="text/javascript" src="http://cdn.bootcss.com/fabric.js/1.6.0-rc.1/fabric.require.min.js"></script>
+    <script type="text/javascript" src="../js/scripts.js"></script>
+    <script type="text/javascript" src="../js/baiduTemplate.js"></script>
+	<script>
+		$(function(){
+			$.ajax({
+				url:"../admin/Advertisment/getSliderAds.do",
+				type:"get",
+				contentType : "application/json; charset=utf-8",
+				dataType:"json",
+				data:{pageNo:1,pageSize:3},
+				success:function(data){
+					var html= baidu.template('t:ads_temp',{"list":data.result});
+					$("#ads-wraper").html(html);
+					//幻灯片
+					var mySwiper = new Swiper('.swiper-container', {
+						autoplay: 5000,
+						pagination: '.swiper-pagination',
+				        paginationClickable: true
+					});
+				}
+			});
+		});
+	</script>
+</body>
+</html>

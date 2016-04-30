@@ -35,6 +35,7 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	private String id;
 	private Types parentType;
 	private String typeName;
+	private String typeTag;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -58,17 +59,20 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Types(Types parentType, String typeName, Date addTime,
-			Date updateTime, Date deleteTime, String typeRemark,
-			Boolean deleteFlage) {
+	public Types(String id, Types parentType, String typeName, String typeTag, Date addTime, Date updateTime,
+			Date deleteTime, String typeRemark, Boolean deleteFlage) {
+		super();
+		this.id = id;
 		this.parentType = parentType;
 		this.typeName = typeName;
+		this.typeTag = typeTag;
 		this.addTime = addTime;
 		this.updateTime = updateTime;
 		this.deleteTime = deleteTime;
 		this.typeRemark = typeRemark;
 		this.deleteFlage = deleteFlage;
 	}
+	
 
 	// Property accessors
 	@Id
@@ -78,6 +82,7 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	public String getId() {
 		return this.id;
 	}
+
 
 	public void setId(String id) {
 		this.id = id;
@@ -100,6 +105,15 @@ public class Types extends Page<Types> implements java.io.Serializable {
 
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+	
+	@Column(name = "type_tag", nullable = false, length = 50)
+	public String getTypeTag() {
+		return typeTag;
+	}
+
+	public void setTypeTag(String typeTag) {
+		this.typeTag = typeTag;
 	}
 
 	@Column(name = "add_time", nullable = true, length = 0)

@@ -36,7 +36,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Types productType;
 	private Material material;
 	private String usId;
-	private String pdtNo;
+	private String pdtNo=new Date().getTime()+"";
 	private String pdtName;
 	private Double pdtIntRat;
 	private String pdtLabel;

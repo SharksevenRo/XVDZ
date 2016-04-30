@@ -52,6 +52,16 @@
 						<a href="javascript:;">
 							<b class="caret pull-right"></b>
 							<i class="fa fa-inbox"></i> 
+							<span>类型管理</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#ajax/type.html">所有类型</a></li>
+						</ul>
+					</li>
+					<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-inbox"></i> 
 							<span>产品管理</span>
 						</a>
 						<ul class="sub-menu">

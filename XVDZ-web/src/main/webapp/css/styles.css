@@ -1,0 +1,185 @@
+html, body{
+    height: 100%;
+}
+
+body{
+    background: #efeff4!important;
+    padding-top: 44px;
+}
+
+* {
+	/*tarnsition:all 	1s ease 0s;*/
+}
+
+p {
+	margin: 0px;
+}
+
+.bar {
+	position: fixed;
+	background: rgb(247, 247, 250)!important;
+	/*border-bottom: 1px solid rgb(238, 238, 238);*/
+}
+
+.padding {
+	padding: 15px;
+}
+
+.swiper-container {
+	padding-bottom: 0px;
+}
+
+.weui_tab_bd_item{
+    display: none;
+}
+
+.weui_tab_bd_item h3{
+    padding: 45% 0 0;
+    text-align: center;
+    color: #888;
+    font-weight: normal;
+}
+
+.swiper-slide {
+	text-align: center;
+	color: rgb(255, 255, 255);
+	line-height: 160px;
+}
+
+.blue-slide {
+	background: #4390EE;
+}
+
+.red-slide {
+	background: #CA4040;
+}
+
+.orange-slide {
+	background: #FF8604;
+}
+
+.weui_tab_bd_item {
+	padding-bottom: 40px;
+}
+
+.weui_tabbar {
+	z-index: 655;
+}
+
+.list-block .item-text {
+	font-size: 12px;
+}
+
+.list-block .item-title {
+	font-size: 14px;
+}
+
+.weui_mask, .weui_mask_transition, .weui_mask_transparent {
+	z-index: 1000;
+}
+
+.weui_dialog {
+	z-index: 1600;
+}
+
+.title-bar {
+	width: 40px;
+	height: 40px;
+	background-color: rgba(0, 0, 0, 0.4);
+	color: rgb(255, 255, 255);
+	border-radius: 50%;
+	position: fixed;
+	top: 15px;
+	left: 15px;
+	z-index: 4000;
+	text-align: center;
+	line-height: 35px;
+	font-weight: 800;
+	cursor: pointer;
+	tarnsition:all 1s ease 0s!important;
+}
+
+.title-bar.right {
+	left: 300px;
+}
+
+.title-bar.right-bottom {
+	top: 300px;
+}
+
+.title-bar.blue {
+	background: rgba(117, 147, 213, 0.8);
+}
+
+.coupon-header {
+	background-color: #ffffff;
+	-moz-box-shadow: inset 0px 0px 99px 30px #ffa60a;
+	-webkit-box-shadow: inset 0px 0px 99px 30px #ffa60a;
+	box-shadow: inset 0px 0px 99px 30px #ffa60a;
+	/*Inner elements should not cover inner shadows*/
+	/*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+	filter: progid: DXImageTransform.Microsoft.gradient(startColorstr = '#ffc62e', endColorstr = '#ffc240');
+	/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+	/*Element must have a height (not auto)*/
+	/*All filters must be placed together*/
+	-ms-filter: "progid: DXImageTransform.Microsoft.gradient(startColorstr = '#ffc62e', endColorstr = '#ffc240')";
+	/*Element must have a height (not auto)*/
+	/*All filters must be placed together*/
+	background-image: -moz-linear-gradient(top, #ffc62e, #ffc240);
+	background-image: -ms-linear-gradient(top, #ffc62e, #ffc240);
+	background-image: -o-linear-gradient(top, #ffc62e, #ffc240);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#ffc62e), to(#ffc240));
+	background-image: -webkit-linear-gradient(top, #ffc62e, #ffc240);
+	background-image: linear-gradient(top, #ffc62e, #ffc240);
+	/*--IE9 DOES NOT SUPPORT GRADIENT BACKGROUNDS--*/
+	opacity: 0.95;
+	-ms-filter: progid: DXImageTransform.Microsoft.Alpha(Opacity = 95);
+	/*-ms-filter must come before filter*/
+	filter: alpha(opacity = 95);
+	/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+	/*All filters must be placed together*/
+	color: rgb(255, 255, 255);
+}
+
+.coupon .facebook-date {
+	color: rgb(255, 255, 255);
+	margin-left: 0px;
+}
+
+.coupon .facebook-name {
+	margin-left: 0px;
+	font-weight: 800;
+	font-size: 16px;
+}
+
+.use-coupon-container {
+	float: right;
+	margin-top: -35px;
+}
+
+.use-coupon-container a {
+	color: rgb(255, 255, 255)!important;
+	border-color: rgb(255, 255, 255);
+}
+
+.bar-tab#diy-tools .tab-item.active {
+    border-bottom: 4px solid #0894ec;
+}
+
+.diytool-panel {
+	margin: 0px;
+	box-shadow: none;
+	position: absolute;
+	bottom: 44px;width: 100%;
+	display: none;
+}
+
+.div-container {
+	width: 100%;
+	height: 100%;
+}
+
+.div-container canvas {
+	width: 100%;
+	height: 100%;
+}
