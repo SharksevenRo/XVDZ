@@ -516,7 +516,7 @@
 
 			    <div class="list-block media-list">
 			      <ul id="order_item">
-			        <!-- <li id="theme-dark">
+			        <li id="theme-dark">
 			          <label class="label-checkbox item-content">
 			            <input type="checkbox" name="my-radio">
 			            <div class="item-media">
@@ -532,7 +532,7 @@
 					        <div class="item-text">Lorem ipsum dolor sit amet...</div>
 					      </div>
   			          	</label>
-			        </li> -->
+			        </li>
 			      </ul>
 			        <script id="t:order_item" type="text/html">
 				        <%for(var i=0;i<list.length;i++){%>
@@ -741,5 +741,81 @@
 	<script type="text/javascript" src="http://cdn.bootcss.com/fabric.js/1.6.0-rc.1/fabric.require.min.js"></script>
     <script type="text/javascript" src="../js/scripts.js"></script>
     <script type="text/javascript" src="../js/baiduTemplate.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		// 幻灯片
+    		$.ajax({
+    			url : "../admin/Advertisment/getSliderAds.do",
+    			type : "get",
+    			contentType : "application/json; charset=utf-8",
+    			dataType : "json",
+    			data : {
+    				pageNo : 1,
+    				pageSize : 3
+    			},
+    			success : function(data) {
+    				var html = baidu.template('t:ads_temp', {
+    					"list" : data.result
+    				});
+    				$("#ads-wraper").html(html);
+    				// 幻灯片
+    				var mySwiper = new Swiper('.swiper-container', {
+    					autoplay : 5000,
+    					pagination : '.swiper-pagination',
+    					paginationClickable : true
+    				});
+    			}
+    		});
+    		//产品类型
+    		/* $.ajax({
+    			url : "../admin/type/productType.do",
+    			type : "get",
+    			contentType : "application/json; charset=utf-8",
+    			dataType : "json",
+    			success : function(data) {
+    				var html = baidu.template('t:product_type', {
+    					"list" : data.result
+    				});
+    				$("#productType").html(html);
+    			}
+    		}); */
+    		// 最热作品
+    		/* $.ajax({
+    			url : "../admin/product/hotProduct.do",
+    			type : "get",
+    			contentType : "application/json; charset=utf-8",
+    			dataType : "json",
+    			data : {
+    				pageNo : 1,
+    				pageSize : 5
+    			},
+    			success : function(data) {
+    				var oldHtml = $("#tab1").html();
+    				var html = baidu.template('t:hot_product', {
+    					"list" : data.result
+    				});
+    				$("#tab1").html(oldHtml+html);
+    			}
+    		}); */
+    		// 最新作品
+    		/* $.ajax({
+    			url : "../admin/product/newProduct.do",
+    			type : "get",
+    			contentType : "application/json; charset=utf-8",
+    			dataType : "json",
+    			data : {
+    				pageNo : 1,
+    				pageSize : 5
+    			},
+    			success : function(data) {
+    				var oldHtml = $("#tab2").html();
+    				var html = baidu.template('t:new_product', {
+    					"list" : data.result
+    				});
+    				$("#tab2").html(oldHtml+html);
+    			}
+    		}); */
+    	});
+    </script>
 </body>
 </html>
