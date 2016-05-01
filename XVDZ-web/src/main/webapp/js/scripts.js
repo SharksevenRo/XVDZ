@@ -255,6 +255,34 @@ $(function(){
 
   //------------------------------------------定制页面控制逻辑------------------------------------------
 
+  //初始化canvas
+  $('#c').attr('width', $(window).width() + 'px');
+  $('#c').attr('height', ($(window).height() - 44) + 'px');
+  var canvas = new fabric.Canvas('c');
+
+  fabric.Image.fromURL('./src/images/icon_nav_progress.png', function(img) {
+
+    img.scale(1).set({
+      left: 150,
+      top: 150,
+      angle: -15
+    });
+
+    canvas.add(img).setActiveObject(img);
+
+  });
+
+  $('#trends, #pictures').height($(document).height() - 44).css({
+    'z-index': 65530
+  });
+
+  var drawingOptionsEl = $('#drawing-mode-options'),
+      drawingColorEl = $('#drawing-color'),
+      drawingShadowColorEl = $('#drawing-shadow-color'),
+      drawingLineWidthEl = $('#drawing-line-width'),
+      drawingShadowWidth = $('#drawing-shadow-width'),
+      drawingShadowOffset = $('#drawing-shadow-offset');
+
   var toolPanelIsShow = false;
   //定制页面底部菜单
   var startToolPanelAnimation = function(open) {
@@ -268,7 +296,7 @@ $(function(){
       console.log($('#' + open));
       toolPanelIsShow = false;
     }else {
-      fixTilebarTightBottomPos(320);
+      fixTilebarTightBottomPos(340);
       $('#' + open).show();
       $('#' + open).animateCss('fadeInUp');
       toolPanelIsShow = true;
@@ -309,6 +337,14 @@ $(function(){
       startToolPanelAnimation(open);
     }
 
+    if(open == 'diy') {
+      //进入自由绘画（涂鸦）状态
+      canvas.isDrawingMode = true;
+      $.weui.topTips('进入编辑状态');
+    }else {
+      canvas.isDrawingMode = false;
+    }
+
   });
 
   $('#down-toolpanel').click(function() {
@@ -317,35 +353,317 @@ $(function(){
     }
   });
 
-  var canvas = new fabric.Canvas('c');
-  fabric.Image.fromURL('../img/icon_nav_progress.png', function(img) {
-    img.scale(0.5).set({
-      left: 150,
-      top: 150,
-      angle: -15
+  // console.log($(document).css('font-family'));
+
+  (function() {
+
+    var align = 'left',
+        lineHeight = 1,
+        textBackgroundColor = '',
+        stroke = '',
+        strokeWidth = 1,
+        fontStyle = '',
+        fontFamily = '微软雅黑',
+        textDecoration = 'none';
+
+    $('#text-font-family').change(function() {
+      fontFamily = this.value;
     });
-    canvas.add(img).setActiveObject(img);
+
+    $('#text-font-style').change(function() {
+      fontStyle = this.value;
+      console.log(fontStyle);
+    });
+
+    $('#text-text-deco').change(function() {
+      textDecoration = this.value;
+      console.log(textDecoration);
+    });
+
+    $('#text-stroke-width').change(function() {
+      strokeWidth = this.value;
+    });
+
+    $('#text-stroke-color').change(function() {
+      stroke = this.value;
+    });
+
+    $('#text-line-height').change(function() {
+      lineHeight = this.value;
+    });
+
+    $('#text-bg-color').change(function() {
+      textBackgroundColor = this.value;
+    });
+
+
+    $('#add-text-fuck').click(function() {
+
+      $('#text-adding-form').show();
+
+      $('#cancel-text-adding').click(function() {
+        $('#text-adding-form').hide();
+      });
+
+    });
+
+    $('#confirm-text-adding').click(function() {
+
+      var textToAdd = $('#text-adding-field').val();
+
+      var text = new fabric.Text(textToAdd, {
+
+        textAlign: align,
+
+        left: 100,
+        top: 100,
+
+        lineHeight: lineHeight,
+        textBackgroundColor: textBackgroundColor,
+        stroke: stroke,
+        strokeWidth: strokeWidth,
+        fontStyle: fontStyle,
+        fontFamily: fontFamily,
+        textDecoration: textDecoration
+
+      });
+
+      canvas.add(text);
+
+      $('#text-adding-form').hide();
+
+    });
+
+    $('#text-align a').click(function() {
+
+      align = $(this).attr('id').split('-');
+      align = align[1];
+
+      $(this).parent().find('a.active').removeClass('active');
+      $(this).addClass('active');
+
+    });
+
+  })();
+
+  //更换颜色
+  (function() {
+
+    $('#colors .card-cover').click(function() {
+
+      // fabric.util.loadImage($(this).attr('src'), function(img) {
+      //   cloth.fill = new fabric.Pattern({
+      //     source: img,
+      //     repeat: 'repeat'
+      //   });
+      //   canvas.renderAll();
+      // });
+
+      fabric.Image.fromURL($(this).attr('src'), function(img) {
+
+        img.scale(1).set({
+          left: 150,
+          top: 150,
+          angle: -15
+        });
+
+        canvas.add(img).setActiveObject(img);
+        
+      });
+
+
+    });
+
+  })();
+
+  $('.diytool-panel').find('.weui_bar_item_on').removeClass('weui_bar_item_on');
+
+  //涂鸦面板按钮事件
+  $('.diytool-panel .weui_navbar .weui_navbar_item').click(function() {
+
+    var fun = {
+      next: function() {
+
+      },
+
+      prev: function() {
+
+      },
+
+      clearCanvas: function() {
+        canvas.clear();
+      }
+    };
+
+    fun[$(this).attr('id')]();
+
+    return false;
+
   });
 
-  var info = document.getElementById('info');
+  $('#scale-this').click(function() {
+    
+  });
 
   canvas.on({
     'touch:gesture': function() {
-      info.insertBefore(text, info.firstChild);
+      // info.insertBefore(text, info.firstChild);
     },
     'touch:drag': function() {
-      info.insertBefore(text, info.firstChild);
+      // info.insertBefore(text, info.firstChild);
     },
     'touch:orientation': function() {
-      info.insertBefore(text, info.firstChild);
+      // info.insertBefore(text, info.firstChild);
     },
     'touch:shake': function() {
-      info.insertBefore(text, info.firstChild);
+      // info.insertBefore(text, info.firstChild);
     },
     'touch:longpress': function() {
-      info.insertBefore(text, info.firstChild);
+      // info.insertBefore(text, info.firstChild);
     }
   });
+
+  if (fabric.PatternBrush) {
+    var vLinePatternBrush = new fabric.PatternBrush(canvas);
+    vLinePatternBrush.getPatternSrc = function() {
+
+      var patternCanvas = fabric.document.createElement('canvas');
+      patternCanvas.width = patternCanvas.height = 10;
+      var ctx = patternCanvas.getContext('2d');
+
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(0, 5);
+      ctx.lineTo(10, 5);
+      ctx.closePath();
+      ctx.stroke();
+
+      return patternCanvas;
+    };
+
+    var hLinePatternBrush = new fabric.PatternBrush(canvas);
+    hLinePatternBrush.getPatternSrc = function() {
+
+      var patternCanvas = fabric.document.createElement('canvas');
+      patternCanvas.width = patternCanvas.height = 10;
+      var ctx = patternCanvas.getContext('2d');
+
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(5, 0);
+      ctx.lineTo(5, 10);
+      ctx.closePath();
+      ctx.stroke();
+
+      return patternCanvas;
+    };
+
+    var squarePatternBrush = new fabric.PatternBrush(canvas);
+    squarePatternBrush.getPatternSrc = function() {
+
+      var squareWidth = 10, squareDistance = 2;
+
+      var patternCanvas = fabric.document.createElement('canvas');
+      patternCanvas.width = patternCanvas.height = squareWidth + squareDistance;
+      var ctx = patternCanvas.getContext('2d');
+
+      ctx.fillStyle = this.color;
+      ctx.fillRect(0, 0, squareWidth, squareWidth);
+
+      return patternCanvas;
+    };
+
+    var diamondPatternBrush = new fabric.PatternBrush(canvas);
+    diamondPatternBrush.getPatternSrc = function() {
+
+      var squareWidth = 10, squareDistance = 5;
+      var patternCanvas = fabric.document.createElement('canvas');
+      var rect = new fabric.Rect({
+        width: squareWidth,
+        height: squareWidth,
+        angle: 45,
+        fill: this.color
+      });
+
+      var canvasWidth = rect.getBoundingRectWidth();
+
+      patternCanvas.width = patternCanvas.height = canvasWidth + squareDistance;
+      rect.set({ left: canvasWidth / 2, top: canvasWidth / 2 });
+
+      var ctx = patternCanvas.getContext('2d');
+      rect.render(ctx);
+
+      return patternCanvas;
+    };
+
+    var img = new Image();
+    img.src = '../assets/honey_im_subtle.png';
+
+    var texturePatternBrush = new fabric.PatternBrush(canvas);
+    texturePatternBrush.source = img;
+  }
+
+  $('#drawing-mode-selector').change(function() {
+
+    console.log(this); 
+
+    if (this.value === 'hline') {
+      canvas.freeDrawingBrush = vLinePatternBrush;
+    }
+    else if (this.value === 'vline') {
+      canvas.freeDrawingBrush = hLinePatternBrush;
+    }
+    else if (this.value === 'square') {
+      canvas.freeDrawingBrush = squarePatternBrush;
+    }
+    else if (this.value === 'diamond') {
+      canvas.freeDrawingBrush = diamondPatternBrush;
+    }
+    else if (this.value === 'texture') {
+      canvas.freeDrawingBrush = texturePatternBrush;
+    }
+    else {
+      canvas.freeDrawingBrush = new fabric[this.value + 'Brush'](canvas);
+    }
+
+    if (canvas.freeDrawingBrush) {
+      // canvas.freeDrawingBrush.color = drawingColorEl.value;
+      // canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
+      // canvas.freeDrawingBrush.shadowBlur = parseInt(drawingShadowWidth.value, 10) || 0;
+    }
+  });
+
+  drawingColorEl.change(function() {
+    canvas.freeDrawingBrush.color = this.value;
+  });
+
+  drawingShadowColorEl.change(function() {
+    canvas.freeDrawingBrush.shadowColor = this.value;
+  });
+
+  drawingLineWidthEl.change(function() {
+    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+    this.previousSibling.innerHTML = this.value;
+  });
+
+  drawingShadowWidth.change(function() {
+    canvas.freeDrawingBrush.shadowBlur = parseInt(this.value, 10) || 0;
+    this.previousSibling.innerHTML = this.value;    
+  });
+
+  drawingShadowOffset.change(function() {
+    canvas.freeDrawingBrush.shadowOffsetX =
+    canvas.freeDrawingBrush.shadowOffsetY = parseInt(this.value, 10) || 0;
+    this.previousSibling.innerHTML = this.value;
+  });
+
+  if (canvas.freeDrawingBrush) {
+    // canvas.freeDrawingBrush.color = drawingColorEl.value;
+    // canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
+    // canvas.freeDrawingBrush.shadowBlur = 0;
+  }
 
   //------------------------------------------定制页面控制逻辑------------------------------------------
 
