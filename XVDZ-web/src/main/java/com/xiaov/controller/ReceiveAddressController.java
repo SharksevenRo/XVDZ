@@ -5,6 +5,10 @@ import com.xiaov.model.ReceiveAddress;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.ReceiveAddressService;
+import com.xiaov.web.support.CookieUtil;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +25,10 @@ public class ReceiveAddressController {
 
     @RequestMapping("/admin/ReceiveAddress/saveAjax")
     @ResponseBody
-    public MessageBean saveAjax(ReceiveAddress receiveAddress) {
+    public MessageBean saveAjax(ReceiveAddress receiveAddress,HttpServletRequest request) {
 
         try {
+        	receiveAddress.setId(new CookieUtil(request).getValue("user", "id", true));
             receiveAddressService.save(receiveAddress);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
