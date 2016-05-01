@@ -376,7 +376,7 @@ $(function() {
 	$('#c').attr('height', ($(window).height() - 44) + 'px');
 	var canvas = new fabric.Canvas('c');
 
-	fabric.Image.fromURL('./src/images/icon_nav_progress.png', function(img) {
+	fabric.Image.fromURL('../img/icon_nav_progress.png', function(img) {
 
 		img.scale(1).set({
 			left : 150,
@@ -707,7 +707,7 @@ $(function() {
 		};
 
 		var img = new Image();
-		img.src = '../assets/honey_im_subtle.png';
+		img.src = '../img/honey_im_subtle.png';
 
 		var texturePatternBrush = new fabric.PatternBrush(canvas);
 		texturePatternBrush.source = img;
