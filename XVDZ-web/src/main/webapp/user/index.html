@@ -767,7 +767,7 @@
     			}
     		});
     		//产品类型
-    		/* $.ajax({
+    		$.ajax({
     			url : "../admin/type/productType.do",
     			type : "get",
     			contentType : "application/json; charset=utf-8",
@@ -778,9 +778,9 @@
     				});
     				$("#productType").html(html);
     			}
-    		}); */
+    		});
     		// 最热作品
-    		/* $.ajax({
+    		$.ajax({
     			url : "../admin/product/hotProduct.do",
     			type : "get",
     			contentType : "application/json; charset=utf-8",
@@ -796,9 +796,9 @@
     				});
     				$("#tab1").html(oldHtml+html);
     			}
-    		}); */
+    		});
     		// 最新作品
-    		/* $.ajax({
+    		$.ajax({
     			url : "../admin/product/newProduct.do",
     			type : "get",
     			contentType : "application/json; charset=utf-8",
@@ -814,7 +814,7 @@
     				});
     				$("#tab2").html(oldHtml+html);
     			}
-    		}); */
+    		});
     	});
     </script>
 </body>

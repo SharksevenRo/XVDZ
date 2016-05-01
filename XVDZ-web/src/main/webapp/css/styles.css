@@ -209,3 +209,22 @@ p {
 	height: 76px;
 	cursor: pointer;
 }
+
+.pattern-wall .card-header img{
+	height: 82px;
+	cursor: pointer;
+}
+
+.pattern-wall .card {
+	box-shadow: none;
+	border: 1px solid rgb(208, 208, 208);
+	border-bottom: 0px;
+}
+
+.pattern-wall .card:nth-child(1) {
+	border-right: 0px;
+}
+
+.pattern-wall:last-child .card .card-header img{
+	border-bottom: 1px solid rgb(208, 208, 208);
+}
