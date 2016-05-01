@@ -27,6 +27,7 @@ public class ReceiveAddressController {
             receiveAddressService.save(receiveAddress);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
+        	e.printStackTrace();
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }

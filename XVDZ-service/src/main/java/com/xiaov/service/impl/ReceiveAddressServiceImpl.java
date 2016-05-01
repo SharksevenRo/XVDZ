@@ -1,12 +1,16 @@
 package com.xiaov.service.impl;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.xiaov.dao.ReceiveAddressDao;
 import com.xiaov.model.ReceiveAddress;
 import com.xiaov.service.interfaces.ReceiveAddressService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by zouziyang on 4/18/16.
@@ -14,6 +18,7 @@ import java.util.List;
 @Service
 public class ReceiveAddressServiceImpl extends BaseServiceImpl<ReceiveAddress> implements ReceiveAddressService {
 
+	private static Logger logger = LoggerFactory.getLogger(ReceiveAddressServiceImpl.class);
     @Autowired
     private ReceiveAddressDao receiveAddressDao;
 
@@ -30,9 +35,24 @@ public class ReceiveAddressServiceImpl extends BaseServiceImpl<ReceiveAddress> i
     }
 
     @Override
+    @Transactional
     public void save(ReceiveAddress entity) {
 
-        super.save(entity);
+    	//获取默认地址
+    	List<ReceiveAddress> defaultAdd = receiveAddressDao.findByProperty("addDefault", true);
+    	
+    	if(defaultAdd.size()==1){
+    		//修改默认地址
+    		ReceiveAddress address = defaultAdd.get(0);
+    		address.setAddDefault(false);
+    		receiveAddressDao.update(address);
+    		entity.setAddDefault(true);
+            super.save(entity);
+    	}else{
+    		logger.error("默认地址异常");
+    		throw new RuntimeException("默认地址异常");
+    	}
+    	
     }
 
     @Override
