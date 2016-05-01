@@ -1,74 +1,101 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>小v定制</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="../css/weui.min.css"/>
-    <link rel="stylesheet" href="../css/swiper.min.css">
-    <link rel="stylesheet" href="../css/sm.min.css">
-    <link rel="stylesheet" href="../css/sm-extend.min.css">
-    <link rel="stylesheet" href="../css/styles.css" type="text/css">
-</head>
-<body>
 
-	<div class="weui_tab">
-	    <div class="weui_tab_bd">
-	        <div class="weui_tab_bd_item">
+	<head>
+		<meta charset="UTF-8">
+		<title>小v定制</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/weui.min.css" />
+		<link rel="stylesheet" href="../css/swiper.min.css">
+		<link rel="stylesheet" href="../css/sm.min.css">
+		<link rel="stylesheet" href="../css/sm-extend.min.css">
+		<link rel="stylesheet" href="../css/styles.css" type="text/css">
+	</head>
 
-	        	<header class="bar bar-nav">
-	        		<a class="button button-link button-nav pull-left back">
-				      <span class="icon icon-left"></span>
-				      返回
-				    </a>
-				  	<h1 class="title">收货地址</h1>
-				  	<button class="button button-link button-nav pull-right" id="new_addr">
-					    新增
-					    <span class="icon icon-right"></span>
-					</button>
-				</header>
+	<body>
 
-			<div class="list-block media-list">
-			    <ul>
-			      <li class="item-link" id="update_addr">
-			        <a href="#" class="item-link item-content">
-			          <div class="item-inner">
-			            <div class="item-title-row">
-			              <div class="item-title">地址1</div>
-			              <div class="item-after">18000179176</div>
-			            </div>
-			            <!-- <div class="item-subtitle">详细地址</div> -->
-			            <div class="item-text">地址详细信息...</div>
-			          </div>
-			        </a>
-			      </li>
-			      <li class="item-link" id="update_addr">
-			        <a href="#" class="item-link item-content">
-			          <div class="item-inner">
-			            <div class="item-title-row">
-			              <div class="item-title">地址2</div>
-			              <div class="item-after">18000179176</div>
-			            </div>
-			            <!-- <div class="item-subtitle">详细地址</div> -->
-			            <div class="item-text">地址详细信息...</div>
-			          </div>
-			        </a>
-			      </li>
-			    </ul>
+		<div class="weui_tab">
+			<div class="weui_tab_bd">
+				<div class="weui_tab_bd_item">
+
+					<header class="bar bar-nav">
+						<a class="button button-link button-nav pull-left back">
+							<span class="icon icon-left"></span> 返回
+						</a>
+						<h1 class="title">收货地址</h1>
+						<button class="button button-link button-nav pull-right" id="new_addr">
+							新增
+							<span class="icon icon-right"></span>
+						</button>
+					</header>
+
+					<div class="list-block media-list">
+						<ul id="user_address">
+							<!-- <li class="item-link" id="update_addr">
+								<a href="#" class="item-link item-content">
+									<div class="item-inner">
+										<div class="item-title-row">
+											<div class="item-title">地址2</div>
+											<div class="item-after">18000179176</div>
+										</div>
+										<div class="item-subtitle">详细地址</div>
+										<div class="item-text">地址详细信息...</div>
+									</div>
+								</a>
+							</li> -->
+						</ul>
+						<script id="t:address_item" type="text/html">
+							<%for(var i=0;i<list.length;i++){%>
+								<li class="item-link" id="update_addr">
+									<a href="#" class="item-link item-content">
+										<div class="item-inner">
+											<div class="item-title-row">
+												<div class="item-title">
+													<%=list[i].reAddName%>
+												</div>
+												<div class="item-after">
+													<%=list[i].reAddTel%>
+												</div>
+											</div>
+											<div class="item-text">
+												<%=list[i].reAddDet%>
+											</div>
+										</div>
+									</a>
+								</li>
+								<%}%>
+						</script>
+					</div>
+
+				</div>
 			</div>
-
-	    </div>
 		</div>
-	</div>
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/weui.js"></script>
-	<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
-    <script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/weui.js"></script>
+		<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
+		<script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
+		<script type="text/javascript" src="../js/scripts.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				// 加载用户地址信息
+				$.ajax({
+					url : "../admin/address/getUserAddress.do",
+					type : "get",
+					contentType : "application/json; charset=utf-8",
+					dataType : "json",
+					success : function(data) {
+						var html = baidu.template('t:address_item', {
+							"list" : data.result
+						});
+						$("#user_address").html(html);
+					}
+				});
+			});
+		</script>
+	</body>
 
-</body>
 </html>

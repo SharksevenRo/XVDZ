@@ -1,57 +1,112 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>小v定制</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="../css/weui.min.css"/>
-    <link rel="stylesheet" href="../css/swiper.min.css">
-    <link rel="stylesheet" href="../css/sm.min.css">
-    <link rel="stylesheet" href="../css/sm-extend.min.css">
-    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+<meta charset="UTF-8">
+<title>小v定制</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="../css/weui.min.css" />
+<link rel="stylesheet" href="../css/swiper.min.css">
+<link rel="stylesheet" href="../css/sm.min.css">
+<link rel="stylesheet" href="../css/sm-extend.min.css">
+<link rel="stylesheet" href="../css/styles.css" type="text/css">
 </head>
 <body>
 
 	<div class="weui_tab">
-	    <div class="weui_tab_bd">
-	        <div class="weui_tab_bd_item">
+		<div class="weui_tab_bd">
+			<div class="weui_tab_bd_item">
 
-	        	<header class="bar bar-nav">
-	        		<a class="button button-link button-nav pull-left back">
-				      <span class="icon icon-left"></span>
-				      返回
-				    </a>
-				  	<h1 class="title">意见反馈</h1>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back"> <span
+						class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">意见反馈</h1>
 				</header>
 
 				<div class="weui_cells_title">意见反馈</div>
 				<div class="weui_cells weui_cells_form">
-				    <div class="weui_cell">
-				        <div class="weui_cell_bd weui_cell_primary">
-				            <textarea class="weui_textarea" id="textarea" placeholder="请输入意见反馈" rows="3"></textarea>
-				            <div class="weui_textarea_counter"><span id="count">0</span>/200</div>
-				        </div>
-				    </div>
+					<div class="weui_cell">
+						<form id="contact">
+							<div class="weui_cell_bd weui_cell_primary">
+								<textarea name="compliantContent" class="weui_textarea"
+									id="textarea" placeholder="请输入意见反馈" rows="3"></textarea>
+								<div class="weui_textarea_counter">
+									<span id="count">0</span>/200
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 
-			    <div class="weui_opr_area">
-			        <p class="weui_btn_area">
-			            <a href="javascript:;" class="weui_btn weui_btn_primary">确定</a>
-			        </p>
-			    </div>
+				<div class="weui_opr_area">
+					<p class="weui_btn_area">
+						<a href="javascript:;" class="weui_btn weui_btn_primary">确定</a>
+					</p>
+				</div>
 			</div>
-	    </div>
+			<div id="toast" style="display: none;">
+				<div class="weui_mask_transparent"></div>
+				<div class="weui_toast" style="top: 180px">
+					<i class="weui_icon_toast"></i>
+					<p class="weui_toast_content">添加成功</p>
+				</div>
+			</div>
+			<div id="dialog" class="weui_dialog_confirm" style="display: none;">
+				<div class="weui_mask"></div>
+				<div class="weui_dialog">
+					<div class="weui_dialog_hd">
+						<strong class="weui_dialog_title">友情提示</strong>
+					</div>
+					<div class="weui_dialog_bd">请填写意见反馈信息!</div>
+					<div class="weui_dialog_ft">
+						<a href="javascript:;" class="weui_btn_dialog default">取消</a> <a
+							href="javascript:;" class="weui_btn_dialog primary">确定</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	
+
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/weui.js"></script>
 	<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
-    <script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
-
+	<script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../js/sm-extend.min.js'
+		charset='utf-8'></script>
+	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript">
+		function addressFormSubmit() {
+			var text = $("#textarea").val().trim();
+			if (text == "") {
+				$('#dialog').show();
+				setTimeout(function() {
+					$('#dialog').hide();
+				}, 3000);
+			} else {
+				$.ajax({
+					url : "../admin/compliant/saveCompliantAjax.do",
+					type : "post",
+					contentType : "application/json; charset=utf-8",
+					dataType : "json",
+					data : $("#contact").serialize(),
+					success : function(data) {
+						if (true) {
+							$('#toast').show();
+							setTimeout(function() {
+								$('#toast').hide();
+								window.location.href = "addr.html";
+							}, 2000);
+						}
+					}
+				});
+			}
+		}
+		$(function() {
+		});
+	</script>
 </body>
 </html>

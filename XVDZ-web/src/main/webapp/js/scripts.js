@@ -260,7 +260,7 @@ $(function(){
   $('#c').attr('height', ($(window).height() - 44) + 'px');
   var canvas = new fabric.Canvas('c');
 
-  fabric.Image.fromURL('./src/images/icon_nav_progress.png', function(img) {
+  fabric.Image.fromURL('../img/icon_nav_progress.png', function(img) {
 
     img.scale(1).set({
       left: 150,

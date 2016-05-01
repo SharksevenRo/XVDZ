@@ -47,7 +47,8 @@
 				  	<h1 class="title">小v定制</h1>
 	                <a href="javascript:window.location.href='about.html'" class="icon icon-me pull-right open-panel" style="z-index:300"></a>
 				</header>
-
+				
+				<!-- 幻灯片 -->
 				<div class="swiper-container" style="height:160px;">
 				  	<div id="ads-wraper" class="swiper-wrapper">
 				  	</div>
@@ -60,6 +61,8 @@
 				    	</script>
 			        <div class="swiper-pagination"></div>
 				</div>
+				
+				<!-- 主页面搜索框 -->
 				<div class="weui_cells weui_cells_form" style="margin-top:0px">
 				    <div class="weui_cell">
 				        <div class="weui_cell_hd">
@@ -71,80 +74,27 @@
 				    </div>
 				</div>
 
-				<div class="weui_grids">
-				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
+				<!-- 产品类型 -->
+				<div id="productType" class="weui_grids">
+				    <!-- <a href="javascript:window.location.href='all_goods.html?typeId=2';" class="weui_grid">
 				        <div class="weui_grid_icon">
 				            <img src="../img/icon_nav_button.png" alt="">
 				        </div>
 				        <p class="weui_grid_label">
 				            全部商品
 				        </p>
-				    </a>
-				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
-				        <div class="weui_grid_icon">
-				            <img src="../img/icon_nav_cell.png" alt="">
-				        </div>
-				        <p class="weui_grid_label">
-				            全球购
-				        </p>
-				    </a>
-				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
-				        <div class="weui_grid_icon">
-				            <img src="../img/icon_nav_toast.png" alt="">
-				        </div>
-				        <p class="weui_grid_label">
-				            情侣空间
-				        </p>
-				    </a>
-				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
-				        <div class="weui_grid_icon">
-				            <img src="../img/icon_nav_dialog.png" alt="">
-				        </div>
-				        <p class="weui_grid_label">
-				            好兄弟
-				        </p>
-				    </a>
-				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
-				        <div class="weui_grid_icon">
-				            <img src="../img/icon_nav_progress.png" alt="">
-				        </div>
-				        <p class="weui_grid_label">
-				            有你真好
-				        </p>
-				    </a>
-				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
-				        <div class="weui_grid_icon">
-				            <img src="../img/icon_nav_msg.png" alt="">
-				        </div>
-				        <p class="weui_grid_label">
-				            班级
-				        </p>
-				    </a>
-				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
-				        <div class="weui_grid_icon">
-				            <img src="../img/icon_nav_article.png" alt="">
-				        </div>
-				        <p class="weui_grid_label">
-				            设计师
-				        </p>
-				    </a>
-				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
-				        <div class="weui_grid_icon">
-				            <img src="../img/icon_nav_actionSheet.png" alt="">
-				        </div>
-				        <p class="weui_grid_label">
-				            其它
-				        </p>
-				    </a>
-				    <a href="javascript:window.location.href='all_goods.html';" class="weui_grid">
-				        <div class="weui_grid_icon">
-				            <img src="../img/icon_nav_icons.png" alt="">
-				        </div>
-				        <p class="weui_grid_label">
-				            待续
-				        </p>
-				    </a>
+				    </a> -->
 				</div>
+				<script id="t:product_type" type="text/html">
+					<%for(var i=0;i<list.length;i++){%>
+						<a href="javascript:window.location.href='all_goods.html?type=<%=list[i].typeId%>';" class="weui_grid">
+				        	<div class="weui_grid_icon">
+				            	<img src="../<%=list[i].typeTag%>" alt="">
+				        	</div>
+				        	<p class="weui_grid_label"><%=list[i].typeName%></p>
+				    	</a>
+					<%}%>
+				</script>
 
 			    <div class="buttons-tab fixed-tab" data-offset="44">
 			      <a href="#tab1" class="tab-link active button">最热作品</a>
@@ -152,92 +102,51 @@
 			    </div>
 
 			    <div class="tabs" style="margin-bottom:35px;">
+					<!-- 最热作品 -->
 			      <div id="tab1" class="tab active">
-
-					<div class="card facebook-card">
-					    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
-					    <div class="card-footer no-border">
-					      <a href="#" class="link">赞</a>
-					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-					      <a href="#" class="link"><span class="icon icon-share"></span></a>
-					    </div>
-					</div>
-
-					<div class="card facebook-card">
-					    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
-					    <div class="card-footer no-border">
-					      <a href="#" class="link">赞</a>
-					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-					      <a href="#" class="link"><span class="icon icon-share"></span></a>
-					    </div>
-					</div>
-
-					<div class="card facebook-card">
-					    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
-					    <div class="card-footer no-border">
-					      <a href="#" class="link">赞</a>
-					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-					      <a href="#" class="link"><span class="icon icon-share"></span></a>
-					    </div>
-					</div>
-
-					<div class="card facebook-card">
-					    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
-					    <div class="card-footer no-border">
-					      <a href="#" class="link">赞</a>
-					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-					      <a href="#" class="link"><span class="icon icon-share"></span></a>
-					    </div>
-					</div>
-
 			      </div>
+					<script id="t:hot_product" type="text/html">
+						<%for(var i=0;i<list.length;i++){%>
+							<div class="card facebook-card">
+					    		<div class="card-content">
+									<img src="../img/<%=list[i].pdtPicUrl%>" width="100%">
+								</div>
+					    		<div class="card-footer no-border">
+					      			<a href="#" class="link">赞</a>
+					      			<a href="#" class="link leave-a-message">
+										<span class="icon icon-message"></span>
+									</a>
+	  				      			<a href="#" class="link"><span class="icon icon-star"></span></a>
+					      			<a href="#" class="link"><span class="icon icon-share"></span></a>
+					    		</div>
+							</div>
+						<%}%>
+					</script>
+					
+					<!-- 最新作品 -->
 			      <div id="tab2" class="tab">
-
-					<div class="card facebook-card">
-					    <div class="card-content"><img src="http://d02.res.meilishuo.net/pic/_o/e4/d9/d34baa117aa1abb17822337b7bf6_800_800.ch.jpeg" width="100%"></div>
-					    <div class="card-footer no-border">
-					      <a href="#" class="link">赞</a>
-					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-					      <a href="#" class="link"><span class="icon icon-share"></span></a>
-					    </div>
-					</div>
-
-					<div class="card facebook-card">
-					    <div class="card-content"><img src="http://d02.res.meilishuo.net/pic/_o/e4/d9/d34baa117aa1abb17822337b7bf6_800_800.ch.jpeg" width="100%"></div>
-					    <div class="card-footer no-border">
-					      <a href="#" class="link">赞</a>
-					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-					      <a href="#" class="link"><span class="icon icon-share"></span></a>
-					    </div>
-					</div>
-
-					<div class="card facebook-card">
-					    <div class="card-content"><img src="http://d02.res.meilishuo.net/pic/_o/e4/d9/d34baa117aa1abb17822337b7bf6_800_800.ch.jpeg" width="100%"></div>
-					    <div class="card-footer no-border">
-					      <a href="#" class="link">赞</a>
-					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-					      <a href="#" class="link"><span class="icon icon-share"></span></a>
-					    </div>
-					</div>
-
-					<div class="card facebook-card">
-					    <div class="card-content"><img src="http://d02.res.meilishuo.net/pic/_o/e4/d9/d34baa117aa1abb17822337b7bf6_800_800.ch.jpeg" width="100%"></div>
-					    <div class="card-footer no-border">
-					      <a href="#" class="link">赞</a>
-					      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-	  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-					      <a href="#" class="link"><span class="icon icon-share"></span></a>
-					    </div>
-					</div>
-
 			      </div>
+					<script id="t:new_product" type="text/html">
+						<%for(var i=0;i<list.length;i++){%>
+							<div class="card facebook-card">
+					    		<div class="card-content">
+									<img src="../img/<%=list[i].pdtPicUrl%>" width="100%">
+								</div>
+					    		<div class="card-footer no-border">
+					      			<a href="#" class="link">赞</a>
+					      			<a href="#" class="link leave-a-message">
+										<span class="icon icon-message"></span>
+									</a>
+	  				      			<a href="#" class="link">
+										<span class="icon icon-star"></span>
+									</a>
+					      			<a href="#" class="link">
+										<span class="icon icon-share"></span>
+									</a>
+					    		</div>
+							</div>
+						<%}%>
+					</script>
 			    </div>
 
 	        </div>
@@ -293,7 +202,7 @@
 						      <div class="col-33">
 						      	<div class="card demo-card-header-pic" style="margin:0px">
 								    <div valign="bottom" class="card-header color-white no-border no-padding">
-								      <img class='card-cover' src="../img/type1.jpg" alt="">
+								      <img class='card-cover' src="../img/type2.jpg" alt="">
 								    </div>
 								</div>
 						      </div>
@@ -606,24 +515,7 @@
 				</header>
 
 			    <div class="list-block media-list">
-			      <ul>
-			        <li id="theme-default">
-			          <label class="label-checkbox item-content">
-			            <input type="checkbox" name="my-radio">
-			            <div class="item-media">
-			            	<i class="icon icon-form-checkbox"></i>
-	                      	<div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 3rem;margin-left: 10px'></div>
-			            </div>
-					      <div class="item-inner">
-					        <div class="item-title-row">
-					          <div class="item-title">剪刀</div>
-					          <div class="item-after">17:14</div>
-					        </div>
-					        <div class="item-subtitle">New messages from John Doe</div>
-					        <div class="item-text">Lorem ipsum dolor sit amet...</div>
-					      </div>
-			          </label>
-			        </li>
+			      <ul id="order_item">
 			        <li id="theme-dark">
 			          <label class="label-checkbox item-content">
 			            <input type="checkbox" name="my-radio">
@@ -642,6 +534,27 @@
   			          	</label>
 			        </li>
 			      </ul>
+			        <script id="t:order_item" type="text/html">
+				        <%for(var i=0;i<list.length;i++){%>
+						<li id="theme-default">
+				          <label class="label-checkbox item-content">
+				            <input val="<%=list[i].orDtId%>" type="checkbox" name="my-radio">
+				            <div class="item-media">
+				            	<i class="icon icon-form-checkbox"></i>
+		                      	<div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 3rem;margin-left: 10px'></div>
+				            </div>
+						      <div class="item-inner">
+						        <div class="item-title-row">
+						          <div class="item-title">剪刀</div>
+						          <div class="item-after">17:14</div>
+						        </div>
+						        <div class="item-subtitle">New messages from John Doe</div>
+						        <div class="item-text">Lorem ipsum dolor sit amet...</div>
+						      </div>
+				          </label>
+				        </li>
+			        	<%}%>
+			        </script>
 			    </div>
 
 				<div class="content-block-title">总额</div>
@@ -828,26 +741,81 @@
 	<script type="text/javascript" src="http://cdn.bootcss.com/fabric.js/1.6.0-rc.1/fabric.require.min.js"></script>
     <script type="text/javascript" src="../js/scripts.js"></script>
     <script type="text/javascript" src="../js/baiduTemplate.js"></script>
-	<script>
-		$(function(){
-			$.ajax({
-				url:"../admin/Advertisment/getSliderAds.do",
-				type:"get",
-				contentType : "application/json; charset=utf-8",
-				dataType:"json",
-				data:{pageNo:1,pageSize:3},
-				success:function(data){
-					var html= baidu.template('t:ads_temp',{"list":data.result});
-					$("#ads-wraper").html(html);
-					//幻灯片
-					var mySwiper = new Swiper('.swiper-container', {
-						autoplay: 5000,
-						pagination: '.swiper-pagination',
-				        paginationClickable: true
-					});
-				}
-			});
-		});
-	</script>
+    <script type="text/javascript">
+    	$(function(){
+    		// 幻灯片
+    		$.ajax({
+    			url : "../admin/Advertisment/getSliderAds.do",
+    			type : "get",
+    			contentType : "application/json; charset=utf-8",
+    			dataType : "json",
+    			data : {
+    				pageNo : 1,
+    				pageSize : 3
+    			},
+    			success : function(data) {
+    				var html = baidu.template('t:ads_temp', {
+    					"list" : data.result
+    				});
+    				$("#ads-wraper").html(html);
+    				// 幻灯片
+    				var mySwiper = new Swiper('.swiper-container', {
+    					autoplay : 5000,
+    					pagination : '.swiper-pagination',
+    					paginationClickable : true
+    				});
+    			}
+    		});
+    		//产品类型
+    		$.ajax({
+    			url : "../admin/type/productType.do",
+    			type : "get",
+    			contentType : "application/json; charset=utf-8",
+    			dataType : "json",
+    			success : function(data) {
+    				var html = baidu.template('t:product_type', {
+    					"list" : data.result
+    				});
+    				$("#productType").html(html);
+    			}
+    		});
+    		// 最热作品
+    		$.ajax({
+    			url : "../admin/product/hotProduct.do",
+    			type : "get",
+    			contentType : "application/json; charset=utf-8",
+    			dataType : "json",
+    			data : {
+    				pageNo : 1,
+    				pageSize : 5
+    			},
+    			success : function(data) {
+    				var oldHtml = $("#tab1").html();
+    				var html = baidu.template('t:hot_product', {
+    					"list" : data.result
+    				});
+    				$("#tab1").html(oldHtml+html);
+    			}
+    		});
+    		// 最新作品
+    		$.ajax({
+    			url : "../admin/product/newProduct.do",
+    			type : "get",
+    			contentType : "application/json; charset=utf-8",
+    			dataType : "json",
+    			data : {
+    				pageNo : 1,
+    				pageSize : 5
+    			},
+    			success : function(data) {
+    				var oldHtml = $("#tab2").html();
+    				var html = baidu.template('t:new_product', {
+    					"list" : data.result
+    				});
+    				$("#tab2").html(oldHtml+html);
+    			}
+    		});
+    	});
+    </script>
 </body>
 </html>
