@@ -142,5 +142,49 @@ public class ProductController {
 			return new MessageBean(APPConstant.SUCCESS, "上传失败");
 		}
 	}
+	@RequestMapping("/admin/product/newProduct.do")
+	@ResponseBody
+	public Page<Product> newProduct(Product product){
 
+		try {
+			product.setSidx("addTime");
+			product.setSord("DESC");
+			Page<Product> page = productService.page(product);
+
+			String [] fileName={"material","productType"};
+			page = LazyObjecUtil.LazyPageSetNull(page, fileName);
+
+			return page;
+		} catch (Exception e) {
+			e.printStackTrace();
+			Page<Product> page=new Page<Product>();
+			page.setCode(APPConstant.ERROR);
+			page.setMessage("服务器忙");
+			return page;
+		}
+
+	}
+
+	@RequestMapping("/admin/product/hotProduct.do")
+	@ResponseBody
+	public Page<Product> hotProduct(Product product){
+
+		try {
+			product.setSidx("pdtShareCount");
+			product.setSord("DESC");
+			Page<Product> page = productService.page(product);
+
+			String [] fileName={"material","productType"};
+			page = LazyObjecUtil.LazyPageSetNull(page, fileName);
+
+			return page;
+		} catch (Exception e) {
+			e.printStackTrace();
+			Page<Product> page=new Page<Product>();
+			page.setCode(APPConstant.ERROR);
+			page.setMessage("服务器忙");
+			return page;
+		}
+
+	}
 }
