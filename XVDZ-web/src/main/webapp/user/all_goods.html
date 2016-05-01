@@ -61,39 +61,33 @@
 				</div>
 
 				<div class="content-block-title" style="margin-top:54px">列表</div>
-				<div class="card facebook-card">
-				    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
-				    <div class="card-footer no-border">
-				      <a href="#" class="link">赞</a>
-				      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-				      <a href="#" class="link"><span class="icon icon-share"></span></a>
-				    </div>
+				<div id="listContent">
 				</div>
+					<script id="t:all_product" type="text/html">
+						<%for(var i=0;i<list.length;i++){%>
+							<div class="card facebook-card">
+					    		<div class="card-content">
+									<img src="../img/<%=list[i].pdtPicUrl%>" width="100%">
+								</div>
+					    		<div class="card-footer no-border">
+					      			<a href="#" class="link">赞</a>
+					      			<a href="#" class="link leave-a-message">
+										<span class="icon icon-message"></span>
+									</a>
+	  				      			<a href="#" class="link">
+										<span class="icon icon-star"></span>
+									</a>
+					      			<a href="#" class="link">
+										<span class="icon icon-share"></span>
+									</a>
+					    		</div>
+							</div>
+						<%}%>
+					</script>
 
-				<div class="card facebook-card">
-				    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
-				    <div class="card-footer no-border">
-				      <a href="#" class="link">赞</a>
-				      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-				      <a href="#" class="link"><span class="icon icon-share"></span></a>
-				    </div>
-				</div>
-
-				<div class="card facebook-card">
-				    <div class="card-content"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
-				    <div class="card-footer no-border">
-				      <a href="#" class="link">赞</a>
-				      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-				      <a href="#" class="link"><span class="icon icon-share"></span></a>
-				    </div>
-				</div>
-
-				<div class="padding">
+				<!-- <div class="padding">
 					<a href="javascript:;" class="weui_btn weui_btn_primary">加载更多</a>	
-				</div>
+				</div> -->
 
 			</div>
 	    </div>
@@ -106,6 +100,57 @@
     <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
     <script type="text/javascript" src="../js/scripts.js"></script>
-
+    <script type="text/javascript" src="../js/baiduTemplate.js"></script>
+	<script>
+		var typeId = 1;
+		var flag = true;
+		function getQueryString(name) { 
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+			var r = window.location.search.substr(1).match(reg); 
+			if (r != null)
+				return unescape(r[2]);
+			return null; 
+		}
+		function loadGoodsData(){
+			// 根据文本框内容及类型多条件查询商品
+			$.ajax({
+				url : "../admin/product/allProduct.do",
+				type : "get",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				data : {
+					pageNo : 1,
+					pageSize : 5,
+					typeId : typeId,
+					searchText : $("#search").val()
+				},
+				success : function(data) {
+					if(data.result.length==pageSize){
+						pageNo++;
+					}else{
+						flag = false;
+					}
+					var oldHtml = $("#listContent").html();
+					var html = baidu.template('t:all_product', {
+						"list" : data.result
+					});
+					$("#listContent").html(oldHtml+html);
+				}
+			});
+		}
+		$(function(){
+			//获取url链接中的类型参数
+			typeId=getQueryString("typeId")||typeId;
+			//屏幕滚动
+			$(window).scroll(function() {
+				if ($(document).height() - $(this).scrollTop()- $(this).height() < 20) {
+					if(flag==true){
+						loadGoodsData();
+					}
+				}
+			});
+			
+		});
+	</script>
 </body>
 </html>
