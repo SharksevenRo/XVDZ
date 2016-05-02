@@ -26,39 +26,37 @@
 				  	<h1 class="title">订单中心</h1>
 				</header>
 
-				<div class="content-block-title">2016年4月</div>
-				<div class="list-block media-list">
-					<ul>
-					  <li>
-					    <label class="label-checkbox item-content">
-			              <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 4rem;'></div>
-					      <div class="item-inner">
-					        <div class="item-title-row">
-					          <div class="item-title">石头</div>
-					          <div class="item-after">17:14</div>
-					        </div>
-					        <div class="item-subtitle">New messages from John Doe</div>
-					        <div class="item-text">Lorem ipsum dolor sit amet...</div>
-					      </div>
-					    </label>
-					  </li>
-					  <li>
-					    <label class="label-checkbox item-content">
-			              <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 4rem;'></div>
-					      <div class="item-inner">
-					        <div class="item-title-row">
-					          <div class="item-title">青少年</div>
-					          <div class="item-after">17:14</div>
-					        </div>
-					        <div class="item-subtitle">New messages from John Doe</div>
-					        <div class="item-text">Lorem ipsum dolor sit amet...</div>
-					      </div>
-					    </label>
-					  </li>
-					</ul>
-				</div>
+					  
+				<script id="t:order_item" type="text/html">
+				<%for(var i=0;i<list.length;i++){%>
+					<div class="content-block-title"><%=yearAndMonth%></div>
+					<div class="list-block media-list">
+						<ul id="order_item">
+				        	<%for(var j=0;j<list[i].item.length;i++){%>
+								<li id="theme-default">
+				          			<label class="label-checkbox item-content">
+				            			<input val="<%=list[i].item[j].orDtId%>" type="checkbox" name="my-radio">
+				            			<div class="item-media">
+				            				<i class="icon icon-form-checkbox"></i>
+		                      				<div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 3rem;margin-left: 10px'></div>
+				            			</div>
+						      			<div class="item-inner">
+						        			<div class="item-title-row">
+						          			<div class="item-title"><%=list[i].item[j].product.pdtName%></div>
+						          			<div class="item-after"><%=list[i].item[j].addTime%></div>
+						        			</div>
+						        			<div class="item-subtitle"><%=list[i].item[j].product.pdtLabel%></div>
+						        			<div class="item-text"><%=list[i].item[j].orDtRlTotal%>元</div>
+						      			</div>
+				          			</label>
+				        		</li>
+			        		<%}%>
+						</ul>
+					</div>
+				<%}%>
+			    </script>
 
-				<div class="content-block-title">2016年3月</div>
+				<!-- <div class="content-block-title">2016年3月</div>
 				<div class="list-block media-list">
 					<ul>
 					  <li>
@@ -88,11 +86,11 @@
 					    </label>
 					  </li>
 					</ul>
-				</div>
+				</div> -->
 
-				<div class="padding">
+				<!-- <div class="padding">
 					<a href="javascript:;" class="weui_btn weui_btn_primary">加载更多</a>	
-				</div>
+				</div> -->
 
 			</div>
 
@@ -106,6 +104,23 @@
     <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
     <script type="text/javascript" src="../js/scripts.js"></script>
-
+	<script type="text/javascript" src="../js/baiduTemplate.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			// 加载cookie里的订单的订单详细
+			$.ajax({
+				url : "../admin/order/getUserOrderItem.do",
+				type : "get",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(data) {
+					var html = baidu.template('t:order_item', {
+						"list" : data.result
+					});
+					$("#order_item").html(html);
+				}
+			});
+		});
+	</script>
 </body>
 </html>
