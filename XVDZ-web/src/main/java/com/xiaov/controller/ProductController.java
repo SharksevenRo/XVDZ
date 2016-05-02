@@ -1,9 +1,14 @@
 package com.xiaov.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.xiaov.service.impl.ProductServiceImpl;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +29,9 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	public ProductController(){
-		System.out.println("11111");
-	}
-	
+	@Autowired
+	private ProductServiceImpl productServiceimpl;
+
 	@RequestMapping("/admin/product/saveAjax")
 	@ResponseBody
 	public MessageBean saveAjax(Product product){
@@ -145,7 +149,7 @@ public class ProductController {
 	@RequestMapping("/admin/product/newProduct.do")
 	@ResponseBody
 	public Page<Product> newProduct(Product product){
-
+		/*
 		try {
 			product.setSidx("addTime");
 			product.setSord("DESC");
@@ -158,6 +162,19 @@ public class ProductController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			Page<Product> page=new Page<Product>();
+			page.setCode(APPConstant.ERROR);
+			page.setMessage("服务器忙");
+			return page;
+		}*/
+		Page<Product> page = new Page<Product>();
+		try {
+			product.setSidx("addTime");
+			product.setSord("DESC");
+			page= productService.page(product);
+			LazyObjecUtil.LazyPageSetNull(page, new String[]{"material","productType"});
+			return page;
+		} catch (Exception e) {
+
 			page.setCode(APPConstant.ERROR);
 			page.setMessage("服务器忙");
 			return page;
@@ -176,7 +193,6 @@ public class ProductController {
 
 			String [] fileName={"material","productType"};
 			page = LazyObjecUtil.LazyPageSetNull(page, fileName);
-
 			return page;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -184,6 +200,24 @@ public class ProductController {
 			page.setCode(APPConstant.ERROR);
 			page.setMessage("服务器忙");
 			return page;
+		}
+
+	}
+
+	@RequestMapping(value = "/admin/product/searchProduct")
+	@ResponseBody
+	public List<Product> searchProduct(String searchText){
+
+		Criterion eq1 = Restrictions.or(Restrictions.like("pdtName", "%"+searchText+"%"),Restrictions.like("remark", "%"+searchText+"%"));
+		Criterion [] criterions ={eq1};
+		try{
+			List<Product> productList = productServiceimpl.searchProduct(criterions);
+
+			return productList;
+
+		}catch (Exception e){
+			System.out.println("系统错误!");
+			return null;
 		}
 
 	}

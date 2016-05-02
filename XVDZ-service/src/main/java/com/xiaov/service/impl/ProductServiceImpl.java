@@ -111,4 +111,9 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		}
 		return products;
 	}
+	public List<Product> searchProduct(Criterion[] criterions) {
+
+		return dao.getEntitiestNotLazy(new Product(),null, criterions);
+
+	}
 }
