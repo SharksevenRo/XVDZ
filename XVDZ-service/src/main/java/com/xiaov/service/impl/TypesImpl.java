@@ -43,4 +43,18 @@ public class TypesImpl extends BaseServiceImpl<Types> implements TypesService {
     public Types getOne(Class clazz, String pk) {
         return super.getOne(clazz, pk);
     }
+    /**
+     * 查询产品类型
+     */
+	public List<Types> getProductType() {
+		List<Types> list = null;
+		Object[] param = {"10",false};
+		try {
+			list = //dao.findByQuery("select * from types t where t.parentType.id=? and t.deleteFlag=?",param);
+			dao.findByProperty("parentType.id", "10");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
