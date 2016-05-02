@@ -1,9 +1,7 @@
 package com.xiaov.model;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,15 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.xiaov.orm.core.Page;
-import com.xiaov.web.support.CustomDateSerializer;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 
 /**
  * ProductComment entity. @author MyEclipse Persistence Tools
@@ -124,7 +121,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 		this.cmtContent = cmtContent;
 	}
 
-	@Column(name = "cmt_qt_st", nullable = true)
+	@Column(name = "cmt_qt_st")
 	public Integer getCmtQtSt() {
 		return this.cmtQtSt;
 	}
@@ -133,7 +130,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 		this.cmtQtSt = cmtQtSt;
 	}
 
-	@Column(name = "cmt_logistics_st", nullable = true)
+	@Column(name = "cmt_logistics_st")
 	public Integer getCmtLogisticsSt() {
 		return this.cmtLogisticsSt;
 	}
@@ -142,7 +139,7 @@ public class ProductComment extends Page<Orders> implements java.io.Serializable
 		this.cmtLogisticsSt = cmtLogisticsSt;
 	}
 
-	@Column(name = "cmt_wrap_st", nullable = true)
+	@Column(name = "cmt_wrap_st")
 	public Integer getCmtWrapSt() {
 		return this.cmtWrapSt;
 	}
