@@ -25,43 +25,43 @@
 				    </a>
 				  	<h1 class="title">我的优惠券</h1>
 				</header>
-
-				<div class="card facebook-card coupon" style="box-shadow:none">
-			   		<div class="card-header coupon-header">
-				    	<div class="facebook-name">¥ 10</div>
-				      	<div class="facebook-date">黄金级优惠券</div>
-				      	<div class="use-coupon-container">
-					      	<a href="all_goods.html" class="button">使用</a>				      		
-				      	</div>
-				    </div>
-				    <div class="card-content">
-				      <div class="card-content-inner">
-				      	有效期：2016/04/23 - 2016/04/30
-				      </div>
-				    </div>
+				<div id="coupon_time">
 				</div>
+					<script id="t:coupon_time" type="text/html">
+						<%for(var i=0;i<list.length;i++){%>
+							<div class="card facebook-card coupon" style="box-shadow:none">
+					   			<div class="card-header coupon-header">
+						    		<div class="facebook-name"><%=list[i].disCouPrice%></div>
+						      		<div class="facebook-date"><%=list[i].disCouNo%></div>
+						      		<div class="use-coupon-container">
+							      		<a href="javascript:;" class="button">
+											<%if(list[i].disCouState==0) { %>
+												未使用
+											<%}else if(list[i].disCouState==1){%>
+												已使用
+											<%}else{%>
+												已过期
+											<%}%>
+										</a>				      		
+						      		</div>
+						    	</div>
+						    	<div class="card-content">
+						      		<div class="card-content-inner">
+						      			有效期：<%=list[i].disCouValidTime%>之前
+						      		</div>
+						    	</div>
+							</div>
+						<%}%>
+					</script>
+
+				
 
 				<div class="card facebook-card coupon" style="box-shadow:none">
 			   		<div class="card-header coupon-header">
 				    	<div class="facebook-name">¥ 10</div>
 				      	<div class="facebook-date">黄金级优惠券</div>
 				      	<div class="use-coupon-container">
-					      	<a href="all_goods.html" class="button">使用</a>				      		
-				      	</div>
-				    </div>
-				    <div class="card-content">
-				      <div class="card-content-inner">
-				      	有效期：2016/04/23 - 2016/04/30
-				      </div>
-				    </div>
-				</div>
-
-				<div class="card facebook-card coupon" style="box-shadow:none">
-			   		<div class="card-header coupon-header">
-				    	<div class="facebook-name">¥ 10</div>
-				      	<div class="facebook-date">黄金级优惠券</div>
-				      	<div class="use-coupon-container">
-					      	<a href="all_goods.html" class="button">使用</a>				      		
+					      	<a href="all_goods.html" class="button">未使用</a>				      		
 				      	</div>
 				    </div>
 				    <div class="card-content">
@@ -81,6 +81,21 @@
     <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
     <script type="text/javascript" src="../js/scripts.js"></script>
-
+	<script type="text/javascript" src="../js/baiduTemplate.js"></script>
+	<script type="text/javascript">
+		// 加载用户优惠券信息
+		$.ajax({
+			url : "../admin/DiscountCoupan/getUserCoupan.do",
+			type : "get",
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : function(data) {
+				var html = baidu.template("t:coupon_time", {
+					"list" : data.result
+				});
+				$("#coupon_time").html(html);
+			}
+		});
+	</script>
 </body>
 </html>

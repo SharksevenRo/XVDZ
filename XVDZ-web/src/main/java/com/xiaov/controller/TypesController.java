@@ -1,5 +1,8 @@
 package com.xiaov.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.Account;
 import com.xiaov.model.Types;
@@ -7,8 +10,10 @@ import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.AccountService;
 import com.xiaov.service.interfaces.TypesService;
+import com.xiaov.utils.LazyObjecUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Created by yymao on 2016/4/25.
  */
+@Controller
 public class TypesController {
     @Autowired
     private TypesService typesService;
@@ -95,5 +101,18 @@ public class TypesController {
             page.setMessage("服务器忙");
             return page;
         }
+    }
+    
+    @RequestMapping(value = "/admin/types/productType", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Types> getProductType() {
+    	List<Types> list = null;
+    	try {
+    		list = typesService.getProductType();
+    		LazyObjecUtil.AllLazySetNull(list, "parentType");
+        } catch (Exception e) {
+        	list = new ArrayList<Types>();
+        }
+    	return list;
     }
 }

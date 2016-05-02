@@ -174,7 +174,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 		this.reAddTel = reAddTel;
 	}
 
-	@Column(name = "add_default", nullable = true)
+	@Column(name = "add_default")
 	public Boolean getAddDefault() {
 		return this.addDefault;
 	}

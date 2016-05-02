@@ -113,6 +113,8 @@
 					return unescape(r[2]);
 				return null;
 			}
+			//获取url链接中的类型参数
+			typeId = getQueryString("typeId") || typeId;
 
 			function loadGoodsData() {
 				// 根据文本框内容及类型多条件查询商品
@@ -141,9 +143,8 @@
 					}
 				});
 			}
+			loadGoodsData();
 			$(function() {
-				//获取url链接中的类型参数
-				typeId = getQueryString("typeId") || typeId;
 				//屏幕滚动
 				$(window).scroll(function() {
 					if ($(document).height() - $(this).scrollTop() - $(this).height() < 20) {

@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>我的作品</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="../css/weui.min.css"/>
-    <link rel="stylesheet" href="../css/swiper.min.css">
-    <link rel="stylesheet" href="../css/sm.min.css">
-    <link rel="stylesheet" href="../css/sm-extend.min.css">
-    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+<meta charset="UTF-8">
+<title>我的作品</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="../css/weui.min.css" />
+<link rel="stylesheet" href="../css/swiper.min.css">
+<link rel="stylesheet" href="../css/sm.min.css">
+<link rel="stylesheet" href="../css/sm-extend.min.css">
+<link rel="stylesheet" href="../css/styles.css" type="text/css">
 </head>
 <body>
 
 	<div class="weui_tab">
-	    <div class="weui_tab_bd">
-	        <div class="weui_tab_bd_item">
+		<div class="weui_tab_bd">
+			<div class="weui_tab_bd_item">
 
-	        	<header class="bar bar-nav">
-	        		<a class="button button-link button-nav pull-left back">
-				      <span class="icon icon-left"></span>
-				      返回
-				    </a>
-				  	<h1 class="title">我的收藏</h1>
+				<header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back"> <span
+						class="icon icon-left"></span> 返回 </a>
+					<h1 class="title">我的收藏</h1>
 				</header>
-				<div id="favs">
-				
-				</div>
+				<div id="favs"></div>
 				<script id="t:work_group" type="text/html">
 					<%for(var i=0;i<list.length;i++){%>
 						<div class="content-block-title">2016年4月</div>
@@ -90,33 +87,32 @@
 					<a href="javascript:;" class="weui_btn weui_btn_primary">加载更多</a>	
 				</div> -->
 			</div>
-	    </div>
+		</div>
 	</div>
-	
+
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/weui.js"></script>
 	<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
-    <script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
-    <script type="text/javascript" src="../js/baiduTemplate.js"></script>
+	<script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../js/sm-extend.min.js'
+		charset='utf-8'></script>
+	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript" src="../js/baiduTemplate.js"></script>
 	<script type="text/javascript">
-    	$(function(){
-    		// 按照每月加载用户的收藏作品
-    		$.ajax({
-    			url : "../admin/product/getUserCollection.do",
-    			type : "get",
-    			contentType : "application/json; charset=utf-8",
-    			dataType : "json",
-    			success : function(data) {
-    				var html = baidu.template('t:work_group', {
-    					"list" : data.result
-    				});
-    				$("#works").html(oldHtml+html);
-    			}
-    		});
-    	});
-    </script>
+		// 按照每月加载用户的收藏作品
+		$.ajax({
+			url : "../admin/product/getUserCollection.do",
+			type : "get",
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : function(data) {
+				var html = baidu.template('t:work_group', {
+					"list" : data.result
+				});
+				$("#works").html(oldHtml + html);
+			}
+		});
+	</script>
 </body>
 </html>
