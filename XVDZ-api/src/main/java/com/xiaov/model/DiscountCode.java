@@ -38,7 +38,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	private Date disCodeValidTime;
 	private Integer disCodeNum;
 	private String disCodeRemark;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -49,7 +49,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	/** minimal constructor */
 	public DiscountCode(String id, String disCodeNo,
 			Date disCodeTime, Date disCodeValidTime,
-			Integer disCodeNum, Boolean deleteFlag) {
+			Integer disCodeNum, Integer deleteFlag) {
 		this.id = id;
 		this.disCodeNo = disCodeNo;
 		this.disCodeTime = disCodeTime;
@@ -62,7 +62,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	public DiscountCode(String id, UserInfo userInfoByGnrtUId,
 			UserInfo userInfoByProUId, String disCodeNo, Date disCodeTime,
 			Date disCodeValidTime, Integer disCodeNum,
-			String disCodeRemark, Boolean deleteFlag) {
+			String disCodeRemark, Integer deleteFlag) {
 		this.id = id;
 		this.userInfoByGnrtUId = userInfoByGnrtUId;
 		this.userInfoByProUId = userInfoByProUId;
@@ -154,12 +154,12 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 		this.disCodeRemark = disCodeRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 

@@ -4,6 +4,9 @@ import com.xiaov.dao.TypesDao;
 import com.xiaov.model.Types;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.TypesService;
+
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +59,10 @@ public class TypesImpl extends BaseServiceImpl<Types> implements TypesService {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public List<Types> getRootType(){
+		
+		return dao.getEntitiestNotLazy(new Types(), null,new Criterion[]{Restrictions.eqOrIsNull("parentType", null)});
 	}
 }

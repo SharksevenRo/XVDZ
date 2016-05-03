@@ -1,22 +1,20 @@
 package com.xiaov.controller;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import com.xiaov.constant.APPConstant;
-import com.xiaov.model.Account;
-import com.xiaov.model.Types;
-import com.xiaov.orm.core.MessageBean;
-import com.xiaov.orm.core.Page;
-import com.xiaov.service.interfaces.AccountService;
-import com.xiaov.service.interfaces.TypesService;
-import com.xiaov.utils.LazyObjecUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.xiaov.constant.APPConstant;
+import com.xiaov.model.Types;
+import com.xiaov.orm.core.MessageBean;
+import com.xiaov.orm.core.Page;
+import com.xiaov.service.interfaces.TypesService;
+import com.xiaov.utils.LazyObjecUtil;
 
 /**
  * Created by yymao on 2016/4/25.
@@ -38,9 +36,11 @@ public class TypesController {
     public MessageBean saveAjax(Types types) {
 
         try {
+        	types.setAddTime(new Date());
         	typesService.save(types);
             return new MessageBean(APPConstant.SUCCESS, "添加成功");
         } catch (Exception e) {
+        	e.printStackTrace();
             return new MessageBean(APPConstant.ERROR, "添加失败");
         }
     }
@@ -103,16 +103,42 @@ public class TypesController {
         }
     }
     
-    @RequestMapping(value = "/admin/types/productType", method = RequestMethod.GET)
+    @RequestMapping("/admin/types/page")
     @ResponseBody
-    public List<Types> getProductType() {
-    	List<Types> list = null;
-    	try {
-    		list = typesService.getProductType();
-    		LazyObjecUtil.AllLazySetNull(list, "parentType");
+    public Page<Types> page(Types types) {
+        try {
+           Page<Types> page = typesService.page(types);
+           page=LazyObjecUtil.LazyPageSetNull(page, new String[]{"parentType"});
+           return page;
         } catch (Exception e) {
-        	list = new ArrayList<Types>();
+        	e.printStackTrace();
+        	Types page = new Types();
+            page.setCode(APPConstant.ERROR);
+            page.setMessage("服务器忙");
+            return page;
         }
-    	return list;
+    }
+    
+//    @RequestMapping(value = "/admin/types/productType", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<Types> getProductType() {
+//    	List<Types> list = null;
+//    	try {
+//    		list = typesService.getProductType();
+//    		LazyObjecUtil.AllLazySetNull(list, "parentType");
+//        } catch (Exception e) {
+//        	list = new ArrayList<Types>();
+//        }
+//    	return list;
+//    }
+    /**
+     * 获取是根的类型
+     * @return
+     */
+    @RequestMapping("/admin/types/getRootType")
+    @ResponseBody
+    public List<Types> getRootType(){
+    	
+    	return typesService.getRootType();
     }
 }

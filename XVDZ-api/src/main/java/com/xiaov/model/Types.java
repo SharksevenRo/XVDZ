@@ -41,7 +41,7 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private String typeRemark;
-	private Boolean deleteFlage;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -50,15 +50,15 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Types(String typeName, Date addTime, Boolean deleteFlage) {
+	public Types(String typeName, Date addTime, Integer deleteFlag) {
 		this.typeName = typeName;
 		this.addTime = addTime;
-		this.deleteFlage = deleteFlage;
+		this.deleteFlag = deleteFlag;
 	}
 
 	/** full constructor */
 	public Types(String id, Types parentType, String typeName, String typeTag, Date addTime, Date updateTime,
-			Date deleteTime, String typeRemark, Boolean deleteFlage) {
+			Date deleteTime, String typeRemark, Integer deleteFlag) {
 		super();
 		this.id = id;
 		this.parentType = parentType;
@@ -68,7 +68,7 @@ public class Types extends Page<Types> implements java.io.Serializable {
 		this.updateTime = updateTime;
 		this.deleteTime = deleteTime;
 		this.typeRemark = typeRemark;
-		this.deleteFlage = deleteFlage;
+		this.deleteFlag = deleteFlag;
 	}
 	
 
@@ -153,13 +153,13 @@ public class Types extends Page<Types> implements java.io.Serializable {
 		this.typeRemark = typeRemark;
 	}
 
-	@Column(name = "delete_flage", nullable = true)
-	public Boolean getDeleteFlage() {
-		return this.deleteFlage;
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
+		return this.deleteFlag;
 	}
 
-	public void setDeleteFlage(Boolean deleteFlage) {
-		this.deleteFlage = deleteFlage;
+	public void setDeleteFlag(Integer deleteFlag) {
+		this.deleteFlag = deleteFlag;
 	}
 
 }

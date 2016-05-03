@@ -56,7 +56,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private String usRemark;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -67,7 +67,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	/** minimal constructor */
 	public UserInfo(String usId, String usNcNa, String usLgNa, String usPwd,
 			Integer usState, Integer usLoginErrorTimes, Boolean usLoginState,
-			Date addTime, Boolean deleteFlag) {
+			Date addTime, Integer deleteFlag) {
 		this.id = usId;
 		this.usNcNa = usNcNa;
 		this.usLgNa = usLgNa;
@@ -87,7 +87,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 			String usIdCard, Integer usLoginErrorTimes,
 			Date usLastLoginTime, Boolean usLoginState, Date addTime,
 			Date updateTime, Date deleteTime, String usRemark,
-			Boolean deleteFlag) {
+			Integer deleteFlag) {
 		this.id = usId;
 		this.typeId = typeId;
 		this.appId = appId;
@@ -339,12 +339,12 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 		this.usRemark = usRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 

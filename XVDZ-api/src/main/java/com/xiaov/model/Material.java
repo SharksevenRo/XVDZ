@@ -41,7 +41,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	private Date updateTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -51,7 +51,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Material(String id, String materialNo, String meterialName,
-			Date addTime, Boolean deleteFlag) {
+			Date addTime, Integer deleteFlag) {
 		this.id = id;
 		this.materialNo = materialNo;
 		this.meterialName = meterialName;
@@ -63,7 +63,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	public Material(String id, Material material, Types dbTypes,
 			String materialNo, String meterialName, String meterialRemark,
 			Date addTime, Date updateTime, Date deleteTime,
-			Boolean deleteFlag) {
+			Integer deleteFlag) {
 		this.id = id;
 		this.material = material;
 		this.dbTypes = dbTypes;
@@ -165,12 +165,12 @@ public class Material extends Page<Material> implements java.io.Serializable {
 		this.deleteTime = deleteTime;
 	}
 
-	@Column(name = "delete_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 }

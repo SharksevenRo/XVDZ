@@ -10,19 +10,19 @@ public class MessageBean {
 	/**
 	 * 响应码
 	 */
-	private String code;
+	private Integer code;
 	private String message;
 	
 	
-	public MessageBean(String code, String message) {
+	public MessageBean(Integer code, String message) {
 		super();
 		this.code = code;
 		this.message = message;
 	}
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
 	}
 	

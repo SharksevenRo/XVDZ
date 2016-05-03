@@ -56,7 +56,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Date deleteTime;
 	private Boolean pdtOpenState=true;
 	private String remark;
-	private Boolean deleteFlag=false;
+	private Integer deleteFlag=0;
 	
 	private List<ProductDetail> colors;
 	private List<ProductDetail> sizes;
@@ -71,7 +71,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public Product(String id, String pdtNo, String pdtName,
 			String pdtPicBs, Double pdtPrc, Integer pdtSaleCount,
 			Integer pdtGdCount, Integer pdtShareCount, Date addTime,
-			Boolean pdtOpenState, Boolean deleteFlag) {
+			Boolean pdtOpenState, Integer deleteFlag) {
 		this.id = id;
 		this.pdtNo = pdtNo;
 		this.pdtName = pdtName;
@@ -92,7 +92,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 			String pdtPicBs, String pdtPicBp, Double pdtPrc, Double pdtDsct,
 			Integer pdtSaleCount, Integer pdtGdCount, Integer pdtShareCount,
 			Date addTime, Date updateTime, Date deleteTime,
-			Boolean pdtOpenState, String remark, Boolean deleteFlag) {
+			Boolean pdtOpenState, String remark, Integer deleteFlag) {
 		this.id = id;
 		this.productType = productType;
 		this.material = material;
@@ -315,11 +315,11 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	}
 
 	@Column(name = "delet_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 	@Transient

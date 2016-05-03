@@ -35,7 +35,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	private Date dynmcTime;
 	private Integer dynmcGdCnt;
 	private Integer dynmcCmmCnt;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -45,7 +45,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Dynamic(String id, String dynmcContent, Date dynmcTime,
-			Integer dynmcGdCnt, Integer dynmcCmmCnt, Boolean deleteFlag) {
+			Integer dynmcGdCnt, Integer dynmcCmmCnt, Integer deleteFlag) {
 		this.id = id;
 		this.dynmcContent = dynmcContent;
 		this.dynmcTime = dynmcTime;
@@ -57,7 +57,7 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 	/** full constructor */
 	public Dynamic(String id, UserInfo userInfo, String dynmcContent,
 			Date dynmcTime, Integer dynmcGdCnt, Integer dynmcCmmCnt,
-			Boolean deleteFlag) {
+			Integer deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
 		this.dynmcContent = dynmcContent;
@@ -127,12 +127,12 @@ public class Dynamic extends Page<Dynamic> implements java.io.Serializable {
 		this.dynmcCmmCnt = dynmcCmmCnt;
 	}
 
-	@Column(name = "delete_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 

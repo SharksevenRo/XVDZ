@@ -56,6 +56,7 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#ajax/type.html">所有类型</a></li>
+							<li><a href="#ajax/simpleTypes.html">类型管理(列表)</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">

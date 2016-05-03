@@ -46,7 +46,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	private Date updateTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -68,7 +68,7 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 			UserInfo userInfoByUpdateId, String addId, String adsTt,
 			String adsContent, String adsPic, Boolean adsState,
 			Date addTime, Date adsOnme, Date updateTime,
-			Date deleteTime, Boolean deleteFlag) {
+			Date deleteTime, Integer deleteFlag) {
 		this.id = id;
 		this.userInfoByDeleteId = userInfoByDeleteId;
 		this.userInfoByUpdateId = userInfoByUpdateId;
@@ -203,11 +203,11 @@ public class Advertisment extends Page<Advertisment> implements java.io.Serializ
 	}
 
 	@Column(name = "delete_flag")
-	public Boolean getDeleteFlag() {
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 

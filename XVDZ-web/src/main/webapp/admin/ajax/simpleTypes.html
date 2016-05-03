@@ -10,7 +10,7 @@
 		<li class="active">分页表格</li>
 	</ol>
 	<h1 class="page-header">
-		商品<small></small>
+		类型<small></small>
 	</h1>
 	<div class="row">
 		<div class="col-md-12">
@@ -31,7 +31,7 @@
 							data-click="panel-remove"><i class="fa fa-times"></i>
 						</a>
 					</div>
-					<h4 class="panel-title">商品</h4>			
+					<h4 class="panel-title">类型</h4>			
 				</div>
 				<div class="panel-body">
 				
@@ -61,7 +61,7 @@
         <div class="modal-content" style="width: 700px">
             <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">添加商品</h4>
+				<h4 class="modal-title">添加类型</h4>
 			</div>
 			<div class="modal-body">
 <!-- 				<form action="../main/enterGoods/saveOrUpdateEnterGoods" class="form-horizontal" method="post"> -->
@@ -70,23 +70,25 @@
 						<div class="form-group">
 <!--                         </div> -->
 <!--                    		<div class="form-group"> -->
-                            <label class="col-md-2 control-label">商品名称：</label>
+                            <label class="col-md-2 control-label">类型名称：</label>
                             <div class="col-md-4"> 
-                                <input class="form-control" placeholder="请输入商品名称"  type="text" name="pdtName">
+                                <input class="form-control" placeholder="请输入类型名称"  type="text" name="typeName">
                             </div>
-                             <label class="col-md-2 control-label">商品介绍：</label>
+                             <label class="col-md-2 control-label">父类型</label>
                             <div class="col-md-4"> 
-                                <input class="form-control" placeholder="请输入商品名称"  type="text" name="pdtPc">
+                                <select id="parent" name="parentType.id">
+                                	
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
-                         	<label class="col-md-2 control-label">商品标签：</label>
+                         	<label class="col-md-2 control-label">类型图片标签：：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入标签"  type="text" name="pdtLabel">
+                                <input class="form-control" placeholder="请输入标签"  type="text" name="typeTag">
                             </div>
-                            <label class="col-md-2 control-label">单价：</label>
+                             <label class="col-md-2 control-label">备注说明：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="0"  type="text" name="pdtPrc">
+                                <input class="form-control" placeholder="0"  type="text" name="typeRemark">
                             </div>
 						</div>
 						<div class="modal-footer">
@@ -112,7 +114,7 @@
         <div class="modal-content" style="width: 700px">
             <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">添加该商品的详情</h4>
+				<h4 class="modal-title">添加该类型的详情</h4>
 			</div>
 			<div class="modal-body">
 <!-- 				<form action="../main/enterGoods/saveOrUpdateEnterGoods" class="form-horizontal" method="post"> -->
@@ -136,7 +138,7 @@
                                            <input type="checkbox" /> XL
                                        </label>
 	                            </div>
-                             <label class="col-md-2 control-label">商品颜色</label>
+                             <label class="col-md-2 control-label">类型颜色</label>
                             <div class="col-md-4"> 
                                 	<label>
                                            <input type="checkbox" /> S
@@ -153,7 +155,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                         	<label class="col-md-2 control-label">商品标签：</label>
+                         	<label class="col-md-2 control-label">类型标签：</label>
                             <div class="col-md-4">
                                 <input class="form-control" placeholder="请输入标签"  type="text" name="pdtLabel">
                             </div>
@@ -203,7 +205,7 @@
 		$("select[name=enterGoodsTypeId]").html("");
 		$.ajax({
 			type : "get",
-			url : "../admin/product/page.do",
+			url : "../admin/types/page.do",
 			dataType : "json",
 			async : true,
 			success : function(data) {
@@ -237,10 +239,10 @@
 	//jqgrid显示界面
 	
 	$("#grid-table").jqGrid({ 
-		//提交类型
+		//提交
 		type:"post",
-        url: "../admin/product/page.do",
-        //数据类型
+        url: "../admin/types/page.do",
+        //数据
         datatype: "json", 
          jsonReader: {  
 	        	root:"result", page:"pageNo", total:"totalPages", records:"10", repeatitems : false,//userdata: "userdata",
@@ -248,7 +250,7 @@
         //高度自动调整
         height : "100%",
         width : "100%",//下面那个第一个列名为空时存储某个记录的id，为了实现删除和修改操作
-		colNames:["编辑/删除","","商品名称","商品编号","商品价格","折扣","销售数量","标签","商品介绍","上架时间","点赞数","分享数"], //,"点赞数","分享数","添加时间","修改时间","删除时间","是否开放","备注","删除标识"
+		colNames:["编辑/删除","","父类型名称","类型名称","标签图片","备注"], //,"点赞数","分享数","添加时间","修改时间","删除时间","是否开放","备注","删除标识"
 		colModel:[ 
 				   {name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,search:false,
 					　　　　formatter: 'actions',
@@ -267,7 +269,7 @@
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "../admin/product/deleteAjax.do",/* 删除Product的URL */ 
+											url : "../admin/types/deleteAjax.do",/* 删除types的URL */ 
 										},
 							 editbutton:true, 
 							 editformbutton: true,
@@ -283,22 +285,16 @@
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "../admin/product/updateAjax.do",/* 修改Product的URL */ 
+											url : "../admin/types/updateAjax.do",/* 修改types的URL */ 
 							 }
 						} 
 					}, 
 					//index 和name一致必须，为了实现点击表头以当前列排序所依赖的规范(后面属性的定义字面意思很明显，按自己的需求设置值即可)
-					{name:"id",index:"id",hidden : true, editable: true, width:90, align:"center"},
-				   {name:"pdtName",index:"pdtName",hidden : false, editable: true, width:150, align:"center"},
-				   {name:"pdtNo",index:"pdtNo",hidden : true, editable: true, width:120, align:"center"},
-				   {name:"pdtPrc",index:"pdtPrc", editable: true, width:90, align:"center"}, 
-				   {name:"pdtDsct",index:"pdtDsct",hidden : false, editable: true, width:90, align:"center"}, 
-				   {name:"pdtSaleCount",index:"pdtSaleCount",  editable: true,width:80, align:"center"}, 
-				   {name:"pdtLabel",index:"pdtLabel",  editable: true,width:100, align:"center"}, 
-				   {name:"pdtPc",index:"pdtPc",  editable: true,width:200, align:"center"},
-				   {name:"addTime",index:"addTime",  editable: false,width:150, align:"center"}, 
-				   {name:"pdtGdCount",index:"pdtGdCount",  editable: true,width:80, align:"center"}, 
-				   {name:"pdtShareCount",index:"pdtShareCount",  editable: true,width:80, align:"center"}
+					{name:"id",index:"id",hidden : true, editable: true, width:130, align:"center"},
+				   {name:"parentType.typeName",index:"parentType.typeName",hidden : false, editable: false, width:150, align:"center"},
+				   {name:"typeName",index:"typeName",hidden : false, editable: true, width:150, align:"center"},
+				   {name:"typeTag",index:"typeTag", editable: true, width:150, align:"center"}, 
+				   {name:"typeRemark",index:"typeRemark",hidden : false, editable: true, width:90, align:"center"}
 				  ],
    		 rowNum:10, 
    		 rowList:[10,20,30],
@@ -308,7 +304,7 @@
    		 //multikey : "ctrlKey",
    		 //只有当multiselect = true.起作用，当multiboxonly 为ture时只有选择checkbox才会起作用
    		 multiboxonly: true,
-   		 //此属性用来说明当初始化列宽度时候的计算类型，如果为ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
+   		 //此属性用来说明当初始化列宽度时候的计算，如果为ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
    		 shrinkToFit: false,
    		 //自动滚动条
    		 autoScroll: false,
@@ -325,7 +321,7 @@
    		 viewrecords: true, 
    		 sortorder: "desc",
    		 //jqgrid名称 
-//    	 caption:"商品", 
+//    	 caption:"类型", 
    	});
    
    	//加载底部操作按钮及页码
@@ -384,8 +380,26 @@
 // 	 	$("#grid-table").jqGrid('editGridRow', "new", { height : 500,width:500, reloadAfterSubmit : false });
 		//清空表单数据
 		$("input[type=reset]").trigger("click");
-		//加载商品类型
-		loadDepartment(null, null);
+		//加载类型
+		$.ajax({
+		
+		type:"get",
+		url:'../admin/types/getRootType.do',
+		async:false,
+		success:function(data){
+			debugger;
+			if(data[0].code==1){
+				var item="<option >请选择父类型，也可以不选择</option>";
+				for(var i=0;i<data.length;i++){
+					
+					item+="<option value=\""+data[i].id+"\">"+data[i].typeName+"</option>";
+				}
+				$("#parent").html("");
+				$("#parent").append(item);
+			}
+			
+		}
+	});	
 		//手动加载模态框
 	 	$('#mymodal').modal({
 			keyboard: false,
@@ -429,7 +443,7 @@
 			        cache:false,  
 			        type: 'POST',  
 			        dataType : 'text', 
-                    url: "../admin/product/saveAjax.do",
+                    url: "../admin/types/saveAjax.do",
                     //序列化form表单
 			    	data: $("#enteringGoodsForm").serializeArray(),
 			        error: function () {//请求失败处理函数 
@@ -501,21 +515,9 @@
 	 });
 
 	$("#detail_button").click(function(){
-		
+	
 		
 	});	
-
-		
-		
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 });
-
-//浮动框居中
-/* 	function setBoxCenter(dlgDiv) {
-		var width1 = document.body.clientWidth;
-		var hight1 = document.body.clientHeight;
-		dlgDiv[0].style.top = Math.round(hight1 / 2) + "px";
-		dlgDiv[0].style.left = Math.round(width1 / 2) + "px";
-	}; */
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->

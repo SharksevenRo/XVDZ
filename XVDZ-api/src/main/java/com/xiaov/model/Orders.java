@@ -44,7 +44,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private String orRemark;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -54,7 +54,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Orders(String id, String orNo, Double orTotal, Integer orState,
-			Date addTime, Boolean deleteFlag) {
+			Date addTime, Integer deleteFlag) {
 		this.id = id;
 		this.orNo = orNo;
 		this.orTotal = orTotal;
@@ -68,7 +68,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 			DiscountCoupan discountCoupan, String ueId, String orNo,
 			Double orTotal, Double orDiscount, Double orRealCost,
 			Integer orState, Date addTime, Date updateTime,
-			Date deleteTime, String orRemark, Boolean deleteFlag) {
+			Date deleteTime, String orRemark, Integer deleteFlag) {
 		this.id = id;
 		this.orderDetail = orderDetail;
 		this.dbTypes = dbTypes;
@@ -222,12 +222,12 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.orRemark = orRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 
