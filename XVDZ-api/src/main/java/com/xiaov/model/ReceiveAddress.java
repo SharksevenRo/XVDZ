@@ -25,7 +25,7 @@ import com.xiaov.orm.core.FieldType;
  */
 @Entity
 @Table(name = "receive_address", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Serializable {
 
 	// Fields

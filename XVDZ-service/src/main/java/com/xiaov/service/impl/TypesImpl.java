@@ -61,8 +61,8 @@ public class TypesImpl extends BaseServiceImpl<Types> implements TypesService {
 		return list;
 	}
 	
-	public List<Types> getRootType(){
+	public List<Types> getTypesByParent(Types types){
 		
-		return dao.getEntitiestNotLazy(new Types(), null,new Criterion[]{Restrictions.eqOrIsNull("parentType", null)});
+		return dao.getEntitiestNotLazy(new Types(), null,new Criterion[]{Restrictions.eq("parentType.id", types.getId()),Restrictions.eq("deleteFlag", 0)});
 	}
 }

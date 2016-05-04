@@ -28,7 +28,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "discount_coupan", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Serializable {
 
 	// Fields

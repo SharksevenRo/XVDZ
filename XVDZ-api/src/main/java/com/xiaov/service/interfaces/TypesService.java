@@ -14,5 +14,5 @@ public interface TypesService extends BaseService<Types>{
 	 * 获取一级父类型 
 	 * @return
 	 */
-	public List<Types> getRootType();
+	public List<Types> getTypesByParent(Types types);
 }

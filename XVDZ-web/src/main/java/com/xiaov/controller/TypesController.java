@@ -135,10 +135,16 @@ public class TypesController {
      * 获取是根的类型
      * @return
      */
-    @RequestMapping("/admin/types/getRootType")
+    @RequestMapping("/admin/types/getTypesByParent")
     @ResponseBody
-    public List<Types> getRootType(){
+    public List<Types> getTypesByParent(Types types){
     	
-    	return typesService.getRootType();
+    	 List<Types> rootType = typesService.getTypesByParent(types);
+    	 try {
+			return LazyObjecUtil.LazySetNull(rootType, "parentType");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
     }
 }

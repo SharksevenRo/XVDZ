@@ -384,12 +384,13 @@
 		$.ajax({
 		
 		type:"get",
-		url:'../admin/types/getRootType.do',
+		url:'../admin/types/getTypesByParent.do',
 		async:false,
+		data:{id:'0'},
 		success:function(data){
 			debugger;
 			if(data[0].code==1){
-				var item="<option >请选择父类型，也可以不选择</option>";
+				var item="<option value='0'>请选择父类型，也可以不选择</option>";
 				for(var i=0;i<data.length;i++){
 					
 					item+="<option value=\""+data[i].id+"\">"+data[i].typeName+"</option>";
