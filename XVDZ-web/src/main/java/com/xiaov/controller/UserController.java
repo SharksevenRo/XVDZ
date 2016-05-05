@@ -1,12 +1,12 @@
 package com.xiaov.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,11 +34,12 @@ public class UserController {
 		return users;
 	}
 	//添加
-	@RequestMapping("/admin/user/save")
+	@RequestMapping("/admin/user/saveAjax")
 	@ResponseBody
 	public MessageBean save(UserInfo user){
 		
 		try {
+			user.setAddTime(new Date());
 			userService.save(user);
 			return new MessageBean(APPConstant.SUCCESS, "添加成功");
 		} catch (Exception e) {
@@ -79,7 +80,7 @@ public class UserController {
 		
 	}
 	//删除
-	@RequestMapping("/admin/user/delete")
+	@RequestMapping("/admin/user/deleteAjax")
 	@ResponseBody
 	public MessageBean deleteAjax(UserInfo user){
 		try {
@@ -92,7 +93,7 @@ public class UserController {
 		return new MessageBean(APPConstant.SUCCESS, "删除成功");
 	}
 	//删除
-		@RequestMapping("/admin/user/update")
+		@RequestMapping("/admin/user/updateAjax")
 		@ResponseBody
 		public MessageBean updateAjax(UserInfo user){
 			try {

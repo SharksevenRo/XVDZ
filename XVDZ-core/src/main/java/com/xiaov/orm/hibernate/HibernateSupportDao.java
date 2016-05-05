@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
@@ -38,7 +37,6 @@ import org.hibernate.transform.ResultTransformer;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
-import com.google.common.collect.Lists;
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.core.PageRequest;
 import com.xiaov.orm.core.PageRequest.Sort;

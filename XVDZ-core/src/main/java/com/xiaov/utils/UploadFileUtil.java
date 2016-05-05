@@ -303,7 +303,6 @@ public class UploadFileUtil {
 		}
 		return srcPath+newFileName;
 	}
-	
 	/**
 	 * 
 	 * @Description:图片剪切
