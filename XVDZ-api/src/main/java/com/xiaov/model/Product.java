@@ -56,6 +56,8 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Date deleteTime;
 	private Boolean pdtOpenState=true;
 	private String remark;
+	private String baseId;
+	private String allPic;
 	private Integer deleteFlag=0;
 	
 	private List<ProductDetail> detail;
@@ -328,4 +330,21 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
+	@Column(name = "baseid", nullable = true)
+	public String getBaseId() {
+		return baseId;
+	}
+
+	public void setBaseId(String baseId) {
+		this.baseId = baseId;
+	}
+	@Column(name = "allpic", nullable = true)
+	public String getAllPic() {
+		return allPic;
+	}
+
+	public void setAllPic(String allPic) {
+		this.allPic = allPic;
+	}
+	
 }
