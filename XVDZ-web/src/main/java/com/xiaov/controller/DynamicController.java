@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by yymao on 2016/5/5.
@@ -88,11 +91,17 @@ public class DynamicController {
 
     @RequestMapping("/admin/dynamic/addAjax")
     @ResponseBody
-    public MessageBean addAjax(Dynamic dynamic) {
+    public MessageBean addAjax( Dynamic dynamic) {
 
         try {
-            UserInfo userInfo = new UserInfo();
-            dynamic.setUserInfo(userService.getOne(userInfo.getClass(), "1"));
+//            Dynamic dynamic =new Dynamic();
+//            UserInfo userInfo = new UserInfo();
+//            dynamic.setUserInfo(userService.getOne(userInfo.getClass(), "1"));
+            dynamic.setDeleteFlag(0);
+            dynamic.setDynmcCmmCnt(23);
+            dynamic.setDynmcContent("我么麻烦");
+            dynamic.setDynmcGdCnt(34);
+            dynamic.setDynmcTime(new Date());
             dynamicService.save(dynamic);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
