@@ -64,19 +64,20 @@
 		<div class="weui_tab_bd">
 			<div class="weui_tab_bd_item">
 
-				<header class="bar bar-nav">
+				<!-- <header class="bar bar-nav">
 					<h1 class="title">小v定制</h1>
 					<a href="javascript:window.location.href='about.html'"
 						class="icon icon-me pull-right open-panel" style="z-index:300"></a>
-				</header>
+				</header> -->
 
 				<!-- 幻灯片 -->
-				<div class="swiper-container" style="height:160px;">
-					<div id="ads-wraper" class="swiper-wrapper"></div>
-					<script id="t:ads_temp" type="text/html">
+				<div class="swiper-container">
+					<div id="ads-wraper" class="swiper-wrapper">
+					</div>
+						<script id="t:ads_temp" type="text/html">
 				    		<%for(var i=0;i<list.length;i++){%>
-								<div class="swiper-slide blue-slide">
-				    				<img alt="" src="../<%=list[i].adsPic%>">
+								<div class="swiper-slide blue-slide" style="overflow-y:hidden">
+				    				<img width="100%" alt="" src="../<%=list[i].adsPic%>">
 				    			</div>
 							<%}%>
 				    	</script>
@@ -172,9 +173,9 @@
 			</div>
 			<div class="weui_tab_bd_item">
 
-				<header class="bar bar-nav">
+				<!-- <header class="bar bar-nav">
 					<h1 class="title">发现</h1>
-				</header>
+				</header> -->
 
 			</div>
 			<!-- 定制 -->
@@ -234,7 +235,7 @@
 														<div valign="bottom"
 															class="card-header color-white no-border no-padding">
 															<img class='card-cover cloth-chosen active'
-																src="../img/cloths/front.jpg" alt="">
+																src="../img/cloths/1.png" alt="">
 														</div>
 													</div>
 												</div>
@@ -1424,13 +1425,13 @@
 			<!-- 购物车 -->
 			<div class="weui_tab_bd_item">
 
-				<header class="bar bar-nav">
+				<!-- <header class="bar bar-nav">
 					<h1 class="title">购物车</h1>
 					<button class="button button-link button-nav pull-right"
 						id="to_pay">
 						去付款 <span class="icon icon-right"></span>
 					</button>
-				</header>
+				</header> -->
 
 				<div class="list-block media-list">
 					<ul id="order_item">
@@ -1493,9 +1494,9 @@
 			</div>
 			<div class="weui_tab_bd_item">
 
-				<header class="bar bar-nav">
+				<!-- <header class="bar bar-nav">
 					<h1 class="title">个人中心</h1>
-				</header>
+				</header> -->
 
 				<div class="card"
 					style="margin: 0px;margin-top: .5rem;box-shadow: none;border-bottom:1px solid rgb(231, 231, 231)">
