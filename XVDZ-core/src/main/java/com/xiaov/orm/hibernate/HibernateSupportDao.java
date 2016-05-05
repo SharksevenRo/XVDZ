@@ -467,6 +467,32 @@ public class HibernateSupportDao<T,PK extends Serializable> extends BasicHiberna
 		}
 		return null;
 	}
+	public <T> List<T> getEntitiestNotLazyWithOrder(T t, String[] fields,
+			Criterion[] eqs,Order order) {
+
+		try {
+			Criteria criteria = getSession().createCriteria(t.getClass());
+
+			if(order!=null){
+				criteria.addOrder(order);
+			}
+			if (fields != null) {
+				for (String string : fields) {
+					criteria = criteria.setFetchMode(string, org.hibernate.FetchMode.JOIN);
+				}
+			}
+			if (eqs != null) {
+
+				for (Criterion eq : eqs) {
+					criteria.add(eq);
+				}
+			}
+			return criteria.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public Criteria createCriteriaEq(List<SimpleExpression> criterions) {
 		Criteria criteria = getSession().createCriteria(this.entityClass);
