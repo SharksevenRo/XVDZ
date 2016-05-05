@@ -34,7 +34,7 @@ public class ProductController {
 
 	@RequestMapping("/admin/product/saveAjax")
 	@ResponseBody
-	public MessageBean saveAjax(Product product){
+	public MessageBean saveAjax(Product product,ImageCutModel imgCut){
 		
 		try {
 			product.setAddTime(new Date());
@@ -105,7 +105,7 @@ public class ProductController {
 			return page;
 		}
 	}
-	@RequestMapping("/admin/product/picUploadAjax.do")
+	@RequestMapping("/admin/product/picUploadAjax")
 	@ResponseBody
 	public MessageBean saveProductImage(ImageCutModel imgCut,HttpServletRequest request){
 		
@@ -134,7 +134,7 @@ public class ProductController {
 				
 				if(compressTargetPath!=null && dbCutUrl != null){
 					
-					return new MessageBean(APPConstant.SUCCESS, "上传成功");
+					return new MessageBean(APPConstant.SUCCESS, compressTargetPath);
 				}else{
 					return new MessageBean(APPConstant.SUCCESS, "上传失败");
 				}

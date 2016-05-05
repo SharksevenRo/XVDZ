@@ -9,94 +9,18 @@
                         <div class="panel-body">
                             <input class="form-control input-lg" type="text" placeholder="商品名称" />
                             <p></p>
-                            <input class="form-control" type="text" placeholder="" />
-                            <p></p>
                             <input class="form-control input-sm" type="text" placeholder="商品描述" />
                             <p></p>
+                            
+                            <button class=from-control>添加颜色和款式</button>
+                        
                         
                     <!-- end panel -->
-                </div>
+               	 	</div>
+				</div>
+		</div>
+
 </div>
-
-
-
- 
-<div class="modal" id="mymodal" style="padding-top: 150px;">
-    <div class="modal-dialog" style="width: 800px">
-        <div class="modal-content" style="width: 700px">
-            <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">添加用户收货地址</h4>
-			</div>
-			<div class="modal-body">
-<!-- 				<form action="../main/enterGoods/saveOrUpdateEnterGoods" class="form-horizontal" method="post"> -->
-				<form id="enteringGoodsForm" class="form-horizontal" method="post">
-					<fieldset>
-						<div class="form-group">
-<!--                         </div> -->
-<!--                    		<div class="form-group"> -->
-                            <label class="col-md-2 control-label">用户ID：</label>
-                            <div class="col-md-4"> 
-                                <input class="form-control" placeholder="请输入用户ID"  type="text" name="us_id">
-                            </div>
-                             <label class="col-md-2 control-label">联系人电话：</label>
-                            <div class="col-md-4"> 
-                                <input class="form-control" placeholder="联系人电话"  type="text" name="re_add_tel">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                         	<label class="col-md-2 control-label">详细地址：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="详细地址"  type="text" name="re_add_det">
-                            </div>
-                            <label class="col-md-2 control-label">收货人：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="收货人"  type="text" name="re_add_to">
-                            </div>
-						</div>
-						<div class="form-group">
-                         	<label class="col-md-2 control-label">所在省：：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="所在省"  type="text" name="re_add_pro">
-                            </div>
-                            <label class="col-md-2 control-label">所在市：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="所在市"  type="text" name="re_add_city">
-                            </div>
-						</div>
-						<div class="form-group">
-                         	<label class="col-md-2 control-label">所在县/区：</label>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="所在县/区"  type="text" name="re_add_area">
-                            </div>
-                            <label class="col-md-2 control-label">是否默认：</label>
-                            <div class="col-md-4">
-                            	<select class="form-control" name="add_default">
-                            		<option>是</option>
-                            		<option>否</option>
-                            	</select>
-                            </div>
-						</div>
-						<div class="modal-footer">
-						 <div class="form-group">
-<!-- 						    隐藏ID -->
-						 	<input style="display:none;"  type="text"  name="enteringGoodsId">
-                        	<div class="col-md-12" style="text-align: right;">	
-								<button id="closeButton" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button id="saveButton" type="button" class="btn btn-primary">保存</button>
-<!-- 								隐藏重置按钮 -->
-								<input type="reset" style="display:none;" /> 
-							</div>
-						</div>
-					</div>
-					</fieldset>
-				</form>	
-					</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script src="../js/jquery-2.2.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
