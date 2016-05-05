@@ -3,6 +3,7 @@ package com.xiaov.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.xiaov.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -64,5 +65,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserInfo> implements UserSe
 		List<UserInfo> result ;
 		result = userDao.findByProperty(propertynmae,propertyvalues);
 		return result;
+	}
+	public UserInfo login(String usPwd,String usTel){
+		return  userDao.login(usPwd,usTel);
 	}
 }

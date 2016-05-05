@@ -68,4 +68,10 @@ public class ReceiveAddressServiceImpl extends BaseServiceImpl<ReceiveAddress> i
 
         return super.getOne(clazz, pk);
     }
+    public  List<ReceiveAddress> getByProperty(String propertynmae,String propertyvalues){
+        List<ReceiveAddress> result ;
+        result = receiveAddressDao.findByProperty(propertynmae,propertyvalues);
+        return result;
+    }
+
 }
