@@ -58,9 +58,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private String remark;
 	private Integer deleteFlag=0;
 	
-	private List<ProductDetail> colors;
-	private List<ProductDetail> sizes;
-	private List<ProductDetail> materials;
+	private List<ProductDetail> detail;
 	// Constructors
 
 	/** default constructor */
@@ -309,6 +307,14 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public String getRemark() {
 		return this.remark;
 	}
+	@Transient
+	public List<ProductDetail> getDetail() {
+		return detail;
+	}
+
+	public void setDetail(List<ProductDetail> detail) {
+		this.detail = detail;
+	}
 
 	public void setRemark(String remark) {
 		this.remark = remark;
@@ -321,29 +327,5 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
-	}
-	@Transient
-	public List<ProductDetail> getColors() {
-		return colors;
-	}
-
-	public void setColors(List<ProductDetail> colors) {
-		this.colors = colors;
-	}
-	@Transient
-	public List<ProductDetail> getSizes() {
-		return sizes;
-	}
-
-	public void setSizes(List<ProductDetail> sizes) {
-		this.sizes = sizes;
-	}
-	@Transient
-	public List<ProductDetail> getMaterials() {
-		return materials;
-	}
-
-	public void setMaterials(List<ProductDetail> materials) {
-		this.materials = materials;
 	}
 }

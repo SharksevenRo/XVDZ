@@ -415,4 +415,11 @@ public class ProductController {
 		}
 
 	}
+	
+	@RequestMapping("/admin/product/getPdtDetail")
+	@ResponseBody
+	public Product getProductDetail(Product product){
+		
+		return productServiceimpl.fillDetail(product);
+	}
 }

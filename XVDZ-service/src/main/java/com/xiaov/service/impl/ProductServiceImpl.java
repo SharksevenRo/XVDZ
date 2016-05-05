@@ -60,30 +60,12 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	 * @param type 详细的类型（color,Material,Size,颜色、面料、尺码）
 	 * @return
 	 */
-	public Product fillDetail(Product product,String type){
+	public Product fillDetail(Product product){
 		
-		Criterion [] criterions={Restrictions.eq("type", type),Restrictions.eq("pdtId", product.getId())};
+		Criterion [] criterions={Restrictions.eq("productId", product.getId())};
 		List<ProductDetail> details = detailDao.getEntitiestNotLazy(new ProductDetail(), null, criterions);
-		if(APPConstant.COLOR.equals(type)){
-			product.setColors(details);
-		}else if(APPConstant.MATERIAL.equals(type)){
-			product.setMaterials(details);
-		}else if(APPConstant.SIZE.equals(type)){
-			product.setSizes(details);
-		}else{
-			throw new RuntimeException(type+"参数异常");
-		}
+		product.setDetail(details);
 		return product;
-	}
-	/**
-	 * 获取当前商品所有类型的详细信息
-	 * @param product
-	 */
-	public void fillDetail(Product product){
-		
-		fillDetail(product, APPConstant.COLOR);
-		fillDetail(product, APPConstant.SIZE);
-		fillDetail(product, APPConstant.MATERIAL);
 	}
 	/**
 	 * 获取批量商品的所有类型详细
@@ -108,7 +90,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	public List<Product> fillDetail(List<Product> products,String type){
 		
 		for (Product product : products) {
-			fillDetail(product,type);
+			fillDetail(product);
 		}
 		return products;
 	}
