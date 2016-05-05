@@ -144,23 +144,28 @@
 		charset='utf-8'></script>
 	<script type="text/javascript" src="../js/scripts.js"></script>
 	<script type="text/javascript">
-		var times = 60;
 		$(function(){
 			$("#sendBtn").click(function(){
 				getTelCode();
 			});
 		});
+		//改变显示时间
 		function changeTime(){
-			if(times<=60&&times>0){
-				$("#timer").addClass("disabled");
-				$("#timer").text(times--);
-			}else{
-				$("#timer").removeClass("disabled");
-			}
-			
+			var times = 60;
+			var id = setInterval(function(){
+				if(times<=60&&times>0){
+					$("#timer").addClass("disabled");
+					$("#timer").text(times--);
+				}else{
+					$("#timer").removeClass("disabled");
+					$("#timer").text("发送");
+					clearInterval(id);
+				}
+			}, 1000);
 		}
 		//获取手机验证码
 		function getTelCode(obj) {
+			
 			var tel = $.trim($("input[name=usTel]").val());
 			if (tel == "" || !tel.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
 				$("#dialog").show();
@@ -168,16 +173,7 @@
 					$("#dialog").hide();
 				}, 3000);
 			} else {
-				var id = setInterval(function(){
-					if(times<=60&&times>0){
-						$("#timer").addClass("disabled");
-						$("#timer").text(times--);
-					}else{
-						$("#timer").removeClass("disabled");
-						$("#timer").text("发送");
-						clearInterval(id);
-					}
-				}, 1000);
+				changeTime();
 				$.ajax({
 					url : "../admin/telCode/getTelCode.do",
 					type : "get",
@@ -189,7 +185,6 @@
 							$("#toast").show();
 							setTimeout(function() {
 								$("#toast").hide();
-								window.location.href = "addr.html";
 							}, 2000);
 						}
 					}
