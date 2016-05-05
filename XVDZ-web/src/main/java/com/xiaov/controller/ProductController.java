@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,8 +29,6 @@ import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.impl.ProductDetailServiceImpl;
 import com.xiaov.service.impl.ProductServiceImpl;
-import com.xiaov.service.impl.TypesImpl;
-import com.xiaov.service.interfaces.ProductDetailService;
 import com.xiaov.service.interfaces.ProductService;
 import com.xiaov.utils.CompressPicUtil;
 import com.xiaov.utils.ImageCutModel;
@@ -42,7 +39,7 @@ import com.xiaov.utils.UploadFileUtil;
 @Controller
 public class ProductController {
 
-	private String path;
+	
 	@Autowired
 	private ProductService productService;
 
@@ -52,6 +49,7 @@ public class ProductController {
 	@Autowired
 	private ProductDetailServiceImpl detailServiceImpl;
 	
+	private String path;
 	private static int bufSize = 512; // size of bytes
 	private byte[] buf;
 	private int readedBytes;

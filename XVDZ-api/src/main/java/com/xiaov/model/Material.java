@@ -30,7 +30,6 @@ public class Material extends Page<Material> implements java.io.Serializable {
 
 	// Fields
 	private String id;
-	private Material material;
 	private Types dbTypes;
 	private String materialNo;
 	private String meterialName;
@@ -60,12 +59,11 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Material(String id, Material material, Types dbTypes,
+	public Material(String id, Types dbTypes,
 			String materialNo, String meterialName, String meterialRemark,
 			Date addTime, Date updateTime, Date deleteTime,
 			Integer deleteFlag) {
 		this.id = id;
-		this.material = material;
 		this.dbTypes = dbTypes;
 		this.materialNo = materialNo;
 		this.meterialName = meterialName;
@@ -87,16 +85,6 @@ public class Material extends Page<Material> implements java.io.Serializable {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "father_material_id")
-	public Material getMaterial() {
-		return this.material;
-	}
-
-	public void setMaterial(Material material) {
-		this.material = material;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
