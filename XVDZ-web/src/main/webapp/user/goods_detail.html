@@ -1,173 +1,218 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>小v定制</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="../css/weui.min.css"/>
-    <link rel="stylesheet" href="../css/swiper.min.css">
-    <link rel="stylesheet" href="../css/sm.min.css">
-    <link rel="stylesheet" href="../css/sm-extend.min.css">
-    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+<meta charset="UTF-8">
+<title>小v定制</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="../css/weui.min.css" />
+<link rel="stylesheet" href="../css/swiper.min.css">
+<link rel="stylesheet" href="../css/sm.min.css">
+<link rel="stylesheet" href="../css/sm-extend.min.css">
+<link rel="stylesheet" href="../css/styles.css" type="text/css">
 </head>
 <body style="padding-top:0px">
 
 	<div class="weui_dialog_confirm" id="comment" style="display:none">
-	    <div class="weui_mask"></div>
-	    <div class="weui_dialog">
-	        <div class="weui_dialog_hd">
-	          <strong class="weui_dialog_title">评论</strong>
-	        </div>
-	        <div class="weui_dialog_bd">
-	        		
+		<div class="weui_mask"></div>
+		<div class="weui_dialog">
+			<div class="weui_dialog_hd">
+				<strong class="weui_dialog_title">评论</strong>
+			</div>
+			<div class="weui_dialog_bd">
+
 				<div class="weui_cells weui_cells_form">
-				    <div class="weui_cell">
-				        <div class="weui_cell_bd weui_cell_primary">
-				            <textarea class="weui_textarea" id="textarea" placeholder="请输入评论" rows="3"></textarea>
-				        </div>
-				    </div>
+					<div class="weui_cell">
+						<div class="weui_cell_bd weui_cell_primary">
+							<textarea class="weui_textarea" id="textarea" placeholder="请输入评论"
+								rows="3"></textarea>
+						</div>
+					</div>
 				</div>
 
-	        </div>
-	        <div class="weui_dialog_ft">
-	            <a href="javascript:;" id="cancel" class="weui_btn_dialog default">取消</a>
-	            <a href="javascript:;" id="confirm" class="weui_btn_dialog primary">确定</a>
-	        </div>
-	    </div>
+			</div>
+			<div class="weui_dialog_ft">
+				<a href="javascript:;" id="cancel" class="weui_btn_dialog default">取消</a>
+				<a href="javascript:;" id="confirm" class="weui_btn_dialog primary">确定</a>
+			</div>
+		</div>
 	</div>
 
 	<div class="weui_tab">
-	    <div class="weui_tab_bd">
-	        <div class="weui_tab_bd_item">
+		<div class="weui_tab_bd">
+			<div class="weui_tab_bd_item">
 
-	        	<div class="title-bar" id="go-back">
-        		  	<span class="icon icon-left"></span>
-	        	</div>
+				<div class="title-bar" id="go-back">
+					<span class="icon icon-left"></span>
+				</div>
 
-	        	<div class="title-bar right" id="cart-this">
-        		  	<span class="icon icon-share"></span>
-	        	</div>
+				<div class="title-bar right" id="cart-this">
+					<span class="icon icon-share"></span>
+				</div>
 
-	        	<div class="title-bar right" id="share-this">
-        		  	<span class="icon icon-cart"></span>
-	        	</div>
+				<div class="title-bar right" id="share-this">
+					<span class="icon icon-cart"></span>
+				</div>
 
 				<div class="swiper-container">
-				  	<div class="swiper-wrapper">
-				    	<div class="swiper-slide blue-slide" style="height:160px;overflow-y: hidden;">
-				    		<img width="100%" src="http://demo.wex5.com/taobao/v-QzqqYf-zh_CN-/demo/taobao/detail/img/pic1.png">
-				    	</div>
-				    	<div class="swiper-slide red-slide">slider2</div>
-				    	<div class="swiper-slide orange-slide">slider3</div>
-				  	</div>
-			        <div class="swiper-pagination"></div>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide blue-slide"
+							style="height:160px;overflow-y: hidden;">
+							<img width="100%"
+								src="http://demo.wex5.com/taobao/v-QzqqYf-zh_CN-/demo/taobao/detail/img/pic1.png">
+						</div>
+						<div class="swiper-slide red-slide">slider2</div>
+						<div class="swiper-slide orange-slide">slider3</div>
+					</div>
+					<div class="swiper-pagination"></div>
 				</div>
 
 				<div class="list-block media-list" style="margin:0px">
-				    <ul>
-				      <li>
-				        <a href="#" class="item-link item-content">
-				          <div class="item-inner" style="background-image:none">
-				            <div class="item-title-row">
-				              <div class="item-title">雪纺印花百褶裙半身裙</div>
-				              <div class="item-after" style="color: rgb(201, 64, 64);font-size: 30px;">¥15</div>
-				            </div>
-				            <div class="item-subtitle">作者</div>
-				            <div class="item-text">雪纺印花百褶裙半身裙,简约的线条和版型上身很好看，整体更有看点。</div>
-				          </div>
-				        </a>
-				      </li>
-				    </ul>
+					<ul>
+						<li><a href="#" class="item-link item-content">
+								<div class="item-inner" style="background-image:none">
+									<div class="item-title-row">
+										<div class="item-title">雪纺印花百褶裙半身裙</div>
+										<div class="item-after"
+											style="color: rgb(201, 64, 64);font-size: 30px;">¥15</div>
+									</div>
+									<div class="item-subtitle">作者</div>
+									<div class="item-text">雪纺印花百褶裙半身裙,简约的线条和版型上身很好看，整体更有看点。</div>
+								</div> </a>
+						</li>
+					</ul>
 				</div>
 
 
 				<div class="buttons-tab">
-				    <a href="#tab1" class="tab-link active button">图文详情</a>
-				    <a href="#tab2" class="tab-link button">产品参数</a>
+					<a href="#tab1" class="tab-link active button">图文详情</a> <a
+						href="#tab2" class="tab-link button">产品参数</a>
 				</div>
 				<div class="content-block" style="padding:0px;margin-top:0px">
-				    <div class="tabs">
-				      <div id="tab1" class="tab active">
+					<div class="tabs">
+						<div id="tab1" class="tab active">
 
-						  <div class="card demo-card-header-pic" style="margin:0px;box-shadow:none">
-						    <div valign="bottom" class="card-header color-white no-border no-padding">
-						      <img class='card-cover' src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" alt="">
-						    </div>
-						    <div class="card-content">
-						      <div class="card-content-inner">
-						        <p>雪纺印花百褶裙半身裙,简约的线条和版型上身很好看，整体更有看点。时尚真皮女凉鞋 牛筋底中跟欧美潮鞋 2015夏个性森系女鞋子罗马鞋。</p>
-						      </div>
-						    </div>
-						    <div class="card-footer no-border">
-						      <a href="#" class="link">赞</a>
-						      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-		  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-						    </div>
-						</div>
+							<div class="card demo-card-header-pic"
+								style="margin:0px;box-shadow:none">
+								<div valign="bottom"
+									class="card-header color-white no-border no-padding">
+									<img class='card-cover'
+										src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"
+										alt="">
+								</div>
+								<div class="card-content">
+									<div class="card-content-inner">
+										<p>雪纺印花百褶裙半身裙,简约的线条和版型上身很好看，整体更有看点。时尚真皮女凉鞋 牛筋底中跟欧美潮鞋
+											2015夏个性森系女鞋子罗马鞋。</p>
+									</div>
+								</div>
+								<div class="card-footer no-border">
+									<a href="#" class="link">赞</a> <a href="#"
+										class="link leave-a-message"><span
+										class="icon icon-message"></span> </a> <a href="#" class="link"><span
+										class="icon icon-star"></span> </a>
+								</div>
+							</div>
 
-				      </div>
-				      <div id="tab2" class="tab">
-						<div class="list-block" style="margin-top:0px;">
-						    <ul>
-						      <li class="item-content">
-						        <div class="item-media"><i class="icon icon-f7"></i></div>
-						        <div class="item-inner">
-						          <div class="item-title">商品名称</div>
-						          <div class="item-after">杜蕾斯</div>
-						        </div>
-						      </li>
-						      <li class="item-content">
-						        <div class="item-media"><i class="icon icon-f7"></i></div>
-						        <div class="item-inner">
-						          <div class="item-title">型号</div>
-						          <div class="item-after">极致超薄型</div>
-						        </div>
-						      </li>
-						    </ul>
 						</div>
-				      </div>
+						<div id="tab2" class="tab">
+							<div class="list-block" style="margin-top:0px;">
+								<ul>
+									<li class="item-content">
+										<div class="item-media">
+											<i class="icon icon-f7"></i>
+										</div>
+										<div class="item-inner">
+											<div class="item-title">商品名称</div>
+											<div class="item-after">杜蕾斯</div>
+										</div>
+									</li>
+									<li class="item-content">
+										<div class="item-media">
+											<i class="icon icon-f7"></i>
+										</div>
+										<div class="item-inner">
+											<div class="item-title">型号</div>
+											<div class="item-after">极致超薄型</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 
 
 				<div class="card" style="margin:0px;box-shadow:none">
-				    <div class="card-header">买家评论</div>
-				    <div class="card-content">
-				      <div class="list-block media-list">
-				        <ul>
-				          <li class="item-content">
-				            <div class="item-media">
-				              <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="44">
-				            </div>
-				            <div class="item-inner">
-				              <div class="item-title-row">
-				                <div class="item-title">标题</div>
-				              </div>
-				              <div class="item-subtitle">子标题</div>
-				            </div>
-				          </li>
-				        </ul>
-				      </div>
-				    </div>
-				    <div class="card-footer">
-				      <span><a href="">更多</a></span>
-				    </div>
+					<div class="card-header">买家评论</div>
+					<div class="card-content">
+						<div class="list-block media-list">
+							<ul>
+								<li class="item-content">
+									<div class="item-media">
+										<img
+											src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"
+											width="44">
+									</div>
+									<div class="item-inner">
+										<div class="item-title-row">
+											<div class="item-title">标题</div>
+										</div>
+										<div class="item-subtitle">子标题</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="card-footer">
+						<span><a href="">更多</a> </span>
+					</div>
 				</div>
 
 			</div>
-		   </div>
-	    </div>
+		</div>
 	</div>
-	
+
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/weui.js"></script>
 	<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
-    <script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
-
+	<script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../js/sm-extend.min.js'
+		charset='utf-8'></script>
+	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript">
+		function getQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null)
+				return unescape(r[2]);
+			return null;
+		}
+		var productId = getQueryString("pdtId");
+		$("#cart-this").attr("pdtId",productId);
+		//获取产品详细
+		$.ajax({
+			url : "../admin/product/getPdtDetail.do",
+			type : "get",
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : {pdtId:1},
+			success : function(data) {
+				if (data.result.length == pageSize) {
+					pageNo++;
+				} else {
+					flag = false;
+				}
+				var oldHtml = $("#listContent").html();
+				var html = baidu.template('t:all_product', {
+					"list" : data.result
+				});
+				$("#listContent").html(oldHtml + html);
+			}
+		});
+	</script>
 </body>
 </html>
