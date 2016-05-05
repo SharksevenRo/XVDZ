@@ -107,7 +107,7 @@
 								class="button button-big button-fill button-danger">取消</a>
 						</div>
 						<div class="col-50">
-							<a href="javascript:rigist();" class="button button-big button-fill button-success">确认注册</a>
+							<a href="javascript:regist();" class="button button-big button-fill button-success">确认注册</a>
 						</div>
 					</div>
 				</div>
@@ -195,7 +195,7 @@
 		function regist(){
 			var tel = $.trim($("input[name=usTel]").val());
 			var usPwd = $.trim($("input[name=usPwd]").val());
-			var reUsPwd = $.trim($("input[name=reUsPwd]").val());
+			var reUsPwd = $.trim($("input[name=rePwd]").val());
 			var telCode = $.trim($("input[name=telCode]").val());
 			if(tel == "" || usPwd == "" || reUsPwd == "" || telCode == ""){
 				$("#dialog .weui_dialog_bd").text("所填信息不能为空");
@@ -221,14 +221,15 @@
 				}, 3000);
 				return;
 			} else {
+
 				$.ajax({
 					url : "../admin/user/save.do",
-					type : "post",
+					type : "get",
 					contentType : "application/json; charset=utf-8",
 					dataType : "json",
 					data : $("#registForm").serialize(),
 					success : function(data) {
-						if (data.msgCode == "1") {
+						if (data.code == "1") {
 							$.cookie("telCodeCk", "", { expires: -1 }); 
 							$("#toast .weui_toast_content").text("注册成功！");
 							$('#toast').show();
@@ -236,7 +237,16 @@
 								$('#toast').hide();
 								window.location.href = "index.html";
 							}, 2000);
+						}else
+						{
+							$("#dialog .weui_dialog_bd").text(data.message);
+							$("#dialog").show();
+							setTimeout(function() {
+								$('#dialog').hide();
+							}, 3000);
 						}
+
+
 					}
 				});
 			}

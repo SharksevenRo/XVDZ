@@ -1,15 +1,25 @@
 package com.xiaov.controller;
 
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.xiaov.model.DiscountCode;
+import com.xiaov.model.DiscountCodeUseRecord;
+import com.xiaov.service.impl.DiscountCodeServiceImpl;
+import com.xiaov.service.impl.UserServiceImpl;
+import com.xiaov.service.interfaces.DiscountCodeService;
+import com.xiaov.service.interfaces.DiscountCodeUseRecordService;
+import com.xiaov.web.support.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.UserInfo;
@@ -21,9 +31,18 @@ import com.xiaov.web.support.CookieUtil;
 @Controller
 public class UserController {
 
+
 	@Autowired
 	private UserService userService;
-	
+
+    @Autowired
+    private UserServiceImpl userServiceimpl;
+
+	@Autowired
+	private DiscountCodeServiceImpl discountCodeService;
+
+    @Autowired
+    private DiscountCodeUseRecordService discountCodeUseRecordService;
 	//获取所有
 	@RequestMapping("/admin/user/all")
 	@ResponseBody
@@ -34,25 +53,69 @@ public class UserController {
 		return users;
 	}
 	//添加
-	@RequestMapping("/admin/user/save")
+	@RequestMapping(value = "/admin/user/save")
 	@ResponseBody
-	public MessageBean save(UserInfo user){
-		
-		try {
-			userService.save(user);
-			return new MessageBean(APPConstant.SUCCESS, "添加成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new MessageBean(APPConstant.ERROR, "添加失败");
+	public MessageBean save(String telCode,String disCodeNo,String rePwd,String usPwd,String usTel,HttpSession session){
+
+        String number = (String)session.getAttribute("RandNumber");
+
+        if(number.equals(telCode)) {
+			if(usPwd.equals(rePwd)) {
+				try {
+                    List<UserInfo>  userIsAdd = userServiceimpl.getByProperty("usTel",usTel);
+                    if(userIsAdd.isEmpty()) {
+                        if(disCodeNo.length()!=0) //是否绑定优惠码
+                        {
+                            List<DiscountCode> discode = discountCodeService.getByProperty("disCodeNo",disCodeNo);
+                            if(discode.isEmpty())//优惠码是否存在
+                            {
+                                return new MessageBean(-1, "优惠码不存在或错误,请重新输入注册!");
+
+                            }else {
+                                    UserInfo user = new UserInfo();
+                                    user.setUsTel(usTel);
+                                    user.setUsName(usTel);
+                                    user.setUsPwd(usPwd);
+                                    user.setUsSex("保密");
+                                    user.setAddTime(new Date());
+                                    userService.save(user);  //注册用户
+                                    List<UserInfo> userinfo = userServiceimpl.getByProperty("usTel",usTel);
+                                    DiscountCodeUseRecord discountCodeUseRecord = new DiscountCodeUseRecord();
+                                    discountCodeUseRecord.setUserInfo(userinfo.get(0));
+                                    discountCodeUseRecord.setDisCodeId(discode.get(0).getId());
+                                    discountCodeUseRecord.setUseTime(new Date());
+                                    discountCodeUseRecordService.save(discountCodeUseRecord);//绑定优惠码
+                                    return new MessageBean(1,"注册成功!");
+                            }
+                        }
+                        UserInfo user = new UserInfo();
+                        user.setUsTel(usTel);
+                        user.setUsName(usTel);
+                        user.setUsPwd(usPwd);
+                        user.setUsSex("保密");
+                        user.setAddTime(new Date());
+                        userService.save(user);//注册用户
+                        return new MessageBean(1,"注册成功!");
+                    }else {
+                        return new MessageBean(-2,"该手机号已被注册!");
+                    }
+				} catch (Exception e) {
+					e.printStackTrace();
+					return new MessageBean(-4,"系统错误!");
+				}
+			}else {
+                return new MessageBean(-2,"两次密码不匹配");
+			}
+		}else {
+			return new MessageBean(-3,"验证码错误!");
 		}
-		
 	}
 	
 	/**
 	 * 如果要向前途返回json格式数据，加@ResponseBody，返回要返回的对象，
 	 * 如果查询的结果有代理对象调用LazyObjecUtil.LazyPageSetNull去除代理对象
 	 * 如果关联对象数据也要带到前台，选择动态关闭延迟加载的方式查询数据库，方法见UserServiceImp page方法中的实例
-	 * @param request
+	 * @param
 	 * @param page
 	 * @return
 	 */
@@ -126,6 +189,20 @@ public class UserController {
 		String openId = new CookieUtil(request).getValue("user", "openId", true);
 		return null;
 	}
-	
+	@RequestMapping("/admin/telCode/getTelCode")
+	public String SeedMessageCheck(@RequestParam("usTel") String usTel, HttpSession session){
+
+		SendMessage sendMessage = new SendMessage();
+		sendMessage.setMobile(usTel);
+		String rand = String.valueOf(new Random().nextInt(999999));
+		sendMessage.setMsg("您好，您的验证码是"+rand);
+        session.setAttribute("RandNumber", rand);
+        session.setMaxInactiveInterval(600);
+		System.out.println(usTel);
+		System.out.println(sendMessage.getMsg());
+		sendMessage.SeedMessageAPI();
+		return null;
+	}
+
 	
 }

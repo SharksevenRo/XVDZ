@@ -59,4 +59,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserInfo> implements UserSe
 		
 		return super.getOne(clazz, pk);
 	}
+
+	public  List<UserInfo> getByProperty(String propertynmae,String propertyvalues){
+		List<UserInfo> result ;
+		result = userDao.findByProperty(propertynmae,propertyvalues);
+		return result;
+	}
 }

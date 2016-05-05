@@ -3,7 +3,7 @@ package com.xiaov.test;
 public class HttpSenderTest {
 	public static void main(String[] args) {
 		String url = "http://222.73.117.156/msg/";// 应用地址
-		String account = "jiekou-clcs-03";// 账号
+		String account = "zhuxinkeji";// 账号
 		String pswd = "Admin888";// 密码
 		String mobile = "13691726734";// 手机号码，多个号码使用","分割
 		String msg = "您好，您的验证码是123456";// 短信内容
