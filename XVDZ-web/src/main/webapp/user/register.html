@@ -159,6 +159,7 @@
 			}
 			
 		}
+		//获取手机验证码
 		function getTelCode(obj) {
 			var tel = $.trim($("input[name=usTel]").val());
 			if (tel == "" || !tel.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
@@ -182,6 +183,7 @@
 					type : "get",
 					contentType : "application/json; charset=utf-8",
 					dataType : "json",
+					data : {usTel:tel},
 					success : function(data) {
 						if (data.msgCode == "1") {
 							$("#toast").show();
@@ -194,6 +196,7 @@
 				});
 			}
 		}
+		//注册
 		function regist(){
 			var tel = $.trim($("input[name=usTel]").val());
 			var usPwd = $.trim($("input[name=usPwd]").val());
@@ -231,6 +234,7 @@
 					data : $("#registForm").serialize(),
 					success : function(data) {
 						if (data.msgCode == "1") {
+							$.cookie("telCodeCk", "", { expires: -1 }); 
 							$("#toast .weui_toast_content").text("注册成功！");
 							$('#toast').show();
 							setTimeout(function() {
