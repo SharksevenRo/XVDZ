@@ -24,11 +24,11 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "user_info", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
+@StateDelete(propertyName = "deleteFlag", type = FieldType.I, value = "1")
 public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	// Fields
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
 	private Integer typeId;
 	private String appId;
@@ -46,17 +46,20 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private String usHobby;
 	private Integer usState;
 	private String usIdCard;
+	private String school;
+	private String discountCode;
+
 	private Integer usLoginErrorTimes;
 	private Date usLastLoginTime;
 	private Boolean usLoginState;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updateTime;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private String usRemark;
-	private Integer deleteFlag=0;
+	private Integer deleteFlag = 0;
 
 	// Constructors
 
@@ -65,9 +68,8 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public UserInfo(String usId, String usNcNa, String usLgNa, String usPwd,
-			Integer usState, Integer usLoginErrorTimes, Boolean usLoginState,
-			Date addTime, Integer deleteFlag) {
+	public UserInfo(String usId, String usNcNa, String usLgNa, String usPwd, Integer usState, Integer usLoginErrorTimes,
+			Boolean usLoginState, Date addTime, Integer deleteFlag) {
 		this.id = usId;
 		this.usNcNa = usNcNa;
 		this.usLgNa = usLgNa;
@@ -80,13 +82,10 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserInfo(String usId, Integer typeId, String appId, String usNcNa,
-			String usLgNa, String usName, String usPwd, String usSex,
-			Date usBirth, String usPic, String usPicO, String usTel,
-			String usMail, String usNatrue, String usHobby, Integer usState,
-			String usIdCard, Integer usLoginErrorTimes,
-			Date usLastLoginTime, Boolean usLoginState, Date addTime,
-			Date updateTime, Date deleteTime, String usRemark,
+	public UserInfo(String usId, Integer typeId, String appId, String usNcNa, String usLgNa, String usName,
+			String usPwd, String usSex, Date usBirth, String usPic, String usPicO, String usTel, String usMail,
+			String usNatrue, String usHobby, Integer usState, String usIdCard, Integer usLoginErrorTimes,
+			Date usLastLoginTime, Boolean usLoginState, Date addTime, Date updateTime, Date deleteTime, String usRemark,
 			Integer deleteFlag) {
 		this.id = usId;
 		this.typeId = typeId;
@@ -118,8 +117,8 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "us_id", unique = true, nullable = true, length = 33)
-	@GeneratedValue(generator="system-uuid") 
-	@GenericGenerator(name="system-uuid",strategy="uuid")
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	public String getId() {
 		return this.id;
 	}
@@ -347,5 +346,21 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
+	@Column(name = "school")
+	public String getSchool() {
+		return school;
+	}
 
+	public void setSchool(String school) {
+		this.school = school;
+	}
+	@Column(name = "discountcode")
+	public String getDiscountCode() {
+		return discountCode;
+	}
+
+	public void setDiscountCode(String discountCode) {
+		this.discountCode = discountCode;
+	}
+	
 }

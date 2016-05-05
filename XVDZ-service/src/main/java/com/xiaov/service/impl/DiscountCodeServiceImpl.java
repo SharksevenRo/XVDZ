@@ -46,4 +46,13 @@ public class DiscountCodeServiceImpl extends BaseServiceImpl<DiscountCode> imple
 
         return super.getOne(clazz, pk);
     }
+
+    public  List<DiscountCode> getByProperty(String propertynmae,String propertyvalues){
+
+        List<DiscountCode> result ;
+
+        result = discountCodeDao.findByProperty(propertynmae,propertyvalues);
+
+        return result;
+    }
 }
