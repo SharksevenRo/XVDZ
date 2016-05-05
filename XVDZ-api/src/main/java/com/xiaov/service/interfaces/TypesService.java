@@ -9,12 +9,10 @@ import com.xiaov.service.BaseService;
  * Created by yymao on 2016/4/26.
  */
 public interface TypesService extends BaseService<Types>{
-
+	
 	/**
-	 * @Description:TODO
-	 * @param @return
-	 * @return List<Types>
-	 * @throws 
+	 * 获取一级父类型 
+	 * @return
 	 */
-	List<Types> getProductType();
+	public List<Types> getTypesByParent(Types types);
 }

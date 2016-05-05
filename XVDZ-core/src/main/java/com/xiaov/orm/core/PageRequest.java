@@ -63,7 +63,7 @@ public class PageRequest implements java.io.Serializable {
 	/**
 	 * 响应码
 	 */
-	protected String code;
+	protected Integer code=1;
 	
 	protected String message;
 
@@ -92,11 +92,11 @@ public class PageRequest implements java.io.Serializable {
 		this.message = message;
 	}
 
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
 	}
 

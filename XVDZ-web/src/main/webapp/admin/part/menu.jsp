@@ -56,6 +56,17 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#ajax/type.html">所有类型</a></li>
+							<li><a href="#ajax/simpleTypes.html">类型管理(列表)</a></li>
+						</ul>
+					</li>
+					<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-inbox"></i> 
+							<span>图库管理</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#ajax/type.html">新增</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -66,6 +77,7 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#ajax/goods.html">所有产品</a></li>
+							<li><a href="#ajax/uploadProduct.html">基本款上传</a></li>
 							<li><a href="#">产品类型</a></li>
 						</ul>
 					</li>

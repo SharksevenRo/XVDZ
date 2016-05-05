@@ -38,9 +38,11 @@ public class ReceiveAddressServiceImpl extends BaseServiceImpl<ReceiveAddress> i
     @Transactional
     public void save(ReceiveAddress entity) {
 
+    	ReceiveAddress temp=new ReceiveAddress();
+    	temp.setAddDefault(true);
+    	temp.setUserInfo(entity.getUserInfo());
     	//获取默认地址
-    	List<ReceiveAddress> defaultAdd = receiveAddressDao.findByProperty("addDefault", true);
-    	
+    	List<ReceiveAddress> defaultAdd =loadAll(temp);
     	if(defaultAdd.size()==1){
     		//修改默认地址
     		ReceiveAddress address = defaultAdd.get(0);
