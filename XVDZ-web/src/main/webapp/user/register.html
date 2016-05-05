@@ -36,9 +36,9 @@
 										<i class="icon icon-form-name"></i>
 									</div>
 									<div class="item-inner">
-										<div class="item-title label">手机号</div>
+										<div class="item-title label">手机号:</div>
 										<div class="item-input">
-											<input type="text" placeholder="您的手机号">
+											<input value="" name="usTel" type="text" placeholder="您的手机号">
 										</div>
 									</div>
 								</div>
@@ -49,9 +49,9 @@
 										<i class="icon icon-form-name"></i>
 									</div>
 									<div class="item-inner">
-										<div class="item-title label">密码</div>
+										<div class="item-title label">密码:</div>
 										<div class="item-input">
-											<input type="password" placeholder="您的密码">
+											<input name="usPwd" type="password" placeholder="您的密码">
 										</div>
 									</div>
 								</div>
@@ -62,9 +62,22 @@
 										<i class="icon icon-form-name"></i>
 									</div>
 									<div class="item-inner">
-										<div class="item-title label">确认密码</div>
+										<div class="item-title label">确认密码:</div>
 										<div class="item-input">
-											<input type="password" placeholder="输入您的确认密码">
+											<input name="rePwd" type="password" placeholder="输入您的确认密码">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="item-content">
+									<div class="item-media">
+										<i class="icon icon-form-name"></i>
+									</div>
+									<div class="item-inner">
+										<div class="item-title label">优惠码:</div>
+										<div class="item-input">
+											<input name="disCodeNo" type="text" placeholder="输入您的优惠码">
 										</div>
 									</div>
 								</div>
@@ -76,7 +89,7 @@
 									</div>
 									<div class="item-inner">
 										<div class="item-title label">
-											<a href="javascript:getTelCode();" class="button" style="width: 60%">发送</a>
+											<a id="timer" href="javascript:getTelCode(this);" class="button" style="width: 60%">发送</a>
 										</div>
 										<div class="item-input">
 											<input name="telCode" type="text" placeholder="手机验证码">
@@ -131,36 +144,59 @@
 		charset='utf-8'></script>
 	<script type="text/javascript" src="../js/scripts.js"></script>
 	<script type="text/javascript">
-		function getTelCode() {
-			var tel = $("input[name=usTel]").val().trim();
-			if (tel == "" || !"/^0?1[3|4|5|8][0-9]\d{8}$/".test(tel)) {
-				$('#dialog').show();
+		$(function(){
+			$("#sendBtn").click(function(){
+				getTelCode();
+			});
+		});
+		//改变显示时间
+		function changeTime(){
+			var times = 60;
+			var id = setInterval(function(){
+				if(times<=60&&times>0){
+					$("#timer").addClass("disabled");
+					$("#timer").text(times--);
+				}else{
+					$("#timer").removeClass("disabled");
+					$("#timer").text("发送");
+					clearInterval(id);
+				}
+			}, 1000);
+		}
+		//获取手机验证码
+		function getTelCode(obj) {
+			
+			var tel = $.trim($("input[name=usTel]").val());
+			if (tel == "" || !tel.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
+				$("#dialog").show();
 				setTimeout(function() {
-					$('#dialog').hide();
+					$("#dialog").hide();
 				}, 3000);
 			} else {
+				changeTime();
 				$.ajax({
 					url : "../admin/telCode/getTelCode.do",
 					type : "get",
 					contentType : "application/json; charset=utf-8",
 					dataType : "json",
+					data : {usTel:tel},
 					success : function(data) {
 						if (data.msgCode == "1") {
-							$('#toast').show();
+							$("#toast").show();
 							setTimeout(function() {
-								$('#toast').hide();
-								window.location.href = "addr.html";
+								$("#toast").hide();
 							}, 2000);
 						}
 					}
 				});
 			}
 		}
+		//注册
 		function regist(){
-			var tel = $("input[name=usTel]").val().trim();
-			var usPwd = $("input[name=usPwd]").val().trim();
-			var reUsPwd = $("input[name=reUsPwd]").val().trim();
-			var telCode = $("input[name=telCode]").val().trim();
+			var tel = $.trim($("input[name=usTel]").val());
+			var usPwd = $.trim($("input[name=usPwd]").val());
+			var reUsPwd = $.trim($("input[name=reUsPwd]").val());
+			var telCode = $.trim($("input[name=telCode]").val());
 			if(tel == "" || usPwd == "" || reUsPwd == "" || telCode == ""){
 				$("#dialog .weui_dialog_bd").text("所填信息不能为空");
 				$('#dialog').show();
@@ -177,7 +213,7 @@
 				}, 3000);
 				return;
 			}
-			if (!"/^0?1[3|4|5|8][0-9]\d{8}$/".test(tel)) {
+			if (!tel.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
 				$("#dialog .weui_dialog_bd").text("手机号码格式不正确，请重试！");
 				$('#dialog').show();
 				setTimeout(function() {
@@ -193,6 +229,7 @@
 					data : $("#registForm").serialize(),
 					success : function(data) {
 						if (data.msgCode == "1") {
+							$.cookie("telCodeCk", "", { expires: -1 }); 
 							$("#toast .weui_toast_content").text("注册成功！");
 							$('#toast').show();
 							setTimeout(function() {
