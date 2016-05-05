@@ -113,7 +113,7 @@ public class MaterialController {
 		}
 	}
 	@ResponseBody
-	@RequestMapping("/admin/product/uploadByZip")
+	@RequestMapping("/admin/material/uploadByZip")
 	public MessageBean uploadProductByZip(MultipartFile zip, HttpServletRequest request) {
 		ZipFile zipFile = null;
 		InputStream inputStream = null;

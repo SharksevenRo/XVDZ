@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xiaov.constant.APPConstant;
 import com.xiaov.dao.ProductDao;
 import com.xiaov.dao.ProductDetailDao;
 import com.xiaov.model.Product;
@@ -63,11 +64,11 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		
 		Criterion [] criterions={Restrictions.eq("type", type),Restrictions.eq("pdtId", product.getId())};
 		List<ProductDetail> details = detailDao.getEntitiestNotLazy(new ProductDetail(), null, criterions);
-		if(ProductDetail.COLOR.equals(type)){
+		if(APPConstant.COLOR.equals(type)){
 			product.setColors(details);
-		}else if(ProductDetail.MATERIAL.equals(type)){
+		}else if(APPConstant.MATERIAL.equals(type)){
 			product.setMaterials(details);
-		}else if(ProductDetail.SIZE.equals(type)){
+		}else if(APPConstant.SIZE.equals(type)){
 			product.setSizes(details);
 		}else{
 			throw new RuntimeException(type+"参数异常");
@@ -80,9 +81,9 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	 */
 	public void fillDetail(Product product){
 		
-		fillDetail(product, ProductDetail.COLOR);
-		fillDetail(product, ProductDetail.SIZE);
-		fillDetail(product, ProductDetail.MATERIAL);
+		fillDetail(product, APPConstant.COLOR);
+		fillDetail(product, APPConstant.SIZE);
+		fillDetail(product, APPConstant.MATERIAL);
 	}
 	/**
 	 * 获取批量商品的所有类型详细
