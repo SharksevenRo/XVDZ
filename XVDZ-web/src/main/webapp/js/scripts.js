@@ -83,11 +83,11 @@ $(function() {
 			$('body').css({
 				'padding-top' : '0px'
 			});
-		} else {
+		} /*else {
 			$('body').css({
 				'padding-top' : '44px'
 			});
-		}
+		}*/
 
 	});
 
@@ -299,6 +299,17 @@ $(function() {
 
 	$('#go-back').click(function() {
 		window.history.go(-1);
+	});
+	$('#cart-this').click(function() {
+		var cartList = $.cookie("cart");
+		var item = {};
+		item.pdtId = $(this).attr("pdtId");
+		item.color = $("#typesForm input[name=color").val();
+		item.size = $("#typesForm input[name=size").val();
+		item.style = $("#typesForm input[name=style").val();
+		item.orDtMount = $("#typesForm input[name=orDtMount").val();
+		cartList.push(item);
+		$.cookie('cart', cartList); 
 	});
 
 	// 提现按钮事件
