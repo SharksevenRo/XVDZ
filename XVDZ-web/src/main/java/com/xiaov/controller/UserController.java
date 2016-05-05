@@ -204,5 +204,17 @@ public class UserController {
 		return null;
 	}
 
+	@RequestMapping("/admin/user/login")
+	@ResponseBody
+	public MessageBean login(String usTel,String usPwd){
+		UserInfo user = userServiceimpl.login(usPwd,usTel);
+		if(user == null){
+			return new MessageBean(-1,"手机或密码错误!");
+		}else {
+
+			return new MessageBean(1,"登录成功!");
+		}
+
+	}
 	
 }
