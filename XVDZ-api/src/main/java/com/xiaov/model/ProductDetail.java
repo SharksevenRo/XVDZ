@@ -30,28 +30,30 @@ public class ProductDetail extends Page<ProductDetail>{
 	
 	private String id;
 	private String productId;
-	private String pic;
-	private String name;
+	private String picB;
+	private String picF;
+	private String colorName;
 	private String type;
+	private Double price;
 	
 	public ProductDetail() {
 	}
 	
 	
-	public ProductDetail(String productId, String pic, String name, String type) {
+	public ProductDetail(String productId, String picB, String colorName, String type) {
 		super();
 		this.productId = productId;
-		this.pic = pic;
-		this.name = name;
+		this.picB = picB;
+		this.colorName = colorName;
 		this.type = type;
 	}
 
-	public ProductDetail(String id, String productId, String pic, String name, String type) {
+	public ProductDetail(String id, String productId, String picB, String colorName, String type) {
 		super();
 		this.id = id;
 		this.productId = productId;
-		this.pic = pic;
-		this.name = name;
+		this.picB = picB;
+		this.colorName = colorName;
 		this.type = type;
 	}
 
@@ -73,19 +75,19 @@ public class ProductDetail extends Page<ProductDetail>{
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	@Column(name = "pic", length = 50)
-	public String getPic() {
-		return pic;
+	@Column(name = "picB", length = 50)
+	public String getPicB() {
+		return picB;
 	}
-	public void setPic(String pic) {
-		this.pic = pic;
+	public void setPicB(String pic) {
+		this.picB = pic;
 	}
-	@Column(name = "name", length = 50)
-	public String getName() {
-		return name;
+	@Column(name = "colorname", length = 50)
+	public String getColorName() {
+		return colorName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setColorName(String name) {
+		this.colorName = name;
 	}
 	@Column(name = "type", length = 50)
 	public String getType() {
@@ -94,4 +96,25 @@ public class ProductDetail extends Page<ProductDetail>{
 	public void setType(String type) {
 		this.type = type;
 	}
+
+
+	public String getPicF() {
+		return picF;
+	}
+
+	@Column(name = "picf")
+	public void setPicF(String picF) {
+		this.picF = picF;
+	}
+
+	@Column(name = "price")
+	public Double getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
 }
