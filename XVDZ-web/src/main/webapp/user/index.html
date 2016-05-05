@@ -1697,8 +1697,9 @@
 			});
 			//产品类型
 			$.ajax({
-				url : "../admin/types/productType.do",
+				url : "../admin/types/getTypesByParent.do",
 				type : "get",
+				data : {id : "10"},
 				contentType : "application/json; charset=utf-8",
 				dataType : "json",
 				success : function(data) {
