@@ -195,7 +195,7 @@
 		function regist(){
 			var tel = $.trim($("input[name=usTel]").val());
 			var usPwd = $.trim($("input[name=usPwd]").val());
-			var reUsPwd = $.trim($("input[name=reUsPwd]").val());
+			var reUsPwd = $.trim($("input[name=rePwd]").val());
 			var telCode = $.trim($("input[name=telCode]").val());
 			if(tel == "" || usPwd == "" || reUsPwd == "" || telCode == ""){
 				$("#dialog .weui_dialog_bd").text("所填信息不能为空");
@@ -236,6 +236,12 @@
 								$('#toast').hide();
 								window.location.href = "index.html";
 							}, 2000);
+						}else{
+							$("#dialog .weui_dialog_bd").text("手机号不能重复注册！");
+							$("#dialog").show();
+							setTimeout(function() {
+								$('#dialog').hide();
+							}, 3000);
 						}
 					}
 				});
