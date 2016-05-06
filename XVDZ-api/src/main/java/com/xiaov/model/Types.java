@@ -105,7 +105,7 @@ public class Types extends Page<Types> implements java.io.Serializable {
 		this.typeName = typeName;
 	}
 	
-	@Column(name = "type_tag", nullable = false, length = 50)
+	@Column(name = "type_tag", length = 50)
 	public String getTypeTag() {
 		return typeTag;
 	}

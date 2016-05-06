@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xiaov.constant.APPConstant;
+import com.xiaov.model.Material;
 import com.xiaov.model.Product;
 import com.xiaov.model.ProductDetail;
 import com.xiaov.model.Types;
@@ -29,6 +30,7 @@ import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.impl.ProductDetailServiceImpl;
 import com.xiaov.service.impl.ProductServiceImpl;
+import com.xiaov.service.interfaces.MaterialService;
 import com.xiaov.service.interfaces.ProductService;
 import com.xiaov.utils.CompressPicUtil;
 import com.xiaov.utils.ImageCutModel;
@@ -48,6 +50,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductDetailServiceImpl detailServiceImpl;
+	
+	@Autowired
+	private MaterialService materialService;
 	
 	private String path;
 	private static int bufSize = 512; // size of bytes
@@ -343,10 +348,19 @@ public class ProductController {
 					if(loadAll.size()==1){
 						detail=loadAll.get(0);
 					}
+					Material material;
+					material=new Material();
+					material.setDbTypes(types);
+					material.setMeterialName("基本款图片");
+					material.setUrl(basePath+"/"+fileName);
+					material.setAddTime(new Date());
+					material.setOriginalUrl(tempPath+fileName);
+					
+					materialService.save(material);
 					if (split2[1].equals("1")) {
-						detail.setPicB(basePath+"/"+fileName);
+						detail.setPicB(material);
 					} else if (split2[1].equals("2")) {
-						detail.setPicF(basePath+"/"+fileName);
+						detail.setPicF(material);
 					}
 					if(loadAll.size()==1){
 						detailServiceImpl.update(detail);
@@ -420,6 +434,12 @@ public class ProductController {
 	@ResponseBody
 	public Product getProductDetail(Product product){
 		
-		return productServiceimpl.fillDetail(product);
+		try {
+			return productServiceimpl.fillDetail(product);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 }

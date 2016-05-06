@@ -145,23 +145,32 @@ public class MaterialController {
 					for (int i = 1; i < split.length-1; i++) {
 						newTypes=new Types();
 						newTypes.setParentType(types);
-						
-						newTypes.setTypeName(split[1]);
-						typesService.save(newTypes);
+						newTypes.setTypeName(split[i]);
+						List<Types> loadAll = typesService.loadAll(newTypes);
+						if(loadAll.size()<=0){
+							newTypes.setAddTime(new Date());
+							typesService.save(newTypes);
+						}else{
+							newTypes=loadAll.get(0);
+						}
 						
 						types=newTypes;
 					}
+					
+					
 					// 分隔颜色和正反面标记
 					String[] split2 = split[3].split("[_]");
 					
-					
-					;
-					
-
+					Material material=new Material();
+					material.setDbTypes(types);
+					material.setMeterialName(split2[0]);
+					if(split2.length==2){
+						material.setPrice(Double.parseDouble(split2[1].replace(".png", "")));
+					}
 					//临时文件路径
-					String tempPath = "images/material/temp/" + Pinyin4jUtil.spellNoneTone(split[2]);
+					String tempPath = "images/material/original/" + Pinyin4jUtil.spellNoneTone(split[1])+"/"+Pinyin4jUtil.spellNoneTone(split[2]);
 					//压缩文件路径
-					String basePath = "images//material/compress/"+ Pinyin4jUtil.spellNoneTone(split[2]);
+					String basePath = "images//material/compress/"+ Pinyin4jUtil.spellNoneTone(split[1])+"/"+Pinyin4jUtil.spellNoneTone(split[2]);
 					//创建文件夹和文件
 					file= new File(path+tempPath );
 					if (!file.exists()) {
@@ -171,7 +180,7 @@ public class MaterialController {
 					if (!file.exists()) {
 						file.mkdirs();
 					}
-					String fileName = Pinyin4jUtil.spellNoneTone(split2[0]) + split2[1] + ".png";
+					String fileName = Pinyin4jUtil.spellNoneTone(split2[0]) + ".png";
 					file = new File(path+basePath+"/"+fileName);
 					if (!file.exists()) {
 						file.createNewFile();
@@ -191,8 +200,15 @@ public class MaterialController {
 					fileOut.flush();
 					fileOut.close();
 					
+			
 					//文件压缩
 					CompressPicUtil mypic = new CompressPicUtil();
+					mypic.resizePNG(path+tempPath+"/"+fileName,  path+basePath+"/"+fileName, 200, 200, true);
+					
+					material.setAddTime(new Date());
+					material.setUrl(basePath+"/"+fileName);
+					material.setOriginalUrl(basePath+"/"+fileName);
+					materialService.save(material);
 					
 				}
 			}
