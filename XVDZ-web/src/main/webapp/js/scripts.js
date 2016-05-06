@@ -431,7 +431,8 @@ $(function() {
 		if (canvas.getActiveObject() != undefined) {
 			canvas.remove(canvas.getActiveObject());
 		}
-
+		
+		src = src.replace("compress","temp");
 		fabric.Image.fromURL(src, function(img) {
 
 			img.scale(1).set({
@@ -448,7 +449,7 @@ $(function() {
 		});
 	};
 
-	displayCloths('../img/cloths/front.jpg');
+	displayCloths('../img/cloths/LanSe2.png');
 
 	// ------------------------滤镜相关------------------------
 
@@ -667,7 +668,7 @@ $(function() {
 			$('#front-this').show();
 			$('#front-this').animateCss('fadeInLeft');
 
-			displayCloths('../img/cloths/back.jpg');
+			displayCloths('../img/cloths/BaiSe2.jpg');
 			isShowBack = true;
 
 		});
@@ -690,7 +691,7 @@ $(function() {
 			$('#back-this').show();
 			$('#back-this').animateCss('fadeInRight');
 
-			displayCloths('../img/cloths/front.jpg');
+			displayCloths('../img/cloths/BaiSe1.jpg');
 			isShowBack = false;
 
 		});

@@ -1,6 +1,8 @@
 package com.xiaov.service.impl;
 
+import com.xiaov.dao.MaterialDao;
 import com.xiaov.dao.TypesDao;
+import com.xiaov.model.Material;
 import com.xiaov.model.Types;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.TypesService;
@@ -20,6 +22,9 @@ public class TypesImpl extends BaseServiceImpl<Types> implements TypesService {
 
     @Autowired
     private TypesDao dao;
+    
+    @Autowired
+    private MaterialDao materialDao;
     @Override
     public void delete(Types entity) {
         super.delete(entity);
@@ -64,5 +69,20 @@ public class TypesImpl extends BaseServiceImpl<Types> implements TypesService {
 	public List<Types> getTypesByParent(Types types){
 		
 		return dao.getEntitiestNotLazy(new Types(), null,new Criterion[]{Restrictions.eq("parentType.id", types.getId()),Restrictions.eq("deleteFlag", 0)});
+	}
+
+	public List<Types> getMaterialAndDefault(Types types) {
+		List<Types> child = dao.getEntitiestNotLazy(new Types(), new String []{"parentType"},new Criterion []{Restrictions.eq("parentType", types.getParentType())});
+		for (Types type : child) {
+			fillMaterial(type);
+		}
+		return child;
+	}
+	
+	public Types fillMaterial(Types types){
+		
+		List<Material> materials = materialDao.getEntitiestNotLazy(new Material(), new String []{"dbTypes"},new Criterion []{Restrictions.eq("dbTypes", types)});
+		types.setMaterials(materials);
+		return types;
 	}
 }

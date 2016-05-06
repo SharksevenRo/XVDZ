@@ -175,12 +175,11 @@ public class TypesController {
     
     @RequestMapping("/admin/types/getMaterialAndDefault")
     @ResponseBody
-    public List<Product> getMaterialAndDefault(Types types){
+    public List<Types> getMaterialAndDefault(Types types){
     	
     	 try {
-        	List<Product> products = productService.getSimpleProduct(types);
-        	products=LazyObjecUtil.LazySetNull(products, "productType");
-        	return products;
+        	List<Types> loadAll = typesService.getMaterialAndDefault(types);
+        	return loadAll;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
