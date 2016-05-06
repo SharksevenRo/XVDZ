@@ -1,6 +1,7 @@
 package com.xiaov.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -44,6 +46,9 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	private Date deleteTime;
 	private String typeRemark;
 	private Integer deleteFlag=0;
+	
+	private List<ProductDetail> details;
+	private List<Material>materials; 
 
 	// Constructors
 
@@ -162,6 +167,22 @@ public class Types extends Page<Types> implements java.io.Serializable {
 
 	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
+	}
+	@Transient
+	public List<ProductDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<ProductDetail> details) {
+		this.details = details;
+	}
+	@Transient
+	public List<Material> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(List<Material> materials) {
+		this.materials = materials;
 	}
 
 }

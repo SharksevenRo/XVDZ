@@ -13,6 +13,7 @@ import com.xiaov.dao.ProductDao;
 import com.xiaov.dao.ProductDetailDao;
 import com.xiaov.model.Product;
 import com.xiaov.model.ProductDetail;
+import com.xiaov.model.Types;
 import com.xiaov.service.interfaces.ProductService;
 import com.xiaov.utils.LazyObjecUtil;
 @Service
@@ -63,8 +64,10 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	 * @throws Exception 
 	 */
 	public Product fillDetail(Product product) throws Exception{
-		
-		Criterion [] criterions={Restrictions.eq("productId", product.getId())};
+		Criterion [] criterions = null;
+		if(product.getId()!=null){
+			criterions=new Criterion [] {Restrictions.eq("productId", product.getId())};
+		}
 		List<ProductDetail> details = detailDao.getEntitiestNotLazy(new ProductDetail(), new String[]{"picB","picF"}, criterions);
 		product.setDetail(details);
 		return product;
@@ -102,5 +105,11 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
 		return dao.getEntitiestNotLazy(new Product(),null, criterions);
 
+	}
+	public List<Product> getSimpleProduct(Types types) throws Exception {
+		
+		List<Product> products = dao.findByProperty("productType", types);
+		products=fillDetail(products);
+		return products;
 	}
 }
