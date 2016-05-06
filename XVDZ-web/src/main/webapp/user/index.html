@@ -240,7 +240,7 @@
 																<div class="col-33">
 																	<div class="card demo-card-header-pic" style="margin:0px">
 																		<div style="overflow:hidden" valign="bottom" class="card-header color-white no-border no-padding">
-																			<img width="100%" class='card-cover cloth-chosen active' src="../<%=data[i].detail[j].picF.url%>" alt="">
+																			<img width="100%" class="card-cover cloth-chosen active" src="../<%=data[i].detail[j].picF.url%>" alt="">
 																		</div>
 																	</div>
 																</div>
@@ -248,7 +248,7 @@
 																<div class="col-33">
 																	<div class="card demo-card-header-pic" style="margin:0px">
 																		<div style="overflow:hidden" valign="bottom" class="card-header color-white no-border no-padding">
-																			<img width="100%" class='card-cover cloth-chosen' src="../<%=data[i].detail[j].picF.url%>" alt="">
+																			<img width="100%" class="card-cover cloth-chosen" src="../<%=data[i].detail[j].picF.url%>" alt="">
 																		</div>
 																	</div>
 																</div>
@@ -266,7 +266,7 @@
 																<div class="col-33">
 																	<div class="card demo-card-header-pic" style="margin:0px">
 																		<div style="overflow:hidden" valign="bottom" class="card-header color-white no-border no-padding">
-																			<img width="100%" class='card-cover cloth-chosen' src="../<%=data[i].detail[j].picF.url%>" alt="">
+																			<img width="100%" class="card-cover cloth-chosen" src="../<%=data[i].detail[j].picF.url%>" alt="">
 																		</div>
 																	</div>
 																</div>
@@ -274,7 +274,7 @@
 																<div class="col-33">
 																	<div class="card demo-card-header-pic" style="margin:0px">
 																		<div style="overflow:hidden" valign="bottom" class="card-header color-white no-border no-padding">
-																			<img width="100%" class='card-cover cloth-chosen' src="../<%=data[i].detail[j].picF.url%>" alt="">
+																			<img width="100%" class="card-cover cloth-chosen" src="../<%=data[i].detail[j].picF.url%>" alt="">
 																		</div>
 																	</div>
 																</div>
@@ -524,10 +524,38 @@
 					<div class="card-header"
 						style="border-bottom: 1px solid rgb(231, 231, 231);">潮流图</div>
 					<div class="card-content">
-						<div class="card-content-inner"
-							style="height:100%;width:100%;padding:0px">
+						<div id="caoliutu" class="card-content-inner" style="height:100%;width:100%;padding:0px">
 
+						</div>
+						<script id="t:caoliutu" type="text/html">
 							<div class="buttons-tab">
+								<%for(var i=0;i<data.length;i++){%>
+									<a href="#<%=data[i].id%>" class="tab-link button"><%=data[i].typeName%></a>
+								<%}%>
+							</div>
+							<div class="content-block" style="margin-top:-1px">
+								<div class="tabs">
+									<%for(var i=0;i<data.length;i++){%>
+										<div id="<%=data[i].id%>" class="tab active">
+											<div class="content-block" style="padding:0px">
+												<div class="row no-gutter pattern-wall">
+													<%for(var j=0;j<data[i].meterials.length;j++){%>
+														<div class="col-33">
+															<div class="card demo-card-header-pic" style="margin:0px">
+																<div valign="bottom" style="border-bottom: 1px solid #EFE6E6;" class="card-header color-white no-border no-padding">
+																	<img class="card-cover" src="../<%=data[i].meterials[i].url%>" alt="">
+																</div>
+															</div>
+														</div>
+													<%}%>
+												</div>
+											</div>
+										</div>
+									<%}%>
+								</div>
+							</div>
+						</script>
+							<!--<div class="buttons-tab">
 								<a href="#trends-all" class="tab-link active button">默认</a> <a
 									href="#trends-class" class="tab-link button">班服</a> <a
 									href="#trends-cg" class="tab-link button">情侣</a>
@@ -537,266 +565,20 @@
 								<div class="tabs">
 									<div id="trends-all" class="tab active">
 										<div class="content-block" style="padding:0px">
-
 											<div class="row no-gutter pattern-wall">
 												<div class="col-33">
 													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
+														<div valign="bottom" style="border-bottom: 1px solid #EFE6E6;" class="card-header color-white no-border no-padding">
 															<img class='card-cover' src="../img/dora1.jpg" alt="">
 														</div>
 													</div>
 												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora2.jpeg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora3.jpg" alt="">
-														</div>
-													</div>
-												</div>
 											</div>
-
-											<div class="row no-gutter pattern-wall">
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora3.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora1.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora2.jpeg" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="row no-gutter pattern-wall">
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora1.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora2.jpeg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora3.jpg" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-
 										</div>
 									</div>
-									<div id="trends-class" class="tab">
-										<div class="content-block" style="padding:0px">
-
-											<div class="row no-gutter pattern-wall">
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora1.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora2.jpeg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora3.jpg" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="row no-gutter pattern-wall">
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora3.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora2.jpeg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora1.jpg" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="row no-gutter pattern-wall">
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora1.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora2.jpeg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora3.jpg" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-
-										</div>
-									</div>
-									<div id="trends-cg" class="tab">
-										<div class="content-block" style="padding:0px">
-
-											<div class="row no-gutter pattern-wall">
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora1.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora2.jpeg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora3.jpg" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="row no-gutter pattern-wall">
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora3.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora1.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora2.jpeg" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="row no-gutter pattern-wall">
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora1.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora3.jpg" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="col-33">
-													<div class="card demo-card-header-pic" style="margin:0px">
-														<div valign="bottom"
-															class="card-header color-white no-border no-padding">
-															<img class='card-cover' src="../img/dora2.jpeg" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-
-										</div>
-									</div>
+									
 								</div>
-							</div>
-
-						</div>
+							</div>-->
 					</div>
 				</div>
 
@@ -1022,15 +804,21 @@
 
 				<nav class="bar bar-tab" id="diy-tools" style="z-index:1020">
 					<a class="tab-item external" href="#" data-open="clothes"> <span
-						class="icon icon-app"></span> </a> <a class="tab-item external"
+						class="icon icon-app"></span> </a> 
+					<a class="tab-item external"
 						href="#" data-open="colors"> <span class="icon icon-me"></span>
-					</a> <a class="tab-item external" href="#" data-open="pictures"> <span
-						class="icon icon-picture"></span> </a> <a href="#"
+					</a> 
+					<a class="tab-item external" href="#" data-open="pictures"> <span
+						class="icon icon-picture"></span> </a>
+					<a href="javascript:getchaoliutu();"
 						class="tab-item external" data-open="trends"> <span
-						class="icon icon-star"></span> </a> <a class="tab-item external"
+						class="icon icon-star"></span> </a>
+					<a class="tab-item external"
 						href="#" data-open="text"> <span class="icon icon-message"></span>
-					</a> <a class="tab-item external" href="#" data-open="diy"> <span
-						class="icon icon-edit"></span> </a>
+					</a>
+					<a class="tab-item external" href="#" data-open="diy"> <span
+						class="icon icon-edit"></span>
+					</a>
 				</nav>
 			</div>
 			<!-- 购物车 -->
@@ -1373,6 +1161,21 @@
 						"data" : data
 					});
 					$("#base_content").html(html);
+				}
+			});
+		}
+		function getchaoliutu(){
+			$.ajax({
+				url : "../admin/types/getMaterialAndDefault.do?parentType.id=8a8a80405483d95b015483dc903b000f",
+				type : "get",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(data) {
+					debugger;
+					var html = baidu.template("t:caoliutu", {
+						"data" : data
+					});
+					$("#caoliutu").html(html);
 				}
 			});
 		}
