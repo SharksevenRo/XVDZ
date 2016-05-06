@@ -107,7 +107,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
 	}
 	public List<Product> getSimpleProduct(Types types) throws Exception {
-		
+
 		List<Product> products = dao.findByProperty("productType", types);
 		products=fillDetail(products);
 		return products;

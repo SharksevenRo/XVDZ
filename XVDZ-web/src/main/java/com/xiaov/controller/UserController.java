@@ -16,6 +16,7 @@ import com.xiaov.service.impl.UserServiceImpl;
 import com.xiaov.service.interfaces.DiscountCodeService;
 import com.xiaov.service.interfaces.DiscountCodeUseRecordService;
 import com.xiaov.web.support.SendMessage;
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -206,12 +207,15 @@ public class UserController {
 
 	@RequestMapping("/admin/user/login")
 	@ResponseBody
-	public MessageBean login(String usTel,String usPwd){
+	public MessageBean login(String usTel, String usPwd, HttpServletRequest request, HttpServletResponse response){
 		UserInfo user = userServiceimpl.login(usPwd,usTel);
+
 		if(user == null){
 			return new MessageBean(-1,"手机或密码错误!");
 		}else {
-
+			CookieUtil until=new CookieUtil(request);
+			until.setValue("user","userId",user.getId(),true);
+			until.save(response,"user",true);
 			return new MessageBean(1,"登录成功!");
 		}
 

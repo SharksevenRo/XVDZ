@@ -58,20 +58,21 @@
 				<div style="height:220px;overflow-y: hidden;">
 					<img id="baseProduct" width="100%" src="../img/slider1.jpg">
 				</div>
-				<div style="position: fixed;top:80px;left:39%;min-width:44px;min-height:44px" align="center">
+				<div style="position: absolute;top:80px;left:39%;min-width:44px;min-height:44px" align="center">
 					<img id="logo" width="80px" height="80px" alt="" src="../img/5.png">
 				</div>
 				<div class="type-div" style="margin:0px">
 					<form id="typesForm" action="">
-						<input value="" type="hidden" name="pdtId">
+						<input value="" type="hidden" name="productId">
+						<input value="" type="hidden" name="materialId">
 						<div class="type-item">
 							<div class="type-inner">
 								<div class="type-row">
-									<input value="<%=data.detail[0].id%>" type="hidden"
-										name="style">
+									<input value="" type="hidden" name="type">
 									<div class="bold item-title">款式</div>
-									<div align="left" style="width: 80%">
-										<span class="types active">T恤</span> <span class="types">衬衫</span>
+									<div id="types" align="left" style="width: 80%">
+										<span class="types active">T恤</span>
+										<span class="types">衬衫</span>
 									</div>
 								</div>
 							</div>
@@ -79,10 +80,11 @@
 						<div class="type-item">
 							<div class="type-inner">
 								<div class="type-row">
-									<input value="" type="hidden" name="color">
+									<input value="白色" type="hidden" name="colorName">
 									<div class="item-title bold">颜色</div>
-									<div align="left" style="width: 80%">
-										<span class="types active">白色</span> <span class="types">红色</span>
+									<div id="colors" align="left" style="width: 80%">
+										<span class="types active">白色</span>
+										<span class="types">红色</span>
 									</div>
 								</div>
 							</div>
@@ -90,12 +92,15 @@
 						<div class="type-item">
 							<div class="type-inner">
 								<div class="type-row">
-									<input value="" type="hidden" name="size">
+									<input value="XS" type="hidden" name="size">
 									<div class="item-title bold">尺码</div>
 									<div align="left" style="width: 80%">
-										<span class="types active">XS</span> <span class="types">S</span>
-										<span class="types">M</span> <span class="types">L</span> <span
-											class="types">XL</span> <span class="types">XXL</span>
+										<span class="types active">XS</span>
+										<span class="types">S</span>
+										<span class="types">M</span>
+										<span class="types">L</span>
+										<span class="types">XL</span>
+										<span class="types">XXL</span>
 									</div>
 								</div>
 							</div>
@@ -103,13 +108,12 @@
 						<div class="type-item">
 							<div class="type-inner">
 								<div class="type-row">
-									<input value="" type="hidden" name="orDtMount">
+									<input value="0" type="hidden" name="orDtMount">
 									<div class="item-title bold">数量</div>
 									<div align="left" style="width: 30%">
-										<input type="hidden" name="orDtMount" value="0"> <span
-											onclick="changeMount(this)" class="decrecement">-</span> <span
-											id="productMount">0</span> <span onclick="changeMount(this)"
-											class="increcement">+</span>
+										<span onclick="changeMount(this)" class="decrecement">-</span>
+										<span id="productMount">0</span>
+										<span onclick="changeMount(this)" class="increcement">+</span>
 									</div>
 									<div class="item-title bold"
 										style="height: 27px;line-height: 27px;">110元</div>
@@ -132,23 +136,22 @@
 
 							<div class="card demo-card-header-pic"
 								style="margin:0px;box-shadow:none">
-								<div valign="bottom"
-									class="card-header color-white no-border no-padding">
-									<img class='card-cover'
-										src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"
-										alt="">
+								<div valign="bottom" class="card-header color-white no-border no-padding">
+									<img id="baseImg" class='card-cover' src="" alt="">
 								</div>
 								<div class="card-content">
 									<div class="card-content-inner">
-										<p>雪纺印花百褶裙半身裙,简约的线条和版型上身很好看，整体更有看点。时尚真皮女凉鞋 牛筋底中跟欧美潮鞋
-											2015夏个性森系女鞋子罗马鞋。</p>
+										<p id="pdtDes"></p>
 									</div>
 								</div>
 								<div class="card-footer no-border">
-									<a href="#" class="link">赞</a> <a href="#"
-										class="link leave-a-message"><span
-										class="icon icon-message"></span> </a> <a href="#" class="link"><span
-										class="icon icon-star"></span> </a>
+									<a href="#" class="link good">赞</a>
+									<a href="#" class="link leave-a-message">
+										<span class="icon icon-message"></span>
+									</a>
+									<a href="#" class="link star">
+										<span class="icon icon-star"></span>
+									</a>
 								</div>
 							</div>
 
@@ -185,21 +188,23 @@
 					<div class="card-header">买家评论</div>
 					<div class="card-content">
 						<div class="list-block media-list">
-							<ul>
-								<li class="item-content">
-									<div class="item-media">
-										<img
-											src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"
-											width="44">
-									</div>
-									<div class="item-inner">
-										<div class="item-title-row">
-											<div class="item-title">标题</div>
-										</div>
-										<div class="item-subtitle">子标题</div>
-									</div>
-								</li>
+							<ul id="commentContent">
 							</ul>
+								<script id="t:comment_temp" type="text/html">
+									<%for(var i = 0;i<list.lenght;i++){%
+										<li class="item-content">
+											<div class="item-media">
+												<img src="../<%=list[i].material.url%>" width="44">
+											</div>
+											<div class="item-inner">
+												<div class="item-title-row">
+													<div class="item-title"><%=list[i].cmtContent%></div>
+												</div>
+												<div class="item-subtitle" style="text-align:right"><%=list[i].cmtTime%></div>
+											</div>
+										</li>
+									<%}%>
+								</script>
 						</div>
 					</div>
 					<div class="card-footer">
@@ -230,6 +235,10 @@
 		}
 		var productId = getQueryString("pdtId");
 		$("#cart-this").attr("pdtId", productId);
+		var materialId = getQueryString("materialId");
+		$("input[name=materialId]").val(materialId);
+		var productId = getQueryString("productId");
+		$("input[name=productId]").val(productId);
 		//获取产品详细
 		$.ajax({
 			url : "../admin/product/getPdtDetail.do",
@@ -237,15 +246,53 @@
 			contentType : "application/json; charset=utf-8",
 			dataType : "json",
 			data : {
-				id : "8a8a803f5480e214015480e24b3b0000"
+				id : getQueryString("pdtId")
 			},
 			success : function(data) {
-				debugger;
-				var type=[];
+				var types = [];
+				var colors = [];
 				$("#baseProduct").attr("src",data.allPic);
 				$("#logo").attr("src",data.pdtPicBs);
+				$("#baseImg").attr("src",data.pdtPicBs);
+				$("#pdtDes").attr("src",data.pdtDest);
+				$("input[name=pdtId]").val(data.id);
+				if(data.detail.length>0){
+					$("input[name=style]").val(data.detail[0].style);
+					$("input[name=size]").val(data.detail[0].style);
+				}
+				for(var i=0;i<data.detail.length;i++){
+					var types = type.join("");
+					var colors = color.join(""); 
+					if(types.indexOf(data.detail[i].type)!=-1){
+						type[type.length]=data.detail[i].type;
+					}
+					if(colors.indexOf(data.detail[i].colorName)!=-1){
+						type[type.length]=data.detail[i].colorName;
+					}
+				}
+				var html = "";
+				//款式
+				for(var i= 0;i<types.length;i++){
+					if(i==0){
+						html+="<span class='types active'>"+types[i]+"</span>";
+					}else{
+						html+="<span class='types'>"+types[i]+"</span>";
+					}
+				}
+				$("#types").html(html);
+				//颜色
+				for(var i= 0;i<colors.length;i++){
+					if(i==0){
+						html="";
+						html+="<span class='types active'>"+colors[i]+"</span>";
+					}else{
+						html+="<span class='types'>"+colors[i]+"</span>";
+					}
+				}
+				$("#colors").html(html);
 			}
 		});
+		//交易数量
 		function changeMount(obj) {
 			var mount = $("#productMount").text();
 			if ($(obj).hasClass("decrecement")) {
@@ -260,15 +307,62 @@
 				$("#productMount").text(mount);
 			}
 		}
-
+		var pageNo = 1;
+		var pageSize = 5;
+		var flag = true;
+		//获取产品评论
+		function loadComment(){
+			if(flag){
+				$.ajax({
+					url : "../admin/ProductComment/page",
+					type : "get",
+					dataType : "json",
+					data : { pdtId : getQueryString("pdtId"),pageNo:pageNo,pageSize:pageSize},
+					success:function(data){
+						var list = data.result;
+						if(list.length==pageSize){
+							pageNo++;
+						}else{
+							flag = false;
+						}
+						var oldHtml = $("#commentContent").html();
+						var html = baidu.template("t:comment_temp", {
+							"list": list
+						});
+						$("#commentContent").html(oldHtml + html);
+					}
+				});
+			}
+		}
+		loadComment();
+		$(function(){
+			//屏幕滚动
+			$(window).scroll(function() {
+				if ($(document).height() - $(this).scrollTop() - $(this).height() < 20) {
+					if (flag == true) {
+						loadComment();
+					}
+				}
+			});
+		});
 		function changeState() {
-
+			
 		}
 		$(".types").unbind("click").bind("click", function() {
+			var text = $(this).text();
 			if (!$(this).hasClass("active")) {
 				$(this).addClass("active");
 			}
 			$(this).siblings().removeClass("active");
+			$(this).parent().siblings("input").val(text);
+			$.ajax({
+				url : "../admin/productDetail/getOneAjax",
+				dataType : "json",
+				data : $("#typesForm").serialize(),
+				success : function(data){
+					$("#baseImg").attr("src",data.picf);
+				}
+			});
 		});
 	</script>
 </body>
