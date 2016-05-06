@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -320,7 +321,7 @@ public class ProductController {
 					if (!file.exists()) {
 						file.mkdirs();
 					}
-					String fileName = Pinyin4jUtil.spellNoneTone(split2[0]).replace("ü", "") + split2[1].replace("ü", "") + ".png";
+					String fileName= UUID.nameUUIDFromBytes(split2[0].getBytes()) + ".png";
 					file = new File(path+basePath+"/"+fileName);
 					if (!file.exists()) {
 						file.createNewFile();
