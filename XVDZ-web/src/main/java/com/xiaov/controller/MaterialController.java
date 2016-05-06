@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -168,9 +169,9 @@ public class MaterialController {
 						material.setPrice(Double.parseDouble(split2[1].replace(".png", "")));
 					}
 					//临时文件路径
-					String tempPath = "images/material/original/" + Pinyin4jUtil.spellNoneTone(split[1])+"/"+Pinyin4jUtil.spellNoneTone(split[2]);
+					String tempPath = "images/material/original/" + Pinyin4jUtil.spellNoneTone(split[1]).replace("ü", "")+"/"+Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
 					//压缩文件路径
-					String basePath = "images//material/compress/"+ Pinyin4jUtil.spellNoneTone(split[1])+"/"+Pinyin4jUtil.spellNoneTone(split[2]);
+					String basePath = "images//material/compress/"+ Pinyin4jUtil.spellNoneTone(split[1]).replace("ü", "")+"/"+Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
 					//创建文件夹和文件
 					file= new File(path+tempPath );
 					if (!file.exists()) {
@@ -180,8 +181,8 @@ public class MaterialController {
 					if (!file.exists()) {
 						file.mkdirs();
 					}
-					String fileName = Pinyin4jUtil.spellNoneTone(split2[0]) + ".png";
-					file = new File(path+basePath+"/"+fileName);
+					String fileName= UUID.nameUUIDFromBytes(split2[0].getBytes()) + ".png";
+					file = new File(path+basePath+"/");
 					if (!file.exists()) {
 						file.createNewFile();
 					}
