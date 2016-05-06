@@ -47,7 +47,6 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	private String typeRemark;
 	private Integer deleteFlag=0;
 	
-	private List<ProductDetail> details;
 	private List<Material>materials; 
 
 	// Constructors
@@ -167,14 +166,6 @@ public class Types extends Page<Types> implements java.io.Serializable {
 
 	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
-	}
-	@Transient
-	public List<ProductDetail> getDetails() {
-		return details;
-	}
-
-	public void setDetails(List<ProductDetail> details) {
-		this.details = details;
 	}
 	@Transient
 	public List<Material> getMaterials() {
