@@ -308,9 +308,9 @@ public class ProductController {
 					detail.setColorName(split2[0]);
 
 					//临时文件路径
-					String tempPath = "images/temp/" + Pinyin4jUtil.spellNoneTone(split[2]);
+					String tempPath = "images/temp/" + Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
 					//压缩文件路径
-					String basePath = "images/compress/"+ Pinyin4jUtil.spellNoneTone(split[2]);
+					String basePath = "images/compress/"+ Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
 					//创建文件夹和文件
 					file= new File(path+tempPath );
 					if (!file.exists()) {
@@ -320,7 +320,7 @@ public class ProductController {
 					if (!file.exists()) {
 						file.mkdirs();
 					}
-					String fileName = Pinyin4jUtil.spellNoneTone(split2[0]) + split2[1] + ".png";
+					String fileName = Pinyin4jUtil.spellNoneTone(split2[0]).replace("ü", "") + split2[1].replace("ü", "") + ".png";
 					file = new File(path+basePath+"/"+fileName);
 					if (!file.exists()) {
 						file.createNewFile();

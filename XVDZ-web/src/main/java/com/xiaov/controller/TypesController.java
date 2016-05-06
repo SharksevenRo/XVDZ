@@ -172,4 +172,18 @@ public class TypesController {
 			return null;
 		}
     }
+    
+    @RequestMapping("/admin/types/getMaterialAndDefault")
+    @ResponseBody
+    public List<Product> getMaterialAndDefault(Types types){
+    	
+    	 try {
+        	List<Product> products = productService.getSimpleProduct(types);
+        	products=LazyObjecUtil.LazySetNull(products, "productType");
+        	return products;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+    }
 }
