@@ -15,4 +15,6 @@ public interface TypesService extends BaseService<Types>{
 	 * @return
 	 */
 	public List<Types> getTypesByParent(Types types);
+
+	public List<Types> getMaterialAndDefault(Types types);
 }
