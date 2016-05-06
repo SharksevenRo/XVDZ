@@ -442,4 +442,17 @@ public class ProductController {
 		}
 		
 	}
+	@RequestMapping("/admin/product/getUserWorks")
+	@ResponseBody
+	public List<Product> getUserProduct(){
+		String values ="1";
+		List<Product> result = productServiceimpl.getByProperty("usId",values);
+		String[] fileds = new  String[]{"productType","material"};
+		try{
+			result = LazyObjecUtil.LazySetNull(result,fileds);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
