@@ -60,26 +60,26 @@
 				</div>
 				<script id="t:work_group" type="text/html">
 				<%for(var i=0;i<list.length;i++){%>
-					<div class="content-block-title"><%=list[i].yearAndMonth%></div>
+
 					<div class="list-block media-list">
 						<ul>
-				        	<%for(var j=0;j<list[i].items.length;j++){%>
+
 					  			<li>
 					    			<label class="label-checkbox item-content">
 			              				<div class="item-media">
-											<img src="../img/<%=list[i].items[j].product.pdtPicUrl%>" style='width: 4rem;'>
+											<img src="<%=list[i].pdtPicBs%>" style='width: 4rem;'>
 										</div>
 					      				<div class="item-inner">
 					        				<div class="item-title-row">
-					          					<div class="item-title"><%=list[i].items[j].product.pdtName%></div>
-					          					<div class="item-after"><%=list[i].items[j].product.addTime%></div>
+					          					<div class="item-title"><%=list[i].pdtName%></div>
+					          					<div class="item-after"><%=list[i].addTime%></div>
 					        				</div>
-					        				<div class="item-subtitle"><%=list[i].items[j].product.pdtLabel%></div>
-					        				<div class="item-text"><%=list[i].items[j].product.pdtPc%></div>
+					        				<div class="item-subtitle"><%=list[i].pdtLabel%></div>
+					        				<div class="item-text"><%=list[i].pdtPc%></div>
 					      				</div>
 					    			</label>
 					  			</li>
-					  		<%}%>
+
 						</ul>
 					</div>
 				<%}%>
@@ -112,7 +112,7 @@
     				var html = baidu.template('t:work_group', {
     					"list" : data
     				});
-    				$("#works").html(oldHtml+html);
+    				$("#works").html(html);
     			}
     		});
 
