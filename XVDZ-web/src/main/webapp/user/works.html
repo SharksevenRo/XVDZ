@@ -102,7 +102,6 @@
     <script type="text/javascript" src="../js/scripts.js"></script>
     <script type="text/javascript" src="../js/baiduTemplate.js"></script>
 	<script type="text/javascript">
-    	$(function(){
     		// 按照每月加载用户的作品
     		$.ajax({
     			url : "../admin/product/getUserWorks.do",
@@ -111,12 +110,12 @@
     			dataType : "json",
     			success : function(data) {
     				var html = baidu.template('t:work_group', {
-    					"list" : data.result
+    					"list" : data
     				});
     				$("#works").html(oldHtml+html);
     			}
     		});
-    	});
+
     </script>
 </body>
 </html>
