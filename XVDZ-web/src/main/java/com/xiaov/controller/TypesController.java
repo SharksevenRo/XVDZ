@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xiaov.constant.APPConstant;
+import com.xiaov.model.Product;
+import com.xiaov.model.ProductDetail;
 import com.xiaov.model.Types;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
+import com.xiaov.service.interfaces.MaterialService;
+import com.xiaov.service.interfaces.ProductDetailService;
+import com.xiaov.service.interfaces.ProductService;
 import com.xiaov.service.interfaces.TypesService;
 import com.xiaov.utils.LazyObjecUtil;
 
@@ -23,6 +28,13 @@ import com.xiaov.utils.LazyObjecUtil;
 public class TypesController {
     @Autowired
     private TypesService typesService;
+    
+    @Autowired
+    private MaterialService materialService;
+    @Autowired
+    private ProductDetailService productDetailService;
+    @Autowired
+    private ProductService productService;
 
     /**
      * 
@@ -142,6 +154,19 @@ public class TypesController {
     	 List<Types> rootType = typesService.getTypesByParent(types);
     	 try {
 			return LazyObjecUtil.LazySetNull(rootType, "parentType");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+    }
+    @RequestMapping("/admin/types/getBaseProductAndDefault")
+    @ResponseBody
+    public List<Product> getBaseProductAndDefault(Types types){
+    	
+    	 try {
+        	List<Product> products = productService.getSimpleProduct(types);
+        	products=LazyObjecUtil.LazySetNull(products, "productType");
+        	return products;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
