@@ -56,17 +56,25 @@ public class ProductDetailController {
 	        }
 	    }
 
+	    /**
+	     * 获取产品详情和计算价格
+	     * @param productDetail
+	     * @param mount
+	     * @param materialId
+	     * @return
+	     */
 	    @RequestMapping(value = "/admin/productDetail/getOneAjax", method = RequestMethod.POST)
 	    @ResponseBody
-	    public ProductDetail getOne(ProductDetail productDetail) {
-	        try {
-	            return productDetailService.getOne(productDetail.getClass(), productDetail.getId());
+	    public ProductDetail getOne(ProductDetail productDetail,int mount,String materialId) {
+	    	try {
+	    		productDetail = productDetailService.getOne(productDetail.getClass(), productDetail.getId());
 
+	    		
+	    		return productDetail;
 	        } catch (Exception e) {
-	            ProductDetail page = new ProductDetail();
-	            page.setCode(APPConstant.ERROR);
-	            page.setMessage("服务器忙");
-	            return page;
+	        	productDetail.setCode(APPConstant.ERROR);
+	        	productDetail.setMessage("服务器忙");
+	            return productDetail;
 	        }
 	    }
 }

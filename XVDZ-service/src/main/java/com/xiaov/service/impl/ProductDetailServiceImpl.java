@@ -2,6 +2,8 @@ package com.xiaov.service.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +40,15 @@ public class ProductDetailServiceImpl extends BaseServiceImpl<ProductDetail> imp
 	public ProductDetail getOne(Class clazz, String pk) {
 		
 		return super.getOne(clazz, pk);
+	}
+	public ProductDetail getOneForProduct(ProductDetail detail) {
+
+		Criterion [] criterions={Restrictions.eq("productId", detail.getProductId()),Restrictions.eq("type", detail.getType()),Restrictions.eq("color", detail.getColorName())};
+		List<ProductDetail> details = dao.getEntitiestNotLazy(new ProductDetail(), new String[]{"picB","picF"}, criterions);
+		if(details.size()==1){
+			return details.get(0);
+		}else{
+			throw new RuntimeException("数据异常");
+		}
 	}
 }

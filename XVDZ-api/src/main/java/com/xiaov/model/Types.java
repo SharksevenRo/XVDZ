@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,6 +32,7 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	// Fields
 
 	private String id;
+	@JsonIgnore
 	private Types parentType;
 	private String typeName;
 	private String typeTag;
