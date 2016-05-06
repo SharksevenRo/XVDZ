@@ -260,6 +260,7 @@ p {
 	border:1px solid #ccc;
 	padding:2px 5px;
 	border-radius: 3px;
+	font-size: 12px
 }
 .type-item .active{
 	border-color: #C320BE;
