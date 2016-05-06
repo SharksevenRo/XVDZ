@@ -5,4 +5,5 @@ import com.xiaov.service.BaseService;
 
 public interface ProductDetailService extends BaseService<ProductDetail>{
 
+	ProductDetail getOneForProduct(ProductDetail detail);
 }

@@ -71,7 +71,7 @@
 										<div class="item-inner">
 											<div class="item-title label">设为默认地址:</div>
 											<div class="item-input" style="padding: 9px;">
-												<input value="false" name="addDefault" type="checkbox">
+												<input onclick="changeCheckState(this)" value="false" name="addDefault" type="checkbox">
 											</div>
 										</div>
 									</div>
@@ -115,11 +115,21 @@
 		<script type="text/javascript" src="../js/scripts.js"></script>
 
 		<script type="text/javascript">
+			function changeCheckState(obj){
+				if($(obj).val()=="false"){
+					$(obj).val(true);
+				}else{
+					$(obj).val(false);
+				}
+			}
 			function addressFormSubmit() {
-				var reAddTo = $("input[name=reAddTo]").val().trim();
-				var reAddTel = $("input[name=reAddTel]").val().trim();
-				var reAddDet = $("textarea[name=reAddDet]").val().trim();
-				if (reAddTo == "" || reAddTel == "" || reAddDet == ""||!"/^0?1[3|4|5|8][0-9]\d{8}$/".test(reAddTel)) {
+				debugger;
+				var reAddTo =  $.trim($("input[name=reAddTo]").val());
+				var reAddTel =  $.trim($("input[name=reAddTel]").val());
+				var reAddDet =  $.trim($("textarea[name=reAddDet]").val());
+				var addDefault=$.trim($("input[name=addDefault]").val());
+
+				if (reAddTo == "" || reAddTel == "" || reAddDet == ""||!reAddTel.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
 					$('#dialog').show();
 					setTimeout(function() {
 						$('#dialog').hide();
@@ -127,7 +137,7 @@
 				} else {
 					$.ajax({
 						url: "../admin/ReceiveAddress/saveAjax.do",
-						type: "post",
+						type: "get",
 						contentType: "application/json; charset=utf-8",
 						dataType: "json",
 						data: $("form").serialize(),

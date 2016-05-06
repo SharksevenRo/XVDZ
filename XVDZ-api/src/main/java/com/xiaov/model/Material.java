@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,6 +31,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 
 	// Fields
 	private String id;
+	@JsonIgnore
 	private Types dbTypes;
 	private String materialNo;
 	private String meterialName;
@@ -42,6 +44,9 @@ public class Material extends Page<Material> implements java.io.Serializable {
 	private Date deleteTime;
 	private Integer deleteFlag=0;
 	private Double price;
+	
+	private String url;
+	private String originalUrl;
 
 	// Constructors
 
@@ -98,7 +103,7 @@ public class Material extends Page<Material> implements java.io.Serializable {
 		this.dbTypes = dbTypes;
 	}
 
-	@Column(name = "material_no", nullable = true, length = 20)
+	@Column(name = "material_no", length = 20)
 	public String getMaterialNo() {
 		return this.materialNo;
 	}
@@ -169,6 +174,23 @@ public class Material extends Page<Material> implements java.io.Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	@Column(name = "url")
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	@Column(name = "originalurl")
+	public String getOriginalUrl() {
+		return originalUrl;
+	}
+
+	public void setOriginalUrl(String originalUrl) {
+		this.originalUrl = originalUrl;
 	}
 	
 }
