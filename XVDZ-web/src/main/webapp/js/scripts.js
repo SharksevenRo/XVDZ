@@ -449,7 +449,7 @@ $(function() {
 		});
 	};
 
-	displayCloths('../img/cloths/front.jpg');
+	displayCloths('../img/cloths/LanSe2.png');
 
 	// ------------------------滤镜相关------------------------
 
@@ -668,7 +668,7 @@ $(function() {
 			$('#front-this').show();
 			$('#front-this').animateCss('fadeInLeft');
 
-			displayCloths('../img/cloths/back.jpg');
+			displayCloths('../img/cloths/BaiSe2.jpg');
 			isShowBack = true;
 
 		});
@@ -691,7 +691,7 @@ $(function() {
 			$('#back-this').show();
 			$('#back-this').animateCss('fadeInRight');
 
-			displayCloths('../img/cloths/front.jpg');
+			displayCloths('../img/cloths/BaiSe1.jpg');
 			isShowBack = false;
 
 		});
