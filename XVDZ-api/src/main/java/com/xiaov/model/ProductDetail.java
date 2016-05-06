@@ -2,8 +2,11 @@ package com.xiaov.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -16,9 +19,9 @@ public class ProductDetail extends Page<ProductDetail>{
 
 	
 	private String id;
-	private String productId;
-	private String picB;
-	private String picF;
+ 	private String productId;
+	private Material picB;
+	private Material picF;
 	private String colorName;
 	private String type;
 	private Double price;
@@ -27,7 +30,7 @@ public class ProductDetail extends Page<ProductDetail>{
 	}
 	
 	
-	public ProductDetail(String productId, String picB, String colorName, String type) {
+	public ProductDetail(String productId, Material picB, String colorName, String type) {
 		super();
 		this.productId = productId;
 		this.picB = picB;
@@ -35,7 +38,7 @@ public class ProductDetail extends Page<ProductDetail>{
 		this.type = type;
 	}
 
-	public ProductDetail(String id, String productId, String picB, String colorName, String type) {
+	public ProductDetail(String id, String productId, Material picB, String colorName, String type) {
 		super();
 		this.id = id;
 		this.productId = productId;
@@ -62,11 +65,12 @@ public class ProductDetail extends Page<ProductDetail>{
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	@Column(name = "picB", length = 50)
-	public String getPicB() {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "picb")
+	public Material getPicB() {
 		return picB;
 	}
-	public void setPicB(String pic) {
+	public void setPicB(Material pic) {
 		this.picB = pic;
 	}
 	@Column(name = "colorname", length = 50)
@@ -84,13 +88,14 @@ public class ProductDetail extends Page<ProductDetail>{
 		this.type = type;
 	}
 
-
-	public String getPicF() {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "picf")
+	public Material getPicF() {
 		return picF;
 	}
 
-	@Column(name = "picf")
-	public void setPicF(String picF) {
+	
+	public void setPicF(Material picF) {
 		this.picF = picF;
 	}
 

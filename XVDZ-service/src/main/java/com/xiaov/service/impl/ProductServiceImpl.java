@@ -14,6 +14,7 @@ import com.xiaov.dao.ProductDetailDao;
 import com.xiaov.model.Product;
 import com.xiaov.model.ProductDetail;
 import com.xiaov.service.interfaces.ProductService;
+import com.xiaov.utils.LazyObjecUtil;
 @Service
 public class ProductServiceImpl extends BaseServiceImpl<Product> implements ProductService{
 
@@ -59,11 +60,12 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	 * @param product 当前商品
 	 * @param type 详细的类型（color,Material,Size,颜色、面料、尺码）
 	 * @return
+	 * @throws Exception 
 	 */
-	public Product fillDetail(Product product){
+	public Product fillDetail(Product product) throws Exception{
 		
 		Criterion [] criterions={Restrictions.eq("productId", product.getId())};
-		List<ProductDetail> details = detailDao.getEntitiestNotLazy(new ProductDetail(), null, criterions);
+		List<ProductDetail> details = detailDao.getEntitiestNotLazy(new ProductDetail(), new String[]{"picB","picF"}, criterions);
 		product.setDetail(details);
 		return product;
 	}
@@ -71,9 +73,10 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	 * 获取批量商品的所有类型详细
 	 * @param products
 	 * @return
+	 * @throws Exception 
 	 */
 	@Transactional
-	public List<Product> fillDetail(List<Product> products){
+	public List<Product> fillDetail(List<Product> products) throws Exception{
 		
 		for (Product product : products) {
 			fillDetail(product);
@@ -85,9 +88,10 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	 * @param products
 	 * @param type 详细的类型（color,Material,Size,颜色、面料、尺码）
 	 * @return
+	 * @throws Exception 
 	 */
 	@Transactional
-	public List<Product> fillDetail(List<Product> products,String type){
+	public List<Product> fillDetail(List<Product> products,String type) throws Exception{
 		
 		for (Product product : products) {
 			fillDetail(product);

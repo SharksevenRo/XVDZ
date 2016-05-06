@@ -27,7 +27,9 @@ import com.xiaov.model.ProductDetail;
 import com.xiaov.model.Types;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
+import com.xiaov.service.impl.TypesImpl;
 import com.xiaov.service.interfaces.MaterialService;
+import com.xiaov.service.interfaces.TypesService;
 import com.xiaov.utils.CompressPicUtil;
 import com.xiaov.utils.LazyObjecUtil;
 import com.xiaov.utils.Pinyin4jUtil;
@@ -37,6 +39,9 @@ public class MaterialController {
 
 	@Autowired
 	private MaterialService materialService;
+	
+	@Autowired
+	private TypesService typesService;
 	
 	private String path;
 	private static int bufSize = 512; // size of bytes
@@ -129,39 +134,43 @@ public class MaterialController {
 			for (Enumeration<? extends ZipEntry> e = zipFile.getEntries(); e.hasMoreElements();) {
 				ZipEntry entry = e.nextElement();
 				System.out.println("文件名:" + entry.getName() + ", 内容如下:");
+				Types types=new Types();
+				Types newTypes;
+				types.setId("16");
 				if (entry.getName().toLowerCase().endsWith(".png")) {
 
 					// 文件路径分隔
 					String[] split = entry.getName().split("[/]");
-					// 分隔款式和价格
-					String[] split1 = split[2].split("[_]");
+					
+					for (int i = 1; i < split.length-1; i++) {
+						newTypes=new Types();
+						newTypes.setParentType(types);
+						newTypes.setTypeName(split[i]);
+						List<Types> loadAll = typesService.loadAll(newTypes);
+						if(loadAll.size()<=0){
+							newTypes.setAddTime(new Date());
+							typesService.save(newTypes);
+						}else{
+							newTypes=loadAll.get(0);
+						}
+						
+						types=newTypes;
+					}
+					
+					
 					// 分隔颜色和正反面标记
 					String[] split2 = split[3].split("[_]");
-
-					// 添加商品
-					Product product = new Product();
-					Types types = new Types();
-					// 定制类型商品
-					types.setId("15");
-					product.setProductType(types);
-					// 商品名
-					product.setPdtName(split[1]);
-					// 商品价格
-
 					
-					ProductDetail detail = new ProductDetail();
-					detail.setProductId(product.getId());
-					// 款式
-					detail.setType(split1[0]);
-					// 价格
-					detail.setPrice((Double.parseDouble(split2[2].replace(".png", ""))));
-					// 颜色
-					detail.setColorName(split2[0]);
-
+					Material material=new Material();
+					material.setDbTypes(types);
+					material.setMeterialName(split2[0]);
+					if(split2.length==2){
+						material.setPrice(Double.parseDouble(split2[1].replace(".png", "")));
+					}
 					//临时文件路径
-					String tempPath = "images/temp/" + Pinyin4jUtil.spellNoneTone(split[2]);
+					String tempPath = "images/material/original/" + Pinyin4jUtil.spellNoneTone(split[1])+"/"+Pinyin4jUtil.spellNoneTone(split[2]);
 					//压缩文件路径
-					String basePath = "images/compress/"+ Pinyin4jUtil.spellNoneTone(split[2]);
+					String basePath = "images//material/compress/"+ Pinyin4jUtil.spellNoneTone(split[1])+"/"+Pinyin4jUtil.spellNoneTone(split[2]);
 					//创建文件夹和文件
 					file= new File(path+tempPath );
 					if (!file.exists()) {
@@ -171,7 +180,7 @@ public class MaterialController {
 					if (!file.exists()) {
 						file.mkdirs();
 					}
-					String fileName = Pinyin4jUtil.spellNoneTone(split2[0]) + split2[1] + ".png";
+					String fileName = Pinyin4jUtil.spellNoneTone(split2[0]) + ".png";
 					file = new File(path+basePath+"/"+fileName);
 					if (!file.exists()) {
 						file.createNewFile();
@@ -191,8 +200,15 @@ public class MaterialController {
 					fileOut.flush();
 					fileOut.close();
 					
+			
 					//文件压缩
 					CompressPicUtil mypic = new CompressPicUtil();
+					mypic.resizePNG(path+tempPath+"/"+fileName,  path+basePath+"/"+fileName, 200, 200, true);
+					
+					material.setAddTime(new Date());
+					material.setUrl(basePath+"/"+fileName);
+					material.setOriginalUrl(basePath+"/"+fileName);
+					materialService.save(material);
 					
 				}
 			}
