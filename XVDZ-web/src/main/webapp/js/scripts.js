@@ -431,7 +431,8 @@ $(function() {
 		if (canvas.getActiveObject() != undefined) {
 			canvas.remove(canvas.getActiveObject());
 		}
-
+		
+		src = src.replace("compress","temp");
 		fabric.Image.fromURL(src, function(img) {
 
 			img.scale(1).set({
