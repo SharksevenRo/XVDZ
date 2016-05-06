@@ -91,7 +91,7 @@
 			dataType : "json",
 			success : function(data) {
 				var html = baidu.template('t:address_item', {
-					"list" : data.result
+					"list" : data
 				});
 				$("#user_address").html(html);
 			}
