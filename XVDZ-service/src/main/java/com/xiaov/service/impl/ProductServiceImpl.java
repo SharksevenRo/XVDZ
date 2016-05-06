@@ -112,4 +112,9 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		products=fillDetail(products);
 		return products;
 	}
+	public List<Product> getByProperty(String propertyName,String values){
+		List<Product> products = dao.findByProperty(propertyName,values);
+
+		return  products;
+	}
 }
