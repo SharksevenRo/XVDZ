@@ -34,10 +34,21 @@ public class ReceiveAddressController {
 
     @RequestMapping("/admin/ReceiveAddress/saveAjax")
     @ResponseBody
-    public MessageBean saveAjax(ReceiveAddress receiveAddress,HttpServletRequest request) {
+    public MessageBean saveAjax(String reAddTo,String reAddTel,String reAddDet,String addDefault) {
 
         try {
-        	receiveAddress.setId(new CookieUtil(request).getValue("user", "id", true));
+        	//receiveAddress.setId(new CookieUtil(request).getValue("user", "id", true));
+            ReceiveAddress receiveAddress = new ReceiveAddress();
+            receiveAddress.setId("1");
+            receiveAddress.setReAddTo(reAddTo);
+            receiveAddress.setReAddTel(reAddTel);
+            receiveAddress.setReAddDet(reAddDet);
+            System.out.println(addDefault);
+            if(addDefault.equals("true"))
+                receiveAddress.setAddDefault(true);
+            else
+                receiveAddress.setAddDefault(false);
+            System.out.println(receiveAddress.getAddDefault());
             receiveAddressService.save(receiveAddress);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
@@ -102,8 +113,8 @@ public class ReceiveAddressController {
     }
     @RequestMapping("admin/address/getUserAddress")
     @ResponseBody
-    public List<ReceiveAddress> getReceiveAddress(String values) {
-        values ="1";
+    public List<ReceiveAddress> getReceiveAddress() {
+        String values ="1";
         List<ReceiveAddress> result = receiveAddressServiceimpl.getByProperty("userInfo.id",values);
         try{
             result = LazyObjecUtil.LazySetNull(result,"userInfo");
