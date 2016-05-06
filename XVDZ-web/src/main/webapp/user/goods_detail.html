@@ -55,36 +55,23 @@
 				<div class="title-bar right" id="share-this">
 					<span class="icon icon-cart"></span>
 				</div>
-
-				<!-- <div class="swiper-container">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide blue-slide" style="height:180px;overflow-y: hidden;">
-							<img width="100%" src="http://demo.wex5.com/taobao/v-QzqqYf-zh_CN-/demo/taobao/detail/img/pic1.png">
-						</div>
-						<div class="swiper-slide red-slide" style="height:180px;overflow-y: hidden;">
-							<img width="100%" src="http://demo.wex5.com/taobao/v-QzqqYf-zh_CN-/demo/taobao/detail/img/pic1.png">
-						</div>
-						<div class="swiper-slide orange-slide" style="height:180px;overflow-y: hidden;">
-							<img width="100%" src="http://demo.wex5.com/taobao/v-QzqqYf-zh_CN-/demo/taobao/detail/img/pic1.png">
-						</div>
-					</div>
-					<div class="swiper-pagination"></div>
-				</div> -->
-				<div style="height:180px;overflow-y: hidden;">
-					<img width="100%" src="http://demo.wex5.com/taobao/v-QzqqYf-zh_CN-/demo/taobao/detail/img/pic1.png">
+				<div style="height:220px;overflow-y: hidden;">
+					<img id="baseProduct" width="100%" src="../img/slider1.jpg">
 				</div>
-
+				<div style="position: fixed;top:80px;left:39%;min-width:44px;min-height:44px" align="center">
+					<img id="logo" width="80px" height="80px" alt="" src="../img/5.png">
+				</div>
 				<div class="type-div" style="margin:0px">
 					<form id="typesForm" action="">
 						<input value="" type="hidden" name="pdtId">
 						<div class="type-item">
 							<div class="type-inner">
 								<div class="type-row">
-									<input value="" type="hidden" name="style">
+									<input value="<%=data.detail[0].id%>" type="hidden"
+										name="style">
 									<div class="bold item-title">款式</div>
 									<div align="left" style="width: 80%">
-										<span class="types active">纯棉</span>
-										<span class="types">经典</span>
+										<span class="types active">T恤</span> <span class="types">衬衫</span>
 									</div>
 								</div>
 							</div>
@@ -95,9 +82,7 @@
 									<input value="" type="hidden" name="color">
 									<div class="item-title bold">颜色</div>
 									<div align="left" style="width: 80%">
-										<span class="types active">红色</span>
-										<span class="types">淡蓝色</span>
-										<span class="types">白色</span>
+										<span class="types active">白色</span> <span class="types">红色</span>
 									</div>
 								</div>
 							</div>
@@ -121,19 +106,20 @@
 									<input value="" type="hidden" name="orDtMount">
 									<div class="item-title bold">数量</div>
 									<div align="left" style="width: 30%">
-										<input type="hidden" name="orDtMount" value="0">
-										<span onclick="changeMount(this)" class="decrecement">-</span>
-										<span id="productMount">0</span>
-										<span onclick="changeMount(this)" class="increcement">+</span>
+										<input type="hidden" name="orDtMount" value="0"> <span
+											onclick="changeMount(this)" class="decrecement">-</span> <span
+											id="productMount">0</span> <span onclick="changeMount(this)"
+											class="increcement">+</span>
 									</div>
 									<div class="item-title bold"
-										style="height: 27px;line-height: 27px;">122元</div>
+										style="height: 27px;line-height: 27px;">110元</div>
 									<button class="button">购买</button>
 								</div>
 							</div>
 						</div>
 					</form>
 				</div>
+
 
 
 				<div class="buttons-tab">
@@ -177,7 +163,8 @@
 										<div class="item-inner">
 											<div class="item-title">商品名称</div>
 											<div class="item-after">杜蕾斯</div>
-										</div></li>
+										</div>
+									</li>
 									<li class="item-content">
 										<div class="item-media">
 											<i class="icon icon-f7"></i>
@@ -185,7 +172,8 @@
 										<div class="item-inner">
 											<div class="item-title">型号</div>
 											<div class="item-after">极致超薄型</div>
-										</div></li>
+										</div>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -209,12 +197,14 @@
 											<div class="item-title">标题</div>
 										</div>
 										<div class="item-subtitle">子标题</div>
-									</div></li>
+									</div>
+								</li>
 							</ul>
 						</div>
 					</div>
 					<div class="card-footer">
-						<span><a href="">更多</a></span>
+						<span><a href="">更多</a>
+						</span>
 					</div>
 				</div>
 
@@ -229,6 +219,7 @@
 	<script type='text/javascript' src='../js/sm.min.js'></script>
 	<script type='text/javascript' src='../js/sm-extend.min.js'></script>
 	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript" src="../js/baiduTemplate.js"></script>
 	<script type="text/javascript">
 		function getQueryString(name) {
 			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -246,41 +237,35 @@
 			contentType : "application/json; charset=utf-8",
 			dataType : "json",
 			data : {
-				pdtId : 1
+				id : "8a8a803f5480e214015480e24b3b0000"
 			},
 			success : function(data) {
-				if (data.result.length == pageSize) {
-					pageNo++;
-				} else {
-					flag = false;
-				}
-				var oldHtml = $("#listContent").html();
-				var html = baidu.template('t:all_product', {
-					"list" : data.result
-				});
-				$("#listContent").html(oldHtml + html);
+				debugger;
+				var type=[];
+				$("#baseProduct").attr("src",data.allPic);
+				$("#logo").attr("src",data.pdtPicBs);
 			}
 		});
-		function changeMount(obj){
+		function changeMount(obj) {
 			var mount = $("#productMount").text();
-			if($(obj).hasClass("decrecement")){
+			if ($(obj).hasClass("decrecement")) {
 				if (mount == 0) {
 					return;
 				} else {
-					mount = parseInt(mount)-1;
+					mount = parseInt(mount) - 1;
 					$("#productMount").text(mount);
 				}
-			}else{
-				mount = parseInt(mount)+1;
+			} else {
+				mount = parseInt(mount) + 1;
 				$("#productMount").text(mount);
 			}
 		}
-		
-		function changeState(){
-			
+
+		function changeState() {
+
 		}
-		$(".types").unbind("click").bind("click",function(){
-			if(!$(this).hasClass("active")){
+		$(".types").unbind("click").bind("click", function() {
+			if (!$(this).hasClass("active")) {
 				$(this).addClass("active");
 			}
 			$(this).siblings().removeClass("active");
