@@ -45,7 +45,7 @@
 
 							</div>
 							<script id="t:voice" type="text/html">
-							<%for(var i=0;i<list.length;i++){%>
+							<%for(var i=0;i< list.length;i++){%>
 								<div class="card">
 							    	<div class="card-content">
 							     	 <div class="list-block media-list">
@@ -144,13 +144,13 @@
 					pageSize : 5
 				},
 				success : function(data) {
-					if (data.result.length == 5) {
+					if (data.length == 5) {
 						pageNo++;
 					} else {
 						flag = false;
 					}
 					var html = baidu.template('t:voice', {
-						"list" : data.result
+						"list" : data
 					});
 					$("#tab1").html(html);
 				}
@@ -182,8 +182,9 @@
 				});
 			}
 		}
+		loadDynamic();
 		$(function() {
-			loadDynamic();
+
 			//屏幕滚动
 			$(window).scroll(
 					function() {

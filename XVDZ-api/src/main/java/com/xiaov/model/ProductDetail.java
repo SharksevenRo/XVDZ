@@ -16,7 +16,7 @@ public class ProductDetail extends Page<ProductDetail>{
 
 	
 	private String id;
-	private String productId;
+ 	private String productId;
 	private String picB;
 	private String picF;
 	private String colorName;

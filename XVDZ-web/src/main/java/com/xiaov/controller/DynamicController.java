@@ -30,7 +30,7 @@ public class DynamicController {
     @ResponseBody
     public List<Dynamic> getAll() {
         //先声明关闭延迟加载的关联对象UserInfo
-        String[] fields = new String[]{"userInfo"};
+        System.out.println(dynamicService.getAll().get(0).getDynmcContent());
         return dynamicService.getAll();
     }
 
