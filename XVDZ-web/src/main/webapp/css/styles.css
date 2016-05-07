@@ -109,7 +109,7 @@ p {
 
 .title-bar.blue {
 	background: rgba(117, 147, 213, 0.8);
-	z-index: 65535;
+	z-index: 4000;
 }
 
 .coupon-header {

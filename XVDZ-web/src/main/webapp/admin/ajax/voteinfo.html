@@ -1,0 +1,136 @@
+<link
+	href="../js/assets/plugins/jstree/dist/themes/default/style.min.css"
+	rel="stylesheet" />
+
+<div id="content" class="content" style="margin-bottom: 20px">
+	<ol class="breadcrumb pull-right">
+		<li><a href="javascript:void(0);">首页</a></li>
+		<li><a href="javascript:void(0);">人员管理</a></li>
+		<li class="active">参赛信息</li>
+	</ol>
+	<h1 class="page-header">
+		参赛信息
+	</h1>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<div class="panel panel-inverse" data-sortable-id="tree-view-3">
+				<div class="panel-heading">
+					<div class="panel-heading-btn">
+						<a href="javascript:void(0);"
+							class="btn btn-xs btn-icon btn-circle btn-default"
+							data-click="panel-expand"><i class="fa fa-expand"></i> </a> <a
+							href="javascript:void(0);"
+							class="btn btn-xs btn-icon btn-circle btn-success"
+							data-click="panel-reload"><i class="fa fa-repeat"></i> </a> <a
+							href="javascript:void(0);"
+							class="btn btn-xs btn-icon btn-circle btn-warning"
+							data-click="panel-collapse"><i class="fa fa-minus"></i> </a> <a
+							href="javascript:void(0);"
+							class="btn btn-xs btn-icon btn-circle btn-danger"
+							data-click="panel-remove"><i class="fa fa-times"></i> </a>
+					</div>
+					<h4 class="panel-title">参赛信息录入</h4>
+				</div>
+				<div class="alert alert-info">
+					
+				</div>
+				<div class="panel-body">
+					<form id="infoForm" class="form-horizontal form-bordered"  enctype="multipart/form-data" method="post">
+						<input id="typeId" value="" type="hidden" name="typeId"> <input
+							id="parentTypeId" value="" type="hidden" name="parentTypeId">
+						<input id="oper" name="oper" type="hidden" value="">
+						<div id="content-input">
+							<div class="form-group">
+								<label class="control-label col-md-4 col-sm-4 font-14">姓名:</label>
+								<div class="col-md-6 col-sm-7">
+									<div class="input-group">
+										<input name="typeName" type="text" value="" placeholder="选手姓名"
+											data-bv-notempty="true" data-bv-notempty-message="请输入选手姓名"
+											class="form-control"> <span class="input-group-addon">
+											<span class="fa fa-at"></span> </span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-4 col-sm-4 font-14">学校:</label>
+								<div class="col-md-6 col-sm-7">
+									<div class="input-group">
+										<input name="typeName" type="text" value="" placeholder="选手学校"
+											data-bv-notempty="true" data-bv-notempty-message="请输入选手学校"
+											class="form-control"> <span class="input-group-addon">
+											<span class="fa fa-at"></span> </span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-4 col-sm-4 font-14">头像:</label>
+								<div class="col-md-5 col-sm-5">
+									<div class="input-group">
+										<input name="picUrl" value="" placeholder="选手头像图片" type="file"
+											class="form-control "> <span
+											class="input-group-addon"> <span class="fa fa-flag-o"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-4 col-sm-4 font-14">图片:</label>
+								<div class="col-md-5 col-sm-5">
+									<div class="input-group">
+										<input name="picUrl" value="" placeholder="选手图片" type="file"
+											class="form-control "> <span
+											class="input-group-addon"> <span class="fa fa-th"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-4 col-sm-4 font-14">说明:</label>
+								<div class="col-md-6 col-sm-6">
+									<div class="input-group">
+										<textarea class="form-control" roles="5" name="descrition"
+											value="" placeholder="说明"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+                            	<div class="col-md-8 col-md-offset-4">
+                                	<button type="reset" class="btn btn-sm btn-primary m-r-5">重置</button>
+                                	<button name="saveBtn" type="button" class="btn btn-sm btn-default">提交</button>
+                                </div>
+                            </div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="../js/assets/plugins/jstree/dist/jstree.min.js"></script>
+<script src="../js/assets/plugins/select2/dist/js/select2.min.js"></script>
+<script src="../js/assets/js/form-plugins.demo.min.js"></script>
+<script
+	src="../js/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="../js/assets/plugins/masked-input/masked-input.min.js"></script>
+<script src="../js/apps.js"></script>
+<script>
+	$(function(){
+		$("button[name=saveBtn]").click(function(){
+			$.ajax({
+					url : "../admin/ProductComment/page",
+					type : "get",
+					dataType : "json",
+					data : $("#infoForm").serialize(),
+					success:function(data){
+						if(data.code=="1"){
+							$("button[name=reset]").trigger("click");
+						}else{
+							alert("保存失败");
+						}
+					}
+			});
+		});
+	});
+</script>
