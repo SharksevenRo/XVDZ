@@ -64,4 +64,8 @@ public class VoteServiceImpl implements VoteService {
 		return createSQLQuery.list();
 	}
 
+	public void save(Vote vote) {
+		dao.save(vote);
+	}
+
 }

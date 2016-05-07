@@ -26,5 +26,7 @@ public interface VoteService {
 	  * @return
 	  */
 	 List<Vote> top(Vote vote);
+	 
+	 void save(Vote vote);
 		
 }
