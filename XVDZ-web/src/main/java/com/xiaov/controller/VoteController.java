@@ -2,6 +2,8 @@ package com.xiaov.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import com.xiaov.constant.APPConstant;
 import com.xiaov.model.Vote;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.service.interfaces.VoteService;
+import com.xiaov.web.support.CookieUtil;
 
 @Controller
 public class VoteController {
@@ -20,8 +23,10 @@ public class VoteController {
 	
 	@RequestMapping("/user/vote")
 	@ResponseBody
-	public MessageBean vote(Vote vote){
+	public MessageBean vote(Vote vote,HttpServletRequest request){
 		if(!voteService.isRepeate(vote)){
+			String openId = new CookieUtil(request).getValue("user", "openId", true);
+			vote.setOpenId(openId);
 			voteService.vote(vote);
 			return new MessageBean(APPConstant.ERROR, "投票成功");
 		}else{

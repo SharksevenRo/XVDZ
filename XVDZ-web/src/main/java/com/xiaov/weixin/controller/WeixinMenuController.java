@@ -12,24 +12,24 @@ public class WeixinMenuController {
 
 	public static void main(String[] args) {
 		WxMpService service = BuildAndGetWxService.buildAndGetWxService();
-		/*List<WxMenuButton> buttons = new ArrayList<WxMenuButton>();
+		List<WxMenuButton> buttons = new ArrayList<WxMenuButton>();
 		WxMenu menu = new WxMenu();
 		WxMenuButton button=new WxMenuButton();
 		
 		button.setType("view");
-		button.setName("授权测试");
-		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2?state=2");
+		button.setName("投票");
+		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2.do?state=2");
 		buttons.add(button);
 		
 		button=new WxMenuButton();
 		button.setType("view");
-		button.setName("小V商城");
-		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2?state=1");
+		button.setName("个性定制");
+		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2.do?state=1");
 		buttons.add(button);
 		
-		menu.setButtons(buttons);*/
+		menu.setButtons(buttons);
 		try {
-			service.menuDelete();
+			service.menuCreate(menu);
 		} catch (WxErrorException e) {
 			e.printStackTrace();
 		}
