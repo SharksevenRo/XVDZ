@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,user-scalable=0">
-<title>WeUI</title>
+<title>小v定制</title>
 <link rel="stylesheet" href="../../css/weui.min.css" />
 <link rel="stylesheet" href="../../css/swiper.min.css" />
 <link rel="stylesheet" href="../../css/example.css" />
@@ -127,24 +127,24 @@
 			if (!$(this).find("a").hasClass("disabled")) {
 				$(this).find("a").addClass("disabled");
 			}
-			debugger;
+			
 			$.ajax({
 				url : "../../user/vote.do",
 				dataType : "json",
 				data : {
-					id : id,
-					openId : "personId"
+					id : id
 				},
 				success : function(data) {
-					if (data.msgCode == "1") {
-						$("#toast weui_toast_content").text("投票成功");
+					
+					if (data.code == 1) {
+						$("#toast .weui_toast_content").text("投票成功");
 						$("#toast").show();
 						setTimeout(function() {
 							$("#toast").hide();
 						}, 2000);
 						$(obj).text("已投票");
 					} else {
-						$("#toast weui_toast_content").text("您已投票，不能重复投票");
+						$("#toast .weui_toast_content").text("您已投票，不能重复投票");
 						$("#toast").show();
 						setTimeout(function() {
 							$("#toast").hide();

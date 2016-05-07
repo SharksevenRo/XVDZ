@@ -3,6 +3,8 @@ package com.xiaov.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import com.xiaov.model.Vote;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.service.interfaces.VoteService;
 import com.xiaov.utils.UploadFileUtil;
+import com.xiaov.web.support.CookieUtil;
 
 @Controller
 public class VoteController extends BaseController {
@@ -23,8 +26,11 @@ public class VoteController extends BaseController {
 
 	@RequestMapping("/user/vote")
 	@ResponseBody
-	public MessageBean vote(Vote vote) {
-		if (voteService.isRepeate(vote)) {
+	public MessageBean vote(Vote vote,HttpServletRequest request) {
+		String openId = new CookieUtil(request).getValue("user", "openId", true);
+		vote.setOpenId(openId);
+		if (!voteService.isRepeate(vote)) {
+			
 			voteService.vote(vote);
 			return new MessageBean(APPConstant.SUCCESS, "投票成功");
 		} else {
@@ -49,7 +55,8 @@ public class VoteController extends BaseController {
 			MultipartFile tupian) {
 		String contextPath = request.getRealPath("/");
 		// 新文件名
-		String newFileName = new Date().getTime() + ".jpg";
+		String newFileName1 = new Date().getTime() + ".jpg";
+		String newFileName2 = new Date().getTime() + "2.jpg";
 		try {
 			
 			// 设置正常保存路径域
@@ -62,13 +69,13 @@ public class VoteController extends BaseController {
 			String[] compressScope = { "compress", "vote" };
 			// 压缩1
 			String touxiangCompressTargetPath = fileUtil.savePicWithCompress(
-					touxiang, newFileName, compressScope, false);
-			String dbCompress1Url = fileUtil.getNormalRelativeFolderPath()+newFileName;
+					touxiang, newFileName1, compressScope, false);
+			String dbCompress1Url = fileUtil.getNormalRelativeFolderPath()+newFileName1;
 			vote.setPic1(dbCompress1Url);
 			// 压缩2
 			String tupianCompressTargetPath = fileUtil.savePicWithCompress(
-					tupian, newFileName, compressScope, false);
-			String dbCompress2Url = fileUtil.getSmallRelativeFolderPath()+newFileName;
+					tupian, newFileName2, compressScope, false);
+			String dbCompress2Url = fileUtil.getNormalRelativeFolderPath()+newFileName2;
 			vote.setPic2(dbCompress2Url);
 			voteService.save(vote);
 			return new MessageBean(APPConstant.SUCCESS, "添加成功");
