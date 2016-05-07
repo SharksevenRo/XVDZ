@@ -12,7 +12,7 @@ public class WeixinMenuController {
 
 	public static void main(String[] args) {
 		WxMpService service = BuildAndGetWxService.buildAndGetWxService();
-		List<WxMenuButton> buttons = new ArrayList<WxMenuButton>();
+		/*List<WxMenuButton> buttons = new ArrayList<WxMenuButton>();
 		WxMenu menu = new WxMenu();
 		WxMenuButton button=new WxMenuButton();
 		
@@ -27,11 +27,10 @@ public class WeixinMenuController {
 		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2?state=1");
 		buttons.add(button);
 		
-		menu.setButtons(buttons);
+		menu.setButtons(buttons);*/
 		try {
-			service.menuCreate(menu);
+			service.menuDelete();
 		} catch (WxErrorException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

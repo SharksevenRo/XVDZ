@@ -1,86 +1,151 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>小v定制</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="../css/weui.min.css"/>
-    <link rel="stylesheet" href="../css/swiper.min.css">
-    <link rel="stylesheet" href="../css/sm.min.css">
-    <link rel="stylesheet" href="../css/sm-extend.min.css">
-    <link rel="stylesheet" href="../css/styles.css" type="text/css">
-</head>
-<body>
 
-	<div class="weui_tab">
-	    <div class="weui_tab_bd">
-	        <div class="weui_tab_bd_item">
+	<head>
+		<meta charset="UTF-8">
+		<title>小v定制</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/weui.min.css" />
+		<link rel="stylesheet" href="../css/swiper.min.css">
+		<link rel="stylesheet" href="../css/sm.min.css">
+		<link rel="stylesheet" href="../css/sm-extend.min.css">
+		<!-- <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
+		<link rel="stylesheet" href="../css/bootstrap-validator.css">
+		<link rel="stylesheet" href="../css/styles.css" type="text/css">
+	</head>
 
-	        	<header class="bar bar-nav">
-	        		<a class="button button-link button-nav pull-left back">
-				      <span class="icon icon-left"></span>
-				      返回
-				    </a>
-				  	<h1 class="title">收货地址</h1>
-				</header>
+	<body>
 
-				<div class="list-block">
-				    <ul>
-				      <!-- Text inputs -->
-				      <li>
-				        <div class="item-content">
-				          <div class="item-media"><i class="icon icon-form-name"></i></div>
-				          <div class="item-inner">
-				            <div class="item-title label">姓名</div>
-				            <div class="item-input">
-				              <input type="text" placeholder="您的姓名">
-				            </div>
-				          </div>
-				        </div>
-				      </li>
-				      <li>
-				        <div class="item-content">
-				          <div class="item-media"><i class="icon icon-form-name"></i></div>
-				          <div class="item-inner">
-				            <div class="item-title label">手机号</div>
-				            <div class="item-input">
-				              <input type="text" placeholder="您的手机号">
-				            </div>
-				          </div>
-				        </div>
-				      </li>				      
-				      <li class="align-top">
-				        <div class="item-content">
-				          <div class="item-media"><i class="icon icon-form-comment"></i></div>
-				          <div class="item-inner">
-				            <div class="item-title label">详细地址</div>
-				            <div class="item-input">
-				              <textarea></textarea>
-				            </div>
-				          </div>
-				        </div>
-				      </li>
-				    </ul>
-				</div>
-				<div class="content-block">
-				    <div class="row">
-				      <div class="col-50"><a href="javascript:history.go(-1)" class="button button-big button-fill button-danger">取消</a></div>
-				      <div class="col-50"><a href="#" class="button button-big button-fill button-success">提交</a></div>
-				    </div>
+		<div class="weui_tab">
+			<div class="weui_tab_bd">
+				<div class="weui_tab_bd_item">
+					<header class="bar bar-nav">
+						<a class="button button-link button-nav pull-left back">
+							<span class="icon icon-left"></span> 返回
+						</a>
+						<h1 class="title">添加收货地址</h1>
+					</header>
+
+					<div class="list-block">
+						<form id="addressForm">
+							<ul>
+								<!-- Text inputs -->
+								<li>
+									<div class="item-content">
+										<div class="item-media"><i class="icon icon-form-name"></i></div>
+										<div class="item-inner">
+											<div class="item-title label">姓名:</div>
+											<div class="item-input">
+												<input name="reAddTo" type="text" placeholder="收货人姓名">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<div class="item-media"><i class="icon icon-form-name"></i></div>
+										<div class="item-inner">
+											<div class="item-title label">手机号:</div>
+											<div class="item-input">
+												<input name="reAddTel" type="text" placeholder="收货人手机号">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="align-top">
+									<div class="item-content">
+										<div class="item-media"><i class="icon icon-form-comment"></i></div>
+										<div class="item-inner">
+											<div class="item-title label">详细地址:</div>
+											<div class="item-input">
+												<textarea name="reAddDet"></textarea>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="align-top">
+									<div class="item-content">
+										<div class="item-media"><i class="icon icon-form-comment"></i></div>
+										<div class="item-inner">
+											<div class="item-title label">设为默认地址:</div>
+											<div class="item-input" style="padding: 9px;">
+												<input value="false" name="addDefault" type="checkbox">
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</form>
+					</div>
+					<div class="content-block">
+						<div class="row">
+							<div class="col-50"><a href="javascript:history.go(-1)" class="button button-big button-fill button-danger">取消</a></div>
+							<div class="col-50"><a href="javascript:addressFormSubmit();" class="button button-big button-fill button-success">提交</a></div>
+						</div>
+					</div>
+					<div id="toast" style="display: none;">
+						<div class="weui_mask_transparent"></div>
+						<div class="weui_toast" style="top:180px">
+							<i class="weui_icon_toast"></i>
+							<p class="weui_toast_content">添加成功</p>
+						</div>
+					</div>
+					<div id="dialog" class="weui_dialog_confirm" style="display: none;">
+						<div class="weui_mask"></div>
+						<div class="weui_dialog">
+							<div class="weui_dialog_hd"><strong class="weui_dialog_title">友情提示</strong></div>
+							<div class="weui_dialog_bd">请填写正确的地址信息!</div>
+							<div class="weui_dialog_ft">
+								<a href="javascript:;" class="weui_btn_dialog default">取消</a>
+								<a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-	    </div>
-	</div>
-	
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/weui.js"></script>
-	<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
-    <script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
+		</div>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/weui.js"></script>
+		<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
+		<script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
+		<script type="text/javascript" src="../js/scripts.js"></script>
 
-</body>
+		<script type="text/javascript">
+			function addressFormSubmit() {
+				var reAddTo = $("input[name=reAddTo]").val().trim();
+				var reAddTel = $("input[name=reAddTel]").val().trim();
+				var reAddDet = $("textarea[name=reAddDet]").val().trim();
+				if (reAddTo == "" || reAddTel == "" || reAddDet == "") {
+					$('#dialog').show();
+					setTimeout(function() {
+						$('#dialog').hide();
+					}, 3000);
+				} else {
+					$.ajax({
+						url: "../admin/ReceiveAddress/saveAjax.do",
+						type: "post",
+						contentType: "application/json; charset=utf-8",
+						dataType: "json",
+						data: $("form").serialize(),
+						success: function(data) {
+							if (data.msgCode == "1") {
+								$('#toast').show();
+								setTimeout(function() {
+									$('#toast').hide();
+									window.location.href = "addr.html";
+								}, 2000);
+							}
+						}
+					});
+				}
+			}
+			$(function() {
+			});
+		</script>
+	</body>
+
 </html>
