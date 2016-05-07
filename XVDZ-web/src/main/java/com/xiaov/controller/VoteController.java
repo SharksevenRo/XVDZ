@@ -26,7 +26,7 @@ public class VoteController extends BaseController {
 	public MessageBean vote(Vote vote) {
 		if (!voteService.isRepeate(vote)) {
 			voteService.vote(vote);
-			return new MessageBean(APPConstant.ERROR, "投票成功");
+			return new MessageBean(APPConstant.SUCCESS, "投票成功");
 		} else {
 			return new MessageBean(APPConstant.ERROR, "您已为该选选手投票，不能重复投票");
 		}
