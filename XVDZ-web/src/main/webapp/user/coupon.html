@@ -28,7 +28,7 @@
 				<div id="coupon_time">
 				</div>
 					<script id="t:coupon_time" type="text/html">
-						<%for(var i=0;i<list.length;i++){%>
+						<%for(var i=0;i< list.length;i++){%>
 							<div class="card facebook-card coupon" style="box-shadow:none">
 					   			<div class="card-header coupon-header">
 						    		<div class="facebook-name"><%=list[i].disCouPrice%></div>
@@ -56,20 +56,20 @@
 
 				
 
-				<div class="card facebook-card coupon" style="box-shadow:none">
-			   		<div class="card-header coupon-header">
-				    	<div class="facebook-name">¥ 10</div>
-				      	<div class="facebook-date">黄金级优惠券</div>
-				      	<div class="use-coupon-container">
-					      	<a href="all_goods.html" class="button">未使用</a>				      		
-				      	</div>
-				    </div>
-				    <div class="card-content">
-				      <div class="card-content-inner">
-				      	有效期：2016/04/23 - 2016/04/30
-				      </div>
-				    </div>
-				</div>
+				<!--<div class="card facebook-card coupon" style="box-shadow:none">-->
+			   		<!--<div class="card-header coupon-header">-->
+				    	<!--<div class="facebook-name">¥ 10</div>-->
+				      	<!--<div class="facebook-date">黄金级优惠券</div>-->
+				      	<!--<div class="use-coupon-container">-->
+					      	<!--<a href="all_goods.html" class="button">未使用</a>				      		-->
+				      	<!--</div>-->
+				    <!--</div>-->
+				    <!--<div class="card-content">-->
+				      <!--<div class="card-content-inner">-->
+				      	<!--有效期：2016/04/23 - 2016/04/30-->
+				      <!--</div>-->
+				    <!--</div>-->
+				<!--</div>-->
 			</div>
 	    </div>
 	</div>
@@ -91,7 +91,7 @@
 			dataType : "json",
 			success : function(data) {
 				var html = baidu.template("t:coupon_time", {
-					"list" : data.result
+					"list" : data
 				});
 				$("#coupon_time").html(html);
 			}

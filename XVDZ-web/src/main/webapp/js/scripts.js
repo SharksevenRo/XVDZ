@@ -83,11 +83,11 @@ $(function() {
 			$('body').css({
 				'padding-top' : '0px'
 			});
-		} else {
+		} /*else {
 			$('body').css({
 				'padding-top' : '44px'
 			});
-		}
+		}*/
 
 	});
 
@@ -114,11 +114,11 @@ $(function() {
 		id = id == 'theme-default' ? '' : id;
 		$('body').attr('class', id);
 		localStorage.currentTheme = id;
-	})
+	});
 
 	// 购物车去付款事件
 	$('#to_pay').click(function() {
-		window.location.href = 'pay/pay.html';
+		window.location.href = 'pay.html';
 	});
 
 	// 主页搜索框事件
@@ -154,7 +154,7 @@ $(function() {
 
 	// 搜索页面评论事件
 	$(document).on('click', '.card-footer a.leave-a-message', function(ev) {
-
+		var pid=$(this).attr("pid");
 		$('#comment').show();
 
 		$('#cancel').click(function() {
@@ -162,8 +162,6 @@ $(function() {
 		});
 
 		$('#confirm').click(function() {
-
-			// ajax 提交写在这里
 			var text = $("#textarea").val();
 			if (text == "") {
 				$('#dialog').show();
@@ -177,13 +175,13 @@ $(function() {
 				url : "../admin/ProductComment/saveAjax.do",
 				type : "get",
 				data : {
-					"product.id" : pid,
-					cmtContent : $("#textarea").val()
+					"product.id":pid,
+					cmtContent:$("#textarea").val()
 				},
 				contentType : "application/json; charset=utf-8",
 				dataType : "json",
 				success : function(data) {
-					if (data.code == "1") {
+					if (data.code=="1") {
 						$('#toast').show();
 						setTimeout(function() {
 							$('#toast').hide();
@@ -191,6 +189,7 @@ $(function() {
 					}
 				}
 			});
+
 			$('#comment').hide();
 		});
 
@@ -264,7 +263,7 @@ $(function() {
 
 		}
 
-	}
+	};
 
 	fixTilebarTightBottomPos(100, function() {
 		$('#front-this').css({
@@ -301,6 +300,17 @@ $(function() {
 	$('#go-back').click(function() {
 		window.history.go(-1);
 	});
+	$('#cart-this').click(function() {
+		var cartList = $.cookie("cart");
+		var item = {};
+		item.pdtId = $(this).attr("pdtId");
+		item.color = $("#typesForm input[name=color]").val();
+		item.size = $("#typesForm input[name=size]").val();
+		item.style = $("#typesForm input[name=style]").val();
+		item.orDtMount = $("#typesForm input[name=orDtMount]").val();
+		cartList.push(item);
+		$.cookie('cart', cartList); 
+	});
 
 	// 提现按钮事件
 	$('#topup').click(function() {
@@ -330,38 +340,10 @@ $(function() {
 
 	// ------------------------------------------定制页面控制逻辑------------------------------------------
 
-	var designArea = {
-		width : 130,
-		height : 280,
-		left : function() {
-			return ($(document).width() - this.width) / 2;
-		},
-		top : function() {
-			return ($(document).height() - this.height) / 2;
-		}
-	};
-
 	// 初始化canvas
-	$('#c').attr('width', designArea.width + 'px');
-	$('#c').attr('height', designArea.height + 'px');
-
-	$('#c').css({
-		position : 'absolute',
-		'z-index' : '500'
-	});
-
-	$('#bg-cloths').attr('width', $(window).width() + 'px');
-	$('#bg-cloths').attr('height', ($(window).height()) + 'px');
-
+	$('#c').attr('width', $(window).width() + 'px');
+	$('#c').attr('height', ($(window).height()) + 'px');
 	var canvas = new fabric.Canvas('c');
-	var canvasA = new fabric.Canvas('bg-cloths');
-
-	$('#c').parent().css({
-		position : 'absolute',
-		top : ($(document).height() - $('#c').attr('height')) / 2 + 'px',
-		left : ($(document).width() - $('#c').attr('width')) / 2 + 'px'
-	});
-
 	var f = fabric.Image.filters;
 
 	var isShowBack = false;
@@ -372,32 +354,13 @@ $(function() {
 			left : object.left + this._offset.left,
 			top : object.top + this._offset.top
 		};
-	}
-
-	var alpha = new Image();
-	alpha.src = "../img/alpha.png";
-
-	alpha.onload = function() {
-
-		canvas.getContext('2d').drawImage(alpha, 0, 0);
-
-		console.log(alpha);
-
-		console.log(canvas.toDataURL());
-
-	}
-
-	alpha.onerror = function() {
-		// $.alert();
-		console.log('error');
-	}
+	};
 
 	var exitCanvas = function() {
-		canvasA.clear();
 		canvas.clear();
 		displayCloths('../img/cloths/front.jpg');
 		$('#remove-thisobj').hide();
-	}
+	};
 
 	// 定制页面左上角按钮事件
 	$('#back-prev-menu').click(function() {
@@ -415,79 +378,13 @@ $(function() {
 	});
 
 	// 保存图片
-	$('#save-this').click(
-			function() {
+	$('#save-this').click(function() {
 
-				var cxt = canvas.getContext('2d');
-				var oldData = cxt.getImageData(0, 0, canvas.width,
-						canvas.height);
+		$('#cloth-previewer').attr('src', canvas.toDataURL());
 
-				var pattern = canvas.toDataURL();
-				var cloth = canvasA.toDataURL();
+		$('#preiview-cloths').show();
 
-				var pix = oldData.data;
-
-				var clothData = canvasA.getContext('2d').getImageData(0, 0,
-						canvasA.width, canvasA.height);
-
-				var newCanvas = document.createElement("canvas");
-				newCanvas.width = canvasA.width;
-				newCanvas.height = canvasA.height;
-				newCanvas.id = "tmpLayer";
-				document.body.appendChild(newCanvas);
-				var newCxt = newCanvas.getContext("2d");
-
-				var clothImage = new Image();
-				clothImage.src = cloth;
-
-				clothImage.onload = function() {
-					newCxt.drawImage(clothImage, 0, 0);
-
-					var patternImage = new Image();
-					patternImage.src = pattern;
-
-					patternImage.onload = function() {
-						newCxt.drawImage(patternImage, parseFloat($('#c')
-								.parent().css('left')), parseFloat($('#c')
-								.parent().css('top')));
-
-						newCxt.globalCompositeOperation = 'source-in';
-
-						var data = newCanvas.toDataURL();
-
-						$('#cloth-previewer').attr('src', data);
-
-						$('#preiview-cloths').show();
-
-						newCanvas.parentNode.removeChild(newCanvas);
-
-					}
-
-					patternImage.onerror = function() {
-						console.log('error');
-					}
-
-				}
-
-				clothImage.onerror = function() {
-					console.log('error');
-				}
-
-				// newCxt.putImageData(clothData, 0, 0);
-
-				// console.log(newCxt.globalCompositeOperation);
-
-				// console.log(newCxt.globalCompositeOperation);
-
-				// newCxt.putImageData(oldData,
-				// parseFloat($('#c').parent().css('left')),
-				// parseFloat($('#c').parent().css('top')));
-
-				// var data = newCanvas.toDataURL();
-
-				// newCanvas.parentNode.removeChild(newCanvas);
-
-			});
+	});
 
 	$('#prev-cancel').click(function() {
 		$('#preiview-cloths').hide();
@@ -508,12 +405,6 @@ $(function() {
 
 	// 定位按钮（居中按钮）
 	function positionBtn(obj) {
-
-		if (obj == undefined) {
-			return false
-		}
-		;
-
 		var absCoords = canvas.getAbsoluteCoords(obj);
 
 		var btn = $('#remove-thisobj');
@@ -527,30 +418,8 @@ $(function() {
 
 	// 点击对象后加入删除按钮
 	canvas.on('mouse:up', function(e) {
-
-		if (canvas.isDrawingMode) {
-			var inputs = $('#diy, #colors').find('input');
-
-			for ( var i = 0; i < inputs.length; i++) {
-				var curr = $(inputs[i]);
-				curr.attr('disabled', false);
-			}
-			;
-
-			return false;
-		}
-
 		positionBtn(e.target);
 	});
-
-	function makeLine(coords) {
-		return new fabric.Line(coords, {
-			fill : 'grey',
-			stroke : 'grey',
-			strokeWidth : 2,
-			selectable : false
-		});
-	}
 
 	var displayCloths = function(src) {
 
@@ -559,10 +428,11 @@ $(function() {
 		// top: 44
 		// });
 
-		if (canvasA.getActiveObject() != undefined) {
-			canvasA.remove(canvasA.getActiveObject());
+		if (canvas.getActiveObject() != undefined) {
+			canvas.remove(canvas.getActiveObject());
 		}
-
+		
+		src = src.replace("compress","temp");
 		fabric.Image.fromURL(src, function(img) {
 
 			img.scale(1).set({
@@ -574,23 +444,12 @@ $(function() {
 				selectable : false
 			});
 
-			canvasA.add(img).setActiveObject(img);
-
-			// var rect2 = new fabric.Rect({
-			// width: designArea.width,
-			// height: designArea.height,
-			// left: designArea.left(),
-			// top: designArea.top(),
-			// angle: 0,
-			// fill: 'rgba(0,200,0,0.5)'
-			// });
-
-			// canvas.add(rect2);
+			canvas.add(img).setActiveObject(img);
 
 		});
 	};
 
-	displayCloths('../img/cloths/front.jpg');
+	displayCloths('../img/cloths/LanSe2.png');
 
 	// ------------------------滤镜相关------------------------
 
@@ -617,7 +476,7 @@ $(function() {
 								document.getElementsByTagName('input'))
 								.forEach(function(el) {
 									el.disabled = false;
-								})
+								});
 
 						var filters = [ 'grayscale', 'invert', 'remove-white',
 								'sepia', 'sepia2', 'brightness', 'noise',
@@ -626,10 +485,7 @@ $(function() {
 								'blend' ];
 
 						for ( var i = 0; i < filters.length; i++) {
-							if (canvas.getActiveObject().filters != undefined) {
-								$(filters[i]).checked = !!canvas
-										.getActiveObject().filters[i];
-							}
+							$(filters[i]).checked = !!canvas.getActiveObject().filters[i];
 						}
 					},
 
@@ -638,7 +494,7 @@ $(function() {
 								document.getElementsByTagName('input'))
 								.forEach(function(el) {
 									el.disabled = true;
-								})
+								});
 					}
 				});
 
@@ -787,14 +643,6 @@ $(function() {
 			applyFilterValue(14, 'color', this.value);
 		});
 
-		var inputs = $('#diy, #colors').find('input');
-
-		for ( var i = 0; i < inputs.length; i++) {
-			var curr = $(inputs[i]);
-			curr.attr('disabled', false);
-		}
-		;
-
 	})();
 
 	// ------------------------滤镜相关------------------------
@@ -820,7 +668,7 @@ $(function() {
 			$('#front-this').show();
 			$('#front-this').animateCss('fadeInLeft');
 
-			displayCloths('../img/cloths/back.jpg');
+			displayCloths('../img/cloths/BaiSe2.jpg');
 			isShowBack = true;
 
 		});
@@ -843,7 +691,7 @@ $(function() {
 			$('#back-this').show();
 			$('#back-this').animateCss('fadeInRight');
 
-			displayCloths('./src/images/cloths/front.jpg');
+			displayCloths('../img/cloths/BaiSe1.jpg');
 			isShowBack = false;
 
 		});
@@ -857,7 +705,6 @@ $(function() {
 	var drawingOptionsEl = $('#drawing-mode-options'), drawingColorEl = $('#drawing-color'), drawingShadowColorEl = $('#drawing-shadow-color'), drawingLineWidthEl = $('#drawing-line-width'), drawingShadowWidth = $('#drawing-shadow-width'), drawingShadowOffset = $('#drawing-shadow-offset');
 
 	var toolPanelIsShow = false;
-
 	// 定制页面底部菜单
 	var startToolPanelAnimation = function(open) {
 
@@ -894,7 +741,7 @@ $(function() {
 			$('#' + open).addClass('active');
 		}
 
-	}
+	};
 
 	$('#diy-tools .tab-item').click(function() {
 
@@ -956,10 +803,12 @@ $(function() {
 
 		$('#text-font-style').change(function() {
 			fontStyle = this.value;
+			console.log(fontStyle);
 		});
 
 		$('#text-text-deco').change(function() {
 			textDecoration = this.value;
+			console.log(textDecoration);
 		});
 
 		$('#text-stroke-width').change(function() {
@@ -996,8 +845,8 @@ $(function() {
 
 				textAlign : align,
 
-				left : 50,
-				top : 50,
+				left : 100,
+				top : 100,
 
 				lineHeight : lineHeight,
 				textBackgroundColor : textBackgroundColor,
@@ -1075,10 +924,10 @@ $(function() {
 
 			fabric.Image.fromURL($(this).attr('src'), function(img) {
 
-				img.scale(0.2).set({
-					left : 0,
-					top : 0,
-					angle : 0
+				img.scale(1).set({
+					left : 150,
+					top : 150,
+					angle : -15
 				});
 
 				canvas.add(img).setActiveObject(img);
@@ -1094,64 +943,6 @@ $(function() {
 
 			if ($('.diytool-panel.active').length > 0) {
 				startToolPanelAnimation($('.diytool-panel.active').attr('id'));
-			}
-
-		});
-
-		var isGridDisplayed = false;
-
-		var grid = {
-			width : canvas.width / 3,
-			height : canvas.height / 6,
-
-			lineStack : []
-		}
-
-		canvas.on({
-			'object:moving' : function(e) {
-
-				console.log('sss');
-
-				if (!isGridDisplayed) {
-
-					// 为设计区域画九宫格
-
-					// 先画横线
-					for ( var i = 0; i * grid.height <= canvas.height; i++) {
-
-						var line = makeLine([ 0, i * grid.height, canvas.width,
-								i * grid.height ]);
-						canvas.add(line);
-						grid.lineStack.push(line);
-					}
-
-					// 再画竖线
-
-					for ( var j = 0; j * grid.width <= canvas.width; j++) {
-
-						var line = makeLine([ j * grid.width, 0,
-								j * grid.width, canvas.height ]);
-						canvas.add(line);
-						grid.lineStack.push(line);
-
-					}
-
-					isGridDisplayed = true;
-
-				}
-
-			},
-
-			'object:modified' : function(e) {
-
-				for ( var i = 0; i < grid.lineStack.length; i++) {
-					canvas.remove(grid.lineStack[i]);
-				}
-
-				isGridDisplayed = false;
-
-				console.log('end');
-
 			}
 
 		});
@@ -1210,9 +1001,7 @@ $(function() {
 			// info.insertBefore(text, info.firstChild);
 		},
 		'touch:drag' : function() {
-
-			console.log('sss');
-
+			// info.insertBefore(text, info.firstChild);
 		},
 		'touch:orientation' : function() {
 			// info.insertBefore(text, info.firstChild);
@@ -1306,7 +1095,7 @@ $(function() {
 		};
 
 		var img = new Image();
-		img.src = '../img/nasty_fabric.png';
+		img.src = '../img/honey_im_subtle.png';
 
 		var texturePatternBrush = new fabric.PatternBrush(canvas);
 		texturePatternBrush.source = img;
@@ -1349,19 +1138,19 @@ $(function() {
 
 	drawingLineWidthEl.change(function() {
 		canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
-		// this.previousSibling.innerHTML = this.value;
+		this.previousSibling.innerHTML = this.value;
 	});
 
 	drawingShadowWidth.change(function() {
 		canvas.freeDrawingBrush.shadowBlur = parseInt(this.value, 10) || 0;
-		// this.previousSibling.innerHTML = this.value;
+		this.previousSibling.innerHTML = this.value;
 	});
 
 	drawingShadowOffset
 			.change(function() {
 				canvas.freeDrawingBrush.shadowOffsetX = canvas.freeDrawingBrush.shadowOffsetY = parseInt(
 						this.value, 10) || 0;
-				// this.previousSibling.innerHTML = this.value;
+				this.previousSibling.innerHTML = this.value;
 			});
 
 	if (canvas.freeDrawingBrush) {
@@ -1392,4 +1181,4 @@ $(function() {
 
 	});
 
-})
+});
