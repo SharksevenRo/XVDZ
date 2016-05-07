@@ -304,10 +304,10 @@ $(function() {
 		var cartList = $.cookie("cart");
 		var item = {};
 		item.pdtId = $(this).attr("pdtId");
-		item.color = $("#typesForm input[name=color").val();
-		item.size = $("#typesForm input[name=size").val();
-		item.style = $("#typesForm input[name=style").val();
-		item.orDtMount = $("#typesForm input[name=orDtMount").val();
+		item.color = $("#typesForm input[name=color]").val();
+		item.size = $("#typesForm input[name=size]").val();
+		item.style = $("#typesForm input[name=style]").val();
+		item.orDtMount = $("#typesForm input[name=orDtMount]").val();
 		cartList.push(item);
 		$.cookie('cart', cartList); 
 	});
