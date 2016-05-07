@@ -56,8 +56,8 @@ public class VoteServiceImpl implements VoteService {
 
 	public List<Vote> top(Vote vote) {
 
-		String hql = "select b.mount 'mount' ,name,a.id 'id',pic1,pic2,description,slogan,school  from (" + "select count(voteid) 'mount',voteid from voterecord  group by voteid"
-				+ ") as b left join vote a on a.id=b.voteid order by b.mount" ;
+		String hql = "select b.mount 'mount' ,name,a.id 'id',pic1,pic2,description,slogan,school  from  vote a left join (" + "select count(voteid) 'mount',voteid from voterecord  group by voteid"
+				+ ") as b on a.id=b.voteid order by b.mount desc" ;
 		SQLQuery createSQLQuery = dao.createSQLQuery(hql);
 		createSQLQuery.addEntity(Vote .class); 
 
@@ -65,7 +65,12 @@ public class VoteServiceImpl implements VoteService {
 	}
 
 	public void save(Vote vote) {
+		
+		VoteRecord record=new VoteRecord();
+		
 		dao.save(vote);
+		record.setVoteId(vote.getId());
+		recordDao.save(record);
 	}
 
 }

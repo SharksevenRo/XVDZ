@@ -38,7 +38,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	private String reAddDet;
 	private String reAddTo;
 	private String reAddTel;
-	private Boolean addDefault;
+	private String addDefault;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -56,7 +56,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 
 	/** minimal constructor */
 	public ReceiveAddress(String id, String reAddDet, String reAddTo,
-			String reAddTel, Boolean addDefault, Date addTime) {
+			String reAddTel, String addDefault, Date addTime) {
 		this.id = id;
 		this.reAddDet = reAddDet;
 		this.reAddTo = reAddTo;
@@ -69,7 +69,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	public ReceiveAddress(String id, UserInfo userInfo, String reAddName,
 			String reAddPro, String reAddCity, String reAddArea,
 			String reAddDet, String reAddTo, String reAddTel,
-			Boolean addDefault, Date addTime, Date updateTime,
+		    String addDefault, Date addTime, Date updateTime,
 			Date deleteTime, String reAddRemark, Integer deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
@@ -175,11 +175,11 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	}
 
 	@Column(name = "add_default")
-	public Boolean getAddDefault() {
+	public String getAddDefault() {
 		return this.addDefault;
 	}
 
-	public void setAddDefault(Boolean addDefault) {
+	public void setAddDefault(String addDefault) {
 		this.addDefault = addDefault;
 	}
 

@@ -37,15 +37,12 @@
 				</div>
 				<div class="panel-body">
 					<form id="infoForm" class="form-horizontal form-bordered"  enctype="multipart/form-data" method="post">
-						<input id="typeId" value="" type="hidden" name="typeId"> <input
-							id="parentTypeId" value="" type="hidden" name="parentTypeId">
-						<input id="oper" name="oper" type="hidden" value="">
 						<div id="content-input">
 							<div class="form-group">
 								<label class="control-label col-md-4 col-sm-4 font-14">姓名:</label>
 								<div class="col-md-6 col-sm-7">
 									<div class="input-group">
-										<input name="typeName" type="text" value="" placeholder="选手姓名"
+										<input name="name" type="text" value="" placeholder="选手姓名"
 											data-bv-notempty="true" data-bv-notempty-message="请输入选手姓名"
 											class="form-control"> <span class="input-group-addon">
 											<span class="fa fa-at"></span> </span>
@@ -56,7 +53,7 @@
 								<label class="control-label col-md-4 col-sm-4 font-14">学校:</label>
 								<div class="col-md-6 col-sm-7">
 									<div class="input-group">
-										<input name="typeName" type="text" value="" placeholder="选手学校"
+										<input name="school" type="text" value="" placeholder="选手学校"
 											data-bv-notempty="true" data-bv-notempty-message="请输入选手学校"
 											class="form-control"> <span class="input-group-addon">
 											<span class="fa fa-at"></span> </span>
@@ -67,7 +64,7 @@
 								<label class="control-label col-md-4 col-sm-4 font-14">头像:</label>
 								<div class="col-md-5 col-sm-5">
 									<div class="input-group">
-										<input name="picUrl" value="" placeholder="选手头像图片" type="file"
+										<input name="touxiang" value="" placeholder="选手头像图片" type="file"
 											class="form-control "> <span
 											class="input-group-addon"> <span class="fa fa-flag-o"></span>
 										</span>
@@ -78,19 +75,19 @@
 								<label class="control-label col-md-4 col-sm-4 font-14">图片:</label>
 								<div class="col-md-5 col-sm-5">
 									<div class="input-group">
-										<input name="picUrl" value="" placeholder="选手图片" type="file"
-											class="form-control "> <span
+										<input name="tupian" value="" placeholder="选手图片" type="file"
+											class="form-control"> <span
 											class="input-group-addon"> <span class="fa fa-th"></span>
 										</span>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-4 col-sm-4 font-14">说明:</label>
+								<label class="control-label col-md-4 col-sm-4 font-14">口号:</label>
 								<div class="col-md-6 col-sm-6">
 									<div class="input-group">
-										<textarea class="form-control" roles="5" name="descrition"
-											value="" placeholder="说明"></textarea>
+										<textarea class="form-control" name="slogan"
+											 placeholder="口号"></textarea>
 									</div>
 								</div>
 							</div>
@@ -114,14 +111,17 @@
 <script
 	src="../js/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 <script src="../js/assets/plugins/masked-input/masked-input.min.js"></script>
+<script type="text/javascript" src="../js/jquery.form.js"></script>
 <script src="../js/apps.js"></script>
 <script>
 	$(function(){
 		$("button[name=saveBtn]").click(function(){
-			$.ajax({
-					url : "../admin/ProductComment/page",
-					type : "get",
+			debugger;
+			var options = {
+				url : "../user/infoSave.do",
+					type : "post",
 					dataType : "json",
+					contentType : "application/json; charset=utf-8",
 					data : $("#infoForm").serialize(),
 					success:function(data){
 						if(data.code=="1"){
@@ -130,7 +130,9 @@
 							alert("保存失败");
 						}
 					}
-			});
+			};
+			// 提交表单 
+			$("#infoForm").ajaxSubmit(options);
 		});
 	});
 </script>

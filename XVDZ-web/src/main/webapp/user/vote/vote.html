@@ -25,13 +25,13 @@
 						<%for(var i=0;i<data.length;i++){%>
 							<div class="weui_media_box weui_media_appmsg">
 								<div class="weui_media_hd">
-									<img class="weui_media_appmsg_thumb" src="<%=data[i].url%>" alt="">
+									<img class="weui_media_appmsg_thumb" src="../<%=data[i].pic1%>" alt="">
 								</div>
 								<div class="weui_media_bd">
 									<p style="display: inline-block;" class="weui_media_title"><%=data[i].name%></p>
 									<a personId="<%=data[i].id%>" style="float:right" href="javascript:vote(this);"
 										class="weui_btn weui_btn_mini weui_btn_primary">投票</a>
-									<p class="weui_media_desc"><%=data[i].description%></p>
+									<p class="weui_media_desc"><%=data[i].slogan%></p>
 								</div>
 							</div>
 						<%}%>
@@ -59,13 +59,14 @@
 	<script type="text/javascript">
 		function loadPerson() {
 			$.ajax({
-				url : "../admin/product/allProduct.do",
+				url : "../../user/top.do",
 				type : "get",
 				contentType : "application/json; charset=utf-8",
 				dataType : "json",
 				success : function(data) {
+					debugger;
 					var html = baidu.template("t:personList", {
-						"list" : data
+						"data" : data
 					});
 					$("#personList").html(html);
 				}
