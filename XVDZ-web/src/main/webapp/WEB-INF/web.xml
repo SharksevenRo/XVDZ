@@ -66,10 +66,20 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>wechat</servlet-name>
+		<servlet-class>com.xiaov.weixin.controller.WechatController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>wechat</servlet-name>
+		<url-pattern>/xvdz/wechat</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

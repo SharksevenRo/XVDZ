@@ -38,22 +38,23 @@ public class ReceiveAddressServiceImpl extends BaseServiceImpl<ReceiveAddress> i
     @Transactional
     public void save(ReceiveAddress entity) {
 
-    	ReceiveAddress temp=new ReceiveAddress();
-    	temp.setAddDefault(true);
-    	temp.setUserInfo(entity.getUserInfo());
-    	//获取默认地址
-    	List<ReceiveAddress> defaultAdd =loadAll(temp);
-    	if(defaultAdd.size()==1){
-    		//修改默认地址
-    		ReceiveAddress address = defaultAdd.get(0);
-    		address.setAddDefault(false);
-    		receiveAddressDao.update(address);
-    		entity.setAddDefault(true);
-            super.save(entity);
-    	}else{
-    		logger.error("默认地址异常");
-    		throw new RuntimeException("默认地址异常");
-    	}
+//    	ReceiveAddress temp=new ReceiveAddress();
+//    	temp.setAddDefault("1");
+//    	temp.setUserInfo(entity.getUserInfo());
+//    	//获取默认地址
+//    	List<ReceiveAddress> defaultAdd =loadAll(temp);
+//    	if(defaultAdd.size()==1){
+//    		//修改默认地址
+//    		ReceiveAddress address = defaultAdd.get(0);
+//    		address.setAddDefault("0");
+//    		receiveAddressDao.update(address);
+//    		entity.setAddDefault("1");
+//            super.save(entity);
+//    	}else{
+//    		logger.error("默认地址异常");
+//    		throw new RuntimeException("默认地址异常");
+//    	}
+        super.save(entity);
     	
     }
 

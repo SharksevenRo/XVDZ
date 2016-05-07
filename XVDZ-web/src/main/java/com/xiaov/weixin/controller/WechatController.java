@@ -1,13 +1,11 @@
 package com.xiaov.weixin.controller;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.xiaov.utils.LogBuilder;
 import com.xiaov.weixin.config.ConfigDao;
 import com.xiaov.weixin.config.ConfigInfo;
 
@@ -20,79 +18,88 @@ import me.chanjar.weixin.mp.bean.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.WxMpXmlOutTextMessage;
 
-@Controller
-public class WechatController {
-	
-	private static Logger logger = LoggerFactory.getLogger(WechatController.class); 
+/**
+ * 微信校验及接受用户消息
+ * @author Administrator
+ *
+ */
+public class WechatController extends HttpServlet {
+
 	protected WxMpInMemoryConfigStorage wxMpConfigStorage;
 	protected WxMpService wxMpService;
 	protected WxMpMessageRouter wxMpMessageRouter;
-	public void init(){ 
+
+	@Override
+	public void init() throws ServletException {
+		super.init();
 		ConfigDao configDao = new ConfigDao();
 		ConfigInfo configInfo = configDao.GetConfig();
 		wxMpConfigStorage = new WxMpInMemoryConfigStorage();
 		wxMpConfigStorage.setAppId(configInfo.getWeChatAppID()); // 设置微信公众号的appid
 		wxMpConfigStorage.setSecret(configInfo.getWeChatAppSecret()); // 设置微信公众号的app
-																		// corpSecret 
+																		// corpSecret
 		wxMpConfigStorage.setToken(configInfo.getWeChatToken()); // 设置微信公众号的token
 		wxMpConfigStorage.setAesKey(configInfo.getWeChatAESKey()); // 设置微信公众号的EncodingAESKey
- 
+
 		wxMpService = new WxMpServiceImpl();
 		wxMpService.setWxMpConfigStorage(wxMpConfigStorage);
-	} 
-	@RequestMapping("/xvdz/wechat")
-	public void XVDZWechat(HttpServletRequest request,HttpServletResponse response){
-		try { 
-			
-			init();
+	}
+
+	@Override
+	protected void service(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException {
+
+		try {
 			response.setContentType("text/html;charset=utf-8");
 			response.setStatus(HttpServletResponse.SC_OK);
- 
+
 			String signature = request.getParameter("signature");
 			String nonce = request.getParameter("nonce");
-			String Date = request.getParameter("Date");
- 
-			if (!wxMpService.checkSignature(Date, nonce, signature)) {
-				// 消息签名不正确，说明不是公众平台发过来的消息 
+			String timestamp = request.getParameter("timestamp");
+
+			if (!wxMpService.checkSignature(timestamp, nonce, signature)) {
+				// 消息签名不正确，说明不是公众平台发过来的消息
 				response.getWriter().println("非法请求");
-				return; 
-			} 
- 
+				return;
+			}
+
 			String echostr = request.getParameter("echostr");
 			if (StringUtils.isNotBlank(echostr)) {
-				// 说明是一个仅仅用来验证的请求，回显echostr 
+				// 说明是一个仅仅用来验证的请求，回显echostr
 				response.getWriter().println(echostr);
-				return; 
-			} 
- 
+				return;
+			}
+
 			String encryptType = StringUtils.isBlank(request
 					.getParameter("encrypt_type")) ? "raw" : request
-					.getParameter("encrypt_type"); 
-			response.setContentType("text/xml");
+					.getParameter("encrypt_type");
+
 			if ("raw".equals(encryptType)) {
-				// 明文传输的消息 
+				// 明文传输的消息
 				WxMpXmlMessage inMessage = WxMpXmlMessage.fromXml(request
-						.getInputStream()); 
+						.getInputStream());
 				WxMpXmlOutTextMessage m = WxMpXmlOutMessage.TEXT()
-						.fromUser(inMessage.getToUserName()).content("您好,欢迎关注小V定制微信平台")
+						.fromUser(inMessage.getToUserName()).content("您好,欢迎关注小v定制，90后就该不一样")
 						.toUser(inMessage.getFromUserName()).build();
 				response.getWriter().write(m.toXml());
-			} 
+				return;
+			}
 			if ("aes".equals(encryptType)) {
-				// 是aes加密的消息 
+				// 是aes加密的消息
 				WxMpXmlMessage inMessage = WxMpXmlMessage.fromXml(request
-						.getInputStream()); 
+						.getInputStream());
 				WxMpXmlOutTextMessage m = WxMpXmlOutMessage.TEXT()
-						.fromUser(inMessage.getToUserName()).content("您好,欢迎关注小V定制微信平台")
+						.fromUser(inMessage.getToUserName()).content("您好,欢迎关注小v定制，90后就该不一样")
 						.toUser(inMessage.getFromUserName()).build();
 				response.getWriter().write(m.toXml());
-			} 
+				return;
+			}
 			response.getWriter().println("不可识别的加密类型");
-			return; 
+			return;
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
-		} 
- 
+			LogBuilder.writeToLog(e.getMessage());
+		}
+
 	}
+
 }

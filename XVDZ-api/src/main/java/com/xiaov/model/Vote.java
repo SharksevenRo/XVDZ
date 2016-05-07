@@ -20,7 +20,7 @@ public class Vote implements Serializable{
 	private String name;
 	private String description;
 	private String slogan;
-	private Integer count;
+	private Integer mount;
 	private String pic1;
 	private String school;
 	private String pic2;
@@ -50,12 +50,12 @@ public class Vote implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@Column(name="count")
-	public Integer getCount() {
-		return count;
+	@Column(name="mount")
+	public Integer getMount() {
+		return mount;
 	}
-	public void setCount(Integer count) {
-		this.count = count;
+	public void setMount(Integer count) {
+		this.mount = count;
 	}
 	@Column(name="slogan")
 	public String getSlogan() {
