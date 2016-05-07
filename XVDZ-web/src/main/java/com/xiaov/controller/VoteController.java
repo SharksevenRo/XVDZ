@@ -63,11 +63,13 @@ public class VoteController extends BaseController {
 			// 压缩1
 			String touxiangCompressTargetPath = fileUtil.savePicWithCompress(
 					touxiang, newFileName, compressScope, false);
+			String dbCompress1Url = fileUtil.getNormalRelativeFolderPath()+newFileName;
+			vote.setPic1(dbCompress1Url);
 			// 压缩2
 			String tupianCompressTargetPath = fileUtil.savePicWithCompress(
 					tupian, newFileName, compressScope, false);
-			vote.setPic1(touxiangCompressTargetPath);
-			vote.setPic2(tupianCompressTargetPath);
+			String dbCompress2Url = fileUtil.getSmallRelativeFolderPath()+newFileName;
+			vote.setPic2(dbCompress2Url);
 			voteService.save(vote);
 			return new MessageBean(APPConstant.SUCCESS, "添加成功");
 		} catch (Exception e) {
