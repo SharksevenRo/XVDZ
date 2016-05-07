@@ -2,6 +2,7 @@ package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.ReceiveAddress;
+import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.impl.ReceiveAddressServiceImpl;
@@ -17,8 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,21 +37,27 @@ public class ReceiveAddressController {
 
     @RequestMapping("/admin/ReceiveAddress/saveAjax")
     @ResponseBody
-    public MessageBean saveAjax(String reAddTo,String reAddTel,String reAddDet,String addDefault) {
+    public MessageBean saveAjax(String reAddTo, String reAddTel,String reAddDet,String addDefault, HttpServletRequest request) {
 
         try {
         	//receiveAddress.setId(new CookieUtil(request).getValue("user", "id", true));
+            CookieUtil until=new CookieUtil(request);
             ReceiveAddress receiveAddress = new ReceiveAddress();
-            receiveAddress.setId("1");
+            System.out.println(until.getValue("user","userId",true));
+            UserInfo userInfo = new UserInfo();
+            userInfo.setId(until.getValue("user","userId",true));
+            receiveAddress.setUserInfo(userInfo);
+            System.out.println(request.getParameter("reAddTo"));
+            System.out.println(request.getParameter("reAddDet"));
+            System.out.println(request.getParameter("addDefault"));
+            System.out.println(request.getParameter("reAddTel"));
             receiveAddress.setReAddTo(reAddTo);
             receiveAddress.setReAddTel(reAddTel);
+
             receiveAddress.setReAddDet(reAddDet);
-            System.out.println(addDefault);
-            if(addDefault.equals("true"))
-                receiveAddress.setAddDefault(true);
-            else
-                receiveAddress.setAddDefault(false);
-            System.out.println(receiveAddress.getAddDefault());
+            receiveAddress.setAddTime(new Date());
+
+            receiveAddress.setAddDefault(addDefault);
             receiveAddressService.save(receiveAddress);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
@@ -113,8 +122,9 @@ public class ReceiveAddressController {
     }
     @RequestMapping("admin/address/getUserAddress")
     @ResponseBody
-    public List<ReceiveAddress> getReceiveAddress() {
-        String values ="1";
+    public List<ReceiveAddress> getReceiveAddress(HttpServletRequest request) {
+        CookieUtil until=new CookieUtil(request);
+        String values =until.getValue("user","userId",true);
         List<ReceiveAddress> result = receiveAddressServiceimpl.getByProperty("userInfo.id",values);
         try{
             result = LazyObjecUtil.LazySetNull(result,"userInfo");

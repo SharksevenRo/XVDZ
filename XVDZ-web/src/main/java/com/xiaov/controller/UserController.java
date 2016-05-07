@@ -216,6 +216,7 @@ public class UserController {
 			CookieUtil until=new CookieUtil(request);
 			until.setValue("user","userId",user.getId(),true);
 			until.save(response,"user",true);
+			System.out.println(user.getId());
 			return new MessageBean(1,"登录成功!");
 		}
 
