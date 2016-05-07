@@ -13,34 +13,40 @@
 		<div class="panel">
 			<div class="hd" style="background: #5CAB74">
 				<h1 class="page_title" style="color: #fff">高校女神大赛</h1>
-				<div style="color: #fff;float:right;width:100%;text-align: right;padding-right:10px">——&nbsp;南昌高校</div>
+				<div
+					style="color: #fff;float:right;width:100%;text-align: right;padding-right:10px">——&nbsp;南昌高校</div>
 			</div>
 
 			<div class="bd">
 				<div class="weui_panel weui_panel_access">
 					<div class="weui_panel_hd">参赛人员</div>
-					<div id="personList" class="weui_panel_bd">
-					</div>
+					<div id="personList" class="weui_panel_bd"></div>
 					<script id="t:personList" type="text/html">
 						<%for(var i=0;i<data.length;i++){%>
 							<div class="weui_media_box weui_media_appmsg">
 								<div class="weui_media_hd">
-									<img class="weui_media_appmsg_thumb" src="../<%=data[i].pic1%>" alt="">
+									<img pic2="../../<%=data[i][0].pic2%>" onclick="showPic(this)" class="weui_media_appmsg_thumb" src="../../<%=data[i][0].pic1%>" alt="">
 								</div>
 								<div class="weui_media_bd">
-									<p style="display: inline-block;" class="weui_media_title"><%=data[i].name%></p>
-									<a personId="<%=data[i].id%>" style="float:right" href="javascript:vote(this);"
+									<p style="display: inline-block;" class="weui_media_title"><%=data[i][0].name%></p>
+									<a personId="<%=data[i][0].id%>" style="float:right" href="javascript:vote(this);"
 										class="weui_btn weui_btn_mini weui_btn_primary">投票</a>
-									<p class="weui_media_desc"><%=data[i].slogan%></p>
+									<p class="weui_media_desc"><%=data[i][0].slogan%></p>
 								</div>
 							</div>
 						<%}%>
 					</script>
 				</div>
 			</div>
-			<div style="position: absolute;bottom: 0px;width: 100%;font-family: 微软雅黑;color: #999;font-size: 12px" align="center">
-				<div>©2016 <a href="javascript:;">小V定制</a></div>
-				<div><label>主办方:</label>&nbsp;南昌竹新科技有限公司</div>
+			<div
+				style="position: absolute;bottom: 0px;width: 100%;font-family: 微软雅黑;color: #999;font-size: 12px"
+				align="center">
+				<div>
+					©2016 <a href="javascript:;">小V定制</a>
+				</div>
+				<div>
+					<label>主办方:</label>&nbsp;南昌竹新科技有限公司
+				</div>
 			</div>
 		</div>
 		<div id="toast" style="display:none;">
@@ -48,6 +54,30 @@
 			<div class="weui_toast" style="top:180px">
 				<i class="weui_icon_toast"></i>
 				<p class="weui_toast_content">投票成功</p>
+			</div>
+		</div>
+		<div id="dialog" class="weui_dialog_confirm" style="display: none">
+			<div class="weui_mask"></div>
+			<div class="weui_dialog" style="width:100%">
+				<div class="weui_dialog_bd">
+					<div class="swiper-container"
+						style="height:160px;overflow-y:hidden;">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide blue-slide">
+								<img id="pic1" width="100%" alt="" src="">
+							</div>
+							<div class="swiper-slide red-slide">
+								<img id="pic2" width="100%" alt="" src="">
+							</div>
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+
+				</div>
+				<div class="weui_dialog_ft">
+					<a href="javascript:hide();" class="weui_btn_dialog default">关闭</a>
+					<a href="javascript:hide();" class="weui_btn_dialog primary">确定</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -73,17 +103,37 @@
 			});
 		}
 		loadPerson();
-		
+		function hide(){
+			$("#dialog").css({
+				display : "none"
+			});
+		}
+		function showPic(obj) {
+			$("#pic1").attr("src", $(obj).attr("src"));
+			$("#pic2").attr("src", $(obj).attr("pic2"));
+			$("#dialog").css({
+				display : "block"
+			});
+			// 幻灯片
+			var mySwiper = new Swiper('.swiper-container', {
+				autoplay : 5000,
+				pagination : '.swiper-pagination',
+				paginationClickable : true
+			});
+		}
+
 		function vote(obj) {
 			var id = $(this).attr("personID");
 			if (!$(this).find("a").hasClass("disabled")) {
 				$(this).find("a").addClass("disabled");
 			}
 			$.ajax({
-				url : "../admin/productDetail/getOneAjax",
+				url : "../../user/vote.do",
 				dataType : "json",
-				data : {id:id},
-				success : function(data){
+				data : {
+					openId : "22"
+				},
+				success : function(data) {
 					if (data.msgCode == "1") {
 						$("#toast weui_toast_content").text("投票成功");
 						$("#toast").show();
@@ -91,7 +141,7 @@
 							$("#toast").hide();
 						}, 2000);
 						$(obj).text("已投票");
-					}else{
+					} else {
 						$("#toast weui_toast_content").text("您已投票，不能重复投票");
 						$("#toast").show();
 						setTimeout(function() {
