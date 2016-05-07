@@ -39,6 +39,7 @@
 							<li><a href="#ajax/userList.html">用户管理</a></li>
 							<li><a href="#ajax/salesman.html">公司业务员管理</a></li>
 							<li><a href="#ajax/addr.html">用户收货地址</a></li>
+							<li><a href="#ajax/voteinfo.html">投票信息录入</a></li>
 					<!--	<ul class="sub-menu">
 						    <li><a href="#ajax/email_inbox.html">管理会员信息</a></li>
 						    <li><a href="#ajax/email_inbox_v2.html">管理产品信息</a></li>

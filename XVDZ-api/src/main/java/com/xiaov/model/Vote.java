@@ -1,5 +1,7 @@
 package com.xiaov.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +10,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.stereotype.Repository;
 
 @Entity
 @Table(name = "vote", catalog = "xvdz")
-public class Vote {
+public class Vote implements Serializable{
 
 	
 	private String id;
