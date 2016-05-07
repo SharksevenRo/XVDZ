@@ -24,7 +24,7 @@ public class VoteController extends BaseController {
 	@RequestMapping("/user/vote")
 	@ResponseBody
 	public MessageBean vote(Vote vote) {
-		if (!voteService.isRepeate(vote)) {
+		if (voteService.isRepeate(vote)) {
 			voteService.vote(vote);
 			return new MessageBean(APPConstant.SUCCESS, "投票成功");
 		} else {

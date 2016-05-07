@@ -38,10 +38,6 @@ public class VoteServiceImpl implements VoteService {
 
 	public boolean vote(Vote vote) {
 		try {
-
-			vote = dao.get(vote.getId());
-			count++;
-			System.out.println("未枷锁：" + count);
 			VoteRecord record = new VoteRecord();
 			record.setOpenId(vote.getOpenId());
 			record.setVoteId(vote.getId());
