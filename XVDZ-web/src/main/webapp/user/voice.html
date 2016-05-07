@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>我的作品</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="../css/weui.min.css"/>
-    <link rel="stylesheet" href="../css/swiper.min.css">
-    <link rel="stylesheet" href="../css/sm.min.css">
-    <link rel="stylesheet" href="../css/sm-extend.min.css">
-    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+<meta charset="UTF-8">
+<title>我的作品</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="../css/weui.min.css" />
+<link rel="stylesheet" href="../css/swiper.min.css">
+<link rel="stylesheet" href="../css/sm.min.css">
+<link rel="stylesheet" href="../css/sm-extend.min.css">
+<link rel="stylesheet" href="../css/styles.css" type="text/css">
 </head>
 <body>
 
 	<div class="weui_tab">
-	    <div class="weui_tab_bd">
-	        <div class="weui_tab_bd_item">
+		<div class="weui_tab_bd">
+			<div class="weui_tab_bd_item">
 
-	        	<header class="bar bar-nav">
-	        		<a class="button button-link button-nav pull-left back">
-				      <span class="icon icon-left"></span>
-				      返回
-				    </a>
-				  	<h1 class="title">大家的声音</h1>
+				<!-- <header class="bar bar-nav">
+					<a class="button button-link button-nav pull-left back"> <span
+						class="icon icon-left"></span> 返回
+					</a>
+					<h1 class="title">大家的声音</h1>
 					<button class="button button-link button-nav pull-right back">
-				      <span class="icon icon-share"></span>
-				    </button>				  	
-				</header>
+						<span class="icon icon-share"></span>
+					</button>
+				</header> -->
 
-				<div class="content" style="top:0px">
-				  <div class="buttons-tab">
-				    <a href="#tab1" class="tab-link active button">全部</a>
-				    <a href="#tab2" class="tab-link button">发布</a>
-				  </div>
-				  <div class="content-block" style="padding:0px">
-				    <div class="tabs">
-				      <div id="tab1" class="tab active">
-							
+				<div class="content" style="top: 0px">
+					<div class="buttons-tab">
+						<a href="#tab1" class="tab-link active button">全部</a> <a
+							href="#tab2" class="tab-link button">发布</a>
+					</div>
+					<div class="content-block" style="padding: 0px">
+						<div class="tabs">
+							<div id="tab1" class="tab active">
 
-							<!-- <div class="padding">
+
+								<!-- <div class="padding">
 								<a href="javascript:;" class="weui_btn weui_btn_primary">加载更多</a>	
 							</div> -->
 
-				      </div>
-						<script id="t:voice" type="text/html">
-							<%for(var i=0;i<list.length;i++){%>
+							</div>
+							<script id="t:voice" type="text/html">
+							<%for(var i=0;i< list.length;i++){%>
 								<div class="card">
 							    	<div class="card-content">
 							     	 <div class="list-block media-list">
@@ -71,40 +71,68 @@
 								</div>
 							<%}%>
 						</script>
-				      <div id="tab2" class="tab">
-				        <div class="content-block">
-							<div class="weui_cells weui_cells_form">
-							    <div class="weui_cell">
-							        <div class="weui_cell_bd weui_cell_primary">
-							            <textarea class="weui_textarea" id="textarea" placeholder="请输入内容" rows="3"></textarea>
-							        </div>
-							    </div>
+							<div id="tab2" class="tab">
+								<div class="content-block">
+									<div class="weui_cells weui_cells_form">
+										<form id="voiceForm" action="" method="post">
+											<div class="weui_cell">
+												<div class="weui_cell_bd weui_cell_primary">
+													<textarea name="dynmcContent" class="weui_textarea" id="textarea"
+														placeholder="请输入内容" rows="3"></textarea>
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class="content-block">
+										<div class="row">
+											<div class="col-100">
+												<a href="javascript:dynamicFormSubmit();"
+													class="button button-big button-fill button-success">提交</a>
+											</div>
+										</div>
+									</div>
+									<div id="toast" style="display: none;">
+										<div class="weui_mask_transparent"></div>
+										<div class="weui_toast" style="top: 180px">
+											<i class="weui_icon_toast"></i>
+											<p class="weui_toast_content">添加成功</p>
+										</div>
+									</div>
+									<div id="dialog" class="weui_dialog_confirm"
+										style="display: none;">
+										<div class="weui_mask"></div>
+										<div class="weui_dialog">
+											<div class="weui_dialog_hd">
+												<strong class="weui_dialog_title">友情提示</strong>
+											</div>
+											<div class="weui_dialog_bd">请填写动态信息!</div>
+											<div class="weui_dialog_ft">
+												<a href="javascript:;" class="weui_btn_dialog default">取消</a>
+												<a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="content-block">
-							    <div class="row">
-							      <div class="col-100"><a href="#" class="button button-big button-fill button-success">提交</a></div>
-							    </div>
-							</div>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
+						</div>
+					</div>
 				</div>
 			</div>
-	    </div>
+		</div>
 	</div>
-	
+
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/weui.js"></script>
 	<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
-    <script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
-    <script type="text/javascript" src="../js/baiduTemplate.js"></script>
+	<script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../js/sm-extend.min.js'
+		charset='utf-8'></script>
+	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript" src="../js/baiduTemplate.js"></script>
 	<script type="text/javascript">
 		var flag = true;
-		function loadDynamic(){
+		function loadDynamic() {
 			// 分页加载动态
 			$.ajax({
 				url : "../admin/dynamic/allDynamic.do",
@@ -116,28 +144,57 @@
 					pageSize : 5
 				},
 				success : function(data) {
-					if(data.result.length==5){
+					if (data.length == 5) {
 						pageNo++;
-					}else{
+					} else {
 						flag = false;
 					}
 					var html = baidu.template('t:voice', {
-						"list" : data.result
+						"list" : data
 					});
 					$("#tab1").html(html);
 				}
 			});
 		}
-		$(function(){
-			loadDynamic();
-			//屏幕滚动
-			$(window).scroll(function() {
-				if ($(document).height() - $(this).scrollTop()- $(this).height() < 20) {
-					if(flag==true){
-						loadGoodsData();
+		function dynamicFormSubmit() {
+			var text = $("textarea[name=dynmcContent]").val().trim();
+			if (text == "") {
+				$('#dialog').show();
+				setTimeout(function() {
+					$('#dialog').hide();
+				}, 3000);
+			} else {
+				$.ajax({
+					url: "../admin/dynamic/addAjax.do",
+					type: "post",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					data: $("#voiceForm").serialize(),
+					success: function(data) {
+						if (data.msgCode == "1") {
+							$('#toast').show();
+							setTimeout(function() {
+								$('#toast').hide();
+								window.location.href = "voice.html";
+							}, 2000);
+						}
 					}
-				}
-			});
+				});
+			}
+		}
+		loadDynamic();
+		$(function() {
+
+			//屏幕滚动
+			$(window).scroll(
+					function() {
+						if ($(document).height() - $(this).scrollTop()
+								- $(this).height() < 20) {
+							if (flag == true) {
+								loadGoodsData();
+							}
+						}
+					});
 		});
 	</script>
 </body>

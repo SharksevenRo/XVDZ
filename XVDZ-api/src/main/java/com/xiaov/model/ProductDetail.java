@@ -2,8 +2,11 @@ package com.xiaov.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -14,44 +17,33 @@ import com.xiaov.orm.core.Page;
 @Table(name = "product_detail", catalog = "xvdz")
 public class ProductDetail extends Page<ProductDetail>{
 
-	/**
-	 * 该商品的颜色种类
-	 */
-	public static final String COLOR="color";
-	/**
-	 * 该商品的面料种类
-	 */
-	public static final String MATERIAL="material";
-	
-	/**
-	 * 改商品的面料类型
-	 */
-	public static final String SIZE="size";
 	
 	private String id;
-	private String productId;
-	private String pic;
-	private String name;
+ 	private String productId;
+	private Material picB;
+	private Material picF;
+	private String colorName;
 	private String type;
+	private Double price;
 	
 	public ProductDetail() {
 	}
 	
 	
-	public ProductDetail(String productId, String pic, String name, String type) {
+	public ProductDetail(String productId, Material picB, String colorName, String type) {
 		super();
 		this.productId = productId;
-		this.pic = pic;
-		this.name = name;
+		this.picB = picB;
+		this.colorName = colorName;
 		this.type = type;
 	}
 
-	public ProductDetail(String id, String productId, String pic, String name, String type) {
+	public ProductDetail(String id, String productId, Material picB, String colorName, String type) {
 		super();
 		this.id = id;
 		this.productId = productId;
-		this.pic = pic;
-		this.name = name;
+		this.picB = picB;
+		this.colorName = colorName;
 		this.type = type;
 	}
 
@@ -73,19 +65,20 @@ public class ProductDetail extends Page<ProductDetail>{
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	@Column(name = "pic", length = 50)
-	public String getPic() {
-		return pic;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "picb")
+	public Material getPicB() {
+		return picB;
 	}
-	public void setPic(String pic) {
-		this.pic = pic;
+	public void setPicB(Material pic) {
+		this.picB = pic;
 	}
-	@Column(name = "name", length = 50)
-	public String getName() {
-		return name;
+	@Column(name = "colorname", length = 50)
+	public String getColorName() {
+		return colorName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setColorName(String name) {
+		this.colorName = name;
 	}
 	@Column(name = "type", length = 50)
 	public String getType() {
@@ -94,4 +87,26 @@ public class ProductDetail extends Page<ProductDetail>{
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "picf")
+	public Material getPicF() {
+		return picF;
+	}
+
+	
+	public void setPicF(Material picF) {
+		this.picF = picF;
+	}
+
+	@Column(name = "price")
+	public Double getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
 }

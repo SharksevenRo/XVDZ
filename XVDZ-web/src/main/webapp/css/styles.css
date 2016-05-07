@@ -4,7 +4,7 @@ html, body{
 
 body{
     background: #efeff4!important;
-    padding-top: 44px;
+    /* padding-top: 44px; */
 }
 
 * {
@@ -109,7 +109,7 @@ p {
 
 .title-bar.blue {
 	background: rgba(117, 147, 213, 0.8);
-	z-index: 65535;
+	z-index: 4000;
 }
 
 .coupon-header {
@@ -209,22 +209,65 @@ p {
 	height: 76px;
 	cursor: pointer;
 }
-
-.pattern-wall .card-header img{
-	height: 82px;
+.increcement,.decrecement,.mount{
+	border:1px solid #ccc;
+	padding:0 7px;
+	border-radius: 3px;
+}
+.des,.inc:HOVER{
 	cursor: pointer;
 }
-
-.pattern-wall .card {
-	box-shadow: none;
-	border: 1px solid rgb(208, 208, 208);
-	border-bottom: 0px;
+.type-div{
+	margin: 1.75rem 0;
+    font-size: .85rem;
+	
 }
-
-.pattern-wall .card:nth-child(1) {
-	border-right: 0px;
+.type-item{
+	box-sizing: border-box;
+    padding-left: .75rem;
+    min-height: 2.2rem;
+    display: flex;
+    -webkit-align-items: center;
+    transition-duration: .3s;
+    color: inherit;
+    border-bottom: 1px solid #FDFBFB;
+    background: #fff;
 }
-
-.pattern-wall:last-child .card .card-header img{
-	border-bottom: 1px solid rgb(208, 208, 208);
+.type-inner{
+	display: block;
+    padding-top: .5rem;
+    padding-bottom: .45rem;
+    align-self: stretch;
+    padding-right: .75rem;
+    position: relative;
+    width: 100%;
+    min-height: 2.2rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.type-row{
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+.types{
+	border:1px solid #ccc;
+	padding:2px 5px;
+	border-radius: 3px;
+	font-size: 12px
+}
+.type-item .active{
+	border-color: #C320BE;
+}
+.bold{
+	font-weight: bold;
+}
+.list-block.media-list .item-title {
+    font-weight: bold;
 }

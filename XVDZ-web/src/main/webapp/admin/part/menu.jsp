@@ -37,7 +37,7 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#ajax/userList.html">用户管理</a></li>
-							<li><a href="#ajax/managerStaff.html">公司员工管理</a></li>
+							<li><a href="#ajax/salesman.html">公司业务员管理</a></li>
 							<li><a href="#ajax/addr.html">用户收货地址</a></li>
 					<!--	<ul class="sub-menu">
 						    <li><a href="#ajax/email_inbox.html">管理会员信息</a></li>
@@ -56,6 +56,17 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#ajax/type.html">所有类型</a></li>
+							<li><a href="#ajax/simpleTypes.html">类型管理(列表)</a></li>
+						</ul>
+					</li>
+					<li class="has-sub">
+						<a href="javascript:;">
+							<b class="caret pull-right"></b>
+							<i class="fa fa-inbox"></i> 
+							<span>图库管理</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#ajax/materialUpload.html">上传图案</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -66,6 +77,7 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#ajax/goods.html">所有产品</a></li>
+							<li><a href="#ajax/uploadProduct.html">基本款上传</a></li>
 							<li><a href="#">产品类型</a></li>
 						</ul>
 					</li>

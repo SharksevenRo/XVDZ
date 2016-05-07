@@ -48,4 +48,9 @@ public class DiscountCoupanServiceImpl extends BaseServiceImpl<DiscountCoupan> i
 
         return super.getOne(clazz, pk);
     }
+    public  List<DiscountCoupan> getByProperty(String propertynmae,String propertyvalues){
+        List<DiscountCoupan> result ;
+        result = discountCoupanDao.findByProperty(propertynmae,propertyvalues);
+        return result;
+    }
 }

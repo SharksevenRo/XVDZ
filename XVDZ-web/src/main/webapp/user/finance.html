@@ -79,8 +79,7 @@
 				<div class="weui_msg">
 				    <div class="weui_icon_area"><i class="weui_icon_safe weui_icon_safe_success"></i></div>
 				    <div class="weui_text_area">
-				        <h2 class="weui_msg_title" style="font-size:2.4em">¥ 26.44</h2>
-				        <!-- <p class="weui_msg_desc">关于小v关于小v关于小v关于小v关于小v关于小v关于小v关于小v</p> -->
+				        <h2 id="balance" class="weui_msg_title" style="font-size:2.4em">¥ 26.44</h2>
 				    </div>
 				    <div class="weui_opr_area">
 				        <p class="weui_btn_area">
@@ -88,7 +87,7 @@
 				        </p>
 				    </div>
 				</div>
-
+			</div>
 	    </div>
 	</div>
 	
@@ -99,6 +98,19 @@
     <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
     <script type="text/javascript" src="../js/scripts.js"></script>
-
+	<script type="text/javascript">
+		// 加载用户账户信息
+		$.ajax({
+			url : "../admin/Account/userAccount.do",
+			type : "get",
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : function(data) {
+				if(data.code=="1"){
+					$("#balance").text(data.data);
+				}
+			}
+		});
+	</script>
 </body>
 </html>

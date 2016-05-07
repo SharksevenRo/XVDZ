@@ -25,7 +25,7 @@ import com.xiaov.orm.core.FieldType;
  */
 @Entity
 @Table(name = "receive_address", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Serializable {
 
 	// Fields
@@ -46,7 +46,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private String reAddRemark;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -70,7 +70,7 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 			String reAddPro, String reAddCity, String reAddArea,
 			String reAddDet, String reAddTo, String reAddTel,
 			Boolean addDefault, Date addTime, Date updateTime,
-			Date deleteTime, String reAddRemark, Boolean deleteFlag) {
+			Date deleteTime, String reAddRemark, Integer deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
 		this.reAddName = reAddName;
@@ -223,11 +223,11 @@ public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Seri
 	}
 
 	@Column(name = "delete_flag")
-	public Boolean getDeleteFlag() {
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 

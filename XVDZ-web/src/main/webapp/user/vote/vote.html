@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<title>WeUI</title>
+<link rel="stylesheet" href="../../css/weui.min.css" />
+<link rel="stylesheet" href="../../css/example.css" />
+</head>
+<body ontouchstart>
+	<div class="container" id="container">
+		<div class="panel">
+			<div class="hd" style="background: #5CAB74">
+				<h1 class="page_title" style="color: #fff">高校女神大赛</h1>
+				<div style="color: #fff;float:right;width:100%;text-align: right;padding-right:10px">——&nbsp;南昌高校</div>
+			</div>
+
+			<div class="bd">
+				<div class="weui_panel weui_panel_access">
+					<div class="weui_panel_hd">参赛人员</div>
+					<div id="personList" class="weui_panel_bd">
+					</div>
+					<script id="t:personList" type="text/html">
+						<%for(var i=0;i<data.length;i++){%>
+							<div class="weui_media_box weui_media_appmsg">
+								<div class="weui_media_hd">
+									<img class="weui_media_appmsg_thumb" src="<%=data[i].url%>" alt="">
+								</div>
+								<div class="weui_media_bd">
+									<p style="display: inline-block;" class="weui_media_title"><%=data[i].name%></p>
+									<a personId="<%=data[i].id%>" style="float:right" href="javascript:vote(this);"
+										class="weui_btn weui_btn_mini weui_btn_primary">投票</a>
+									<p class="weui_media_desc"><%=data[i].description%></p>
+								</div>
+							</div>
+						<%}%>
+					</script>
+				</div>
+			</div>
+			<div style="position: absolute;bottom: 0px;width: 100%;font-family: 微软雅黑;color: #999;font-size: 12px" align="center">
+				<div>©2016 <a href="javascript:;">小V定制</a></div>
+				<div><label>主办方:</label>&nbsp;南昌竹新科技有限公司</div>
+			</div>
+		</div>
+		<div id="toast" style="display:none;">
+			<div class="weui_mask_transparent"></div>
+			<div class="weui_toast" style="top:180px">
+				<i class="weui_icon_toast"></i>
+				<p class="weui_toast_content">投票成功</p>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/router.min.js"></script>
+	<script src="../../js/baiduTemplate.js"></script>
+	<script type="text/javascript">
+		function loadPerson() {
+			$.ajax({
+				url : "../admin/product/allProduct.do",
+				type : "get",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(data) {
+					var html = baidu.template("t:personList", {
+						"list" : data
+					});
+					$("#personList").html(html);
+				}
+			});
+		}
+		loadPerson();
+		
+		function vote(obj) {
+			var id = $(this).attr("personID");
+			if (!$(this).find("a").hasClass("disabled")) {
+				$(this).find("a").addClass("disabled");
+			}
+			$.ajax({
+				url : "../admin/productDetail/getOneAjax",
+				dataType : "json",
+				data : {id:id},
+				success : function(data){
+					if (data.msgCode == "1") {
+						$("#toast weui_toast_content").text("投票成功");
+						$("#toast").show();
+						setTimeout(function() {
+							$("#toast").hide();
+						}, 2000);
+						$(obj).text("已投票");
+					}else{
+						$("#toast weui_toast_content").text("您已投票，不能重复投票");
+						$("#toast").show();
+						setTimeout(function() {
+							$("#toast").hide();
+						}, 2000);
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>

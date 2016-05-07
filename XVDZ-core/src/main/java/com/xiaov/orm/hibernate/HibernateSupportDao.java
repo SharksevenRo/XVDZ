@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
@@ -38,7 +37,6 @@ import org.hibernate.transform.ResultTransformer;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
-import com.google.common.collect.Lists;
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.core.PageRequest;
 import com.xiaov.orm.core.PageRequest.Sort;
@@ -452,6 +450,32 @@ public class HibernateSupportDao<T,PK extends Serializable> extends BasicHiberna
 		try {
 			Criteria criteria = getSession().createCriteria(t.getClass());
 
+			if (fields != null) {
+				for (String string : fields) {
+					criteria = criteria.setFetchMode(string, org.hibernate.FetchMode.JOIN);
+				}
+			}
+			if (eqs != null) {
+
+				for (Criterion eq : eqs) {
+					criteria.add(eq);
+				}
+			}
+			return criteria.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public <T> List<T> getEntitiestNotLazyWithOrder(T t, String[] fields,
+			Criterion[] eqs,Order order) {
+
+		try {
+			Criteria criteria = getSession().createCriteria(t.getClass());
+
+			if(order!=null){
+				criteria.addOrder(order);
+			}
 			if (fields != null) {
 				for (String string : fields) {
 					criteria = criteria.setFetchMode(string, org.hibernate.FetchMode.JOIN);

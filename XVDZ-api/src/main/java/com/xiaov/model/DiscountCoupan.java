@@ -28,7 +28,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "discount_coupan", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Serializable {
 
 	// Fields
@@ -42,7 +42,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	private Date disCouValidTime;
 	private Integer disCouState;
 	private String disCouRemark;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -53,7 +53,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	/** minimal constructor */
 	public DiscountCoupan(String id, String disCouNo, Double disCouPrice,
 			Date disCouTime, Date disCouValidTime,
-			Integer disCouState, Boolean deleteFlag) {
+			Integer disCouState, Integer deleteFlag) {
 		this.id = id;
 		this.disCouNo = disCouNo;
 		this.disCouPrice = disCouPrice;
@@ -67,7 +67,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	public DiscountCoupan(String id, UserInfo userInfo, String disCouNo,
 			Double disCouPrice, Date disCouTime,
 			Date disCouValidTime, Integer disCouState,
-			String disCouRemark, Boolean deleteFlag) {
+			String disCouRemark, Integer deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
 		this.disCouNo = disCouNo;
@@ -158,12 +158,12 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouRemark = disCouRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 }

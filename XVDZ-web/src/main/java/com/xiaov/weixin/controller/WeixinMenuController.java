@@ -17,14 +17,14 @@ public class WeixinMenuController {
 		WxMenuButton button=new WxMenuButton();
 		
 		button.setType("view");
-		button.setName("授权测试");
-		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2?state=2");
+		button.setName("投票");
+		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2.do?state=2");
 		buttons.add(button);
 		
 		button=new WxMenuButton();
 		button.setType("view");
-		button.setName("小V商城");
-		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2?state=1");
+		button.setName("个性定制");
+		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2.do?state=1");
 		buttons.add(button);
 		
 		menu.setButtons(buttons);*/

@@ -26,7 +26,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "order_detail", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class OrderDetail extends Page<OrderDetail> implements java.io.Serializable {
 
 	// Fields
@@ -39,13 +39,23 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	private Double orDtItmeTotal;
 	private Double orDtRlTotal;
 	private String orDtRemark;
+	//尺码
+	private String size;
+	//颜色
+	private String color;
+	
+	//款式
+	private String style;
+	//用户定制图片
+	private String pic;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date updateTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -56,7 +66,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	/** minimal constructor */
 	public OrderDetail(String id, String orDtNo, Double orDtPrc,
 			Integer orDtMount, Double orDtItmeTotal, Double orDtRlTotal,
-			Date addTime, Boolean deleteFlag) {
+			Date addTime, Integer deleteFlag) {
 		this.id = id;
 		this.orDtNo = orDtNo;
 		this.orDtPrc = orDtPrc;
@@ -72,7 +82,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 			Double orDtPrc, Integer orDtMount, Double orDtDsct,
 			Double orDtItmeTotal, Double orDtRlTotal, String orDtRemark,
 			Date addTime, Date updateTime, Date deleteTime,
-			Boolean deleteFlag) {
+			Integer deleteFlag) {
 		this.id = id;
 		this.pdtId = pdtId;
 		this.orDtNo = orDtNo;
@@ -203,12 +213,45 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 		this.deleteTime = deleteTime;
 	}
 
-	@Column(name = "delete_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
+	@Column(name = "size", length = 0)
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+	@Column(name = "color", length = 0)
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+	@Column(name = "pic", length = 0)
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+	@Column(name = "style", length = 0)
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
+	
 }

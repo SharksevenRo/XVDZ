@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xiaov.constant.APPConstant;
 import com.xiaov.dao.ProductDao;
 import com.xiaov.dao.ProductDetailDao;
 import com.xiaov.model.Product;
 import com.xiaov.model.ProductDetail;
+import com.xiaov.model.Types;
 import com.xiaov.service.interfaces.ProductService;
+import com.xiaov.utils.LazyObjecUtil;
 @Service
 public class ProductServiceImpl extends BaseServiceImpl<Product> implements ProductService{
 
@@ -58,39 +61,25 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	 * @param product 当前商品
 	 * @param type 详细的类型（color,Material,Size,颜色、面料、尺码）
 	 * @return
+	 * @throws Exception 
 	 */
-	public Product fillDetail(Product product,String type){
-		
-		Criterion [] criterions={Restrictions.eq("type", type),Restrictions.eq("pdtId", product.getId())};
-		List<ProductDetail> details = detailDao.getEntitiestNotLazy(new ProductDetail(), null, criterions);
-		if(ProductDetail.COLOR.equals(type)){
-			product.setColors(details);
-		}else if(ProductDetail.MATERIAL.equals(type)){
-			product.setMaterials(details);
-		}else if(ProductDetail.SIZE.equals(type)){
-			product.setSizes(details);
-		}else{
-			throw new RuntimeException(type+"参数异常");
+	public Product fillDetail(Product product) throws Exception{
+		Criterion [] criterions = null;
+		if(product.getId()!=null){
+			criterions=new Criterion [] {Restrictions.eq("productId", product.getId())};
 		}
+		List<ProductDetail> details = detailDao.getEntitiestNotLazy(new ProductDetail(), new String[]{"picB","picF"}, criterions);
+		product.setDetail(details);
 		return product;
-	}
-	/**
-	 * 获取当前商品所有类型的详细信息
-	 * @param product
-	 */
-	public void fillDetail(Product product){
-		
-		fillDetail(product, ProductDetail.COLOR);
-		fillDetail(product, ProductDetail.SIZE);
-		fillDetail(product, ProductDetail.MATERIAL);
 	}
 	/**
 	 * 获取批量商品的所有类型详细
 	 * @param products
 	 * @return
+	 * @throws Exception 
 	 */
 	@Transactional
-	public List<Product> fillDetail(List<Product> products){
+	public List<Product> fillDetail(List<Product> products) throws Exception{
 		
 		for (Product product : products) {
 			fillDetail(product);
@@ -102,13 +91,30 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	 * @param products
 	 * @param type 详细的类型（color,Material,Size,颜色、面料、尺码）
 	 * @return
+	 * @throws Exception 
 	 */
 	@Transactional
-	public List<Product> fillDetail(List<Product> products,String type){
+	public List<Product> fillDetail(List<Product> products,String type) throws Exception{
 		
 		for (Product product : products) {
-			fillDetail(product,type);
+			fillDetail(product);
 		}
 		return products;
+	}
+	public List<Product> searchProduct(Criterion[] criterions) {
+
+		return dao.getEntitiestNotLazy(new Product(),null, criterions);
+
+	}
+	public List<Product> getSimpleProduct(Types types) throws Exception {
+
+		List<Product> products = dao.findByProperty("productType", types);
+		products=fillDetail(products);
+		return products;
+	}
+	public List<Product> getByProperty(String propertyName,String values){
+		List<Product> products = dao.findByProperty(propertyName,values);
+
+		return  products;
 	}
 }

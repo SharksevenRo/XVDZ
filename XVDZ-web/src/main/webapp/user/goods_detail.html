@@ -1,173 +1,369 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>小v定制</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="../css/weui.min.css"/>
-    <link rel="stylesheet" href="../css/swiper.min.css">
-    <link rel="stylesheet" href="../css/sm.min.css">
-    <link rel="stylesheet" href="../css/sm-extend.min.css">
-    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+<meta charset="UTF-8">
+<title>小v定制</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="../css/weui.min.css" />
+<link rel="stylesheet" href="../css/swiper.min.css">
+<link rel="stylesheet" href="../css/sm.min.css">
+<link rel="stylesheet" href="../css/sm-extend.min.css">
+<link rel="stylesheet" href="../css/styles.css" type="text/css">
 </head>
 <body style="padding-top:0px">
 
 	<div class="weui_dialog_confirm" id="comment" style="display:none">
-	    <div class="weui_mask"></div>
-	    <div class="weui_dialog">
-	        <div class="weui_dialog_hd">
-	          <strong class="weui_dialog_title">评论</strong>
-	        </div>
-	        <div class="weui_dialog_bd">
-	        		
+		<div class="weui_mask"></div>
+		<div class="weui_dialog">
+			<div class="weui_dialog_hd">
+				<strong class="weui_dialog_title">评论</strong>
+			</div>
+			<div class="weui_dialog_bd">
+
 				<div class="weui_cells weui_cells_form">
-				    <div class="weui_cell">
-				        <div class="weui_cell_bd weui_cell_primary">
-				            <textarea class="weui_textarea" id="textarea" placeholder="请输入评论" rows="3"></textarea>
-				        </div>
-				    </div>
+					<div class="weui_cell">
+						<div class="weui_cell_bd weui_cell_primary">
+							<textarea class="weui_textarea" id="textarea" placeholder="请输入评论"
+								rows="3"></textarea>
+						</div>
+					</div>
 				</div>
 
-	        </div>
-	        <div class="weui_dialog_ft">
-	            <a href="javascript:;" id="cancel" class="weui_btn_dialog default">取消</a>
-	            <a href="javascript:;" id="confirm" class="weui_btn_dialog primary">确定</a>
-	        </div>
-	    </div>
+			</div>
+			<div class="weui_dialog_ft">
+				<a href="javascript:;" id="cancel" class="weui_btn_dialog default">取消</a>
+				<a href="javascript:;" id="confirm" class="weui_btn_dialog primary">确定</a>
+			</div>
+		</div>
 	</div>
 
 	<div class="weui_tab">
-	    <div class="weui_tab_bd">
-	        <div class="weui_tab_bd_item">
+		<div class="weui_tab_bd">
+			<div class="weui_tab_bd_item">
 
-	        	<div class="title-bar" id="go-back">
-        		  	<span class="icon icon-left"></span>
-	        	</div>
-
-	        	<div class="title-bar right" id="cart-this">
-        		  	<span class="icon icon-share"></span>
-	        	</div>
-
-	        	<div class="title-bar right" id="share-this">
-        		  	<span class="icon icon-cart"></span>
-	        	</div>
-
-				<div class="swiper-container" style="height:250px;">
-				  	<div class="swiper-wrapper">
-				    	<div class="swiper-slide blue-slide">
-				    		<img src="http://demo.wex5.com/taobao/v-QzqqYf-zh_CN-/demo/taobao/detail/img/pic1.png">
-				    	</div>
-				    	<div class="swiper-slide red-slide">slider2</div>
-				    	<div class="swiper-slide orange-slide">slider3</div>
-				  	</div>
-			        <div class="swiper-pagination"></div>
+				<div class="title-bar" id="go-back">
+					<span class="icon icon-left"></span>
 				</div>
 
-				<div class="list-block media-list" style="margin:0px">
-				    <ul>
-				      <li>
-				        <a href="#" class="item-link item-content">
-				          <div class="item-inner" style="background-image:none">
-				            <div class="item-title-row">
-				              <div class="item-title">雪纺印花百褶裙半身裙</div>
-				              <div class="item-after" style="color: rgb(201, 64, 64);font-size: 30px;">¥15</div>
-				            </div>
-				            <div class="item-subtitle">作者</div>
-				            <div class="item-text">雪纺印花百褶裙半身裙,简约的线条和版型上身很好看，整体更有看点。</div>
-				          </div>
-				        </a>
-				      </li>
-				    </ul>
+				<div class="title-bar right" id="cart-this">
+					<span class="icon icon-share"></span>
 				</div>
+
+				<div class="title-bar right" id="share-this">
+					<span class="icon icon-cart"></span>
+				</div>
+				<div style="height:220px;overflow-y: hidden;">
+					<img id="baseProduct" width="100%" src="../img/slider1.jpg">
+				</div>
+				<div style="position: absolute;top:80px;left:39%;min-width:44px;min-height:44px" align="center">
+					<img id="logo" width="80px" height="80px" alt="" src="../img/5.png">
+				</div>
+				<div class="type-div" style="margin:0px">
+					<form id="typesForm" action="">
+						<input value="" type="hidden" name="productId">
+						<input value="" type="hidden" name="materialId">
+						<div class="type-item">
+							<div class="type-inner">
+								<div class="type-row">
+									<input value="" type="hidden" name="type">
+									<div class="bold item-title">款式</div>
+									<div id="types" align="left" style="width: 80%">
+										<span class="types active">T恤</span>
+										<span class="types">衬衫</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="type-item">
+							<div class="type-inner">
+								<div class="type-row">
+									<input value="白色" type="hidden" name="colorName">
+									<div class="item-title bold">颜色</div>
+									<div id="colors" align="left" style="width: 80%">
+										<span class="types active">白色</span>
+										<span class="types">红色</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="type-item">
+							<div class="type-inner">
+								<div class="type-row">
+									<input value="XS" type="hidden" name="size">
+									<div class="item-title bold">尺码</div>
+									<div align="left" style="width: 80%">
+										<span class="types active">XS</span>
+										<span class="types">S</span>
+										<span class="types">M</span>
+										<span class="types">L</span>
+										<span class="types">XL</span>
+										<span class="types">XXL</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="type-item">
+							<div class="type-inner">
+								<div class="type-row">
+									<input value="0" type="hidden" name="orDtMount">
+									<div class="item-title bold">数量</div>
+									<div align="left" style="width: 30%">
+										<span onclick="changeMount(this)" class="decrecement">-</span>
+										<span id="productMount">0</span>
+										<span onclick="changeMount(this)" class="increcement">+</span>
+									</div>
+									<div class="item-title bold"
+										style="height: 27px;line-height: 27px;">110元</div>
+									<button class="button">购买</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
 
 
 				<div class="buttons-tab">
-				    <a href="#tab1" class="tab-link active button">图文详情</a>
-				    <a href="#tab2" class="tab-link button">产品参数</a>
+					<a href="#tab1" class="tab-link active button">图文详情</a> <a
+						href="#tab2" class="tab-link button">产品参数</a>
 				</div>
 				<div class="content-block" style="padding:0px;margin-top:0px">
-				    <div class="tabs">
-				      <div id="tab1" class="tab active">
+					<div class="tabs">
+						<div id="tab1" class="tab active">
 
-						  <div class="card demo-card-header-pic" style="margin:0px;box-shadow:none">
-						    <div valign="bottom" class="card-header color-white no-border no-padding">
-						      <img class='card-cover' src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" alt="">
-						    </div>
-						    <div class="card-content">
-						      <div class="card-content-inner">
-						        <p>雪纺印花百褶裙半身裙,简约的线条和版型上身很好看，整体更有看点。时尚真皮女凉鞋 牛筋底中跟欧美潮鞋 2015夏个性森系女鞋子罗马鞋。</p>
-						      </div>
-						    </div>
-						    <div class="card-footer no-border">
-						      <a href="#" class="link">赞</a>
-						      <a href="#" class="link leave-a-message"><span class="icon icon-message"></span></a>
-		  				      <a href="#" class="link"><span class="icon icon-star"></span></a>
-						    </div>
-						</div>
+							<div class="card demo-card-header-pic"
+								style="margin:0px;box-shadow:none">
+								<div valign="bottom" class="card-header color-white no-border no-padding">
+									<img id="baseImg" class='card-cover' src="" alt="">
+								</div>
+								<div class="card-content">
+									<div class="card-content-inner">
+										<p id="pdtDes"></p>
+									</div>
+								</div>
+								<div class="card-footer no-border">
+									<a href="#" class="link good">赞</a>
+									<a href="#" class="link leave-a-message">
+										<span class="icon icon-message"></span>
+									</a>
+									<a href="#" class="link star">
+										<span class="icon icon-star"></span>
+									</a>
+								</div>
+							</div>
 
-				      </div>
-				      <div id="tab2" class="tab">
-						<div class="list-block" style="margin-top:0px;">
-						    <ul>
-						      <li class="item-content">
-						        <div class="item-media"><i class="icon icon-f7"></i></div>
-						        <div class="item-inner">
-						          <div class="item-title">商品名称</div>
-						          <div class="item-after">杜蕾斯</div>
-						        </div>
-						      </li>
-						      <li class="item-content">
-						        <div class="item-media"><i class="icon icon-f7"></i></div>
-						        <div class="item-inner">
-						          <div class="item-title">型号</div>
-						          <div class="item-after">极致超薄型</div>
-						        </div>
-						      </li>
-						    </ul>
 						</div>
-				      </div>
+						<div id="tab2" class="tab">
+							<div class="list-block" style="margin-top:0px;">
+								<ul>
+									<li class="item-content">
+										<div class="item-media">
+											<i class="icon icon-f7"></i>
+										</div>
+										<div class="item-inner">
+											<div class="item-title">商品名称</div>
+											<div class="item-after">杜蕾斯</div>
+										</div>
+									</li>
+									<li class="item-content">
+										<div class="item-media">
+											<i class="icon icon-f7"></i>
+										</div>
+										<div class="item-inner">
+											<div class="item-title">型号</div>
+											<div class="item-after">极致超薄型</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 
 
 				<div class="card" style="margin:0px;box-shadow:none">
-				    <div class="card-header">买家评论</div>
-				    <div class="card-content">
-				      <div class="list-block media-list">
-				        <ul>
-				          <li class="item-content">
-				            <div class="item-media">
-				              <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="44">
-				            </div>
-				            <div class="item-inner">
-				              <div class="item-title-row">
-				                <div class="item-title">标题</div>
-				              </div>
-				              <div class="item-subtitle">子标题</div>
-				            </div>
-				          </li>
-				        </ul>
-				      </div>
-				    </div>
-				    <div class="card-footer">
-				      <span><a href="">更多</a></span>
-				    </div>
+					<div class="card-header">买家评论</div>
+					<div class="card-content">
+						<div class="list-block media-list">
+							<ul id="commentContent">
+							</ul>
+								<script id="t:comment_temp" type="text/html">
+									<%for(var i = 0;i<list.lenght;i++){%
+										<li class="item-content">
+											<div class="item-media">
+												<img src="../<%=list[i].material.url%>" width="44">
+											</div>
+											<div class="item-inner">
+												<div class="item-title-row">
+													<div class="item-title"><%=list[i].cmtContent%></div>
+												</div>
+												<div class="item-subtitle" style="text-align:right"><%=list[i].cmtTime%></div>
+											</div>
+										</li>
+									<%}%>
+								</script>
+						</div>
+					</div>
+					<div class="card-footer">
+						<span><a href="">更多</a>
+						</span>
+					</div>
 				</div>
 
 			</div>
-		   </div>
-	    </div>
+		</div>
 	</div>
-	
+
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/weui.js"></script>
 	<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
-    <script type='text/javascript' src='../js/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='../js/sm-extend.min.js' charset='utf-8'></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
-
+	<script type='text/javascript' src='../js/zepto.min.js'></script>
+	<script type='text/javascript' src='../js/sm.min.js'></script>
+	<script type='text/javascript' src='../js/sm-extend.min.js'></script>
+	<script type="text/javascript" src="../js/scripts.js"></script>
+	<script type="text/javascript" src="../js/baiduTemplate.js"></script>
+	<script type="text/javascript">
+		function getQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null)
+				return unescape(r[2]);
+			return null;
+		}
+		var productId = getQueryString("pdtId");
+		$("#cart-this").attr("pdtId", productId);
+		var materialId = getQueryString("materialId");
+		$("input[name=materialId]").val(materialId);
+		var productId = getQueryString("productId");
+		$("input[name=productId]").val(productId);
+		//获取产品详细
+		$.ajax({
+			url : "../admin/product/getPdtDetail.do",
+			type : "get",
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : {
+				id : getQueryString("pdtId")
+			},
+			success : function(data) {
+				var types = [];
+				var colors = [];
+				$("#baseProduct").attr("src",data.allPic);
+				$("#logo").attr("src",data.pdtPicBs);
+				$("#baseImg").attr("src",data.pdtPicBs);
+				$("#pdtDes").attr("src",data.pdtDest);
+				$("input[name=pdtId]").val(data.id);
+				if(data.detail.length>0){
+					$("input[name=style]").val(data.detail[0].style);
+					$("input[name=size]").val(data.detail[0].style);
+				}
+				for(var i=0;i<data.detail.length;i++){
+					var types = type.join("");
+					var colors = color.join(""); 
+					if(types.indexOf(data.detail[i].type)!=-1){
+						type[type.length]=data.detail[i].type;
+					}
+					if(colors.indexOf(data.detail[i].colorName)!=-1){
+						type[type.length]=data.detail[i].colorName;
+					}
+				}
+				var html = "";
+				//款式
+				for(var i= 0;i<types.length;i++){
+					if(i==0){
+						html+="<span class='types active'>"+types[i]+"</span>";
+					}else{
+						html+="<span class='types'>"+types[i]+"</span>";
+					}
+				}
+				$("#types").html(html);
+				//颜色
+				for(var i= 0;i<colors.length;i++){
+					if(i==0){
+						html="";
+						html+="<span class='types active'>"+colors[i]+"</span>";
+					}else{
+						html+="<span class='types'>"+colors[i]+"</span>";
+					}
+				}
+				$("#colors").html(html);
+			}
+		});
+		//交易数量
+		function changeMount(obj) {
+			var mount = $("#productMount").text();
+			if ($(obj).hasClass("decrecement")) {
+				if (mount == 0) {
+					return;
+				} else {
+					mount = parseInt(mount) - 1;
+					$("#productMount").text(mount);
+				}
+			} else {
+				mount = parseInt(mount) + 1;
+				$("#productMount").text(mount);
+			}
+		}
+		var pageNo = 1;
+		var pageSize = 5;
+		var flag = true;
+		//获取产品评论
+		function loadComment(){
+			if(flag){
+				$.ajax({
+					url : "../admin/ProductComment/page",
+					type : "get",
+					dataType : "json",
+					data : { pdtId : getQueryString("pdtId"),pageNo:pageNo,pageSize:pageSize},
+					success:function(data){
+						var list = data.result;
+						if(list.length==pageSize){
+							pageNo++;
+						}else{
+							flag = false;
+						}
+						var oldHtml = $("#commentContent").html();
+						var html = baidu.template("t:comment_temp", {
+							"list": list
+						});
+						$("#commentContent").html(oldHtml + html);
+					}
+				});
+			}
+		}
+		loadComment();
+		$(function(){
+			//屏幕滚动
+			$(window).scroll(function() {
+				if ($(document).height() - $(this).scrollTop() - $(this).height() < 20) {
+					if (flag == true) {
+						loadComment();
+					}
+				}
+			});
+		});
+		function changeState() {
+			
+		}
+		$(".types").unbind("click").bind("click", function() {
+			var text = $(this).text();
+			if (!$(this).hasClass("active")) {
+				$(this).addClass("active");
+			}
+			$(this).siblings().removeClass("active");
+			$(this).parent().siblings("input").val(text);
+			$.ajax({
+				url : "../admin/productDetail/getOneAjax",
+				dataType : "json",
+				data : $("#typesForm").serialize(),
+				success : function(data){
+					$("#baseImg").attr("src",data.picf);
+				}
+			});
+		});
+	</script>
 </body>
 </html>

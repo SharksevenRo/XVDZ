@@ -1,6 +1,7 @@
 package com.xiaov.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,12 +28,13 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "types", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class Types extends Page<Types> implements java.io.Serializable {
 
 	// Fields
 
 	private String id;
+	@JsonIgnore
 	private Types parentType;
 	private String typeName;
 	private String typeTag;
@@ -41,7 +45,9 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private String typeRemark;
-	private Boolean deleteFlage;
+	private Integer deleteFlag=0;
+	
+	private List<Material>materials; 
 
 	// Constructors
 
@@ -50,15 +56,15 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Types(String typeName, Date addTime, Boolean deleteFlage) {
+	public Types(String typeName, Date addTime, Integer deleteFlag) {
 		this.typeName = typeName;
 		this.addTime = addTime;
-		this.deleteFlage = deleteFlage;
+		this.deleteFlag = deleteFlag;
 	}
 
 	/** full constructor */
 	public Types(String id, Types parentType, String typeName, String typeTag, Date addTime, Date updateTime,
-			Date deleteTime, String typeRemark, Boolean deleteFlage) {
+			Date deleteTime, String typeRemark, Integer deleteFlag) {
 		super();
 		this.id = id;
 		this.parentType = parentType;
@@ -68,7 +74,7 @@ public class Types extends Page<Types> implements java.io.Serializable {
 		this.updateTime = updateTime;
 		this.deleteTime = deleteTime;
 		this.typeRemark = typeRemark;
-		this.deleteFlage = deleteFlage;
+		this.deleteFlag = deleteFlag;
 	}
 	
 
@@ -105,7 +111,7 @@ public class Types extends Page<Types> implements java.io.Serializable {
 		this.typeName = typeName;
 	}
 	
-	@Column(name = "type_tag", nullable = false, length = 50)
+	@Column(name = "type_tag", length = 50)
 	public String getTypeTag() {
 		return typeTag;
 	}
@@ -153,13 +159,21 @@ public class Types extends Page<Types> implements java.io.Serializable {
 		this.typeRemark = typeRemark;
 	}
 
-	@Column(name = "delete_flage", nullable = true)
-	public Boolean getDeleteFlage() {
-		return this.deleteFlage;
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
+		return this.deleteFlag;
 	}
 
-	public void setDeleteFlage(Boolean deleteFlage) {
-		this.deleteFlage = deleteFlage;
+	public void setDeleteFlag(Integer deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+	@Transient
+	public List<Material> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(List<Material> materials) {
+		this.materials = materials;
 	}
 
 }

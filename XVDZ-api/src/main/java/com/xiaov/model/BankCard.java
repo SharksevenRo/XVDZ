@@ -24,7 +24,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "bank_card", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class BankCard extends Page<BankCard> implements java.io.Serializable {
 
 	// Fields
@@ -41,7 +41,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private String bcRemark;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -52,7 +52,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	/** minimal constructor */
 	public BankCard(String id, Types dbTypes, String bkCdNo,
 			String bcForName, String bcBdTel, Date addTime,
-			Boolean deleteFlag) {
+			Integer deleteFlag) {
 		this.id = id;
 		this.dbTypes = dbTypes;
 		this.bkCdNo = bkCdNo;
@@ -66,7 +66,7 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 	public BankCard(String id, Types dbTypes, Account account,
 			String bkCdNo, String bcForName, String bcBdTel, Date addTime,
 			Date updateTime, Date deleteTime, String bcRemark,
-			Boolean deleteFlag) {
+			Integer deleteFlag) {
 		this.id = id;
 		this.dbTypes = dbTypes;
 		this.account = account;
@@ -179,12 +179,12 @@ public class BankCard extends Page<BankCard> implements java.io.Serializable {
 		this.bcRemark = bcRemark;
 	}
 
-	@Column(name = "delete_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	@Column(name = "delete_Flag")
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 

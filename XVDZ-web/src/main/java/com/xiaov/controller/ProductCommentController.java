@@ -1,5 +1,7 @@
 package com.xiaov.controller;
 
+import java.util.Date;
+
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.ProductComment;
 import com.xiaov.orm.core.MessageBean;
@@ -19,15 +21,25 @@ public class ProductCommentController {
     @Autowired
     private ProductCommentService ProductCommentService;
 
+    /**
+     * 
+     * @Description:添加商品评论
+     * @param @param productComment
+     * @param @return
+     * @return MessageBean
+     * @throws
+     */
     @RequestMapping("/admin/ProductComment/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(ProductComment productComment) {
 
         try {
-            ProductCommentService.save(productComment);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            productComment.setCmtTime(new Date());
+        	ProductCommentService.save(productComment);
+            return new MessageBean(APPConstant.SUCCESS, "评论成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            e.printStackTrace();
+        	return new MessageBean(APPConstant.ERROR, "评论失败");
         }
     }
 

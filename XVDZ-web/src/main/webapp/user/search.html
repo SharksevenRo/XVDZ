@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../css/sm.min.css">
     <link rel="stylesheet" href="../css/sm-extend.min.css">
     <link rel="stylesheet" href="../css/styles.css" type="text/css">
+    
+    
 </head>
 <body>
 
@@ -42,13 +44,13 @@
 	    <div class="weui_tab_bd">
 	        <div class="weui_tab_bd_item">
 
-	        	<header class="bar bar-nav">
+	        	<!-- <header class="bar bar-nav">
 	        		<a class="button button-link button-nav pull-left back">
 				      <span class="icon icon-left"></span>
 				      返回
 				    </a>
 				  	<h1 class="title">搜索商品</h1>
-				</header>
+				</header> -->
 
 				<div class="bar bar-header-secondary">
 				  <div class="searchbar">
@@ -97,14 +99,15 @@
 				    </div>
 				</div> -->
 
-				<div class="padding">
+				<!-- <div class="padding">
 					<a href="javascript:;" class="weui_btn weui_btn_primary">加载更多</a>	
-				</div>
+				</div> -->
 
 			</div>
 	    </div>
 	</div>
 
+	
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/weui.js"></script>
 	<script type='text/javascript' src="../js/swiper.jquery.min.js"></script>
@@ -114,17 +117,21 @@
     <script type="text/javascript" src="../js/scripts.js"></script>
 	<script type="text/javascript">
 		var flag = true;
+		var text = localStorage.searchContent;
 		function loadGoodsData(){
+			if($("#search").val().trim()!=""){
+				text = $("#search").val().trim();
+			}
 			// 根据文本框内容多条件查询商品
 			$.ajax({
-				url : "../admin/product/allProduct.do",
+				url : "../admin/product/searchProduct.do",
 				type : "get",
 				contentType : "application/json; charset=utf-8",
 				dataType : "json",
 				data : {
 					pageNo : 1,
 					pageSize : 5,
-					searchText : $("#search").val()
+					searchText : text
 				},
 				success : function(data) {
 					if(data.result.length==pageSize){
@@ -132,15 +139,15 @@
 					}else{
 						flag = false;
 					}
-					var html = baidu.template('t:all_product', {
+					var html = baidu.template("t:all_product", {
 						"list" : data.result
 					});
 					$("#searchContent").html(html);
 				}
 			});
 		}
+		loadGoodsData();
 		$(function(){
-			loadGoodsData();
 			//屏幕滚动
 			$(window).scroll(function() {
 				if ($(document).height() - $(this).scrollTop()- $(this).height() < 20) {

@@ -25,7 +25,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "account", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class Account extends Page<Account> implements java.io.Serializable {
 
 	// Fields
@@ -44,7 +44,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
 	private String remark;
-	private Boolean deleteFlag;
+	private Integer deleteFlag=0;
 
 	// Constructors
 
@@ -54,7 +54,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Account(String id, Double actMm, Double actTtEn, Double actBlc,
-			Double actFm, Date addTime, Boolean deleteFlag) {
+			Double actFm, Date addTime, Integer deleteFlag) {
 		this.id = id;
 		this.actMm = actMm;
 		this.actTtEn = actTtEn;
@@ -68,7 +68,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	public Account(String id, UserInfo userInfo, Double actMm,
 			Double actTtEn, Double actBlc, Double actFm, Integer actState,
 			Date addTime, Date updateTime, Date deleteTime,
-			String remark, Boolean deleteFlag) {
+			String remark, Integer deleteFlag) {
 		this.id = id;
 		this.userInfo = userInfo;
 		this.actMm = actMm;
@@ -191,11 +191,11 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	}
 
 	@Column(name = "deleteFlag", nullable = true)
-	public Boolean getDeleteFlag() {
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 

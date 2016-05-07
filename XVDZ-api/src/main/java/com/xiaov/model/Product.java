@@ -27,7 +27,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "product", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag",type = FieldType.B,value="1")
+@StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class Product extends Page<Product> implements java.io.Serializable {
 
 	// Fields
@@ -36,7 +36,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Types productType;
 	private Material material;
 	private String usId;
-	private String pdtNo=new Date().getTime()+"";
+	private String pdtNo;
 	private String pdtName;
 	private Double pdtIntRat;
 	private String pdtLabel;
@@ -56,11 +56,11 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Date deleteTime;
 	private Boolean pdtOpenState=true;
 	private String remark;
-	private Boolean deleteFlag=false;
+	private String baseId;
+	private String allPic;
+	private Integer deleteFlag=0;
 	
-	private List<ProductDetail> colors;
-	private List<ProductDetail> sizes;
-	private List<ProductDetail> materials;
+	private List<ProductDetail> detail;
 	// Constructors
 
 	/** default constructor */
@@ -71,7 +71,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public Product(String id, String pdtNo, String pdtName,
 			String pdtPicBs, Double pdtPrc, Integer pdtSaleCount,
 			Integer pdtGdCount, Integer pdtShareCount, Date addTime,
-			Boolean pdtOpenState, Boolean deleteFlag) {
+			Boolean pdtOpenState, Integer deleteFlag) {
 		this.id = id;
 		this.pdtNo = pdtNo;
 		this.pdtName = pdtName;
@@ -92,7 +92,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 			String pdtPicBs, String pdtPicBp, Double pdtPrc, Double pdtDsct,
 			Integer pdtSaleCount, Integer pdtGdCount, Integer pdtShareCount,
 			Date addTime, Date updateTime, Date deleteTime,
-			Boolean pdtOpenState, String remark, Boolean deleteFlag) {
+			Boolean pdtOpenState, String remark, Integer deleteFlag) {
 		this.id = id;
 		this.productType = productType;
 		this.material = material;
@@ -309,41 +309,42 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public String getRemark() {
 		return this.remark;
 	}
+	@Transient
+	public List<ProductDetail> getDetail() {
+		return detail;
+	}
+
+	public void setDetail(List<ProductDetail> detail) {
+		this.detail = detail;
+	}
 
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
 
 	@Column(name = "delet_flag", nullable = true)
-	public Boolean getDeleteFlag() {
+	public Integer getDeleteFlag() {
 		return this.deleteFlag;
 	}
 
-	public void setDeleteFlag(Boolean deleteFlag) {
+	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-	@Transient
-	public List<ProductDetail> getColors() {
-		return colors;
+	@Column(name = "baseid", nullable = true)
+	public String getBaseId() {
+		return baseId;
 	}
 
-	public void setColors(List<ProductDetail> colors) {
-		this.colors = colors;
+	public void setBaseId(String baseId) {
+		this.baseId = baseId;
 	}
-	@Transient
-	public List<ProductDetail> getSizes() {
-		return sizes;
-	}
-
-	public void setSizes(List<ProductDetail> sizes) {
-		this.sizes = sizes;
-	}
-	@Transient
-	public List<ProductDetail> getMaterials() {
-		return materials;
+	@Column(name = "allpic", nullable = true)
+	public String getAllPic() {
+		return allPic;
 	}
 
-	public void setMaterials(List<ProductDetail> materials) {
-		this.materials = materials;
+	public void setAllPic(String allPic) {
+		this.allPic = allPic;
 	}
+	
 }
