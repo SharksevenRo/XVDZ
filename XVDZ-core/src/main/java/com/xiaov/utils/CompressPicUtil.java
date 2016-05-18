@@ -220,8 +220,13 @@ public class CompressPicUtil {
 			g2d.drawImage(from, 0, 0, null);
 			g2d.dispose();
 
-			ImageIO.write(to, "png", new File(toFile));
-
+			if(fromFile.endsWith("png")){
+				ImageIO.write(to, "png", new File(toFile));
+			}
+			
+			if(fromFile.endsWith("jpg")){
+				ImageIO.write(to, "jpg", new File(toFile));
+			}
 		} catch (IOException e) {
 
 			e.printStackTrace();

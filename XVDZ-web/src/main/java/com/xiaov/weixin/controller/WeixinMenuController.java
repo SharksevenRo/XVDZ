@@ -35,7 +35,7 @@ public class WeixinMenuController {
 		
 		menu.setButtons(buttons);
 		try {
-			service.menuCreate(menu);
+			service.menuDelete();
 		} catch (WxErrorException e) {
 			e.printStackTrace();
 		}

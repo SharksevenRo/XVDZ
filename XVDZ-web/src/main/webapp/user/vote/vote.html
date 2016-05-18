@@ -110,8 +110,8 @@
 			});
 		}
 		function showPic(obj) {
-			$("#pic1").attr("src", $(obj).attr("src"));
-			$("#pic2").attr("src", $(obj).attr("pic2"));
+			$("#pic1").attr("src", $(obj).attr("src").replace("compress","temp"));
+			$("#pic2").attr("src", $(obj).attr("pic2").replace("compress","temp"));
 			$("#dialog").css({
 				display : "block"
 			});
