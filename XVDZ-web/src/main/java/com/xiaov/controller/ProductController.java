@@ -70,7 +70,7 @@ public class ProductController {
 			return new MessageBean(APPConstant.SUCCESS, "上传成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageBean(APPConstant.SUCCESS, "上传失败");
+			return new MessageBean(APPConstant.ERROR, "上传失败");
 		}
 	}
 
@@ -82,7 +82,7 @@ public class ProductController {
 			productService.update(product);
 			return new MessageBean(APPConstant.SUCCESS, "上传成功");
 		} catch (Exception e) {
-			return new MessageBean(APPConstant.SUCCESS, "上传失败");
+			return new MessageBean(APPConstant.ERROR, "上传失败");
 		}
 	}
 
@@ -114,7 +114,7 @@ public class ProductController {
 		try {
 			product = productService.getOne(product.getClass(), product.getId());
 			productService.delete(product);
-			return new MessageBean(APPConstant.ERROR, "删除成功");
+			return new MessageBean(APPConstant.SUCCESS, "删除成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new MessageBean(APPConstant.ERROR, "删除失败");
@@ -178,7 +178,7 @@ public class ProductController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageBean(APPConstant.SUCCESS, "上传失败");
+			return new MessageBean(APPConstant.ERROR, "上传失败");
 		}
 	}
 
@@ -371,7 +371,7 @@ public class ProductController {
 					
 				}
 			}
-			return new MessageBean(APPConstant.ERROR, "请上传PNG格式文件");
+			return new MessageBean(APPConstant.SUCCESS, "请上传PNG格式文件");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new MessageBean(APPConstant.ERROR, "请上传PNG格式文件");
@@ -405,6 +405,18 @@ public class ProductController {
 		
 	}
 
+	/**
+	 * 设计师作品上传
+	 * @param zip
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/admin/product/desingerUploadByZip")
+	@ResponseBody
+	public MessageBean designerUpload(MultipartFile zip,HttpServletRequest request){
+		return null;
+		
+	}
 	public void inputstreamtofile(InputStream ins) {
 		String temp = path + "temp.zip";
 		File file = new File(temp);

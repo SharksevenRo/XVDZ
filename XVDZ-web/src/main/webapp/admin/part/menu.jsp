@@ -79,7 +79,7 @@
 						<ul class="sub-menu">
 							<li><a href="#ajax/goods.html">所有产品</a></li>
 							<li><a href="#ajax/uploadProduct.html">基本款上传</a></li>
-							<li><a href="#">产品类型</a></li>
+							<li><a href="#ajax/designerUpload.html">设计师作品上传</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
