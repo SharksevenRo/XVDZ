@@ -56,7 +56,7 @@ public class WechatOauth2Controller {
 			// 根据state判断用户点击的菜单
 			if (state.equals("2")) {
 				response.getWriter().write("xiaov商城");
-				response.sendRedirect("/error/message2.html");
+				response.sendRedirect("/user/index.html");
 				return;
 			} else if (state.equals("1")) {
 				response.getWriter().write("授权成功" + "你的openid:" + openId);

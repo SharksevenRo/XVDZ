@@ -56,7 +56,7 @@ public class UserController {
 	//添加
 	@RequestMapping(value = "/admin/user/save")
 	@ResponseBody
-	public MessageBean save(String telCode,String disCodeNo,String rePwd,String usPwd,String usTel,HttpSession session){
+	public MessageBean save(String telCode,String disCodeNo,String rePwd,String usPwd,String usTel,HttpSession session,String activeCode){
 
         String number = (String)session.getAttribute("RandNumber");
 
@@ -220,6 +220,12 @@ public class UserController {
 			return new MessageBean(1,"登录成功!");
 		}
 
+	}
+	@RequestMapping("/admin/user/adminLogin")
+	@ResponseBody
+	public MessageBean login(UserInfo user){
+
+		return null;
 	}
 	
 }

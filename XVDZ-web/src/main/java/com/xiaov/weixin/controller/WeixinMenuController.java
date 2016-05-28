@@ -17,8 +17,8 @@ public class WeixinMenuController {
 		
 		WxMenuButton button=new WxMenuButton();
 		button.setType("view");
-		button.setName("投票");
-		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2.do?state=1");
+		button.setName("xiaoV商城");
+		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2.do?state=2");
 		buttons.add(button);
 		
 		button=new WxMenuButton();
@@ -29,8 +29,8 @@ public class WeixinMenuController {
 		
 		button=new WxMenuButton();
 		button.setType("view");
-		button.setName("美女排行榜");
-		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2.do?state=3");
+		button.setName("个人中心");
+		button.setUrl("http://weixin.xiaovdingzhi.com/weixin/oauth2.do?state=2");
 		buttons.add(button);
 		
 		menu.setButtons(buttons);
