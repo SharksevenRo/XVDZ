@@ -116,7 +116,6 @@
 <script>
 	$(function(){
 		$("button[name=saveBtn]").click(function(){
-			debugger;
 			var options = {
 				url : "../user/infoSave.do",
 					type : "post",
@@ -124,7 +123,7 @@
 					contentType : "application/json; charset=utf-8",
 					data : $("#infoForm").serialize(),
 					success:function(data){
-						if(data.code=="1"){
+						if(data.code==1){
 							$("button[name=reset]").trigger("click");
 						}else{
 							alert("保存失败");

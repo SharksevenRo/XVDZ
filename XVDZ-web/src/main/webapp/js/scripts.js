@@ -339,30 +339,114 @@ $(function() {
 	});
 
 	// ------------------------------------------定制页面控制逻辑------------------------------------------
+	var width = 130,height = 280;
+	var designArea = {
+		width: width,
+		height: height,
+		left: ($(document).width() - width) / 2,
+		top: ($(document).height() - height) / 2
+	};
+	//初始化canvas
+	$('#c').css({
+		'width': designArea.width + 'px',
+		'height': designArea.height + 'px',
+		position: 'absolute',
+		'left': designArea.left + 'px',
+		'top': designArea.top + 'px',
+		'z-index': '500'
+	});
 
-	// 初始化canvas
-	$('#c').attr('width', $(window).width() + 'px');
-	$('#c').attr('height', ($(window).height()) + 'px');
+	$('#bg-cloths').attr('width', $(window).width() + 'px');
+	$('#bg-cloths').attr('height', ($(window).height()) + 'px');
+
 	var canvas = new fabric.Canvas('c');
+	//canvas.width = designArea.width;
+	//canvas.height = designArea.height;
+	var canvasA = new fabric.Canvas('bg-cloths');
+	//canvasA.width = designArea.width;
+	//canvasA.height = designArea.height;
+
+	debugger;
+	$('#c').parent().css({
+		position: 'absolute',
+		top: ($(document).height() - designArea.height) / 2 + 'px',
+		left: ($(document).width() - designArea.width) / 2 + 'px'
+	});
+
 	var f = fabric.Image.filters;
 
-	var isShowBack = false;
+	var isShowBack = true;
 
-	// 拓展fabric库，增加获得绝对位置
+	//拓展fabric库，增加获得绝对位置
 	fabric.Canvas.prototype.getAbsoluteCoords = function(object) {
 		return {
-			left : object.left + this._offset.left,
-			top : object.top + this._offset.top
+			left: object.left + this._offset.left,
+			top: object.top + this._offset.top
 		};
-	};
+	}
 
+	var alpha = new Image();
+	alpha.src = "../img/cloths/LanSe1.png";
+
+	alpha.onload = function() {
+
+		canvas.getContext('2d').drawImage(alpha, 0, 0);
+
+		console.log(alpha);
+
+		console.log(canvas.toDataURL());
+
+	}
+
+	alpha.onerror = function() {
+		// $.alert();
+		console.log('error');
+	}
+	var displayCloths = function(src) {
+
+		// canvas.setBackgroundImage(src, canvas.renderAll.bind(canvas), {
+		//   left: ($(document).width() - 640) / 2.5,
+		//   top: 44
+		// });
+
+		if (canvasA.getActiveObject() != undefined) {
+			canvasA.remove(canvasA.getActiveObject());
+		}
+
+		fabric.Image.fromURL(src, function(img) {
+
+			img.scale(1).set({
+				left: ($(document).width() - 640) / 2.5,
+				top: 44,
+				angle: 0,
+				hasControls: false,
+				hasBorders: false,
+				selectable: false
+			});
+
+			canvasA.add(img).setActiveObject(img);
+
+			// var rect2 = new fabric.Rect({
+			//   width: designArea.width, 
+			//   height: designArea.height, 
+			//   left: designArea.left(), 
+			//   top: designArea.top(), 
+			//   angle: 0,
+			//   fill: 'rgba(0,200,0,0.5)'
+			// });
+
+			// canvas.add(rect2);
+
+		});
+	};
 	var exitCanvas = function() {
+		canvasA.clear();
 		canvas.clear();
 		displayCloths('../img/cloths/front.jpg');
 		$('#remove-thisobj').hide();
-	};
+	}
 
-	// 定制页面左上角按钮事件
+	//定制页面左上角按钮事件
 	$('#back-prev-menu').click(function() {
 
 		$.weui.confirm('确认放弃当前编辑吗？', function() {
@@ -377,21 +461,69 @@ $(function() {
 
 	});
 
-	// 保存图片
+	//保存图片
 	$('#save-this').click(function() {
+		debugger;
+		var cxt = canvas.getContext('2d');
+		var oldData = cxt.getImageData(0, 0, canvas.width, canvas.height);
 
-		$('#cloth-previewer').attr('src', canvas.toDataURL());
+		var pattern = canvas.toDataURL();
+		var cloth = canvasA.toDataURL();
 
-		$('#preiview-cloths').show();
+		var pix = oldData.data;
 
+		var clothData = canvasA.getContext('2d').getImageData(0, 0, canvasA.width, canvasA.height);
+
+		var newCanvas = document.createElement("canvas");
+		newCanvas.width = canvasA.width;
+		newCanvas.height = canvasA.height;
+		newCanvas.id = "tmpLayer";
+		document.body.appendChild(newCanvas);
+		var newCxt = newCanvas.getContext("2d");
+
+		var clothImage = new Image();
+		clothImage.src = cloth;
+
+		clothImage.onload = function() {
+			newCxt.drawImage(clothImage, 0, 0);
+
+			var patternImage = new Image();
+			patternImage.src = pattern;
+			debugger;
+			patternImage.onload = function() {
+				debugger;
+				newCxt.drawImage(patternImage, parseFloat($('#c').parent().css('left')), parseFloat($('#c').parent().css('top')));
+
+				newCxt.globalCompositeOperation = 'source-in';
+
+				var data = newCanvas.toDataURL();
+
+				$('#cloth-previewer').attr('src', data);
+
+				$('#preiview-cloths').show();
+
+				newCanvas.parentNode.removeChild(newCanvas);
+
+			}
+
+			patternImage.onerror = function() {
+				console.log('error');
+			}
+
+		}
+		clothImage.onerror = function() {
+			console.log('error');
+		}
 	});
 
 	$('#prev-cancel').click(function() {
 		$('#preiview-cloths').hide();
 	});
 
-	// 确认保存
+	//确认保存
 	$('#prev-confirm').click(function() {
+
+
 
 	});
 
@@ -421,35 +553,7 @@ $(function() {
 		positionBtn(e.target);
 	});
 
-	var displayCloths = function(src) {
-
-		// canvas.setBackgroundImage(src, canvas.renderAll.bind(canvas), {
-		// left: ($(document).width() - 640) / 2.5,
-		// top: 44
-		// });
-
-		if (canvas.getActiveObject() != undefined) {
-			canvas.remove(canvas.getActiveObject());
-		}
-		
-		src = src.replace("compress","temp");
-		fabric.Image.fromURL(src, function(img) {
-
-			img.scale(1).set({
-				left : ($(document).width() - 640) / 2.5,
-				top : 44,
-				angle : 0,
-				hasControls : false,
-				hasBorders : false,
-				selectable : false
-			});
-
-			canvas.add(img).setActiveObject(img);
-
-		});
-	};
-
-	displayCloths('../img/cloths/LanSe2.png');
+	displayCloths('../img/cloths/LanSe1.png');
 
 	// ------------------------滤镜相关------------------------
 
@@ -668,7 +772,7 @@ $(function() {
 			$('#front-this').show();
 			$('#front-this').animateCss('fadeInLeft');
 
-			displayCloths('../img/cloths/BaiSe2.jpg');
+			displayCloths('../img/cloths/LanSe2.png');
 			isShowBack = true;
 
 		});
@@ -691,7 +795,7 @@ $(function() {
 			$('#back-this').show();
 			$('#back-this').animateCss('fadeInRight');
 
-			displayCloths('../img/cloths/BaiSe1.jpg');
+			displayCloths('../img/cloths/LanSe1.png');
 			isShowBack = false;
 
 		});
