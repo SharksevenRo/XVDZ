@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
  * 分页参数封装类.
  * @author Sharkseven
  */
-public class PageRequest implements java.io.Serializable {
+public class PageRequest  implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 

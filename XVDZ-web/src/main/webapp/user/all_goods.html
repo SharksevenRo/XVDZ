@@ -119,16 +119,11 @@
 			function loadGoodsData() {
 				// 根据文本框内容及类型多条件查询商品
 				$.ajax({
-					url: "../admin/product/allProduct.do",
+					url: "../admin/product/page.do",
 					type: "get",
+					data:{'productType.id':typeId},
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
-					data: {
-						pageNo: 1,
-						pageSize: 5,
-						typeId: typeId,
-						searchText: $("#search").val()
-					},
 					success: function(data) {
 						if (data.result.length == pageSize) {
 							pageNo++;

@@ -21,6 +21,7 @@
 		<junitversion>3.8.1</junitversion>
 		<hibernate.version>4.2.7.Final</hibernate.version>
 		<aspectj.version>1.7.3</aspectj.version>
+		<shiroversion>1.2.4</shiroversion>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -288,6 +289,25 @@
 			<artifactId>pinyin4j</artifactId>
 			<version>2.5.0</version>
 		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiroversion}</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.shiro/shiro-web -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiroversion}</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiroversion}</version>
+		</dependency>
+
 
 	</dependencies>
 	<modules>

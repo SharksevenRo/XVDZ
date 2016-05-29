@@ -8,7 +8,7 @@
         <li class="active">分页表格</li>
     </ol>
     <h1 class="page-header">
-        商品<small></small>
+       优惠卷<small></small>
     </h1>
     <div class="row">
         <div class="col-md-12">
@@ -29,7 +29,7 @@
                             data-click="panel-remove"><i class="fa fa-times"></i>
                     </a>
                     </div>
-                    <h4 class="panel-title">商品</h4>
+                    <h4 class="panel-title">优惠卷</h4>
                 </div>
                 <div class="panel-body">
 
@@ -59,7 +59,7 @@
         <div class="modal-content" style="width: 700px">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">添加商品</h4>
+                <h4 class="modal-title">添加优惠卷</h4>
             </div>
             <div class="modal-body">
                 <!-- 				<form action="../main/enterGoods/saveOrUpdateEnterGoods" class="form-horizontal" method="post"> -->
@@ -68,17 +68,17 @@
                         <div class="form-group">
                             <!--                         </div> -->
                             <!--                    		<div class="form-group"> -->
-                            <label class="col-md-2 control-label">商品名称：</label>
+                            <label class="col-md-2 control-label">优惠卷名称：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入商品名称"  type="text" name="pdtName">
+                                <input class="form-control" placeholder="请输入优惠卷名称"  type="text" name="pdtName">
                             </div>
-                            <label class="col-md-2 control-label">商品介绍：</label>
+                            <label class="col-md-2 control-label">优惠卷介绍：</label>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="请输入商品名称"  type="text" name="pdtPc">
+                                <input class="form-control" placeholder="请输入优惠卷名称"  type="text" name="pdtPc">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">商品标签：</label>
+                            <label class="col-md-2 control-label">优惠卷标签：</label>
                             <div class="col-md-4">
                                 <input class="form-control" placeholder="请输入标签"  type="text" name="pdtLabel">
                             </div>
@@ -246,7 +246,7 @@
             viewrecords: true,
             sortorder: "desc",
             //jqgrid名称
-//    	 caption:"商品",
+//    	 caption:"优惠卷",
         });
 
         //加载底部操作按钮及页码
@@ -305,7 +305,7 @@
 // 	 	$("#grid-table").jqGrid('editGridRow', "new", { height : 500,width:500, reloadAfterSubmit : false });
             //清空表单数据
             $("input[type=reset]").trigger("click");
-            //加载商品类型
+            //加载优惠卷类型
             loadDepartment(null, null);
             //手动加载模态框
             $("#mymodal").modal("toggle");

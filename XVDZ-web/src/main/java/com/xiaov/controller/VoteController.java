@@ -1,7 +1,13 @@
 package com.xiaov.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,18 +19,27 @@ import com.xiaov.constant.APPConstant;
 import com.xiaov.model.Vote;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.service.interfaces.VoteService;
+import com.xiaov.utils.CompressPicUtil;
+import com.xiaov.utils.Pinyin4jUtil;
 import com.xiaov.utils.UploadFileUtil;
+import com.xiaov.web.support.CookieUtil;
 
 @Controller
 public class VoteController extends BaseController {
 
 	@Autowired
 	private VoteService voteService;
+	private static int bufSize = 512; // size of bytes
+	private byte[] buf;
+	private int readedBytes;
 
 	@RequestMapping("/user/vote")
 	@ResponseBody
-	public MessageBean vote(Vote vote) {
-		if (voteService.isRepeate(vote)) {
+	public MessageBean vote(Vote vote,HttpServletRequest request) {
+		String openId = new CookieUtil(request).getValue("user", "openId", true);
+		vote.setOpenId(openId);
+		if (!voteService.isRepeate(vote)) {
+			
 			voteService.vote(vote);
 			return new MessageBean(APPConstant.SUCCESS, "投票成功");
 		} else {
@@ -43,33 +58,84 @@ public class VoteController extends BaseController {
 
 	}
 
-	@RequestMapping("/user/infoSave")
+	@RequestMapping("/admin/infoSave")
 	@ResponseBody
 	public MessageBean infoSave(Vote vote, MultipartFile touxiang,
 			MultipartFile tupian) {
+		File file=null;
+		InputStream inputStream = null;
+		FileOutputStream fileOut = null;
 		String contextPath = request.getRealPath("/");
 		// 新文件名
-		String newFileName = new Date().getTime() + ".jpg";
+		String newFileName1 = new Date().getTime() + ".jpg";
+		String newFileName2 = new Date().getTime() + "2.png";
 		try {
-			
+			String tempPath = "images/vote/temp/";
+			//压缩文件路径
+			String basePath = "images/vote/compress/";
 			// 设置正常保存路径域
-			String[] normalScope = { "normal", "vote" };
-			// 创建图片上传对象，这是正常路径
-			UploadFileUtil fileUtil = new UploadFileUtil(contextPath,
-					normalScope);
-
-			// 设置压缩保存路径域
-			String[] compressScope = { "compress", "vote" };
+			//创建文件夹和文件
+			file= new File(contextPath+tempPath );
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			file = new File(contextPath+basePath );
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			file = new File(contextPath+basePath+"/"+newFileName1);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			file = new File(contextPath+tempPath+"/"+newFileName1);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			//获取压缩包中的图片
+			inputStream = touxiang.getInputStream();
+			fileOut = new FileOutputStream(file);
+			this.buf = new byte[this.bufSize];
+			//写到临时文件
+			while ((this.readedBytes = inputStream.read(this.buf)) > 0) {
+				fileOut.write(this.buf, 0, this.readedBytes);
+			}
+			fileOut.flush();
+			fileOut.close();
+			
+			file= new File(contextPath+tempPath );
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			file = new File(contextPath+basePath );
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			file = new File(contextPath+basePath+"/"+newFileName2);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			file = new File(contextPath+tempPath+"/"+newFileName2);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			//获取压缩包中的图片
+			inputStream = touxiang.getInputStream();
+			fileOut = new FileOutputStream(file);
+			this.buf = new byte[this.bufSize];
+			//写到临时文件
+			while ((this.readedBytes = inputStream.read(this.buf)) > 0) {
+				fileOut.write(this.buf, 0, this.readedBytes);
+			}
+			fileOut.flush();
+			fileOut.close();
+			
+			CompressPicUtil mypic1 = new CompressPicUtil();
+			mypic1.resizePNG(contextPath+tempPath+"/"+newFileName1,  contextPath+basePath+"/"+newFileName1, 200, 200, true);
 			// 压缩1
-			String touxiangCompressTargetPath = fileUtil.savePicWithCompress(
-					touxiang, newFileName, compressScope, false);
-			String dbCompress1Url = fileUtil.getNormalRelativeFolderPath()+newFileName;
-			vote.setPic1(dbCompress1Url);
-			// 压缩2
-			String tupianCompressTargetPath = fileUtil.savePicWithCompress(
-					tupian, newFileName, compressScope, false);
-			String dbCompress2Url = fileUtil.getSmallRelativeFolderPath()+newFileName;
-			vote.setPic2(dbCompress2Url);
+			vote.setPic1(contextPath+basePath+"/"+newFileName1);
+			CompressPicUtil mypic2 = new CompressPicUtil();
+			mypic1.resizePNG(contextPath+basePath+"/"+newFileName1,  contextPath+basePath+"/"+newFileName1, 200, 200, true);
+			vote.setPic2(contextPath+basePath+"/"+newFileName1);
 			voteService.save(vote);
 			return new MessageBean(APPConstant.SUCCESS, "添加成功");
 		} catch (Exception e) {

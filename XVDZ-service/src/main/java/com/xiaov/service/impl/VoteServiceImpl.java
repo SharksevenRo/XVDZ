@@ -38,6 +38,7 @@ public class VoteServiceImpl implements VoteService {
 
 	public boolean vote(Vote vote) {
 		try {
+
 			VoteRecord record = new VoteRecord();
 			record.setOpenId(vote.getOpenId());
 			record.setVoteId(vote.getId());
@@ -65,9 +66,6 @@ public class VoteServiceImpl implements VoteService {
 		VoteRecord record=new VoteRecord();
 		
 		dao.save(vote);
-		record.setVoteId(vote.getId());
-		record.setOpenId("111");
-		recordDao.save(record);
 	}
 
 }

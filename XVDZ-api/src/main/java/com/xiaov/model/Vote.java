@@ -20,7 +20,7 @@ public class Vote implements Serializable{
 	private String name;
 	private String description;
 	private String slogan;
-	private Integer mount;
+	private Integer mount=0;
 	private String pic1;
 	private String school;
 	private String pic2;

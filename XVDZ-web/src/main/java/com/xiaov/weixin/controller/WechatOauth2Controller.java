@@ -53,7 +53,6 @@ public class WechatOauth2Controller {
 			CookieUtil util = new CookieUtil(request);
 			util.setValue("user", "openId", openId, true);
 			util.save(response, "user", true);
-			request.getSession().setAttribute("openId", openId);
 			// 根据state判断用户点击的菜单
 			if (state.equals("2")) {
 				response.getWriter().write("xiaov商城");
@@ -61,9 +60,10 @@ public class WechatOauth2Controller {
 				return;
 			} else if (state.equals("1")) {
 				response.getWriter().write("授权成功" + "你的openid:" + openId);
+				response.sendRedirect("/user/vote/vote.html");
 			} else if (state.equals("3")) {
 
-				return;
+				response.sendRedirect("/user/vote/rank.html");
 			} else if (state.equals("4")) {
 
 			} else if (state.equals("5")) {
@@ -114,7 +114,7 @@ public class WechatOauth2Controller {
 
 		try {
 			CookieUtil util = new CookieUtil(request);
-			util.setValue("user", "openID", "oWJP6sjCHdhDYO9gGzSa5_DvTEE8", true);
+			util.setValue("user", "openId", "oWJP6sjCHdhDYO9gGzSa5_DvTEE8", true);
 			util.save(response, "user", true);
 		} catch (Exception e) {
 			e.printStackTrace();
