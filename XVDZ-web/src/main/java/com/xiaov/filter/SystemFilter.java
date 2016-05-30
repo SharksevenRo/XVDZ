@@ -11,6 +11,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xiaov.utils.StrKit;
+import com.xiaov.web.support.AuthenticationCahce;
+import com.xiaov.web.support.CookieUtil;
+
 public class SystemFilter implements Filter{
 
 	public void destroy() {
@@ -22,6 +26,50 @@ public class SystemFilter implements Filter{
 		
 		HttpServletRequest request=(HttpServletRequest) arg0;
 		HttpServletResponse response=(HttpServletResponse) arg1;
+		
+		String url = request.getRequestURL().toString();
+		
+		if(url.contains("login.html")||url.contains("adminLogin.do")||url.endsWith(".css")||url.endsWith(".js")||url.endsWith(".jpg")||url.endsWith(".png")){
+			arg2.doFilter(arg0, arg1);
+		}else{
+			CookieUtil util=new CookieUtil(request);
+			String openId=util.getValue("login", "user.openId", true);
+			
+			String userId=util.getValue("login", "user.userId", true);
+			String admintoken = util.getValue("login", "user.token", true);
+			
+			if(url.contains("delete")||url.contains("update")||url.contains("save")||url.contains("index.jsp")){
+				if(StrKit.isBlank(admintoken)||StrKit.isBlank(openId)){
+					response.sendRedirect("/error/message.html");
+					return;
+				}else{
+					
+					if(admintoken.equals(AuthenticationCahce.get(userId))){
+						arg2.doFilter(arg0, arg1);
+					}else{
+						response.sendRedirect("/error/error.html");
+					}
+					
+				}
+			}else{
+				if(!StrKit.isBlank(openId)){
+					arg2.doFilter(request, response);
+				}else{
+					if(admintoken==""||admintoken==null||openId!=null){
+						response.sendRedirect("login.html");
+						return;
+					}else{
+						
+						if(admintoken.equals(AuthenticationCahce.get(userId))){
+							arg2.doFilter(arg0, arg1);
+						}else{
+							response.sendRedirect("/error/error.html");
+						}
+						
+					}
+				}
+			}
+		}
 	}
 
 	public void init(FilterConfig arg0) throws ServletException {

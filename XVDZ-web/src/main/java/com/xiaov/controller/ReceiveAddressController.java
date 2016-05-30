@@ -43,9 +43,9 @@ public class ReceiveAddressController {
         	//receiveAddress.setId(new CookieUtil(request).getValue("user", "id", true));
             CookieUtil until=new CookieUtil(request);
             ReceiveAddress receiveAddress = new ReceiveAddress();
-            System.out.println(until.getValue("user","userId",true));
+            System.out.println(until.getValue("user","user.userId",true));
             UserInfo userInfo = new UserInfo();
-            userInfo.setId(until.getValue("user","userId",true));
+            userInfo.setId(until.getValue("user","user.userId",true));
             receiveAddress.setUserInfo(userInfo);
             System.out.println(request.getParameter("reAddTo"));
             System.out.println(request.getParameter("reAddDet"));
@@ -124,7 +124,7 @@ public class ReceiveAddressController {
     @ResponseBody
     public List<ReceiveAddress> getReceiveAddress(HttpServletRequest request) {
         CookieUtil until=new CookieUtil(request);
-        String values =until.getValue("user","userId",true);
+        String values =until.getValue("user","user.userId",true);
         List<ReceiveAddress> result = receiveAddressServiceimpl.getByProperty("userInfo.id",values);
         try{
             result = LazyObjecUtil.LazySetNull(result,"userInfo");

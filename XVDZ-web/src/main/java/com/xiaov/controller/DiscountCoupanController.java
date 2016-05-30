@@ -85,7 +85,7 @@ public class DiscountCoupanController {
     public List<DiscountCoupan> getUserCoupan(HttpServletRequest request) {
         try {
             CookieUtil util=new CookieUtil(request);
-            String userid= util.getValue("user","userId",true);
+            String userid= util.getValue("user","user.userId",true);
             List<DiscountCoupan> result = discountCoupanServiceImpl.getByProperty("userInfo.id",userid);
             result = LazyObjecUtil.LazySetNull(result,"userInfo");
             return result;

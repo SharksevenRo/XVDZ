@@ -1,22 +1,22 @@
 package com.xiaov.weixin.controller;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.xiaov.model.Types;
+import com.xiaov.constant.APPConstant;
 import com.xiaov.model.UserInfo;
-import com.xiaov.service.interfaces.UserService;
+import com.xiaov.orm.core.MessageBean;
 import com.xiaov.utils.LogBuilder;
+import com.xiaov.web.support.AuthenticationCahce;
 import com.xiaov.web.support.CookieUtil;
+import com.xiaov.web.support.UserToken;
 
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -52,7 +52,7 @@ public class WechatOauth2Controller {
 			}
 			CookieUtil util = new CookieUtil(request);
 			util.setValue("user", "openId", openId, true);
-			util.save(response, "user", true);
+			util.save(response, "user",null,null,30*1000*60, true);
 			// 根据state判断用户点击的菜单
 			if (state.equals("2")) {
 				response.getWriter().write("xiaov商城");
@@ -113,9 +113,31 @@ public class WechatOauth2Controller {
 	public void monitor(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
+
+				CookieUtil util = new CookieUtil(request);
+				UserToken token = AuthenticationCahce.put("22");
+				util.setValue("login", "user.token", token.getToken(), true);
+				util.save(response, "login", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+
+	}
+	
+	/**
+	 * 微信授权模拟，用户开发时自测
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/weixin/oauth2/get")
+	public void get(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
 			CookieUtil util = new CookieUtil(request);
-			util.setValue("user", "openId", "oWJP6sjCHdhDYO9gGzSa5_DvTEE8", true);
-			util.save(response, "user", true);
+			String value = util.getValue("login", "user.token",true);
+			System.out.println(value);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
