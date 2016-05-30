@@ -22,6 +22,27 @@
 			<p class="weui_toast_content">添加成功</p>
 		</div>
 	</div>
+	<div class="weui_dialog_confirm" id="preiview-cloths" style="display:none;z-index: 4001">
+			<div class="weui_mask" style="z-index: 4001"></div>
+			<div class="weui_dialog" style="z-index: 4001">
+				<div class="weui_dialog_hd">
+					<strong class="weui_dialog_title">预览服装</strong>
+				</div>
+				<div class="weui_dialog_bd">
+
+					<div class="card facebook-card" style="margin:12px">
+						<div class="card-content">
+							<img id="cloth-previewer" src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%">
+						</div>
+					</div>
+
+				</div>
+				<div class="weui_dialog_ft">
+					<a href="javascript:;" id="prev-cancel" class="weui_btn_dialog default">取消</a>
+					<a href="javascript:;" id="prev-confirm" class="weui_btn_dialog primary">确定</a>
+				</div>
+			</div>
+		</div>
 	<div id="dialog" class="weui_dialog_confirm" style="display: none;">
 		<div class="weui_mask"></div>
 		<div class="weui_dialog">
@@ -800,6 +821,7 @@
 
 				<div class="div-container">
 					<canvas id="c"></canvas>
+					<canvas id="bg-cloths"></canvas>
 				</div>
 
 				<nav class="bar bar-tab" id="diy-tools" style="z-index:1020">
