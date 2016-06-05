@@ -52,7 +52,7 @@ public class WechatOauth2Controller {
 			}
 			CookieUtil util = new CookieUtil(request);
 			util.setValue("user", "openId", openId, true);
-			util.save(response, "user",null,null,30*1000*60, true);
+			util.save(response, "user", null, null, 30 * 1000 * 60, true);
 			// 根据state判断用户点击的菜单
 			if (state.equals("2")) {
 				response.getWriter().write("xiaov商城");
@@ -114,17 +114,16 @@ public class WechatOauth2Controller {
 
 		try {
 
-				CookieUtil util = new CookieUtil(request);
-				UserToken token = AuthenticationCahce.put("22");
-				util.setValue("login", "user.token", token.getToken(), true);
-				util.save(response, "login", true);
+			CookieUtil util = new CookieUtil(request);
+			util.setValue("login", "user.openId", "2312312312312", true);
+			util.save(response, "login", true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
 		}
 
 	}
-	
+
 	/**
 	 * 微信授权模拟，用户开发时自测
 	 * 
@@ -136,7 +135,7 @@ public class WechatOauth2Controller {
 
 		try {
 			CookieUtil util = new CookieUtil(request);
-			String value = util.getValue("login", "user.token",true);
+			String value = util.getValue("user", "user.openId", true);
 			System.out.println(value);
 		} catch (Exception e) {
 			e.printStackTrace();

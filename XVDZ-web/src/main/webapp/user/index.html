@@ -1171,13 +1171,16 @@
 				}
 			});
 		});
+		
 		function loadDesignData(){
+			debugger;
 			$.ajax({
 				url : "../admin/types/getBaseProductAndDefault.do?id=15",
 				type : "get",
 				contentType : "application/json; charset=utf-8",
 				dataType : "json",
 				success : function(data) {
+					debugger;
 					var html = baidu.template("t:base_product", {
 						"data" : data
 					});
@@ -1187,7 +1190,7 @@
 		}
 		function getchaoliutu(){
 			$.ajax({
-				url : "../admin/types/getMaterialAndDefault.do?parentType.id=8a8a80405483d95b015483dc903b000f",
+				url : "../admin/types/getMaterialAndDefault.do?parentType.id=297e35ff5500c418015500e14d270036",
 				type : "get",
 				contentType : "application/json; charset=utf-8",
 				dataType : "json",
@@ -1200,8 +1203,9 @@
 			});
 		}
 		function loadPictures(){
+			debugger;
 			$.ajax({
-				url : "../admin/types/getMaterialAndDefault.do?parentType.id=8a8a80405483d95b015483dc7bd10004",
+				url : "../admin/types/getMaterialAndDefault.do?parentType.id=297e35ff5500c418015500e1431f0031",
 				type : "get",
 				contentType : "application/json; charset=utf-8",
 				dataType : "json",

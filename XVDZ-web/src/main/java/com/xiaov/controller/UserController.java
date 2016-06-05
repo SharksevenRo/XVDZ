@@ -1,5 +1,6 @@
 package com.xiaov.controller;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -234,25 +235,36 @@ public class UserController {
 
 	}
 
-	@RequestMapping("/admin/user/adminLogin")
-	@ResponseBody
-	public MessageBean login(UserInfo user, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/admin/adminLogin")
+	public void login(UserInfo user, HttpServletRequest request, HttpServletResponse response) {
 
-		List<UserInfo> loadAll = userService.loadAll(user);
+		try {
+			List<UserInfo> loadAll = userService.loadAll(user);
 
-		if (loadAll.size() == 1) {
+			if (loadAll.size() == 1) {
 
-			CookieUtil util = new CookieUtil(request);
-			
-			UserToken token = AuthenticationCahce.put(loadAll.get(0).getId());
-			util.setValue("login", "user.token", token.getToken(), true);
-			util.setValue("login", "user.userId", loadAll.get(0).getId(), true);
+				CookieUtil util = new CookieUtil(request);
+				
+				UserToken token = AuthenticationCahce.put(loadAll.get(0).getId());
+				util.setValue("login", "user.token", token.getToken(), true);
+				util.setValue("login", "user.userId", loadAll.get(0).getId(), true);
 
-			util.save(response, "login", true);
-
-			return new MessageBean(APPConstant.SUCCESS, "登录成功");
+				util.save(response, "login", true);
+				response.sendRedirect("index.jsp");
+				return;
+			}else{
+				response.sendRedirect("login.html");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				response.sendRedirect("login.html");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
-		return new MessageBean(APPConstant.ERROR, "登录失败，密码或账号错误");
+		
+		
 	}
 
 }

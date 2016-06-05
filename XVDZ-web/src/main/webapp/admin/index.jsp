@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
@@ -19,28 +19,28 @@
 	
 	<link href="<%=basePath %>icons/enterprise.ico" type="image/x-icon" rel="shortcut icon" />
 	
-	<link href="../css/google_font.css" type="text/css"  rel="stylesheet"/>
-	<link href="../js/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
-	<link href="../js/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="../js/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-	<link href="../js/assets/css/animate.min.css" rel="stylesheet" />
-	<link href="../js/assets/css/style.min.css" rel="stylesheet" />
-	<link href="../js/assets/css/style-responsive.min.css" rel="stylesheet" />
-	<link href="../js/assets/css/theme/default.css" rel="stylesheet" id="theme" />
-	<link href="../js/assets/plugins/gritter/css/jquery.gritter.css" type="text/css"/>
-	<link href="../css/manhuaTip.1.0.css" type="text/css"></link>
+	<link href="${pageContext.request.contextPath}/css/google_font.css" type="text/css"  rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/js/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/js/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/js/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/js/assets/css/animate.min.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/js/assets/css/style.min.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/js/assets/css/style-responsive.min.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/js/assets/css/theme/default.css" rel="stylesheet" id="theme" />
+	<link href="${pageContext.request.contextPath}/js/assets/plugins/gritter/css/jquery.gritter.css" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/css/manhuaTip.1.0.css" type="text/css"></link>
 	
 	
-    <link href="../css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
-    <link href="../css/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet"/>
-    <link href="../css/custom.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet" type="text/css"/>
     
     <style type="text/css">
     	#navs span,a{font-size: 16px}
     </style>
 	
-	<script src="../js/assets/plugins/pace/pace.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/assets/plugins/pace/pace.min.js"></script>
 
 </head>
 <body>
@@ -69,13 +69,13 @@
 
 	<jsp:include page="part/script.jsp"></jsp:include>
 
-	<script src="../js/assets/plugins/jquery-hashchange/jquery.hashchange.min.js"></script>	
-	<script src="../js/assets/plugins/gritter/js/jquery.gritter.min.js" type="text/javascript"></script>
-	<script src="../js/manhuaTip.1.0.js" type="text/javascript" ></script>
-	<script src="../js/assets/js/apps.js"></script>
+	<script src="${pageContext.request.contextPath}/js/assets/plugins/jquery-hashchange/jquery.hashchange.min.js"></script>	
+	<script src="${pageContext.request.contextPath}/js/assets/plugins/gritter/js/jquery.gritter.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/manhuaTip.1.0.js" type="text/javascript" ></script>
+	<script src="${pageContext.request.contextPath}/js/assets/js/apps.js"></script>
 	
 	<script type="text/javascript">	
-		var userName="${sessionScope.employee.employeeName}";
+		 var userName="${sessionScope.employee.employeeName}";
 		$(document).ready(function() {
 			$("#ajax-content").height($(document).height());
 			$(".manhuaTip").manhuaTip({					       
@@ -93,7 +93,7 @@
 					class_name: "my-sticky-class"
 				});
 			}
-		});
+		}); 
 	</script>
 </body>
 </html>

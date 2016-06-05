@@ -29,38 +29,39 @@ public class SystemFilter implements Filter{
 		
 		String url = request.getRequestURL().toString();
 		
-		if(url.contains("login.html")||url.contains("adminLogin.do")||url.endsWith(".css")||url.endsWith(".js")||url.endsWith(".jpg")||url.endsWith(".png")){
+		if(url.contains("login.html")||url.contains("adminLogin.do")||url.endsWith(".css")||url.endsWith(".js")||url.endsWith(".jpg")||url.endsWith(".png")||url.endsWith(".ico")){
 			arg2.doFilter(arg0, arg1);
+			return;
+			
 		}else{
 			CookieUtil util=new CookieUtil(request);
 			String openId=util.getValue("login", "user.openId", true);
-			
 			String userId=util.getValue("login", "user.userId", true);
 			String admintoken = util.getValue("login", "user.token", true);
 			
 			if(url.contains("delete")||url.contains("update")||url.contains("save")||url.contains("index.jsp")){
-				if(StrKit.isBlank(admintoken)||StrKit.isBlank(openId)){
-					response.sendRedirect("/error/message.html");
+				if(StrKit.isBlank(admintoken)&&StrKit.isBlank(openId)){
+					response.sendRedirect("login.html");
 					return;
 				}else{
 					
-					if(admintoken.equals(AuthenticationCahce.get(userId))){
+					if(admintoken.equals(AuthenticationCahce.get(userId).getToken())){
 						arg2.doFilter(arg0, arg1);
+						return;
 					}else{
 						response.sendRedirect("/error/error.html");
+						return;
 					}
-					
 				}
-			}else{
+			}/*else{
 				if(!StrKit.isBlank(openId)){
 					arg2.doFilter(request, response);
 				}else{
-					if(admintoken==""||admintoken==null||openId!=null){
+					if(StrKit.isBlank(admintoken)){
 						response.sendRedirect("login.html");
 						return;
 					}else{
-						
-						if(admintoken.equals(AuthenticationCahce.get(userId))){
+						if(admintoken.equals(AuthenticationCahce.get(userId).getToken())){
 							arg2.doFilter(arg0, arg1);
 						}else{
 							response.sendRedirect("/error/error.html");
@@ -68,7 +69,8 @@ public class SystemFilter implements Filter{
 						
 					}
 				}
-			}
+			}*/
+			arg2.doFilter(arg0, arg1);
 		}
 	}
 

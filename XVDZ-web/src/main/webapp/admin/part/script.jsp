@@ -16,6 +16,5 @@
 		<script src="<%=basePath %>js/assets/crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
 <script src="<%=basePath %>js/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<%=basePath %>js/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
 <script src="<%=basePath %>js/bootstrap-validator.js"></script>
 <!-- ================== END BASE JS ================== -->

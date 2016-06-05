@@ -132,7 +132,7 @@
 			</li>
 			<li class="dropdown navbar-user">
 				<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-					<img src="../img/image-1.jpg" alt="" />
+					<img src="${pageContext.request.contextPath}/img/image-1.jpg" alt="" />
 					<span class="hidden-xs"></span>
 					<b class="caret"></b>
 				</a>

@@ -309,9 +309,9 @@ public class ProductController {
 					detail.setColorName(split2[0]);
 
 					//临时文件路径
-					String tempPath = "images/temp/" + Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
+					String tempPath = "images/baseproduct/temp/" + Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
 					//压缩文件路径
-					String basePath = "images/compress/"+ Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
+					String basePath = "images/baseproduct/compress/"+ Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
 					//创建文件夹和文件
 					file= new File(path+tempPath );
 					if (!file.exists()) {
@@ -321,7 +321,7 @@ public class ProductController {
 					if (!file.exists()) {
 						file.mkdirs();
 					}
-					String fileName= UUID.nameUUIDFromBytes(split2[0].getBytes()) + ".png";
+					String fileName= UUID.nameUUIDFromBytes(entry.getName().getBytes()) + ".png";
 					file = new File(path+basePath+"/"+fileName);
 					if (!file.exists()) {
 						file.createNewFile();
@@ -354,21 +354,24 @@ public class ProductController {
 					material.setDbTypes(types);
 					material.setMeterialName("基本款图片");
 					material.setUrl(basePath+"/"+fileName);
-					material.setAddTime(new Date());
-					material.setOriginalUrl(tempPath+fileName);
 					
-					materialService.save(material);
-					if (split2[1].equals("1")) {
-						detail.setPicB(material);
-					} else if (split2[1].equals("2")) {
-						detail.setPicF(material);
+					if(materialService.loadAll(material).size()==0){
+						material.setAddTime(new Date());
+						
+						material.setOriginalUrl(tempPath+fileName);
+						
+						materialService.save(material);
+						if (split2[1].equals("1")) {
+							detail.setPicB(material);
+						} else if (split2[1].equals("2")) {
+							detail.setPicF(material);
+						}
+						if(loadAll.size()==1){
+							detailServiceImpl.update(detail);
+						}else{
+							detailServiceImpl.save(detail);
+						}
 					}
-					if(loadAll.size()==1){
-						detailServiceImpl.update(detail);
-					}else{
-						detailServiceImpl.save(detail);
-					}
-					
 				}
 			}
 			return new MessageBean(APPConstant.SUCCESS, "请上传PNG格式文件");

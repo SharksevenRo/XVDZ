@@ -34,9 +34,15 @@ public class AuthenticationCahce {
 	}
 
 	public static UserToken get(String userId) {
-
+		UserToken token = null;
 		if (StrKit.notBlank(userId)) {
-			return cache.get(userId);
+			for (Entry<String, UserToken> entry : cache.entrySet()) {
+				if(userId.equals(entry.getKey())){
+					token = entry.getValue();
+					break;
+				}
+			}
+			return token;
 		} else {
 			throw new RuntimeException("userId is NULL");
 		}

@@ -11,7 +11,7 @@
 			<li class="nav-profile">
 				<div class="image">
 					<a href="javascript:void(0);">
-						<img src="../img/image-1.jpg" alt="用户头像" />
+						<img src="${pageContext.request.contextPath}/img/image-1.jpg" alt="用户头像" />
 					</a>
 				</div>
 				<div class="info center">
