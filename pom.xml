@@ -22,7 +22,7 @@
 		<hibernate.version>4.2.7.Final</hibernate.version>
 		<aspectj.version>1.7.3</aspectj.version>
 		<shiroversion>1.2.4</shiroversion>
-		<java.home>/usr/lib/jvm/java-1.7.0-openjdk</java.home>
+		<java.home>/usr/lib/java/jdk1.7.0_67</java.home>
 	</properties>
 	<dependencies>
 		<dependency>
