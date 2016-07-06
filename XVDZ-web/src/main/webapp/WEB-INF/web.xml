@@ -52,33 +52,13 @@
 	</filter> -->
     <filter>  
         <filter-name>CORS</filter-name>  
-        <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>  
-        <init-param>  
-            <param-name>cors.allowOrigin</param-name> 
-            <param-value>*</param-value> 
-        </init-param>  
-        <init-param>  
-            <param-name>cors.supportedMethods</param-name> 
-            <param-value>GET, POST, HEAD, PUT, DELETE</param-value> 
-        </init-param>  
-        <init-param>  
-            <param-name>cors.supportedHeaders</param-name> 
-            <param-value>Accept, Origin, X-Requested-With, Content-Type, Last-Modified</param-value> 
-        </init-param>  
-        <init-param>  
-            <param-name>cors.exposedHeaders</param-name> 
-            <param-value>Set-Cookie</param-value> 
-        </init-param>  
-        <init-param>  
-            <param-name>cors.supportsCredentials</param-name> 
-            <param-value>true</param-value> 
-        </init-param>  
-    </filter>  
-    <filter-mapping>  
-        <filter-name>CORS</filter-name>  
-        <url-pattern>/*</url-pattern>  
-   </filter-mapping>
-   
+        <filter-class>com.xiaov.filter.CorsFilter</filter-class>
+    </filter>
+
+	<filter-mapping>
+		<filter-name>CORS</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -89,6 +69,7 @@
 		<filter-name>EncodeFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
 	<!-- <filter-mapping>
 		<filter-name>SystemFilter</filter-name>
 		<url-pattern>/admin/*</url-pattern>
@@ -108,15 +89,15 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<servlet>
+	<!--<servlet>
 		<servlet-name>wechat</servlet-name>
 		<servlet-class>com.xiaov.weixin.controller.WechatController
 		</servlet-class>
-	</servlet>
-	<servlet-mapping>
+	</servlet>-->
+<!--	<servlet-mapping>
 		<servlet-name>wechat</servlet-name>
 		<url-pattern>/xvdz/wechat</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping>-->
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>*.do</url-pattern>
