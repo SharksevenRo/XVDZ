@@ -1,6 +1,9 @@
 package com.xiaov.filter;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,6 +19,7 @@ import com.xiaov.web.support.AuthenticationCahce;
 import com.xiaov.web.support.CookieUtil;
 
 public class SystemFilter implements Filter{
+	private HttpServletRequest request;
 
 	public void destroy() {
 		
@@ -23,8 +27,8 @@ public class SystemFilter implements Filter{
 
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
 			throws IOException, ServletException {
-		
-		HttpServletRequest request=(HttpServletRequest) arg0;
+		request=(HttpServletRequest) arg0;
+
 		HttpServletResponse response=(HttpServletResponse) arg1;
 		
 		String url = request.getRequestURL().toString();
@@ -78,5 +82,14 @@ public class SystemFilter implements Filter{
 		
 		
 	}
-
+	private Map<String, String> getHeadersInfo() {
+		Map<String, String> map = new HashMap<String, String>();
+		Enumeration headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String key = (String) headerNames.nextElement();
+			String value = request.getHeader(key);
+			map.put(key, value);
+		}
+		return map;
+	}
 }
