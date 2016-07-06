@@ -21,7 +21,7 @@ public class OrdersController {
     @Autowired
     private OrdersService ordersService;
 
-    @RequestMapping("/admin/Orders/saveAjax")
+    @RequestMapping("/admin/orders/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(Orders orders) {
 
@@ -33,7 +33,7 @@ public class OrdersController {
         }
     }
 
-    @RequestMapping("/admin/Orders/updateAjax")
+    @RequestMapping("/admin/orders/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(Orders orders) {
 
@@ -44,7 +44,7 @@ public class OrdersController {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
-    @RequestMapping("/admin/Orders/deleteAjax")
+    @RequestMapping("/admin/orders/deleteAjax")
     @ResponseBody
     public MessageBean deleteAjax(Orders orders){
 
@@ -58,7 +58,7 @@ public class OrdersController {
         }
     }
 
-    @RequestMapping("/admin/Orders/page")
+    @RequestMapping("/admin/orders/page")
     @ResponseBody
     public Page<Orders> page(Orders orders) {
     	Page<Orders> page = new Page<Orders>();
@@ -75,7 +75,7 @@ public class OrdersController {
         }
     }
 
-    @RequestMapping(value = "/admin/Orders/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/orders/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public Orders getOne(Orders orders) {
         try {

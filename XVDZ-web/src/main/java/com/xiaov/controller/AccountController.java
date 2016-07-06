@@ -17,7 +17,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/admin/Account/saveAjax")
+    @RequestMapping("/admin/account/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(Account account) {
 
@@ -29,7 +29,7 @@ public class AccountController {
         }
     }
 
-    @RequestMapping("/admin/Account/updateAjax")
+    @RequestMapping("/admin/account/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(Account account) {
 
@@ -41,7 +41,7 @@ public class AccountController {
         }
     }
 
-    @RequestMapping("/admin/Account/deleteAjax")
+    @RequestMapping("/admin/account/deleteAjax")
     @ResponseBody
     public MessageBean deleteAjax(Account account) {
 
@@ -55,7 +55,7 @@ public class AccountController {
         }
     }
 
-    @RequestMapping("/admin/Account/page")
+    @RequestMapping("/admin/account/page")
     @ResponseBody
     public Page<Account> page(Page<Account> accountPage) {
 
@@ -70,7 +70,7 @@ public class AccountController {
         }
     }
 
-    @RequestMapping(value = "/admin/Account/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/account/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public Account getOne(Account account) {
         try {

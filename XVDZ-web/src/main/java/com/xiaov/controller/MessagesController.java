@@ -19,7 +19,7 @@ public class MessagesController {
     @Autowired
     private MessagesService messagesService;
 
-    @RequestMapping("/admin/Messages/saveAjax")
+    @RequestMapping("/admin/messages/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(Messages messages) {
 
@@ -31,7 +31,7 @@ public class MessagesController {
         }
     }
 
-    @RequestMapping("/admin/Messages/updateAjax")
+    @RequestMapping("/admin/messages/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(Messages messages) {
 
@@ -43,7 +43,7 @@ public class MessagesController {
         }
     }
 
-    @RequestMapping("/admin/Messages/page")
+    @RequestMapping("/admin/messages/page")
     @ResponseBody
     public Page<Messages> page(Messages messages) {
 
@@ -58,7 +58,7 @@ public class MessagesController {
         }
     }
 
-    @RequestMapping(value = "/admin/Messages/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/messages/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public Messages getOne(Messages messages) {
         try {

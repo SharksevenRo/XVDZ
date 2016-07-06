@@ -152,7 +152,7 @@
 		$("select[name=enterGoodsTypeId]").html("");
 		$.ajax({
 			type : "get",
-			url : "/admin/ReceiveAddress/page.do",
+			url : "/admin/receiveAddress/page.do",
 			dataType : "json",
 			async : true,
 			success : function(data) {
@@ -187,7 +187,7 @@
 	$("#grid-table").jqGrid({ 
 		//提交类型
 		type:"post",
-        url: "/admin/ReceiveAddress/page.do",
+        url: "/admin/receiveAddress/page.do",
         //数据类型
         datatype: "json", 
          jsonReader: {  
@@ -215,7 +215,7 @@
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "/admin/ReceiveAddress/deleteAjax.do",/* 删除Product的URL */ 
+											url : "/admin/receiveAddress/deleteAjax.do",/* 删除Product的URL */ 
 										},
 							 editbutton:true, 
 							 editformbutton: false,
@@ -231,7 +231,7 @@
 												return postdata;
 											}, 
 											reloadAfterSubmit : false,
-											url : "/admin/ReceiveAddress/updateAjax.do",/* 修改Product的URL */ 
+											url : "/admin/receiveAddress/updateAjax.do",/* 修改Product的URL */ 
 							 }
 						} 
 					}, 
@@ -372,7 +372,7 @@
 			        cache:false,  
 			        type: 'POST',  
 			        dataType : 'text', 
-                    url: "/admin/ReceiveAddress/saveAjax.do",
+                    url: "/admin/receiveAddress/saveAjax.do",
                     //序列化form表单
 			    	data: $("#enteringGoodsForm").serializeArray(),
 			        error: function () {//请求失败处理函数 

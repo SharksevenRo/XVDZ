@@ -29,7 +29,7 @@ public class ProductCommentController {
      * @return MessageBean
      * @throws
      */
-    @RequestMapping("/admin/ProductComment/saveAjax")
+    @RequestMapping("/admin/productComment/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(ProductComment productComment) {
 
@@ -43,7 +43,7 @@ public class ProductCommentController {
         }
     }
 
-    @RequestMapping("/admin/ProductComment/updateAjax")
+    @RequestMapping("/admin/productComment/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(ProductComment productComment) {
 
@@ -55,7 +55,7 @@ public class ProductCommentController {
         }
     }
 
-    @RequestMapping("/admin/ProductComment/page")
+    @RequestMapping("/admin/productComment/page")
     @ResponseBody
     public Page<ProductComment> page(ProductComment productComment) {
         try {
@@ -69,7 +69,7 @@ public class ProductCommentController {
         }
     }
 
-    @RequestMapping(value = "/admin/ProductComment/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/productComment/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public ProductComment getOne(ProductComment productComment) {
         try {

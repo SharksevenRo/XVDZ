@@ -19,7 +19,7 @@ public class DiscountCodeUseRecordController {
     @Autowired
     private DiscountCodeUseRecordService discountCodeUseRecordService;
 
-    @RequestMapping("/admin/DiscountCodeUseRecord/saveAjax")
+    @RequestMapping("/admin/discountCodeUseRecord/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(DiscountCodeUseRecord discountCodeUseRecord) {
 
@@ -31,7 +31,7 @@ public class DiscountCodeUseRecordController {
         }
     }
 
-    @RequestMapping("/admin/DiscountCodeUseRecord/updateAjax")
+    @RequestMapping("/admin/discountCodeUseRecord/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(DiscountCodeUseRecord discountCodeUseRecord) {
 
@@ -43,7 +43,7 @@ public class DiscountCodeUseRecordController {
         }
     }
 
-    @RequestMapping("/admin/DiscountCodeUseRecord/page")
+    @RequestMapping("/admin/discountCodeUseRecord/page")
     @ResponseBody
     public Page<DiscountCodeUseRecord> page(DiscountCodeUseRecord discountCodeUseRecord) {
 
@@ -58,7 +58,7 @@ public class DiscountCodeUseRecordController {
         }
     }
 
-    @RequestMapping(value = "/admin/DiscountCodeUseRecord/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/discountCodeUseRecord/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public DiscountCodeUseRecord getOne(DiscountCodeUseRecord discountCodeUseRecord) {
         try {

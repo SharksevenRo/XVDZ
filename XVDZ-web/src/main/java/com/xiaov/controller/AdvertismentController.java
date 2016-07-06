@@ -30,7 +30,7 @@ public class AdvertismentController {
      * @return MessageBean
      * @throws
      */
-    @RequestMapping("/admin/Advertisment/saveAjax")
+    @RequestMapping("/admin/advertisment/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(Advertisment advertisment) {
 
@@ -48,7 +48,7 @@ public class AdvertismentController {
      * @param advertisment
      * @throws
      */
-    @RequestMapping("/admin/Advertisment/updateAjax")
+    @RequestMapping("/admin/advertisment/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(Advertisment advertisment) {
 
@@ -68,7 +68,7 @@ public class AdvertismentController {
      * @return MessageBean
      * @throws
      */
-    @RequestMapping("/admin/Advertisment/deleteAjax")
+    @RequestMapping("/admin/advertisment/deleteAjax")
     @ResponseBody
     public MessageBean deleteAjax(Advertisment advertisment){
 
@@ -90,7 +90,7 @@ public class AdvertismentController {
      * @return Page<Advertisment>
      * @throws
      */
-    @RequestMapping("/admin/Advertisment/page")
+    @RequestMapping("/admin/advertisment/page")
     @ResponseBody
     public Page<Advertisment> page(Advertisment advertisment) {
     	 Page<Advertisment> page = new Page<Advertisment>();
@@ -115,7 +115,7 @@ public class AdvertismentController {
      * @return Advertisment
      * @throws
      */
-    @RequestMapping(value = "/admin/Advertisment/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/advertisment/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public Advertisment getOne(Advertisment advertisment) {
         try {
@@ -129,7 +129,7 @@ public class AdvertismentController {
         }
     }
     
-    @RequestMapping(value = "/admin/Advertisment/getSliderAds")
+    @RequestMapping(value = "/admin/advertisment/getSliderAds")
     @ResponseBody
     public Page<Advertisment> getSliderAds(Advertisment advertisment) {
     	Page<Advertisment> page = null;

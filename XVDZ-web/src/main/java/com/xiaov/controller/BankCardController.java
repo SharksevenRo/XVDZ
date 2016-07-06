@@ -19,7 +19,7 @@ public class BankCardController {
     @Autowired
     private BankCardService bankCardService;
 
-    @RequestMapping("/admin/BankCard/saveAjax")
+    @RequestMapping("/admin/bankCard/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(BankCard bankCard) {
 
@@ -31,7 +31,7 @@ public class BankCardController {
         }
     }
 
-    @RequestMapping("/admin/BankCard/updateAjax")
+    @RequestMapping("/admin/bankCard/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(BankCard bankCard) {
 
@@ -43,7 +43,7 @@ public class BankCardController {
         }
     }
 
-    @RequestMapping("/admin/BankCard/page")
+    @RequestMapping("/admin/bankCard/page")
     @ResponseBody
     public Page<BankCard> page(BankCard bankCard) {
 
@@ -58,7 +58,7 @@ public class BankCardController {
         }
     }
 
-    @RequestMapping(value = "/admin/BankCard/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/bankCard/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public BankCard getOne(BankCard bankCard) {
         try {

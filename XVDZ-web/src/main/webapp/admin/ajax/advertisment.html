@@ -129,7 +129,7 @@
         $("select[name=enterGoodsTypeId]").html("");
         $.ajax({
             type : "get",
-            url : "${pageContext.request.contextPath}/admin/Advertisment/page.do",
+            url : "${pageContext.request.contextPath}/admin/advertisment/page.do",
             dataType : "json",
             async : true,
             success : function(data) {
@@ -164,7 +164,7 @@
         $("#grid-table").jqGrid({
             //提交类型
             type:"post",
-            url: "../admin/Advertisment/page.do",
+            url: "../admin/advertisment/page.do",
             //数据类型
             datatype: "json",
             jsonReader: {
@@ -192,7 +192,7 @@
                                 return postdata;
                             },
                             reloadAfterSubmit : false,
-                            url : "../admin/Advertisment/deleteAjax.do",/* 删除Product的URL */
+                            url : "../admin/advertisment/deleteAjax.do",/* 删除Product的URL */
                         },
                         editbutton:true,
                         editformbutton: true,
@@ -208,7 +208,7 @@
                                 return postdata;
                             },
                             reloadAfterSubmit : false,
-                            url : "../admin/Advertisment/updateAjax.do",/* 修改Product的URL */
+                            url : "../admin/advertisment/updateAjax.do",/* 修改Product的URL */
                         }
                     }
                 },
@@ -346,7 +346,7 @@
                 cache:false,
                 type: 'POST',
                 dataType : 'text',
-                url: "${pageContext.request.contextPath}/admin/Advertisment/saveAjax.do",
+                url: "${pageContext.request.contextPath}/admin/advertisment/saveAjax.do",
                 //序列化form表单
                 data: $("#enteringGoodsForm").serializeArray(),
                 error: function () {//请求失败处理函数

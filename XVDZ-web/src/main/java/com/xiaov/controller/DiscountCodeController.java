@@ -22,7 +22,7 @@ public class DiscountCodeController {
     @Autowired
     private DiscountCodeService discountCodeService;
 
-    @RequestMapping("/admin/DiscountCode/saveAjax")
+    @RequestMapping("/admin/discountCode/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(DiscountCode discountCode) {
 
@@ -34,7 +34,7 @@ public class DiscountCodeController {
         }
     }
 
-    @RequestMapping("/admin/DiscountCode/updateAjax")
+    @RequestMapping("/admin/discountCode/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(DiscountCode discountCode) {
 
@@ -47,7 +47,7 @@ public class DiscountCodeController {
         }
     }
 
-    @RequestMapping("/admin/DiscountCode/deleteAjax")
+    @RequestMapping("/admin/discountCode/deleteAjax")
     @ResponseBody
     public MessageBean deleteAjax(DiscountCode discountCode){
 
@@ -61,7 +61,7 @@ public class DiscountCodeController {
         }
     }
 
-    @RequestMapping("/admin/DiscountCode/page")
+    @RequestMapping("/admin/discountCode/page")
     @ResponseBody
     public Page<DiscountCode> page(DiscountCode discountCode) {
     	  Page<DiscountCode> page = new Page<DiscountCode>();
@@ -77,7 +77,7 @@ public class DiscountCodeController {
         }
     }
 
-    @RequestMapping(value = "/admin/DiscountCode/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/discountCode/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public DiscountCode getOne(DiscountCode discountCode) {
         try {

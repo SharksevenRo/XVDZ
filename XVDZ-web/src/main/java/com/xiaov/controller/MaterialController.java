@@ -50,7 +50,7 @@ public class MaterialController {
 	private int readedBytes;
 
 
-	@RequestMapping("/admin/Material/saveAjax")
+	@RequestMapping("/admin/material/saveAjax")
 	@ResponseBody
 	public MessageBean saveAjax(Material Material) {
 
@@ -62,7 +62,7 @@ public class MaterialController {
 		}
 	}
 
-	@RequestMapping("/admin/Material/updateAjax")
+	@RequestMapping("/admin/material/updateAjax")
 	@ResponseBody
 	public MessageBean updateAjax(Material Material) {
 
@@ -74,7 +74,7 @@ public class MaterialController {
 		}
 	}
 
-	@RequestMapping("/admin/Material/deleteAjax")
+	@RequestMapping("/admin/material/deleteAjax")
 	@ResponseBody
 	public MessageBean deleteAjax(Material Material) {
 
@@ -88,7 +88,7 @@ public class MaterialController {
 		}
 	}
 
-	@RequestMapping("/admin/Material/page")
+	@RequestMapping("/admin/material/page")
 	@ResponseBody
 	public Page<Material> page(Material Material) {
 		Page<Material> page = new Page<Material>();
@@ -105,7 +105,7 @@ public class MaterialController {
 		}
 	}
 
-	@RequestMapping(value = "/admin/Material/getOneAjax", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/material/getOneAjax", method = RequestMethod.POST)
 	@ResponseBody
 	public Material getOne(Material Material) {
 		try {

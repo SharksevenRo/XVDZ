@@ -20,7 +20,7 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    @RequestMapping("/admin/OrderDetail/saveAjax")
+    @RequestMapping("/admin/orderDetail/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(OrderDetail orderDetail) {
 
@@ -32,7 +32,7 @@ public class OrderDetailController {
         }
     }
 
-    @RequestMapping("/admin/OrderDetail/updateAjax")
+    @RequestMapping("/admin/orderDetail/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(OrderDetail orderDetail) {
 
@@ -44,7 +44,7 @@ public class OrderDetailController {
         }
     }
 
-    @RequestMapping("/admin/OrderDetail/page")
+    @RequestMapping("/admin/orderDetail/page")
     @ResponseBody
     public Page<OrderDetail> page(OrderDetail orderDetail) {
         try {
@@ -58,7 +58,7 @@ public class OrderDetailController {
         }
     }
 
-    @RequestMapping(value = "/admin/OrderDetail/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/orderDetail/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public OrderDetail getOne(OrderDetail orderDetail) {
         try {

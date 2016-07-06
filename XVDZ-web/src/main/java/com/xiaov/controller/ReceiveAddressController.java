@@ -35,7 +35,7 @@ public class ReceiveAddressController {
     @Autowired
     private ReceiveAddressServiceImpl receiveAddressServiceimpl;
 
-    @RequestMapping("/admin/ReceiveAddress/saveAjax")
+    @RequestMapping("/admin/receiveAddresssaveAjax")
     @ResponseBody
     public MessageBean saveAjax(String reAddTo, String reAddTel,String reAddDet,String addDefault, HttpServletRequest request) {
 
@@ -66,7 +66,7 @@ public class ReceiveAddressController {
         }
     }
 
-    @RequestMapping("/admin/ReceiveAddress/updateAjax")
+    @RequestMapping("/admin/receiveAddressupdateAjax")
     @ResponseBody
     public MessageBean updateAjax(ReceiveAddress receiveAddress) {
 
@@ -78,7 +78,7 @@ public class ReceiveAddressController {
         }
     }
 
-    @RequestMapping("/admin/ReceiveAddress/deleteAjax")
+    @RequestMapping("/admin/receiveAddressdeleteAjax")
     @ResponseBody
     public MessageBean deleteAjax(ReceiveAddress receiveAddress){
 
@@ -92,7 +92,7 @@ public class ReceiveAddressController {
         }
     }
 
-    @RequestMapping("/admin/ReceiveAddress/page")
+    @RequestMapping("/admin/receiveAddresspage")
     @ResponseBody
     public Page<ReceiveAddress> page(ReceiveAddress receiveAddress) {
 
@@ -107,7 +107,7 @@ public class ReceiveAddressController {
         }
     }
 
-    @RequestMapping(value = "/admin/ReceiveAddress/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/receiveAddressgetOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public ReceiveAddress getOne(ReceiveAddress receiveAddress) {
         try {

@@ -29,7 +29,7 @@ public class DiscountCoupanController {
     @Autowired
     private DiscountCoupanServiceImpl discountCoupanServiceImpl;
 
-    @RequestMapping("/admin/DiscountCoupan/saveAjax")
+    @RequestMapping("/admin/discountCoupan/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(DiscountCoupan discountCoupan) {
 
@@ -41,7 +41,7 @@ public class DiscountCoupanController {
         }
     }
 
-    @RequestMapping("/admin/DiscountCoupan/updateAjax")
+    @RequestMapping("/admin/discountCoupan/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(DiscountCoupan discountCoupan) {
 
@@ -53,7 +53,7 @@ public class DiscountCoupanController {
         }
     }
 
-    @RequestMapping("/admin/DiscountCoupan/page")
+    @RequestMapping("/admin/discountCoupan/page")
     @ResponseBody
     public Page<DiscountCoupan> page(DiscountCoupan discountCoupan) {
         try {
@@ -67,7 +67,7 @@ public class DiscountCoupanController {
         }
     }
 
-    @RequestMapping(value = "/admin/DiscountCoupan/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/discountCoupan/getOneAjax", method = RequestMethod.POST)
     @ResponseBody
     public DiscountCoupan getOne(DiscountCoupan discountCoupan) {
         try {
@@ -80,7 +80,7 @@ public class DiscountCoupanController {
             return page;
         }
     }
-    @RequestMapping("/admin/DiscountCoupan/getUserCoupan")
+    @RequestMapping("/admin/discountCoupan/getUserCoupan")
     @ResponseBody
     public List<DiscountCoupan> getUserCoupan(HttpServletRequest request) {
         try {

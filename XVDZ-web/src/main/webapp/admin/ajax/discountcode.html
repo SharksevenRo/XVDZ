@@ -164,7 +164,7 @@
         $("#grid-table").jqGrid({
             //提交类型
             type:"post",
-            url: "../admin/DiscountCode/page.do",
+            url: "../admin/discountCode/page.do",
             //数据类型
             datatype: "json",
             jsonReader: {
@@ -192,7 +192,7 @@
                                 return postdata;
                             },
                             reloadAfterSubmit : false,
-                            url : "../admin/DiscountCode/deleteAjax.do",/* 删除Product的URL */
+                            url : "../admin/discountCode/deleteAjax.do",/* 删除Product的URL */
                         },
                         editbutton:true,
                         editformbutton: true,
@@ -208,7 +208,7 @@
                                 return postdata;
                             },
                             reloadAfterSubmit : false,
-                            url : "../admin/DiscountCode/updateAjax.do",/* 修改Product的URL */
+                            url : "../admin/discountCode/updateAjax.do",/* 修改Product的URL */
                         }
                     }
                 },
@@ -345,7 +345,7 @@
                 cache:false,
                 type: 'POST',
                 dataType : 'text',
-                url: "${pageContext.request.contextPath}/admin/DiscountCode/saveAjax.do",
+                url: "${pageContext.request.contextPath}/admin/discountCode/saveAjax.do",
                 //序列化form表单
                 data: $("#enteringGoodsForm").serializeArray(),
                 error: function () {//请求失败处理函数
