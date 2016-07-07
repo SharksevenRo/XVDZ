@@ -2,13 +2,7 @@ package com.xiaov.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
@@ -60,6 +54,11 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private Date deleteTime;
 	private String usRemark;
 	private Integer deleteFlag = 0;
+
+	//
+	private String oldPwd;
+
+	private String authCode;
 
 	// Constructors
 
@@ -362,5 +361,22 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	public void setDiscountCode(String discountCode) {
 		this.discountCode = discountCode;
 	}
-	
+
+	@Transient
+	public String getOldPwd() {
+		return oldPwd;
+	}
+
+	public void setOldPwd(String oldPwd) {
+		this.oldPwd = oldPwd;
+	}
+
+	@Transient
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
 }

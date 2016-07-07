@@ -16,6 +16,8 @@ import com.xiaov.service.impl.DiscountCodeServiceImpl;
 import com.xiaov.service.impl.UserServiceImpl;
 import com.xiaov.service.interfaces.DiscountCodeService;
 import com.xiaov.service.interfaces.DiscountCodeUseRecordService;
+import com.xiaov.utils.LazyObjecUtil;
+import com.xiaov.utils.Md5;
 import com.xiaov.web.support.SendMessage;
 import com.xiaov.web.support.UserToken;
 
@@ -82,7 +84,7 @@ public class UserController {
 								UserInfo user = new UserInfo();
 								user.setUsTel(usTel);
 								user.setUsName(usTel);
-								user.setUsPwd(usPwd);
+								user.setUsPwd(Md5.GetMD5Code(usPwd));
 								user.setUsSex("保密");
 								user.setAddTime(new Date());
 								userService.save(user); // 注册用户
@@ -122,7 +124,7 @@ public class UserController {
 	 * 如果要向前途返回json格式数据，加@ResponseBody，返回要返回的对象，
 	 * 如果查询的结果有代理对象调用LazyObjecUtil.LazyPageSetNull去除代理对象
 	 * 如果关联对象数据也要带到前台，选择动态关闭延迟加载的方式查询数据库，方法见UserServiceImp page方法中的实例
-	 * 
+	 *
 	 * @param
 	 * @param page
 	 * @return
@@ -165,25 +167,44 @@ public class UserController {
 	}
 
 	// 删除
-	@RequestMapping("/admin/user/update")
+	@RequestMapping("/auth/user/update")
 	@ResponseBody
 	public MessageBean updateAjax(UserInfo user) {
 		try {
-			user = userService.getOne(user.getClass(), user.getId());
-			userService.delete(user);
+
+
+			if(null!=user.getUsPwd()&&!"".equals(user.getUsPwd())){
+
+				String newPwd=Md5.GetMD5Code(user.getUsPwd());
+
+
+				String pwd=userService.getOne(user.getClass(),user.getId()).getUsPwd();
+
+				if(pwd.equals(Md5.GetMD5Code(user.getOldPwd()))){
+					user.setUsPwd(newPwd);
+				}else{
+					return new MessageBean(APPConstant.ERROR, "修改错误，密码错误");
+
+				}
+			}
+			userService.update(user);
+			return new MessageBean(APPConstant.ERROR, "修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageBean(APPConstant.ERROR, "删除失败");
+			return new MessageBean(APPConstant.SUCCESS, "服务器异常，修改失败");
 		}
-		return new MessageBean(APPConstant.SUCCESS, "删除成功");
+
 	}
 
 	@RequestMapping("/admin/user/getOne")
 	@ResponseBody
 	public UserInfo getOne(UserInfo user) {
-		user = userService.getOne(user.getClass(), user.getId());
-		// results=LazyObjecUtil.LazyPageSetNull(user,"role" );无关联对象，注释
-		System.out.println("11");
+		try {
+			user = userService.getOne(user.getClass(), user.getId());
+			user=LazyObjecUtil.LazyOneSetNull(user, "role");
+		}catch (Exception e){
+			user.setCode(APPConstant.ERROR);
+		}
 		return user;
 	}
 
@@ -191,7 +212,7 @@ public class UserController {
 	 * 在进行获取之前需要请求http://localhost:8080/XVDZ-web/weixin/oauth2/monitor创建模拟环境
 	 * 获取微信用户信息实例,只提供OpenID,等用户信息的持久化完成后会对OpenId进行封装，但cookie里会一直保存openID
 	 * 所以需要openid时只需获取即可
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @return
@@ -218,20 +239,36 @@ public class UserController {
 		return null;
 	}
 
-	@RequestMapping("/admin/user/login")
+	@RequestMapping("/client/user/login")
 	@ResponseBody
-	public MessageBean login(String usTel, String usPwd, HttpServletRequest request, HttpServletResponse response) {
-		UserInfo user = userServiceimpl.login(usPwd, usTel);
+	public UserInfo login_user(UserInfo user, HttpServletRequest request, HttpServletResponse response) {
+		UserInfo temp=new UserInfo();
+		temp.setUsTel(user.getUsTel());
+		try {
+			Page<UserInfo> page = userService.page(temp);
+			if(page.getResult().size()==1){
+				temp=page.getResult().get(0);
+				String pwd=Md5.GetMD5Code(user.getUsPwd());
+				String uspwd=temp.getUsPwd();
+				if(uspwd.equals(pwd)){
+					UserToken token = AuthenticationCahce.put(temp.getId());
+					temp.setAuthCode(token.getToken());
+					temp.setUsPwd("");
+				}else{
+					temp.setCode(APPConstant.ERROR);
+					temp.setMessage("手机或密码错误，请重试");
+					temp.setCode(APPConstant.SUCCESS);
+					temp=LazyObjecUtil.LazyOneSetNull(user, "role");
+				}
+			}else{
+				temp.setCode(APPConstant.ERROR);
 
-		if (user == null) {
-			return new MessageBean(-1, "手机或密码错误!");
-		} else {
-			CookieUtil until = new CookieUtil(request);
-			until.setValue("user", "user.userId", user.getId(), true);
-			until.save(response, "user", null, null, 30 * 1000 * 60, true);
-			System.out.println(user.getId());
-			return new MessageBean(1, "登录成功!");
+				temp.setMessage("手机或密码错误，请重试");
+			}
+		}catch (Exception e){
+
 		}
+		return temp;
 
 	}
 
@@ -263,8 +300,6 @@ public class UserController {
 				e1.printStackTrace();
 			}
 		}
-		
-		
-	}
 
+	}
 }

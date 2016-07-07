@@ -107,7 +107,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	public T getOne(Class clazz, String pk) {
-		return (T) dao.getSession().load(clazz, pk);
+		return (T) dao.getSession().get(clazz, pk);
 	}
 	private boolean isBase(Class clazz) {
 
