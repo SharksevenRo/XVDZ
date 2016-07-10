@@ -58,7 +58,9 @@ public class DiscountCoupanController {
     public Page<DiscountCoupan> page(DiscountCoupan discountCoupan) {
         try {
 
-            return discountCoupanService.page(discountCoupan);
+            Page<DiscountCoupan> page = discountCoupanService.page(discountCoupan);
+            page= LazyObjecUtil.LazyPageSetNull(page,"userInfo");
+            return page;
         } catch (Exception e) {
             Page<DiscountCoupan> page = new Page<DiscountCoupan>();
             page.setCode(APPConstant.ERROR);

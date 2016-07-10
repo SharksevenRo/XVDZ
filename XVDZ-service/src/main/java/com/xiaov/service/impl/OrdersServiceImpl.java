@@ -140,8 +140,8 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 			return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
 		}
 
-		if(orders.getUeId()!=null&&!"".equals(orders.getUeId())){
-			Criterion [] criterions={Restrictions.eq("ueId",orders.getUeId())};
+		if(orders.getUser().getId()!=null&&!"".equals(orders.getUser().getId())){
+			Criterion [] criterions={Restrictions.eq("ueId",orders.getUser().getId())};
 			return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
 		}
 		return  null;

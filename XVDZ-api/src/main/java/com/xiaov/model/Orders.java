@@ -26,7 +26,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	private OrderDetail orderDetail;
 	private Types dbTypes;
 	private DiscountCoupan discountCoupan;
-	private String ueId;
+	private UserInfo user;
 	private String orNo;
 	private Double orTotal;
 	private Double orDiscount;
@@ -69,7 +69,6 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.orderDetail = orderDetail;
 		this.dbTypes = dbTypes;
 		this.discountCoupan = discountCoupan;
-		this.ueId = ueId;
 		this.orNo = orNo;
 		this.orTotal = orTotal;
 		this.orDiscount = orDiscount;
@@ -125,14 +124,6 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.discountCoupan = discountCoupan;
 	}
 
-	@Column(name = "ue_id", length = 20)
-	public String getUeId() {
-		return this.ueId;
-	}
-
-	public void setUeId(String ueId) {
-		this.ueId = ueId;
-	}
 
 	@Column(name = "or_no", nullable = true, length = 20)
 	public String getOrNo() {
@@ -234,5 +225,15 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "u_id")
+	public UserInfo getUser() {
+		return user;
+	}
+
+	public void setUser(UserInfo user) {
+		this.user = user;
 	}
 }
