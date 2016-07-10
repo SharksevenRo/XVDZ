@@ -47,7 +47,9 @@ public class Types extends Page<Types> implements java.io.Serializable {
 	private String typeRemark;
 	private Integer deleteFlag=0;
 	
-	private List<Material>materials; 
+	private List<Material>materials;
+
+	List<Types> children;
 
 	// Constructors
 
@@ -176,4 +178,12 @@ public class Types extends Page<Types> implements java.io.Serializable {
 		this.materials = materials;
 	}
 
+	@Transient
+	public List<Types> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Types> children) {
+		this.children = children;
+	}
 }

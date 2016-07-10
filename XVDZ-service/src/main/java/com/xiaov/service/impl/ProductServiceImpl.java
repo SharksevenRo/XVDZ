@@ -117,12 +117,13 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	}
 	public List<Product> getProductByMutiType(PageRequest pageRequest,List<MutiType> types){
 
-		Criterion[] eqs=new SimpleExpression[types.size()+1];
+		Criterion[] eqs=new SimpleExpression[types.size()+2];
 		for (int i=0;i<types.size();i++) {
-			eqs[i]=Restrictions.like("pdtLabel",types.get(i).getId());
+			eqs[i]=Restrictions.like("pdtLabel","%"+types.get(i).getType().getId()+"%");
 
 		}
-		eqs[types.size()+1]=Restrictions.eq("deleteFlag",0);
+		eqs[types.size()]=Restrictions.eq("deleteFlag",0);
+		eqs[types.size()+1]=Restrictions.eq("typeId","product.type");
 		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","material"},eqs,pageRequest.getOffset(),pageRequest.getPageSize());
 	}
 }

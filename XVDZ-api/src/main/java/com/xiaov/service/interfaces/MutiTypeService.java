@@ -7,4 +7,5 @@ import com.xiaov.service.BaseService;
  * Created by Sharkseven on 2016/7/9.
  */
 public interface MutiTypeService extends BaseService<MutiType> {
+
 }

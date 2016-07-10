@@ -80,11 +80,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserInfo> implements UserSe
 
 		Criterion[] eqs=new SimpleExpression[types.size()+2];
 		for (int i=0;i<types.size();i++) {
-			eqs[i]= Restrictions.like("usRemark",types.get(i).getId());
+			eqs[i]= Restrictions.like("usRemark","%"+types.get(i).getType().getId()+"%");
 
 		}
-		eqs[types.size()+1]=Restrictions.eq("deleteFlag",0);
-		eqs[types.size()+2]=Restrictions.eq("typeId","designer.type");
+		eqs[types.size()]=Restrictions.eq("deleteFlag",0);
+		eqs[types.size()+1]=Restrictions.eq("typeId","designer.type");
 
 		return userDao.getEntitiestNotLazy(new UserInfo(),null,eqs,pageRequest.getOffset(),pageRequest.getPageSize());
 	}

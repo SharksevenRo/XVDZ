@@ -185,4 +185,16 @@ public class TypesController {
 			return null;
 		}
     }
+
+    @RequestMapping("/admin/types/lable/list")
+    @ResponseBody
+    public List<Types> getLabels(Types types){
+
+        try {
+            return typesService.getLebles(types);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

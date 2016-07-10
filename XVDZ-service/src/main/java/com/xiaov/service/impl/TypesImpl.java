@@ -85,4 +85,18 @@ public class TypesImpl extends BaseServiceImpl<Types> implements TypesService {
 		types.setMaterials(materials);
 		return types;
 	}
+
+	public  List<Types> getLebles(Types types){
+
+		List<Types> parents = getTypesByParent(types);
+
+		List<Types> children;
+		for (Types t :
+				parents
+				) {
+			children=getTypesByParent(t);
+			t.setChildren(children);
+		}
+		return parents;
+	}
 }

@@ -17,4 +17,10 @@ public interface TypesService extends BaseService<Types>{
 	public List<Types> getTypesByParent(Types types);
 
 	public List<Types> getMaterialAndDefault(Types types);
+
+	/**
+	 * 获取标签类型
+	 * @return
+     */
+	public  List<Types> getLebles(Types types);
 }

@@ -22,7 +22,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	@Autowired
 	@Qualifier(value = "hibernateSupportDao")
 
-	private HibernateSupportDao<T, String> dao;
+	protected HibernateSupportDao<T, String> dao;
 
 	@Transactional
 	public void delete(T entity) {
