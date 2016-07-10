@@ -73,7 +73,7 @@ public class OrdersController {
         try {
 
         	page= ordersService.page(orders);
-        	LazyObjecUtil.LazyPageSetNull(page, new String[]{"orderDetail","discountCoupan","dbTypes"});
+            page=LazyObjecUtil.LazyPageSetNull(page, new String[]{"user","discountCoupan","dbTypes"});
         	return page;
         } catch (Exception e) {
             
@@ -87,7 +87,9 @@ public class OrdersController {
     @ResponseBody
     public Orders getOne(Orders orders) {
         try {
-            return ordersService.getOne(orders.getClass(), orders.getId());
+            Orders one = ordersService.getOne(orders.getClass(), orders.getId());
+            one=LazyObjecUtil.LazyOneSetNull(one, new String[]{"user","discountCoupan","dbTypes"});
+            return one;
 
         } catch (Exception e) {
             Orders page = new Orders();
@@ -103,6 +105,7 @@ public class OrdersController {
         Page<Orders> page = new Page<Orders>();
         try {
            page.setResult(ordersService.getOrderDetai(orders));
+           LazyObjecUtil.LazyPageSetNull(page,new String[]{"user","discountCoupan","dbTypes"});
             return page;
         } catch (Exception e) {
             page.setCode(APPConstant.ERROR);

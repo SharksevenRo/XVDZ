@@ -23,7 +23,6 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	// Fields
 	private String id;
-	private OrderDetail orderDetail;
 	private Types dbTypes;
 	private DiscountCoupan discountCoupan;
 	private UserInfo user;
@@ -66,7 +65,6 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 			Integer orState, Date addTime, Date updateTime,
 			Date deleteTime, String orRemark, Integer deleteFlag) {
 		this.id = id;
-		this.orderDetail = orderDetail;
 		this.dbTypes = dbTypes;
 		this.discountCoupan = discountCoupan;
 		this.orNo = orNo;
@@ -92,16 +90,6 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "or_dt_id")
-	public OrderDetail getOrderDetail() {
-		return this.orderDetail;
-	}
-
-	public void setOrderDetail(OrderDetail orderDetail) {
-		this.orderDetail = orderDetail;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
