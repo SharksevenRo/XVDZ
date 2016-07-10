@@ -76,9 +76,7 @@ public class MutiTypeController {
         }
     }
 
-    public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
-        return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
-    }
+
 
     @ResponseBody
     @RequestMapping("/admin/product/list/label")
@@ -115,5 +113,8 @@ public class MutiTypeController {
         page.setMessage("服务器异常");
         page.setMutiType(null);
         return page;
+    }
+    public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
+        return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
     }
 }

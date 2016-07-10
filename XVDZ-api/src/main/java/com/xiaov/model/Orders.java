@@ -1,14 +1,8 @@
 package com.xiaov.model;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
@@ -45,6 +39,8 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	private Date deleteTime;
 	private String orRemark;
 	private Integer deleteFlag=0;
+
+	private List<OrderDetail> orderDetails;
 
 	// Constructors
 
@@ -231,4 +227,12 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.deleteFlag = deleteFlag;
 	}
 
+	@Transient
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
 }

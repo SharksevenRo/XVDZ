@@ -1,17 +1,21 @@
 package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
+import com.xiaov.model.OrderDetail;
 import com.xiaov.model.Orders;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.OrdersService;
 import com.xiaov.utils.LazyObjecUtil;
-
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.JavaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zouziyang on 4/21/16.
@@ -20,12 +24,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class OrdersController {
     @Autowired
     private OrdersService ordersService;
+    public final static ObjectMapper mapper = new ObjectMapper();
 
-    @RequestMapping("/admin/orders/saveAjax")
+    @RequestMapping("/auth/orders/save")
     @ResponseBody
     public MessageBean saveAjax(Orders orders) {
 
         try {
+            JavaType javaType = getCollectionType(ArrayList.class, OrderDetail.class);
+            List<OrderDetail> orderDetails =  (List<OrderDetail>)mapper.readValue(orders.getMutiType(), javaType);
+            orders.setOrderDetails(orderDetails);
             ordersService.save(orders);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
@@ -33,7 +41,7 @@ public class OrdersController {
         }
     }
 
-    @RequestMapping("/admin/orders/updateAjax")
+    @RequestMapping("/auth/orders/update")
     @ResponseBody
     public MessageBean updateAjax(Orders orders) {
 
@@ -44,7 +52,7 @@ public class OrdersController {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
-    @RequestMapping("/admin/orders/deleteAjax")
+    @RequestMapping("/auth/orders/delete")
     @ResponseBody
     public MessageBean deleteAjax(Orders orders){
 
@@ -58,7 +66,7 @@ public class OrdersController {
         }
     }
 
-    @RequestMapping("/admin/orders/page")
+    @RequestMapping("/auth/orders/page")
     @ResponseBody
     public Page<Orders> page(Orders orders) {
     	Page<Orders> page = new Page<Orders>();
@@ -75,7 +83,7 @@ public class OrdersController {
         }
     }
 
-    @RequestMapping(value = "/admin/orders/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping("/auth/orders/getOne")
     @ResponseBody
     public Orders getOne(Orders orders) {
         try {
@@ -87,5 +95,22 @@ public class OrdersController {
             page.setMessage("服务器忙");
             return page;
         }
+    }
+
+    @RequestMapping("/auth/orders/page/detail")
+    @ResponseBody
+    public Page<Orders> pageDetail(Orders orders) {
+        Page<Orders> page = new Page<Orders>();
+        try {
+           page.setResult(ordersService.getOrderDetai(orders));
+            return page;
+        } catch (Exception e) {
+            page.setCode(APPConstant.ERROR);
+            page.setMessage("服务器忙");
+            return page;
+        }
+    }
+    public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
+        return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
     }
 }

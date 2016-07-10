@@ -224,11 +224,15 @@ public class UserController {
     public UserInfo getOne(UserInfo user) {
         try {
             user = userService.getOne(user.getClass(), user.getId());
-            user = LazyObjecUtil.LazyOneSetNull(user, "role");
+            if(user!=null){
+                user = LazyObjecUtil.LazyOneSetNull(user, "role");
+            }
+            return user;
         } catch (Exception e) {
             user.setCode(APPConstant.ERROR);
+            return user;
         }
-        return user;
+
     }
 
     /**

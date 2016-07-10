@@ -1,19 +1,16 @@
 package com.xiaov.service.impl;
 
 import com.xiaov.dao.OrdersDao;
+import com.xiaov.model.OrderDetail;
 import com.xiaov.model.Orders;
-import com.xiaov.model.Orders;
-import com.xiaov.orm.core.Page;
-import com.xiaov.orm.hibernate.support.EntityParamsUtil;
+import com.xiaov.service.interfaces.OrderDetailService;
 import com.xiaov.service.interfaces.OrdersService;
-
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,9 +22,12 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
     @Autowired
     private OrdersDao dao;
 
+	@Autowired
+	private OrderDetailService orderDetailService;
+
     @Override
 	public void delete(Orders entity) {
-		
+
 		super.delete(entity);
 	}
 	@Override
@@ -36,8 +36,13 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		return super.loadAll(entity);
 	}
 	@Override
+	@Transactional
 	public void save(Orders entity) {
-		
+
+		for (OrderDetail orderDetail: entity.getOrderDetails()
+				) {
+			orderDetailService.save(orderDetail);
+		}
 		super.save(entity);
 	}
 	@Override
@@ -126,6 +131,20 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 
 		return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
 
+	}
+
+	public List<Orders> getOrderDetai(Orders orders){
+		String[] fields = new String[]{"orderDetail", "dbTypes", "discountCoupan"};
+		if(orders.getDiscountCoupan().getDisCouNo()!=null&&!"".equals(orders.getDiscountCoupan().getDisCouNo())){
+			Criterion [] criterions={Restrictions.eq("discountCoupan.disCouNo",orders.getDiscountCoupan().getDisCouNo())};
+			return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
+		}
+
+		if(orders.getUeId()!=null&&!"".equals(orders.getUeId())){
+			Criterion [] criterions={Restrictions.eq("ueId",orders.getUeId())};
+			return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
+		}
+		return  null;
 	}
 }
 
