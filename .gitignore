@@ -10,5 +10,6 @@ XVDZ-web/log
 XVDZ-web/.externalToolBuilders
 *.idea
 *.iml
+*.properties
 
 

@@ -22,7 +22,7 @@
 		<hibernate.version>4.2.7.Final</hibernate.version>
 		<aspectj.version>1.7.3</aspectj.version>
 		<shiroversion>1.2.4</shiroversion>
-		<java.home>C:\Program Files\Java\jdk1.7.0_79</java.home>
+		<java.home>/home/sharkseven/soft/jdk1.7.0_67</java.home>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -164,6 +164,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.1</version>
@@ -287,7 +293,7 @@
                     <encoding>UTF-8</encoding>
                     <compilerArguments>
                         <verbose />
-                        <bootclasspath>${java.home}\jre\lib\rt.jar;${java.home}\jre\lib\jce.jar</bootclasspath>
+                        <bootclasspath>${java.home}/jre/lib/rt.jar:${java.home}/jre/lib/jce.jar</bootclasspath>
                     </compilerArguments>
                 </configuration>
             </plugin>
