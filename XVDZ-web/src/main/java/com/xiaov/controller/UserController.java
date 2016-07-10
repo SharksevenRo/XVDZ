@@ -1,42 +1,36 @@
 package com.xiaov.controller;
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.xiaov.constant.APPConstant;
 import com.xiaov.model.DiscountCode;
 import com.xiaov.model.DiscountCodeUseRecord;
 import com.xiaov.model.InnerSession;
-import com.xiaov.service.impl.DiscountCodeServiceImpl;
-import com.xiaov.service.impl.UserServiceImpl;
-import com.xiaov.service.interfaces.DiscountCodeService;
-import com.xiaov.service.interfaces.DiscountCodeUseRecordService;
-import com.xiaov.service.interfaces.InnerSessionService;
-import com.xiaov.utils.LazyObjecUtil;
-import com.xiaov.utils.Md5;
-import com.xiaov.web.support.SendMessage;
-import com.xiaov.web.support.UserToken;
-
-import org.apache.http.HttpResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import com.xiaov.constant.APPConstant;
 import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
+import com.xiaov.service.impl.DiscountCodeServiceImpl;
+import com.xiaov.service.impl.UserServiceImpl;
+import com.xiaov.service.interfaces.DiscountCodeUseRecordService;
+import com.xiaov.service.interfaces.InnerSessionService;
 import com.xiaov.service.interfaces.UserService;
+import com.xiaov.utils.LazyObjecUtil;
+import com.xiaov.utils.Md5;
 import com.xiaov.web.support.AuthenticationCahce;
 import com.xiaov.web.support.CookieUtil;
+import com.xiaov.web.support.SendMessage;
+import com.xiaov.web.support.UserToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 @Controller
 public class UserController {
@@ -69,7 +63,7 @@ public class UserController {
     @RequestMapping(value = "/admin/user/save")
     @ResponseBody
     public MessageBean save(String telCode, String disCodeNo, String rePwd, String usPwd, String usTel,
-                            HttpSession session, String activeCode, String key) {
+                             String activeCode, String key) {
 
 
         InnerSession one = innerSessionService.getOne(InnerSession.class, key);
@@ -342,6 +336,5 @@ public class UserController {
                 e1.printStackTrace();
             }
         }
-
     }
 }

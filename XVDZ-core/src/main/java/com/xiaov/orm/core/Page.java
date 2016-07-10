@@ -33,6 +33,9 @@ public class Page<T> extends PageRequest implements Serializable {
 	protected List<T> result = null;
 	protected long totalItems = -1;
 
+	//多条件过滤
+	protected  String mutiType;
+
 	public Page() {
 	}
 
@@ -145,4 +148,11 @@ public class Page<T> extends PageRequest implements Serializable {
 		return result;
 	}
 
+	public String getMutiType() {
+		return mutiType;
+	}
+
+	public void setMutiType(String mutiType) {
+		this.mutiType = mutiType;
+	}
 }

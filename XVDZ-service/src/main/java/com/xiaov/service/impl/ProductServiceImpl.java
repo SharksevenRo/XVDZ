@@ -2,8 +2,11 @@ package com.xiaov.service.impl;
 
 import java.util.List;
 
+import com.xiaov.model.MutiType;
+import com.xiaov.orm.core.PageRequest;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,12 +53,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		
 		return super.getOne(clazz, pk);
 	}
-	
-	public Product getOneInteger(Class clazz, Integer pk) {
-		
-		return null;
-	}
-	
+
 	/**
 	 * 获取商品某种属性详情
 	 * @param product 当前商品
@@ -116,5 +114,15 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		List<Product> products = dao.findByProperty(propertyName,values);
 
 		return  products;
+	}
+	public List<Product> getProductByMutiType(PageRequest pageRequest,List<MutiType> types){
+
+		Criterion[] eqs=new SimpleExpression[types.size()+1];
+		for (int i=0;i<types.size();i++) {
+			eqs[i]=Restrictions.like("pdtLabel",types.get(i).getId());
+
+		}
+		eqs[types.size()+1]=Restrictions.eq("deleteFlag",0);
+		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","material"},eqs,pageRequest.getOffset(),pageRequest.getPageSize());
 	}
 }

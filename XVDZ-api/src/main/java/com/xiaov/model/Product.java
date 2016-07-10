@@ -61,6 +61,8 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Integer deleteFlag=0;
 	
 	private List<ProductDetail> detail;
+
+	private String mutiType;
 	// Constructors
 
 	/** default constructor */
@@ -346,5 +348,6 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public void setAllPic(String allPic) {
 		this.allPic = allPic;
 	}
-	
+
+
 }
