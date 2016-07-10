@@ -3,6 +3,8 @@ package com.xiaov.service.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,13 @@ public class DiscountCoupanServiceImpl extends BaseServiceImpl<DiscountCoupan> i
     @Override
     public List<DiscountCoupan> loadAll(DiscountCoupan entity) {
 
-        return super.loadAll(entity);
+        if(entity.getUserInfo()!=null){
+            Criterion [] criterions={Restrictions.eq("userInfo.id",entity.getUserInfo().getId())};
+            return dao.getEntitiestNotLazy(new DiscountCoupan(),null,criterions);
+        }else{
+            Criterion [] criterions={Restrictions.eq("userInfo.id","")};
+            return dao.getEntitiestNotLazy(new DiscountCoupan(),null,criterions);
+        }
     }
 
     @Override

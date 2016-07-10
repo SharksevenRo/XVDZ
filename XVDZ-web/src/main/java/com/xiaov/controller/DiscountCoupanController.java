@@ -55,17 +55,14 @@ public class DiscountCoupanController {
 
     @RequestMapping("/admin/discountCoupan/page")
     @ResponseBody
-    public Page<DiscountCoupan> page(DiscountCoupan discountCoupan) {
+    public List<DiscountCoupan> page(DiscountCoupan discountCoupan) {
+        List<DiscountCoupan> page;
         try {
-
-            Page<DiscountCoupan> page = discountCoupanService.page(discountCoupan);
-            page= LazyObjecUtil.LazyPageSetNull(page,"userInfo");
+            page= discountCoupanService.loadAll(discountCoupan);
+            page=LazyObjecUtil.LazySetNull(page,"userInfo");
             return page;
         } catch (Exception e) {
-            Page<DiscountCoupan> page = new Page<DiscountCoupan>();
-            page.setCode(APPConstant.ERROR);
-            page.setMessage("服务器忙");
-            return page;
+          return null;
         }
     }
 
