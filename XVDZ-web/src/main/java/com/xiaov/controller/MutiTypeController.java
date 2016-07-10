@@ -3,11 +3,13 @@ package com.xiaov.controller;
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.MutiType;
 import com.xiaov.model.Product;
+import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.MutiTypeService;
 import com.xiaov.service.interfaces.ProductService;
 import com.xiaov.service.interfaces.TypesService;
+import com.xiaov.service.interfaces.UserService;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.JavaType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class MutiTypeController {
     @Autowired
     private MutiTypeService mutiTypeService;
     private ProductService productService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private TypesService typesService;
@@ -59,6 +63,19 @@ public class MutiTypeController {
             return  new MessageBean(APPConstant.ERROR,"服务器异常，请重试");
         }
     }
+    @ResponseBody
+    @RequestMapping("/admin/mutitype/list")
+    public List<MutiType> page(MutiType mutiType){
+
+        try {
+            List<MutiType> types = mutiTypeService.loadAll(mutiType);
+            return types;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
         return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
     }
@@ -72,6 +89,24 @@ public class MutiTypeController {
             List<MutiType> types =  (List<MutiType>)mapper.readValue(page.getMutiType(), javaType);
             List<Product> products = productService.getProductByMutiType(page, types);
             page.setResult(products);
+            return page;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        page.setCode(APPConstant.ERROR);
+        page.setMessage("服务器异常");
+        page.setMutiType(null);
+        return page;
+    }
+    @ResponseBody
+    @RequestMapping("/admin/designer/list/label")
+    public Page<UserInfo> pageByMutiTypeDesinger(Page<UserInfo> page){
+
+        try{
+            JavaType javaType = getCollectionType(ArrayList.class, MutiType.class);
+            List<MutiType> types =  (List<MutiType>)mapper.readValue(page.getMutiType(), javaType);
+            List<UserInfo> users = userService.getDesignerByMutiType(page, types);
+            page.setResult(users);
             return page;
         }catch (Exception e){
             e.printStackTrace();
