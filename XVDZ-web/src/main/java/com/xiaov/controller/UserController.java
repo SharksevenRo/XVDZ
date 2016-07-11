@@ -341,4 +341,44 @@ public class UserController {
             }
         }
     }
+
+    // 分页查询
+    @RequestMapping("/admin/user/recommand/page")
+    @ResponseBody
+    public Page<UserInfo> recommandPage(UserInfo page) {
+
+        Page<UserInfo> results = null;
+        try {
+            page.setIsRecommend(1);
+            page.setTypeId("user.designer");
+            results = userService.page(page);
+            return results;
+        } catch (Exception e) {
+            e.printStackTrace();
+            results.setCode(APPConstant.ERROR);
+            results.setMessage("服务器正忙，请重试");
+            return results;
+        }
+
+    }
+    // 分页查询
+    @RequestMapping("/admin/user/talent/page")
+    @ResponseBody
+    public Page<UserInfo> talentPage(UserInfo page) {
+
+
+        Page<UserInfo> results = null;
+        try {
+
+            page.setIsTalent(1);
+            page.setTypeId("user.designer");
+            results = userService.page(page);
+            return results;
+        } catch (Exception e) {
+            e.printStackTrace();
+            results.setCode(APPConstant.ERROR);
+            results.setMessage("服务器正忙，请重试");
+            return results;
+        }
+    }
 }

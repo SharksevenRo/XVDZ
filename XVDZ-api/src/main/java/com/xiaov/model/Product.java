@@ -34,7 +34,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 	private String id;
 	private Types productType;
-	private Material material;
+	private Material img;
 	private String usId;
 	private String pdtNo;
 	private String pdtName;
@@ -57,7 +57,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Boolean pdtOpenState=true;
 	private String remark;
 	private String baseId;
-	private String allPic;
+	private Material show;
 	private Integer deleteFlag=0;
 	
 	private List<ProductDetail> detail;
@@ -89,7 +89,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 	/** full constructor */
 	public Product(String id, Types productType,
-			 Material material,String usId, String pdtNo,
+			 Material img,String usId, String pdtNo,
 			String pdtName, Double pdtIntRat, String pdtLabel, String pdtPc,
 			String pdtPicBs, String pdtPicBp, Double pdtPrc, Double pdtDsct,
 			Integer pdtSaleCount, Integer pdtGdCount, Integer pdtShareCount,
@@ -97,7 +97,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 			Boolean pdtOpenState, String remark, Integer deleteFlag) {
 		this.id = id;
 		this.productType = productType;
-		this.material = material;
+		this.img = img;
 		this.usId = usId;
 		this.pdtNo = pdtNo;
 		this.pdtName = pdtName;
@@ -143,13 +143,13 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "material_id")
-	public Material getMaterial() {
-		return this.material;
+	@JoinColumn(name = "img")
+	public Material getImg() {
+		return this.img;
 	}
 
-	public void setMaterial(Material material) {
-		this.material = material;
+	public void setImg(Material img) {
+		this.img = img;
 	}
 	@Column(name = "us_id", length = 20)
 	public String getUsId() {
@@ -340,14 +340,25 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public void setBaseId(String baseId) {
 		this.baseId = baseId;
 	}
-	@Column(name = "allpic", nullable = true)
-	public String getAllPic() {
-		return allPic;
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "allpic")
+	public Material getShow() {
+		return show;
 	}
 
-	public void setAllPic(String allPic) {
-		this.allPic = allPic;
+	public void setShow(Material show) {
+		this.show = show;
 	}
 
+	@Override
+	public String getMutiType() {
+		return mutiType;
+	}
 
+	@Override
+	public void setMutiType(String mutiType) {
+		this.mutiType = mutiType;
+	}
 }

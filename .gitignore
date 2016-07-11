@@ -11,5 +11,5 @@ XVDZ-web/.externalToolBuilders
 *.idea
 *.iml
 *.properties
-
+pom.xml
 

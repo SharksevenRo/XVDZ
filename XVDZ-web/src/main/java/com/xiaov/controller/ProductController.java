@@ -1,27 +1,5 @@
 package com.xiaov.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.tools.zip.ZipEntry;
-import org.apache.tools.zip.ZipFile;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.Material;
 import com.xiaov.model.Product;
@@ -33,159 +11,171 @@ import com.xiaov.service.impl.ProductDetailServiceImpl;
 import com.xiaov.service.impl.ProductServiceImpl;
 import com.xiaov.service.interfaces.MaterialService;
 import com.xiaov.service.interfaces.ProductService;
-import com.xiaov.utils.CompressPicUtil;
-import com.xiaov.utils.ImageCutModel;
-import com.xiaov.utils.LazyObjecUtil;
-import com.xiaov.utils.Pinyin4jUtil;
-import com.xiaov.utils.UploadFileUtil;
+import com.xiaov.utils.*;
+import org.apache.tools.zip.ZipEntry;
+import org.apache.tools.zip.ZipFile;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.*;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class ProductController {
 
-	
-	@Autowired
-	private ProductService productService;
 
-	@Autowired
-	private ProductServiceImpl productServiceimpl;
+    @Autowired
+    private ProductService productService;
 
-	@Autowired
-	private ProductDetailServiceImpl detailServiceImpl;
-	
-	@Autowired
-	private MaterialService materialService;
-	
-	private String path;
-	private static int bufSize = 512; // size of bytes
-	private byte[] buf;
-	private int readedBytes;
+    @Autowired
+    private ProductServiceImpl productServiceimpl;
 
-	@RequestMapping("/admin/product/saveAjax")
-	@ResponseBody
-	public MessageBean saveAjax(Product product, ImageCutModel imgCut) {
+    @Autowired
+    private ProductDetailServiceImpl detailServiceImpl;
 
-		try {
-			product.setAddTime(new Date());
-			productService.save(product);
-			return new MessageBean(APPConstant.SUCCESS, "上传成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new MessageBean(APPConstant.ERROR, "上传失败");
-		}
-	}
+    @Autowired
+    private MaterialService materialService;
 
-	@RequestMapping("/admin/product/updateAjax")
-	@ResponseBody
-	public MessageBean updateAjax(Product product) {
+    private String path;
+    private static int bufSize = 512; // size of bytes
+    private byte[] buf;
+    private int readedBytes;
 
-		try {
-			productService.update(product);
-			return new MessageBean(APPConstant.SUCCESS, "上传成功");
-		} catch (Exception e) {
-			return new MessageBean(APPConstant.ERROR, "上传失败");
-		}
-	}
+    @RequestMapping("/admin/product/saveAjax")
+    @ResponseBody
+    public MessageBean saveAjax(Product product, ImageCutModel imgCut) {
 
-	@RequestMapping("/admin/product/page")
-	@ResponseBody
-	public Page<Product> page(Product product) {
+        try {
+            product.setAddTime(new Date());
+            productService.save(product);
+            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "上传失败");
+        }
+    }
 
-		try {
+    @RequestMapping("/admin/product/updateAjax")
+    @ResponseBody
+    public MessageBean updateAjax(Product product) {
 
-			Page<Product> page = productService.page(product);
+        try {
+            productService.update(product);
+            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+        } catch (Exception e) {
+            return new MessageBean(APPConstant.ERROR, "上传失败");
+        }
+    }
 
-			String[] fileName = { "material", "productType" };
-			page = LazyObjecUtil.LazyPageSetNull(page, fileName);
+    @RequestMapping("/admin/product/page")
+    @ResponseBody
+    public Page<Product> page(Product product) {
 
-			return page;
-		} catch (Exception e) {
-			e.printStackTrace();
-			Page<Product> page = new Page<Product>();
-			page.setCode(APPConstant.ERROR);
-			page.setMessage("服务器忙");
-			return page;
-		}
-	}
+        try {
 
-	@RequestMapping("/admin/product/deleteAjax")
-	@ResponseBody
-	public MessageBean deleteAjax(Product product) {
+            Page<Product> page = productService.page(product);
 
-		try {
-			product = productService.getOne(product.getClass(), product.getId());
-			productService.delete(product);
-			return new MessageBean(APPConstant.SUCCESS, "删除成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new MessageBean(APPConstant.ERROR, "删除失败");
-		}
-	}
+            String[] fileName = {"productType", "img","show"};
+            page = LazyObjecUtil.LazyPageSetNull(page, fileName);
 
-	@RequestMapping("/admin/product/getOneAjax")
-	@ResponseBody
-	public Product getOne(Product product) {
+            return page;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Page<Product> page = new Page<Product>();
+            page.setCode(APPConstant.ERROR);
+            page.setMessage("服务器忙");
+            return page;
+        }
+    }
 
-		try {
+    @RequestMapping("/admin/product/deleteAjax")
+    @ResponseBody
+    public MessageBean deleteAjax(Product product) {
 
-			return productService.getOne(product.getClass(), product.getId());
-		} catch (Exception e) {
-			Product page = new Product();
-			page.setCode(APPConstant.ERROR);
-			page.setMessage("服务器忙");
-			return page;
-		}
-	}
+        try {
+            product = productService.getOne(product.getClass(), product.getId());
+            productService.delete(product);
+            return new MessageBean(APPConstant.SUCCESS, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "删除失败");
+        }
+    }
 
-	@RequestMapping("/admin/product/picUploadAjax")
-	@ResponseBody
-	public MessageBean saveProductImage(ImageCutModel imgCut, HttpServletRequest request) {
+    @RequestMapping("/admin/product/getOneAjax")
+    @ResponseBody
+    public Product getOne(Product product) {
 
-		System.out.println("11");
-		try {
-			if (imgCut != null) {
-				// 新文件名
-				String newFileName = new Date().getTime() + ".jpg";
-				String contextPath = request.getRealPath("/");
-				// 获取公司ID
-				// 设置正常保存路径域
-				String[] normalScope = { "normal", imgCut.getType(), new Date().getYear() + "",
-						new Date().getMonth() + "", "product" };
-				// 创建图片上传对象，这是正常路径
-				UploadFileUtil fileUtil = new UploadFileUtil(contextPath, normalScope);
+        try {
 
-				// 设置压缩保存路径域
-				String[] compressScope = { "normal", imgCut.getType(), new Date().getYear() + "",
-						new Date().getMonth() + "", "product" };
-				// 压缩
-				String compressTargetPath = fileUtil.savePicWithCompress(imgCut.getImageFile(), newFileName,
-						compressScope, false);
-				String dbCompressUrl = fileUtil.getSmallRelativeFolderPath() + newFileName;
-				// 剪切保存域
-				String[] cutScope = { "normal", imgCut.getType(), new Date().getYear() + "", new Date().getMonth() + "",
-						"product" };
-				// 剪切
-				String cutTargetPath = fileUtil.cutImg(imgCut, newFileName, cutScope);
-				String dbCutUrl = fileUtil.getCutRelativeFolderPath() + newFileName;
+            return productService.getOne(product.getClass(), product.getId());
+        } catch (Exception e) {
+            Product page = new Product();
+            page.setCode(APPConstant.ERROR);
+            page.setMessage("服务器忙");
+            return page;
+        }
+    }
 
-				if (compressTargetPath != null && dbCutUrl != null) {
+    @RequestMapping("/admin/product/picUploadAjax")
+    @ResponseBody
+    public MessageBean saveProductImage(ImageCutModel imgCut, HttpServletRequest request) {
 
-					return new MessageBean(APPConstant.SUCCESS, compressTargetPath);
-				} else {
-					return new MessageBean(APPConstant.SUCCESS, "上传失败");
-				}
-			} else {
-				return new MessageBean(APPConstant.SUCCESS, "上传失败");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new MessageBean(APPConstant.ERROR, "上传失败");
-		}
-	}
+        System.out.println("11");
+        try {
+            if (imgCut != null) {
+                // 新文件名
+                String newFileName = new Date().getTime() + ".jpg";
+                String contextPath = request.getRealPath("/");
+                // 获取公司ID
+                // 设置正常保存路径域
+                String[] normalScope = {"normal", imgCut.getType(), new Date().getYear() + "",
+                        new Date().getMonth() + "", "product"};
+                // 创建图片上传对象，这是正常路径
+                UploadFileUtil fileUtil = new UploadFileUtil(contextPath, normalScope);
 
-	@RequestMapping("/admin/product/newProduct.do")
-	@ResponseBody
-	public Page<Product> newProduct(Product product) {
-		/*
+                // 设置压缩保存路径域
+                String[] compressScope = {"normal", imgCut.getType(), new Date().getYear() + "",
+                        new Date().getMonth() + "", "product"};
+                // 压缩
+                String compressTargetPath = fileUtil.savePicWithCompress(imgCut.getImageFile(), newFileName,
+                        compressScope, false);
+                String dbCompressUrl = fileUtil.getSmallRelativeFolderPath() + newFileName;
+                // 剪切保存域
+                String[] cutScope = {"normal", imgCut.getType(), new Date().getYear() + "", new Date().getMonth() + "",
+                        "product"};
+                // 剪切
+                String cutTargetPath = fileUtil.cutImg(imgCut, newFileName, cutScope);
+                String dbCutUrl = fileUtil.getCutRelativeFolderPath() + newFileName;
+
+                if (compressTargetPath != null && dbCutUrl != null) {
+
+                    return new MessageBean(APPConstant.SUCCESS, compressTargetPath);
+                } else {
+                    return new MessageBean(APPConstant.SUCCESS, "上传失败");
+                }
+            } else {
+                return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "上传失败");
+        }
+    }
+
+    @RequestMapping("/admin/product/newProduct")
+    @ResponseBody
+    public Page<Product> newProduct(Product product) {
+        /*
 		 * try { product.setSidx("addTime"); product.setSord("DESC");
 		 * Page<Product> page = productService.page(product);
 		 * 
@@ -197,278 +187,407 @@ public class ProductController {
 		 * page.setCode(APPConstant.ERROR); page.setMessage("服务器忙"); return
 		 * page; }
 		 */
-		Page<Product> page = new Page<Product>();
-		try {
-			product.setSidx("addTime");
-			product.setSord("DESC");
-			page = productService.page(product);
-			LazyObjecUtil.LazyPageSetNull(page, new String[] { "material", "productType" });
-			return page;
-		} catch (Exception e) {
+        Page<Product> page = new Page<Product>();
+        try {
+            product.setSidx("addTime");
+            product.setSord("DESC");
+            page = productService.page(product);
+            LazyObjecUtil.LazyPageSetNull(page, new String[]{"productType", "img","show"});
+            return page;
+        } catch (Exception e) {
 
-			page.setCode(APPConstant.ERROR);
-			page.setMessage("服务器忙");
-			return page;
-		}
+            page.setCode(APPConstant.ERROR);
+            page.setMessage("服务器忙");
+            return page;
+        }
 
-	}
+    }
 
-	@RequestMapping("/admin/product/hotProduct.do")
-	@ResponseBody
-	public Page<Product> hotProduct(Product product) {
+    @RequestMapping("/admin/product/hotProduct")
+    @ResponseBody
+    public Page<Product> hotProduct(Product product) {
 
-		try {
-			product.setSidx("pdtShareCount");
-			product.setSord("DESC");
-			Page<Product> page = productService.page(product);
+        try {
+            product.setSidx("pdtShareCount");
+            product.setSord("DESC");
+            Page<Product> page = productService.page(product);
 
-			String[] fileName = { "material", "productType" };
-			page = LazyObjecUtil.LazyPageSetNull(page, fileName);
-			return page;
-		} catch (Exception e) {
-			e.printStackTrace();
-			Page<Product> page = new Page<Product>();
-			page.setCode(APPConstant.ERROR);
-			page.setMessage("服务器忙");
-			return page;
-		}
+            String[] fileName = {"productType", "img","show"};
+            page = LazyObjecUtil.LazyPageSetNull(page, fileName);
+            return page;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Page<Product> page = new Page<Product>();
+            page.setCode(APPConstant.ERROR);
+            page.setMessage("服务器忙");
+            return page;
+        }
 
-	}
+    }
 
-	@RequestMapping(value = "/admin/product/searchProduct")
-	@ResponseBody
-	public List<Product> searchProduct(String searchText) {
+    @RequestMapping(value = "/admin/product/searchProduct")
+    @ResponseBody
+    public List<Product> searchProduct(String searchText) {
 
-		Criterion eq1 = Restrictions.or(Restrictions.like("pdtName", "%" + searchText + "%"),
-				Restrictions.like("remark", "%" + searchText + "%"));
-		Criterion[] criterions = { eq1 };
-		try {
-			List<Product> productList = productServiceimpl.searchProduct(criterions);
+        Criterion eq1 = Restrictions.or(Restrictions.like("pdtName", "%" + searchText + "%"),
+                Restrictions.like("remark", "%" + searchText + "%"));
+        Criterion[] criterions = {eq1};
+        try {
+            List<Product> productList = productServiceimpl.searchProduct(criterions);
 
-			return productList;
+            return productList;
 
-		} catch (Exception e) {
-			System.out.println("系统错误!");
-			return null;
-		}
+        } catch (Exception e) {
+            System.out.println("系统错误!");
+            return null;
+        }
 
-	}
+    }
 
-	@ResponseBody
-	@RequestMapping("/admin/product/uploadByZip")
-	public MessageBean uploadProductByZip(MultipartFile zip, HttpServletRequest request) {
-		ZipFile zipFile = null;
-		InputStream inputStream = null;
-		FileOutputStream fileOut = null;
-		File file=null;
+    @ResponseBody
+    @RequestMapping("/admin/product/uploadByZip")
+    public MessageBean uploadProductByZip(MultipartFile zip, HttpServletRequest request) {
+        ZipFile zipFile = null;
+        InputStream inputStream = null;
+        FileOutputStream fileOut = null;
+        File file = null;
 
-		try {
-			path = request.getRealPath("/");
-			
-			System.out.println(path);
-			inputstreamtofile(zip.getInputStream());
-			zipFile = new ZipFile(path + "temp.zip", "gbk");
-			for (Enumeration<? extends ZipEntry> e = zipFile.getEntries(); e.hasMoreElements();) {
-				ZipEntry entry = e.nextElement();
-				System.out.println("文件名:" + entry.getName() + ", 内容如下:");
-				if (entry.getName().toLowerCase().endsWith(".png")) {
+        try {
+            path = request.getRealPath("/");
 
-					// 文件路径分隔
-					String[] split = entry.getName().split("[/]");
-					// 分隔款式和价格
-					String[] split1 = split[2].split("[_]");
-					// 分隔颜色和正反面标记
-					String[] split2 = split[3].split("[_]");
+            System.out.println(path);
+            inputstreamtofile(zip.getInputStream());
+            zipFile = new ZipFile(path + "temp.zip", "gbk");
+            for (Enumeration<? extends ZipEntry> e = zipFile.getEntries(); e.hasMoreElements(); ) {
+                ZipEntry entry = e.nextElement();
+                System.out.println("文件名:" + entry.getName() + ", 内容如下:");
+                if (entry.getName().toLowerCase().endsWith(".png")) {
 
-					// 添加商品
-					Product product = new Product();
-					Types types = new Types();
-					// 定制类型商品
-					types.setId("15");
-					product.setProductType(types);
-					// 商品名
-					product.setPdtName(split[1]);
-					// 商品价格
+                    // 文件路径分隔
+                    String[] split = entry.getName().split("[/]");
+                    // 分隔款式和价格
+                    String[] split1 = split[2].split("[_]");
+                    // 分隔颜色和正反面标记
+                    String[] split2 = split[3].split("[_]");
 
-					List<Product> loadAll2 = productServiceimpl.loadAll(product);					
-					product.setAddTime(new Date());
-					
-					if(loadAll2.size()<=0){
-						productService.save(product);
-					}else if(loadAll2.size()==1){
-						product=loadAll2.get(0);
-					}
-					
-					ProductDetail detail = new ProductDetail();
-					detail.setProductId(product.getId());
-					// 款式
-					detail.setType(split1[0]);
-					// 价格
-					detail.setPrice((Double.parseDouble(split2[2].replace(".png", ""))));
-					// 颜色
-					detail.setColorName(split2[0]);
+                    // 添加商品
+                    Product product = new Product();
+                    Types types = new Types();
+                    // 定制类型商品
+                    types.setId("15");
+                    product.setProductType(types);
+                    // 商品名
+                    product.setPdtName(split[1]);
+                    // 商品价格
 
-					//临时文件路径
-					String tempPath = "images/baseproduct/temp/" + Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
-					//压缩文件路径
-					String basePath = "images/baseproduct/compress/"+ Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
-					//创建文件夹和文件
-					file= new File(path+tempPath );
-					if (!file.exists()) {
-						file.mkdirs();
-					}
-					file = new File(path+basePath );
-					if (!file.exists()) {
-						file.mkdirs();
-					}
-					String fileName= UUID.nameUUIDFromBytes(entry.getName().getBytes()) + ".png";
-					file = new File(path+basePath+"/"+fileName);
-					if (!file.exists()) {
-						file.createNewFile();
-					}
-					file = new File(path+tempPath+"/"+fileName);
-					if (!file.exists()) {
-						file.createNewFile();
-					}
-					//获取压缩包中的图片
-					inputStream = zipFile.getInputStream(entry);
-					fileOut = new FileOutputStream(file);
-					this.buf = new byte[this.bufSize];
-					//写到临时文件
-					while ((this.readedBytes = inputStream.read(this.buf)) > 0) {
-						fileOut.write(this.buf, 0, this.readedBytes);
-					}
-					fileOut.flush();
-					fileOut.close();
-					
-					//文件压缩
-					CompressPicUtil mypic = new CompressPicUtil();
-					mypic.resizePNG(path+tempPath+"/"+fileName,  path+basePath+"/"+fileName, 200, 200, true);
-					List<ProductDetail> loadAll = detailServiceImpl.loadAll(detail);
-					
-					if(loadAll.size()==1){
-						detail=loadAll.get(0);
-					}
-					Material material;
-					material=new Material();
-					material.setDbTypes(types);
-					material.setMeterialName("基本款图片");
-					material.setUrl(basePath+"/"+fileName);
-					
-					if(materialService.loadAll(material).size()==0){
-						material.setAddTime(new Date());
-						
-						material.setOriginalUrl(tempPath+fileName);
-						
-						materialService.save(material);
-						if (split2[1].equals("1")) {
-							detail.setPicB(material);
-						} else if (split2[1].equals("2")) {
-							detail.setPicF(material);
-						}
-						if(loadAll.size()==1){
-							detailServiceImpl.update(detail);
-						}else{
-							detailServiceImpl.save(detail);
-						}
-					}
-				}
-			}
-			return new MessageBean(APPConstant.SUCCESS, "请上传PNG格式文件");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new MessageBean(APPConstant.ERROR, "请上传PNG格式文件");
-		} finally {
-			if (inputStream != null) {
-				try {
-					inputStream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					zipFile = null;
-				}
-			}
-			if (inputStream != null) {
-				try {
-					zipFile.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					zipFile = null;
-				}
-			}
-			if (fileOut != null) {
-				try {
-					fileOut.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					fileOut = null;
-				}
-			}
-			file.delete();
-		}
-		
-	}
+                    List<Product> loadAll2 = productServiceimpl.loadAll(product);
+                    product.setAddTime(new Date());
 
-	/**
-	 * 设计师作品上传
-	 * @param zip
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/admin/product/desingerUploadByZip")
-	@ResponseBody
-	public MessageBean designerUpload(MultipartFile zip,HttpServletRequest request){
-		return null;
-		
-	}
-	public void inputstreamtofile(InputStream ins) {
-		String temp = path + "temp.zip";
-		File file = new File(temp);
-		OutputStream os = null;
-		try {
-			os = new FileOutputStream(file);
-			int bytesRead = 0;
-			byte[] buffer = new byte[8192];
-			while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
-				os.write(buffer, 0, bytesRead);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (os != null) {
-				try {
-					os.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					os = null;
-				}
-			}
-		}
+                    if (loadAll2.size() <= 0) {
+                        productService.save(product);
+                    } else if (loadAll2.size() == 1) {
+                        product = loadAll2.get(0);
+                    }
 
-	}
-	
-	@RequestMapping("/admin/product/getPdtDetail")
-	@ResponseBody
-	public Product getProductDetail(Product product){
-		
-		try {
-			return productServiceimpl.fillDetail(product);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		
-	}
-	@RequestMapping("/admin/product/getUserWorks")
-	@ResponseBody
-	public List<Product> getUserProduct(){
-		String values ="1";
-		List<Product> result = productServiceimpl.getByProperty("usId",values);
-		String[] fileds = new  String[]{"productType","material"};
-		try{
-			result = LazyObjecUtil.LazySetNull(result,fileds);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return result;
-	}
+                    ProductDetail detail = new ProductDetail();
+                    detail.setProductId(product.getId());
+                    // 款式
+                    detail.setType(split1[0]);
+                    // 价格
+                    detail.setPrice((Double.parseDouble(split2[2].replace(".png", ""))));
+                    // 颜色
+                    detail.setColorName(split2[0]);
+
+                    //临时文件路径
+                    String tempPath = "images/baseproduct/temp/" + Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
+                    //压缩文件路径
+                    String basePath = "images/baseproduct/compress/" + Pinyin4jUtil.spellNoneTone(split[2]).replace("ü", "");
+                    //创建文件夹和文件
+                    file = new File(path + tempPath);
+                    if (!file.exists()) {
+                        file.mkdirs();
+                    }
+                    file = new File(path + basePath);
+                    if (!file.exists()) {
+                        file.mkdirs();
+                    }
+                    String fileName = UUID.nameUUIDFromBytes(entry.getName().getBytes()) + ".png";
+                    file = new File(path + basePath + "/" + fileName);
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+                    file = new File(path + tempPath + "/" + fileName);
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+                    //获取压缩包中的图片
+                    inputStream = zipFile.getInputStream(entry);
+                    fileOut = new FileOutputStream(file);
+                    this.buf = new byte[this.bufSize];
+                    //写到临时文件
+                    while ((this.readedBytes = inputStream.read(this.buf)) > 0) {
+                        fileOut.write(this.buf, 0, this.readedBytes);
+                    }
+                    fileOut.flush();
+                    fileOut.close();
+
+                    //文件压缩
+                    CompressPicUtil mypic = new CompressPicUtil();
+                    mypic.resizePNG(path + tempPath + "/" + fileName, path + basePath + "/" + fileName, 200, 200, true);
+                    List<ProductDetail> loadAll = detailServiceImpl.loadAll(detail);
+
+                    if (loadAll.size() == 1) {
+                        detail = loadAll.get(0);
+                    }
+                    Material material;
+                    material = new Material();
+                    material.setDbTypes(types);
+                    material.setMeterialName("基本款图片");
+                    material.setUrl(basePath + "/" + fileName);
+
+                    if (materialService.loadAll(material).size() == 0) {
+                        material.setAddTime(new Date());
+
+                        material.setOriginalUrl(tempPath + fileName);
+
+                        materialService.save(material);
+                        if (split2[1].equals("1")) {
+                            detail.setPicB(material);
+                        } else if (split2[1].equals("2")) {
+                            detail.setPicF(material);
+                        }
+                        if (loadAll.size() == 1) {
+                            detailServiceImpl.update(detail);
+                        } else {
+                            detailServiceImpl.save(detail);
+                        }
+                    }
+                }
+            }
+            return new MessageBean(APPConstant.SUCCESS, "请上传PNG格式文件");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "请上传PNG格式文件");
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    zipFile = null;
+                }
+            }
+            if (inputStream != null) {
+                try {
+                    zipFile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    zipFile = null;
+                }
+            }
+            if (fileOut != null) {
+                try {
+                    fileOut.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    fileOut = null;
+                }
+            }
+            file.delete();
+        }
+
+    }
+
+    /**
+     * 设计师作品上传
+     *
+     * @param zip
+     * @param request
+     * @return
+     */
+    @RequestMapping("/admin/product/desingerUploadByZip")
+    @ResponseBody
+    public MessageBean designerUpload(MultipartFile zip, HttpServletRequest request) {
+        return null;
+
+    }
+
+    public void inputstreamtofile(InputStream ins) {
+        String temp = path + "temp.zip";
+        File file = new File(temp);
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream(file);
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    os = null;
+                }
+            }
+        }
+
+    }
+
+    @RequestMapping("/admin/product/getPdtDetail")
+    @ResponseBody
+    public Product getProductDetail(Product product) {
+
+        try {
+            return productServiceimpl.fillDetail(product);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    @RequestMapping("/admin/product/getUserWorks")
+    @ResponseBody
+    public List<Product> getUserProduct() {
+        String values = "1";
+        List<Product> result = productServiceimpl.getByProperty("usId", values);
+        String[] fileds = new String[]{"productType", "img","show"};
+        try {
+            result = LazyObjecUtil.LazySetNull(result, fileds);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * 设计师作品上传
+     *
+     * @param request
+     * @param product
+     * @param img
+     * @param showImage
+     * @return
+     */
+    @RequestMapping("/auth/designer/product/upload")
+    @ResponseBody
+    public MessageBean designer(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage) {
+
+        Types types = new Types();
+        types.setId("designer.product");
+        Material mImg = saveFile(image, request, types, "设计师作品");
+        Material mshowImage = saveFile(showImage, request, types, "设计师作品");
+
+        if(mImg!=null&&mshowImage!=null){
+
+            product.setProductType(types);
+            //设置溢价
+            mImg.setPrice(product.getPdtPrc());
+            mshowImage.setPrice(product.getPdtPrc());
+            product.setImg(mImg);
+            product.setShow(mshowImage);
+            product.setAddTime(new Date());
+            product.setPdtPrc(0d);
+            productService.save(product);
+            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+        }else{
+            return new MessageBean(APPConstant.SUCCESS, "上传失败，服务器异常");
+        }
+
+
+    }
+
+    /**
+     * 图片上传和保存
+     * @param img
+     * @param request
+     * @param types
+     * @param materialName
+     * @return
+     */
+    private Material saveFile(MultipartFile img, HttpServletRequest request, Types types, String materialName) {
+        InputStream inputStream = null;
+        FileOutputStream fileOut = null;
+        File file = null;
+        try {
+            path = request.getRealPath("/");
+            String[] split = img.getOriginalFilename().split("[.]");
+            String suffix = "." + split[split.length - 1];
+            //临时文件路径
+            String tempPath = "images/designer/temp/";
+            //压缩文件路径
+            String basePath = "images/designer/compress/";
+            //创建文件夹和文件
+            file = new File(path + tempPath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            file = new File(path + basePath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            String fileName = UUID.randomUUID() + suffix;
+            file = new File(path + basePath + "/" + fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            file = new File(path + tempPath + "/" + fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            //获取压缩包中的图片
+            inputStream = img.getInputStream();
+            fileOut = new FileOutputStream(file);
+            this.buf = new byte[this.bufSize];
+            //写到临时文件
+            while ((this.readedBytes = inputStream.read(this.buf)) > 0) {
+                fileOut.write(this.buf, 0, this.readedBytes);
+            }
+            fileOut.flush();
+            fileOut.close();
+
+            //文件压缩
+            CompressPicUtil mypic = new CompressPicUtil();
+            mypic.resizePNG(path + tempPath + "/" + fileName, path + basePath + "/" + fileName, 200, 200, true);
+            Material material;
+            material = new Material();
+            material.setDbTypes(types);
+            material.setOriginalUrl(tempPath + fileName);
+            material.setMeterialName(materialName);
+            material.setUrl(basePath + "/" + fileName);
+            material.setAddTime(new Date());
+            materialService.save(material);
+
+            return material;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/admin/designer/product/page")
+    @ResponseBody
+    public Page<Product> designerPage(Product product){
+        try {
+
+            List<Product> products = productService.designerPage(product);
+            if(products!=null){
+                product.setResult(products);
+            }else{
+                product.setCode(APPConstant.ERROR);
+                product.setMessage("参数不完整");
+            }
+
+            return product;
+        }catch (Exception e){
+            product.setCode(APPConstant.ERROR);
+            product.setMessage("服务器异常"+e.getMessage());
+            return product;
+        }
+    }
 }

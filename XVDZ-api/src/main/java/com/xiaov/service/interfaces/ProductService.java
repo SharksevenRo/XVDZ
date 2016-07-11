@@ -14,4 +14,6 @@ public interface ProductService extends BaseService<Product>{
 
 	List<Product> getProductByMutiType(PageRequest pageRequest,List<MutiType> types);
 
+	List<Product> designerPage(Product product);
+
 }

@@ -124,6 +124,15 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		}
 		eqs[types.size()]=Restrictions.eq("deleteFlag",0);
 		eqs[types.size()+1]=Restrictions.eq("typeId","product.type");
-		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","material"},eqs,pageRequest.getOffset(),pageRequest.getPageSize());
+		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},eqs,pageRequest.getOffset(),pageRequest.getPageSize());
+	}
+
+	public List<Product> designerPage(Product product) {
+
+		if(product.getUsId()!=null){
+			Criterion[] eqs={Restrictions.eq("usId",product.getUsId())};
+			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},eqs,product.getOffset(),product.getPageSize());
+		}
+		return null;
 	}
 }

@@ -54,6 +54,8 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private Date deleteTime;
 	private String usRemark;
 	private Integer deleteFlag = 0;
+	private Integer isRecommend;
+	private Integer isTalent;
 
 	//
 	private String oldPwd;
@@ -378,5 +380,23 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	public void setAuthCode(String authCode) {
 		this.authCode = authCode;
+	}
+
+	@Column(name="isrecommand")
+	public Integer getIsRecommend() {
+		return isRecommend;
+	}
+
+	public void setIsRecommend(Integer isRecommend) {
+		this.isRecommend = isRecommend;
+	}
+
+	@Column(name="istalent")
+	public Integer getIsTalent() {
+		return isTalent;
+	}
+
+	public void setIsTalent(Integer isTalent) {
+		this.isTalent = isTalent;
 	}
 }
