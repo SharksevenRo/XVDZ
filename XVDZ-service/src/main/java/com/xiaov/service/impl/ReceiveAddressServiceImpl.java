@@ -2,6 +2,8 @@ package com.xiaov.service.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +73,8 @@ public class ReceiveAddressServiceImpl extends BaseServiceImpl<ReceiveAddress> i
     }
     public  List<ReceiveAddress> getByProperty(String propertynmae,String propertyvalues){
         List<ReceiveAddress> result ;
-        result = receiveAddressDao.findByProperty(propertynmae,propertyvalues);
+        Criterion [] criterions={Restrictions.eq(propertynmae,propertyvalues),Restrictions.eq("deleteFlag",0)};
+        result= dao.getEntitiestNotLazy(new ReceiveAddress(),new String[]{"userInfo"},criterions);
         return result;
     }
 

@@ -274,7 +274,7 @@ public class ProductController {
                     Product product = new Product();
                     Types types = new Types();
                     // 定制类型商品
-                    types.setId("15");
+                    types.setId("product.basetype");
                     product.setProductType(types);
                     // 商品名
                     product.setPdtName(split[1]);

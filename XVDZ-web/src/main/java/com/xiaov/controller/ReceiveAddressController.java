@@ -35,38 +35,21 @@ public class ReceiveAddressController {
     @Autowired
     private ReceiveAddressServiceImpl receiveAddressServiceimpl;
 
-    @RequestMapping("/admin/receiveAddresssaveAjax")
+    @RequestMapping("/auth/receiveAddress/save")
     @ResponseBody
-    public MessageBean saveAjax(String reAddTo, String reAddTel,String reAddDet,String addDefault, HttpServletRequest request) {
+    public MessageBean saveAjax(ReceiveAddress receiveAddress) {
 
         try {
-        	//receiveAddress.setId(new CookieUtil(request).getValue("user", "id", true));
-            CookieUtil until=new CookieUtil(request);
-            ReceiveAddress receiveAddress = new ReceiveAddress();
-            System.out.println(until.getValue("user","user.userId",true));
-            UserInfo userInfo = new UserInfo();
-            userInfo.setId(until.getValue("user","user.userId",true));
-            receiveAddress.setUserInfo(userInfo);
-            System.out.println(request.getParameter("reAddTo"));
-            System.out.println(request.getParameter("reAddDet"));
-            System.out.println(request.getParameter("addDefault"));
-            System.out.println(request.getParameter("reAddTel"));
-            receiveAddress.setReAddTo(reAddTo);
-            receiveAddress.setReAddTel(reAddTel);
-
-            receiveAddress.setReAddDet(reAddDet);
             receiveAddress.setAddTime(new Date());
-
-            receiveAddress.setAddDefault(addDefault);
             receiveAddressService.save(receiveAddress);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.SUCCESS, "添加成功");
         } catch (Exception e) {
-        	e.printStackTrace();
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            e.printStackTrace();
+            return new MessageBean(APPConstant.SUCCESS, "添加失败");
         }
     }
 
-    @RequestMapping("/admin/receiveAddressupdateAjax")
+    @RequestMapping("/auth/receiveAddress/update")
     @ResponseBody
     public MessageBean updateAjax(ReceiveAddress receiveAddress) {
 
@@ -78,12 +61,12 @@ public class ReceiveAddressController {
         }
     }
 
-    @RequestMapping("/admin/receiveAddressdeleteAjax")
+    @RequestMapping("/auth/receiveAddress/delete")
     @ResponseBody
-    public MessageBean deleteAjax(ReceiveAddress receiveAddress){
+    public MessageBean deleteAjax(ReceiveAddress receiveAddress) {
 
         try {
-            receiveAddress=receiveAddressService.getOne(receiveAddress.getClass(), receiveAddress.getId());
+            receiveAddress = receiveAddressService.getOne(receiveAddress.getClass(), receiveAddress.getId());
             receiveAddressService.delete(receiveAddress);
             return new MessageBean(APPConstant.ERROR, "删除成功");
         } catch (Exception e) {
@@ -92,13 +75,15 @@ public class ReceiveAddressController {
         }
     }
 
-    @RequestMapping("/admin/receiveAddresspage")
+    @RequestMapping("/admin/receiveAddress/page")
     @ResponseBody
     public Page<ReceiveAddress> page(ReceiveAddress receiveAddress) {
 
         try {
 
-            return receiveAddressService.page(receiveAddress);
+            Page<ReceiveAddress> page = receiveAddressService.page(receiveAddress);
+            page=LazyObjecUtil.LazyPageSetNull(page,"userInfo");
+            return  page;
         } catch (Exception e) {
             Page<ReceiveAddress> page = new Page<ReceiveAddress>();
             page.setCode(APPConstant.ERROR);
@@ -107,7 +92,7 @@ public class ReceiveAddressController {
         }
     }
 
-    @RequestMapping(value = "/admin/receiveAddressgetOneAjax", method = RequestMethod.POST)
+    @RequestMapping("/admin/receiveAddress/getOneAjax")
     @ResponseBody
     public ReceiveAddress getOne(ReceiveAddress receiveAddress) {
         try {
@@ -120,19 +105,53 @@ public class ReceiveAddressController {
             return page;
         }
     }
-    @RequestMapping("admin/address/getUserAddress")
+
+    @RequestMapping("auth/user/addresses")
     @ResponseBody
-    public List<ReceiveAddress> getReceiveAddress(HttpServletRequest request) {
-        CookieUtil until=new CookieUtil(request);
-        String values =until.getValue("user","user.userId",true);
-        List<ReceiveAddress> result = receiveAddressServiceimpl.getByProperty("userInfo.id",values);
-        try{
-            result = LazyObjecUtil.LazySetNull(result,"userInfo");
-        }catch (Exception e){
+    public List<ReceiveAddress> getReceiveAddress(ReceiveAddress receiveAddress) {
+
+        List<ReceiveAddress> result = receiveAddressServiceimpl.getByProperty("userInfo.id", receiveAddress.getUserInfo().getId());
+        try {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
         return result;
+    }
+
+    @RequestMapping("/auth/addresses/change/default")
+    @ResponseBody
+    public MessageBean chanageDefalut(ReceiveAddress receiveAddress) {
+
+        try {
+            if (receiveAddress.getAddDefault().equals("1")) {
+
+                List<ReceiveAddress> addDefault = receiveAddressServiceimpl.getByProperty("addDefault", "1");
+                if (addDefault.size() == 1) {
+                    ReceiveAddress dreceiver = addDefault.get(0);
+                    dreceiver.setAddDefault("0");
+                    receiveAddressService.update(dreceiver);
+
+
+                    receiveAddressService.update(receiveAddress);
+
+                    return new MessageBean(APPConstant.SUCCESS, "修改成功");
+                } else {
+                    if(addDefault.size()==0){
+                        receiveAddressService.update(receiveAddress);
+                        return new MessageBean(APPConstant.SUCCESS, "修改成功");
+                    }else{
+                        return new MessageBean(APPConstant.ERROR, "修改错误");
+                    }
+
+                }
+            }else{
+                receiveAddressService.update(receiveAddress);
+                return new MessageBean(APPConstant.SUCCESS, "修改成功");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new MessageBean(APPConstant.SUCCESS, "修改成功");
     }
 
 }

@@ -15,6 +15,8 @@
  */
 package com.xiaov.orm.core;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class Page<T> extends PageRequest implements Serializable {
 	protected long totalItems = -1;
 
 	//多条件过滤
+	@JsonIgnore
 	protected  String mutiType;
 
 	public Page() {

@@ -381,4 +381,18 @@ public class UserController {
             return results;
         }
     }
+
+    /**
+     * 管理员审核认证
+     * @param user
+     * @return
+     */
+    @RequestMapping("/admin/user/identification")
+    @ResponseBody
+    public MessageBean identification(UserInfo user){
+
+        userService.update(user);
+        return new MessageBean(APPConstant.SUCCESS,"认证成功");
+
+    }
 }

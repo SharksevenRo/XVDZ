@@ -48,7 +48,7 @@ public class AdvertismentController {
      * @param advertisment
      * @throws
      */
-    @RequestMapping("/admin/advertisment/updateAjax")
+    @RequestMapping("/admin/advertisment/update")
     @ResponseBody
     public MessageBean updateAjax(Advertisment advertisment) {
 
@@ -68,7 +68,7 @@ public class AdvertismentController {
      * @return MessageBean
      * @throws
      */
-    @RequestMapping("/admin/advertisment/deleteAjax")
+    @RequestMapping("/admin/advertisment/delete")
     @ResponseBody
     public MessageBean deleteAjax(Advertisment advertisment){
 
