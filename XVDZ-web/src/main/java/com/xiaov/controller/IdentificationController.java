@@ -40,7 +40,5 @@ public class IdentificationController {
         }catch (Exception e){
             return  new MessageBean(APPConstant.ERROR,"提交认证失败"+e.getMessage());
         }
-
-
     }
 }
