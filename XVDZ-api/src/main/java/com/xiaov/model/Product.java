@@ -58,11 +58,23 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private String remark;
 	private String baseId;
 	private Material show;
+
+	private String imageBase64;
+
+	private String productDesigner;
+
+	private Integer isGroup;
+
+	private Integer minnum;
+
+	private Double groupPrice;
+
 	private Integer deleteFlag=0;
+
+
 	
 	private List<ProductDetail> detail;
 
-	private String mutiType;
 	// Constructors
 
 	/** default constructor */
@@ -352,13 +364,45 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.show = show;
 	}
 
-	@Override
-	public String getMutiType() {
-		return mutiType;
+	@Column(name="imagebase64")
+	public String getImageBase64() {
+		return imageBase64;
 	}
 
-	@Override
-	public void setMutiType(String mutiType) {
-		this.mutiType = mutiType;
+	public void setImageBase64(String imageBase64) {
+		this.imageBase64 = imageBase64;
+	}
+	@Column(name="productdesigner")
+	public String getProductDesigner() {
+		return productDesigner;
+	}
+
+	public void setProductDesigner(String productDesigner) {
+		this.productDesigner = productDesigner;
+	}
+
+	@Column(name="isgroup")
+	public Integer getIsGroup() {
+		return isGroup;
+	}
+
+	public void setIsGroup(Integer isGroup) {
+		this.isGroup = isGroup;
+	}
+	@Column(name="minnum")
+	public Integer getMinnum() {
+		return minnum;
+	}
+
+	public void setMinnum(Integer minnum) {
+		this.minnum = minnum;
+	}
+
+	@Column(name="groupprice")
+	public Double getGroupPrice() {
+		return groupPrice;
+	}
+	public void setGroupPrice(Double groupPrice) {
+		this.groupPrice = groupPrice;
 	}
 }

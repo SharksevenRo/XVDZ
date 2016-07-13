@@ -1,6 +1,7 @@
 package com.xiaov.service.interfaces;
 
 import com.xiaov.model.MutiType;
+import com.xiaov.model.SearchModel;
 import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.PageRequest;
 import com.xiaov.service.BaseService;
@@ -21,5 +22,7 @@ public interface UserService extends BaseService<UserInfo>{
 	 * @param types
      * @return
      */
-	public List<UserInfo> getDesignerByMutiType(PageRequest pageRequest, List<MutiType> types);
+	public List<UserInfo> getDesignerByMutiType(PageRequest pageRequest, String mutiType);
+
+	public List<UserInfo> search(SearchModel search);
 }

@@ -2,7 +2,8 @@ package com.xiaov.service.impl;
 
 import java.util.List;
 
-import com.xiaov.model.MutiType;
+import com.xiaov.model.*;
+import com.xiaov.orm.core.Page;
 import com.xiaov.orm.core.PageRequest;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -14,9 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xiaov.constant.APPConstant;
 import com.xiaov.dao.ProductDao;
 import com.xiaov.dao.ProductDetailDao;
-import com.xiaov.model.Product;
-import com.xiaov.model.ProductDetail;
-import com.xiaov.model.Types;
 import com.xiaov.service.interfaces.ProductService;
 import com.xiaov.utils.LazyObjecUtil;
 @Service
@@ -115,15 +113,16 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
 		return  products;
 	}
-	public List<Product> getProductByMutiType(PageRequest pageRequest,List<MutiType> types){
+	public List<Product> getProductByMutiType(PageRequest pageRequest,String types){
 
-		Criterion[] eqs=new SimpleExpression[types.size()+2];
-		for (int i=0;i<types.size();i++) {
-			eqs[i]=Restrictions.like("pdtLabel","%"+types.get(i).getType().getId()+"%");
+		String [] split=types.split("[_]");
+
+		Criterion[] eqs=new SimpleExpression[split.length+1];
+		for (int i=0;i<split.length;i++) {
+			eqs[i]= Restrictions.like("pdtLabel","%,"+split[i]+"%");
 
 		}
-		eqs[types.size()]=Restrictions.eq("deleteFlag",0);
-		eqs[types.size()+1]=Restrictions.eq("typeId","product.type");
+		eqs[split.length]=Restrictions.eq("deleteFlag",0);
 		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},eqs,pageRequest.getOffset(),pageRequest.getPageSize());
 	}
 
@@ -134,5 +133,21 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},eqs,product.getOffset(),product.getPageSize());
 		}
 		return null;
+	}
+	public List<Product> pageByType(Product product) {
+
+		if(product.getProductType()!=null){
+
+			Criterion[] eqs={Restrictions.eq("productType",product.getProductType())};
+			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},eqs,product.getOffset(),product.getPageSize());
+		}
+		return null;
+	}
+
+	public List<Product> search(SearchModel search) {
+
+		Criterion [] criterions={Restrictions.like("pdtName","%"+search.getSearch()+"%"),Restrictions.like("pdtPc","%"+search.getSearch()+"%")};
+		Criterion [] criterions2={Restrictions.or(criterions)};
+		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},criterions2,search.getOffset(),search.getPageSize());
 	}
 }

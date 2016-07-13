@@ -21,10 +21,6 @@ import java.util.List;
 @Service
 public class MutiTypeServiceImpl extends BaseServiceImpl<MutiType> implements MutiTypeService {
 
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private UserService userService;
 
 
     @Override
@@ -45,20 +41,6 @@ public class MutiTypeServiceImpl extends BaseServiceImpl<MutiType> implements Mu
     @Transactional
     public void save(MutiType entity) {
         super.save(entity);
-        if(entity.getProductId()!=null){
-            Product one = productService.getOne(Product.class, entity.getProductId());
-            one.setUpdateTime(new Date());
-            one.setPdtLabel(entity.getType().getId()+","+one.getPdtLabel());
-            productService.update(one);
-
-        }
-
-        if(entity.getUserId()!=null){
-            UserInfo one = userService.getOne(UserInfo.class, entity.getUserId());
-            one.setUpdateTime(new Date());
-            one.setUsRemark(entity.getType().getId()+","+one.getUsRemark());
-            userService.update(one);
-        }
     }
 
     @Override

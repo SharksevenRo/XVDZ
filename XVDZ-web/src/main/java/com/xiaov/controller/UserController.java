@@ -1,10 +1,7 @@
 package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
-import com.xiaov.model.DiscountCode;
-import com.xiaov.model.DiscountCodeUseRecord;
-import com.xiaov.model.InnerSession;
-import com.xiaov.model.UserInfo;
+import com.xiaov.model.*;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.impl.DiscountCodeServiceImpl;
@@ -12,6 +9,7 @@ import com.xiaov.service.impl.UserServiceImpl;
 import com.xiaov.service.interfaces.DiscountCodeUseRecordService;
 import com.xiaov.service.interfaces.InnerSessionService;
 import com.xiaov.service.interfaces.UserService;
+import com.xiaov.utils.CompressPicUtil;
 import com.xiaov.utils.LazyObjecUtil;
 import com.xiaov.utils.Md5;
 import com.xiaov.web.support.AuthenticationCahce;
@@ -23,14 +21,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @Controller
 public class UserController {
@@ -48,6 +51,12 @@ public class UserController {
 
     @Autowired
     private DiscountCodeUseRecordService discountCodeUseRecordService;
+
+
+    private String path;
+    private static int bufSize = 512; // size of bytes
+    private byte[] buf;
+    private int readedBytes;
 
     // 获取所有
     @RequestMapping("/admin/user/all")
@@ -192,7 +201,7 @@ public class UserController {
     // 删除
     @RequestMapping("/auth/user/update")
     @ResponseBody
-    public MessageBean updateAjax(UserInfo user) {
+    public MessageBean updateAjax(UserInfo user, MultipartFile head,HttpServletRequest request) {
         try {
 
 
@@ -209,6 +218,11 @@ public class UserController {
                     return new MessageBean(APPConstant.ERROR, "修改错误，密码错误");
 
                 }
+            }
+
+            if(head!=null){
+                String s = saveFile(head, request);
+                user.setUsPic(s);
             }
             userService.update(user);
             return new MessageBean(APPConstant.ERROR, "修改成功");
@@ -394,5 +408,81 @@ public class UserController {
         userService.update(user);
         return new MessageBean(APPConstant.SUCCESS,"认证成功");
 
+    }
+
+
+    /**
+     * 图片上传和保存
+     * @param img
+     * @param request
+     * @return
+     */
+    private String saveFile(MultipartFile img, HttpServletRequest request) {
+        InputStream inputStream = null;
+        FileOutputStream fileOut = null;
+        File file = null;
+        try {
+            path = request.getRealPath("/");
+            String[] split = img.getOriginalFilename().split("[.]");
+            String suffix = "." + split[split.length - 1];
+            //临时文件路径
+            String tempPath = "images/designer/temp/";
+            //压缩文件路径
+            String basePath = "images/designer/compress/";
+            //创建文件夹和文件
+            file = new File(path + tempPath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            file = new File(path + basePath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            String fileName = UUID.randomUUID() + suffix;
+            file = new File(path + basePath + "/" + fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            file = new File(path + tempPath + "/" + fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            //获取压缩包中的图片
+            inputStream = img.getInputStream();
+            fileOut = new FileOutputStream(file);
+            this.buf = new byte[this.bufSize];
+            //写到临时文件
+            while ((this.readedBytes = inputStream.read(this.buf)) > 0) {
+                fileOut.write(this.buf, 0, this.readedBytes);
+            }
+            fileOut.flush();
+            fileOut.close();
+
+            //文件压缩
+            CompressPicUtil mypic = new CompressPicUtil();
+            mypic.resizePNG(path + tempPath + "/" + fileName, path + basePath + "/" + fileName, 200, 200, true);
+
+            return path + basePath + "/" + fileName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/admin/designer/search")
+    public Page<SearchModel> search(SearchModel search){
+
+        try {
+
+            List<UserInfo> users = userService.search(search);
+            search.setResult(users);
+            return search;
+
+        }catch (Exception e){
+            search.setCode(APPConstant.ERROR);
+            search.setMessage("服务器异常"+e.getMessage());
+            return  search;
+        }
     }
 }

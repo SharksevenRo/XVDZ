@@ -3,9 +3,7 @@ package com.xiaov.service.impl;
 import java.util.List;
 import java.util.Map;
 
-import com.xiaov.model.MutiType;
-import com.xiaov.model.Product;
-import com.xiaov.model.User;
+import com.xiaov.model.*;
 import com.xiaov.orm.core.PageRequest;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.xiaov.dao.UserDao;
-import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.hibernate.support.EntityParamsUtil;
 import com.xiaov.service.interfaces.UserService;
@@ -76,16 +73,25 @@ public class UserServiceImpl extends BaseServiceImpl<UserInfo> implements UserSe
 		return  userDao.login(usPwd,usTel);
 	}
 
-	public List<UserInfo> getDesignerByMutiType(PageRequest pageRequest, List<MutiType> types){
+	public List<UserInfo> getDesignerByMutiType(PageRequest pageRequest,String types){
 
-		Criterion[] eqs=new SimpleExpression[types.size()+2];
-		for (int i=0;i<types.size();i++) {
-			eqs[i]= Restrictions.like("usRemark","%"+types.get(i).getType().getId()+"%");
+		String [] split=types.split("[_]");
+
+		Criterion[] eqs=new SimpleExpression[split.length+2];
+		for (int i=0;i<split.length;i++) {
+			eqs[i]= Restrictions.like("usRemark","%,"+split[i]+"%");
 
 		}
-		eqs[types.size()]=Restrictions.eq("deleteFlag",0);
-		eqs[types.size()+1]=Restrictions.eq("typeId","designer.type");
+		eqs[split.length]=Restrictions.eq("deleteFlag",0);
+		eqs[split.length+1]=Restrictions.eq("typeId","user.designer");
 
 		return userDao.getEntitiestNotLazy(new UserInfo(),null,eqs,pageRequest.getOffset(),pageRequest.getPageSize());
+	}
+
+	public List<UserInfo> search(SearchModel search) {
+
+		Criterion [] criterions={Restrictions.like("usName","%"+search.getSearch()+"%"),Restrictions.like("school","%"+search.getSearch()+"%"),Restrictions.like("discountCode","%"+search.getSearch()+"%"),Restrictions.like("usHobby","%"+search.getSearch()+"%"),Restrictions.like("usNcNa","%"+search.getSearch()+"%"),Restrictions.like("usLgNa","%"+search.getSearch()+"%")};
+		Criterion [] criterions2={Restrictions.or(criterions),Restrictions.eq("typeId","user.designer")};
+		return dao.getEntitiestNotLazy(new UserInfo(),new String[]{"productType","img","show"},criterions2,search.getOffset(),search.getPageSize());
 	}
 }

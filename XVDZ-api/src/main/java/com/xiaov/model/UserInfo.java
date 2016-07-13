@@ -31,6 +31,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private String usName;
 	private String usPwd;
 	private String usSex;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date usBirth;
 	private String usPic;
 	private String usPicO;

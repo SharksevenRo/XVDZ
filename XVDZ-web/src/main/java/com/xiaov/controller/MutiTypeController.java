@@ -3,6 +3,7 @@ package com.xiaov.controller;
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.MutiType;
 import com.xiaov.model.Product;
+import com.xiaov.model.Types;
 import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
@@ -28,6 +29,7 @@ public class MutiTypeController {
 
     @Autowired
     private MutiTypeService mutiTypeService;
+    @Autowired
     private ProductService productService;
     @Autowired
     private UserService userService;
@@ -49,14 +51,33 @@ public class MutiTypeController {
     }
     @ResponseBody
     @RequestMapping("/admin/mutitype/more/save")
-    public MessageBean saveMore(String mutiType){
+    public MessageBean saveMore(String mutiType,String type){
 
         try {
             JavaType javaType = getCollectionType(ArrayList.class, MutiType.class);
-            List<MutiType> types =  (List<MutiType>)mapper.readValue(mutiType, javaType);
-            for (MutiType type: types) {
-                mutiTypeService.save(type);
+            List<MutiType> types =  parse(mutiType,type);
+
+         String label="";
+            for (int i=0;i<types.size() ;i++) {
+                mutiTypeService.save(types.get(i));
+                label=label+","+types.get(i).getType().getId();
             }
+            if(type.equals("user")){
+                UserInfo one = userService.getOne(UserInfo.class, types.get(0).getUserId());
+                if(one.getUsRemark()!=null){
+                    label=one.getUsRemark()+label;
+                }
+                one.setUsRemark(label);
+                userService.update(one);
+            }
+                if(type.equals("product")){
+                    Product p = productService.getOne(Product.class, types.get(0).getProductId());
+                    if(p.getPdtLabel()!=null){
+                        label=p.getPdtLabel()+label;
+                    }
+                    p.setPdtLabel(label);
+                    productService.update(p);
+                }
             return  new MessageBean(APPConstant.SUCCESS,"添加成功");
         }catch (Exception e){
             e.printStackTrace();
@@ -83,9 +104,7 @@ public class MutiTypeController {
     public Page<Product> pageByMutiType(Page<Product> page){
 
         try{
-            JavaType javaType = getCollectionType(ArrayList.class, MutiType.class);
-            List<MutiType> types =  (List<MutiType>)mapper.readValue(page.getMutiType(), javaType);
-            List<Product> products = productService.getProductByMutiType(page, types);
+            List<Product> products = productService.getProductByMutiType(page, page.getMutiType());
             page.setResult(products);
             return page;
         }catch (Exception e){
@@ -101,9 +120,7 @@ public class MutiTypeController {
     public Page<UserInfo> pageByMutiTypeDesinger(Page<UserInfo> page){
 
         try{
-            JavaType javaType = getCollectionType(ArrayList.class, MutiType.class);
-            List<MutiType> types =  (List<MutiType>)mapper.readValue(page.getMutiType(), javaType);
-            List<UserInfo> users = userService.getDesignerByMutiType(page, types);
+            List<UserInfo> users = userService.getDesignerByMutiType(page, page.getMutiType());
             page.setResult(users);
             return page;
         }catch (Exception e){
@@ -116,5 +133,40 @@ public class MutiTypeController {
     }
     public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
         return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
+    }
+
+
+    private   List<MutiType> parse(String str,String type){
+
+        if(!type.equals("product")&&!type.equals("user")){
+            throw  new RuntimeException("参数异常");
+        }
+        List<MutiType> mutiTypes=new ArrayList<MutiType>();
+        MutiType m=null;
+        if(str!=null){
+            String[] split = str.split("[_]");
+
+            Types types;
+            String id=split[0];
+            if(split.length>2){
+
+
+                for (int i=1;i<split.length;i++){
+                    m=new MutiType();
+                    types=new Types();
+                    if(type.equals("product")){
+                        m.setProductId(id);
+                    }else {
+                        m.setUserId(id);
+                    }
+                    types.setId(split[i]);
+                    m.setType(types);
+                    mutiTypes.add(m);
+                }
+            }
+        }else{
+            throw  new RuntimeException("参数异常");
+        }
+        return mutiTypes;
     }
 }

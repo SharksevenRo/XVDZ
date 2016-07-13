@@ -41,6 +41,7 @@ public class ReceiveAddressController {
 
         try {
             receiveAddress.setAddTime(new Date());
+            receiveAddress.setAddDefault("0");
             receiveAddressService.save(receiveAddress);
             return new MessageBean(APPConstant.SUCCESS, "添加成功");
         } catch (Exception e) {

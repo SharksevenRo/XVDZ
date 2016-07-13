@@ -1,10 +1,7 @@
 package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
-import com.xiaov.model.Material;
-import com.xiaov.model.Product;
-import com.xiaov.model.ProductDetail;
-import com.xiaov.model.Types;
+import com.xiaov.model.*;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.impl.ProductDetailServiceImpl;
@@ -55,6 +52,38 @@ public class ProductController {
     public MessageBean saveAjax(Product product, ImageCutModel imgCut) {
 
         try {
+            product.setAddTime(new Date());
+            productService.save(product);
+            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "上传失败");
+        }
+    }
+
+    /**
+     * 提交定制
+     * @param product
+     * @return
+     */
+    @RequestMapping("/auth/customization/commit")
+    @ResponseBody
+    public MessageBean commit(Product product) {
+
+        String name="定制商品";
+        try {
+            if(product.getIsGroup()!=null&&product.getIsGroup().equals(1)){
+                if(product.getGroupPrice()==null||product.getMinnum()==null){
+                    return new MessageBean(APPConstant.SUCCESS, "团体定制请输入最低优惠数量和价格");
+                }
+                name="团体"+name;
+            }
+            if(product.getPdtName()==null){
+                product.setPdtName(name);
+            }
+            Types types=new Types();
+            types.setId("designer.product");
+            product.setProductType(types);
             product.setAddTime(new Date());
             productService.save(product);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
@@ -470,7 +499,6 @@ public class ProductController {
      *
      * @param request
      * @param product
-     * @param img
      * @param showImage
      * @return
      */
@@ -590,4 +618,42 @@ public class ProductController {
             return product;
         }
     }
+
+    @RequestMapping("/admin/product/page/type")
+    @ResponseBody
+    public Page<Product> pageByType(Product product){
+        try {
+
+            List<Product> products = productService.pageByType(product);
+            if(products!=null){
+                product.setResult(products);
+            }else{
+                product.setCode(APPConstant.ERROR);
+                product.setMessage("参数不完整");
+            }
+
+            return product;
+        }catch (Exception e){
+            product.setCode(APPConstant.ERROR);
+            product.setMessage("服务器异常"+e.getMessage());
+            return product;
+        }
+    }
+    @ResponseBody
+    @RequestMapping("/admin/product/search")
+    public Page<SearchModel> search(SearchModel search){
+
+        try {
+
+            List<Product> products = productService.search(search);
+            search.setResult(products);
+            return search;
+
+        }catch (Exception e){
+            search.setCode(APPConstant.ERROR);
+            search.setMessage("服务器异常"+e.getMessage());
+            return  search;
+        }
+    }
+
 }
