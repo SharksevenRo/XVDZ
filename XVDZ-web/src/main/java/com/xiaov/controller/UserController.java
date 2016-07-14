@@ -72,25 +72,25 @@ public class UserController {
     @RequestMapping(value = "/admin/user/save")
     @ResponseBody
     public MessageBean save(String telCode, String disCodeNo, String rePwd, String usPwd, String usTel,
-                             String activeCode, String key) {
+                            String activeCode, String key) {
 
 
         InnerSession one = innerSessionService.getOne(InnerSession.class, key);
 
-        if (one!=null) {
+        if (one != null) {
             if ((System.currentTimeMillis() - one.getBegin()) <= one.getTime()) {
 
-                if(!usTel.equals(one.getKey())){
+                if (!usTel.equals(one.getKey())) {
 
                     innerSessionService.delete(one);
-                    return new MessageBean(APPConstant.ERROR,"手机号码有误");
+                    return new MessageBean(APPConstant.ERROR, "手机号码有误");
                 }
                 if (one.getToken().equals(telCode)) {
                     if (usPwd.equals(rePwd)) {
                         try {
                             List<UserInfo> userIsAdd = userServiceimpl.getByProperty("usTel", usTel);
                             if (userIsAdd.isEmpty()) {
-                                if (disCodeNo.length() != 0) // 是否绑定优惠码
+                                if (disCodeNo != null) // 是否绑定优惠码
                                 {
                                     List<DiscountCode> discode = discountCodeService.getByProperty("disCodeNo", disCodeNo);
                                     if (discode.isEmpty())// 优惠码是否存在
@@ -114,16 +114,17 @@ public class UserController {
                                         innerSessionService.delete(one);
                                         return new MessageBean(1, "注册成功!");
                                     }
+                                } else {
+                                    UserInfo user = new UserInfo();
+                                    user.setUsTel(usTel);
+                                    user.setUsName(usTel);
+                                    user.setUsPwd(usPwd);
+                                    user.setUsSex("保密");
+                                    user.setAddTime(new Date());
+                                    userService.save(user);// 注册用户
+                                    innerSessionService.delete(one);
+                                    return new MessageBean(1, "注册成功!");
                                 }
-                                UserInfo user = new UserInfo();
-                                user.setUsTel(usTel);
-                                user.setUsName(usTel);
-                                user.setUsPwd(usPwd);
-                                user.setUsSex("保密");
-                                user.setAddTime(new Date());
-                                userService.save(user);// 注册用户
-                                innerSessionService.delete(one);
-                                return new MessageBean(1, "注册成功!");
                             } else {
                                 innerSessionService.delete(one);
                                 return new MessageBean(APPConstant.ERROR, "该手机号已被注册!");
@@ -201,7 +202,7 @@ public class UserController {
     // 删除
     @RequestMapping("/auth/user/update")
     @ResponseBody
-    public MessageBean updateAjax(UserInfo user, MultipartFile head,HttpServletRequest request) {
+    public MessageBean updateAjax(UserInfo user) {
         try {
 
 
@@ -220,10 +221,6 @@ public class UserController {
                 }
             }
 
-            if(head!=null){
-                String s = saveFile(head, request);
-                user.setUsPic(s);
-            }
             userService.update(user);
             return new MessageBean(APPConstant.ERROR, "修改成功");
         } catch (Exception e) {
@@ -233,12 +230,22 @@ public class UserController {
 
     }
 
+    @RequestMapping("/auth/user/head/update")
+    @ResponseBody
+    public MessageBean updateHead(UserInfo user,MultipartFile head, HttpServletRequest request) {
+
+        String s = saveFile(head, request);
+        user.setUsPic(s);
+        return new MessageBean(APPConstant.SUCCESS, "修改头像成功");
+
+    }
+
     @RequestMapping("/admin/user/getOne")
     @ResponseBody
     public UserInfo getOne(UserInfo user) {
         try {
             user = userService.getOne(user.getClass(), user.getId());
-            if(user!=null){
+            if (user != null) {
                 user = LazyObjecUtil.LazyOneSetNull(user, "role");
             }
             return user;
@@ -249,22 +256,6 @@ public class UserController {
 
     }
 
-    /**
-     * 在进行获取之前需要请求http://localhost:8080/XVDZ-web/weixin/oauth2/monitor创建模拟环境
-     * 获取微信用户信息实例,只提供OpenID,等用户信息的持久化完成后会对OpenId进行封装，但cookie里会一直保存openID
-     * 所以需要openid时只需获取即可
-     *
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping("/example/test")
-    @ResponseBody
-    public String getOne(HttpServletRequest request, HttpServletResponse response) {
-
-        String openId = new CookieUtil(request).getValue("user", "openId", true);
-        return null;
-    }
 
     @RequestMapping("/admin/telCode/getTelCode")
     @ResponseBody
@@ -375,6 +366,7 @@ public class UserController {
         }
 
     }
+
     // 分页查询
     @RequestMapping("/admin/user/talent/page")
     @ResponseBody
@@ -398,21 +390,23 @@ public class UserController {
 
     /**
      * 管理员审核认证
+     *
      * @param user
      * @return
      */
     @RequestMapping("/admin/user/identification")
     @ResponseBody
-    public MessageBean identification(UserInfo user){
+    public MessageBean identification(UserInfo user) {
 
         userService.update(user);
-        return new MessageBean(APPConstant.SUCCESS,"认证成功");
+        return new MessageBean(APPConstant.SUCCESS, "认证成功");
 
     }
 
 
     /**
      * 图片上传和保存
+     *
      * @param img
      * @param request
      * @return
@@ -471,7 +465,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/admin/designer/search")
-    public Page<SearchModel> search(SearchModel search){
+    public Page<SearchModel> search(SearchModel search) {
 
         try {
 
@@ -479,10 +473,10 @@ public class UserController {
             search.setResult(users);
             return search;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             search.setCode(APPConstant.ERROR);
-            search.setMessage("服务器异常"+e.getMessage());
-            return  search;
+            search.setMessage("服务器异常" + e.getMessage());
+            return search;
         }
     }
 }

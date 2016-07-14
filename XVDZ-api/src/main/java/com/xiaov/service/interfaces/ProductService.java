@@ -20,5 +20,6 @@ public interface ProductService extends BaseService<Product>{
 
 	List<Product> search(SearchModel search);
 	public List<Product> pageByType(Product product);
+	public Product geOneDetail(Product product);
 
 }

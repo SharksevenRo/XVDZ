@@ -42,7 +42,6 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private String pdtLabel;
 	private String pdtPc;
 	private String pdtPicBs;
-	private String pdtPicBp;
 	private Double pdtPrc;
 	private Double pdtDsct;
 	private Integer pdtSaleCount;
@@ -59,6 +58,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private String baseId;
 	private Material show;
 
+	private Material backImage;
 	private String imageBase64;
 
 	private String productDesigner;
@@ -72,6 +72,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private Integer deleteFlag=0;
 
 
+	private Integer isModule;
 	
 	private List<ProductDetail> detail;
 
@@ -103,7 +104,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	public Product(String id, Types productType,
 			 Material img,String usId, String pdtNo,
 			String pdtName, Double pdtIntRat, String pdtLabel, String pdtPc,
-			String pdtPicBs, String pdtPicBp, Double pdtPrc, Double pdtDsct,
+			String pdtPicBs, Double pdtPrc, Double pdtDsct,
 			Integer pdtSaleCount, Integer pdtGdCount, Integer pdtShareCount,
 			Date addTime, Date updateTime, Date deleteTime,
 			Boolean pdtOpenState, String remark, Integer deleteFlag) {
@@ -117,7 +118,6 @@ public class Product extends Page<Product> implements java.io.Serializable {
 		this.pdtLabel = pdtLabel;
 		this.pdtPc = pdtPc;
 		this.pdtPicBs = pdtPicBs;
-		this.pdtPicBp = pdtPicBp;
 		this.pdtPrc = pdtPrc;
 		this.pdtDsct = pdtDsct;
 		this.pdtSaleCount = pdtSaleCount;
@@ -224,15 +224,6 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 	public void setPdtPicBs(String pdtPicBs) {
 		this.pdtPicBs = pdtPicBs;
-	}
-
-	@Column(name = "pdt_pic_bp", length = 50)
-	public String getPdtPicBp() {
-		return this.pdtPicBp;
-	}
-
-	public void setPdtPicBp(String pdtPicBp) {
-		this.pdtPicBp = pdtPicBp;
 	}
 
 	@Column(name = "pdt_prc", nullable = true, precision = 22, scale = 0)
@@ -404,5 +395,24 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	}
 	public void setGroupPrice(Double groupPrice) {
 		this.groupPrice = groupPrice;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "backimage")
+	public Material getBackImage() {
+		return backImage;
+	}
+
+	public void setBackImage(Material backImage) {
+		this.backImage = backImage;
+	}
+
+	@Column(name="ismodule")
+	public Integer getIsModule() {
+		return isModule;
+	}
+
+	public void setIsModule(Integer isModule) {
+		this.isModule = isModule;
 	}
 }

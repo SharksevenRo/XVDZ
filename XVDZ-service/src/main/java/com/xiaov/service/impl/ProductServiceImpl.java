@@ -54,8 +54,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
 	/**
 	 * 获取商品某种属性详情
-	 * @param product 当前商品
-	 * @param type 详细的类型（color,Material,Size,颜色、面料、尺码）
+	 * @param product 当前商品详细的类型（color,Material,Size,颜色、面料、尺码）
 	 * @return
 	 * @throws Exception 
 	 */
@@ -123,14 +122,14 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
 		}
 		eqs[split.length]=Restrictions.eq("deleteFlag",0);
-		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},eqs,pageRequest.getOffset(),pageRequest.getPageSize());
+		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},eqs,pageRequest.getOffset(),pageRequest.getPageSize());
 	}
 
 	public List<Product> designerPage(Product product) {
 
 		if(product.getUsId()!=null){
 			Criterion[] eqs={Restrictions.eq("usId",product.getUsId())};
-			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},eqs,product.getOffset(),product.getPageSize());
+			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},eqs,product.getOffset(),product.getPageSize());
 		}
 		return null;
 	}
@@ -139,7 +138,16 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		if(product.getProductType()!=null){
 
 			Criterion[] eqs={Restrictions.eq("productType",product.getProductType())};
-			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},eqs,product.getOffset(),product.getPageSize());
+			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},eqs,product.getOffset(),product.getPageSize());
+		}
+		return null;
+	}
+	public Product geOneDetail(Product product) {
+
+		if(product.getId()!=null){
+
+			Criterion[] eqs={Restrictions.eq("id",product.getId())};
+			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},eqs,product.getOffset(),product.getPageSize()).get(0);
 		}
 		return null;
 	}
@@ -148,6 +156,6 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
 		Criterion [] criterions={Restrictions.like("pdtName","%"+search.getSearch()+"%"),Restrictions.like("pdtPc","%"+search.getSearch()+"%")};
 		Criterion [] criterions2={Restrictions.or(criterions)};
-		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show"},criterions2,search.getOffset(),search.getPageSize());
+		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},criterions2,search.getOffset(),search.getPageSize());
 	}
 }

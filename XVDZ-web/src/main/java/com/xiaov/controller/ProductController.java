@@ -113,7 +113,7 @@ public class ProductController {
 
             Page<Product> page = productService.page(product);
 
-            String[] fileName = {"productType", "img","show"};
+            String[] fileName = {"productType", "img","show","backImage"};
             page = LazyObjecUtil.LazyPageSetNull(page, fileName);
 
             return page;
@@ -221,7 +221,7 @@ public class ProductController {
             product.setSidx("addTime");
             product.setSord("DESC");
             page = productService.page(product);
-            LazyObjecUtil.LazyPageSetNull(page, new String[]{"productType", "img","show"});
+            LazyObjecUtil.LazyPageSetNull(page, new String[]{"productType", "img","show","backImage"});
             return page;
         } catch (Exception e) {
 
@@ -241,7 +241,7 @@ public class ProductController {
             product.setSord("DESC");
             Page<Product> page = productService.page(product);
 
-            String[] fileName = {"productType", "img","show"};
+            String[] fileName = {"productType", "img","show","backImage"};
             page = LazyObjecUtil.LazyPageSetNull(page, fileName);
             return page;
         } catch (Exception e) {
@@ -504,13 +504,13 @@ public class ProductController {
      */
     @RequestMapping("/auth/designer/product/upload")
     @ResponseBody
-    public MessageBean designer(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage) {
+    public MessageBean designer(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage,MultipartFile backImge) {
 
         Types types = new Types();
         types.setId("designer.product");
         Material mImg = saveFile(image, request, types, "设计师作品");
         Material mshowImage = saveFile(showImage, request, types, "设计师作品");
-
+        Material mbackImage = saveFile(backImge, request, types, "设计师作品");
         if(mImg!=null&&mshowImage!=null){
 
             product.setProductType(types);
@@ -519,6 +519,7 @@ public class ProductController {
             mshowImage.setPrice(product.getPdtPrc());
             product.setImg(mImg);
             product.setShow(mshowImage);
+            product.setBackImage(mbackImage);
             product.setAddTime(new Date());
             product.setPdtPrc(0d);
             productService.save(product);
@@ -545,7 +546,7 @@ public class ProductController {
         try {
             path = request.getRealPath("/");
             String[] split = img.getOriginalFilename().split("[.]");
-            String suffix = "." + split[split.length - 1];
+            String suffix = "." + exChange(split[split.length - 1]);
             //临时文件路径
             String tempPath = "images/designer/temp/";
             //压缩文件路径
@@ -587,7 +588,7 @@ public class ProductController {
             material.setDbTypes(types);
             material.setOriginalUrl(tempPath + fileName);
             material.setMeterialName(materialName);
-            material.setUrl(basePath + "/" + fileName);
+            material.setUrl(basePath  + fileName);
             material.setAddTime(new Date());
             materialService.save(material);
 
@@ -619,6 +620,26 @@ public class ProductController {
         }
     }
 
+    @RequestMapping("/admin/designer/product/getOne")
+    @ResponseBody
+    public Product getOneDesigner(Product product){
+        try {
+
+           Product product1=productService.geOneDetail(product);
+            if(product1!=null){
+               return product1;
+            }else{
+                product.setCode(APPConstant.ERROR);
+                product.setMessage("参数不完整");
+            }
+
+            return product;
+        }catch (Exception e){
+            product.setCode(APPConstant.ERROR);
+            product.setMessage("服务器异常"+e.getMessage());
+            return product;
+        }
+    }
     @RequestMapping("/admin/product/page/type")
     @ResponseBody
     public Page<Product> pageByType(Product product){
@@ -655,5 +676,19 @@ public class ProductController {
             return  search;
         }
     }
+    public static String exChange(String str){
+        StringBuffer sb = new StringBuffer();
+        if(str!=null){
+            for(int i=0;i<str.length();i++){
+                char c = str.charAt(i);
+                if(Character.isUpperCase(c)){
+                    sb.append(Character.toLowerCase(c));
+                }else if(Character.isLowerCase(c)){
+                    sb.append(Character.toUpperCase(c));
+                }
+            }
+        }
 
+        return sb.toString();
+    }
 }
