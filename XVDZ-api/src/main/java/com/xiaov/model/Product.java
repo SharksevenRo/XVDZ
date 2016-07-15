@@ -42,6 +42,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private String pdtLabel;
 	private String pdtPc;
 	private String pdtPicBs;
+	private String pdtPicBp;
 	private Double pdtPrc;
 	private Double pdtDsct;
 	private Integer pdtSaleCount;
@@ -414,5 +415,13 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 	public void setIsModule(Integer isModule) {
 		this.isModule = isModule;
+	}
+	@Column(name="pdt_pic_bp")
+	public String getPdtPicBp() {
+		return pdtPicBp;
+	}
+
+	public void setPdtPicBp(String pdtPicBp) {
+		this.pdtPicBp = pdtPicBp;
 	}
 }

@@ -20,6 +20,8 @@ public class Identification {
     private String name;
     private String phone;
 
+    private String type;
+
     public Identification() {
     }
 

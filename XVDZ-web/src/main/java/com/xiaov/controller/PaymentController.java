@@ -3,17 +3,11 @@ package com.xiaov.controller;
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.Payment;
 import com.xiaov.orm.core.MessageBean;
-import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.PaymentService;
-import com.xiaov.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by yymao on 2016/5/5.
@@ -22,7 +16,6 @@ import java.util.List;
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;
-    @Autowired
 
 
     @RequestMapping("/auth/payment/save")
@@ -31,9 +24,9 @@ public class PaymentController {
 
         try {
             paymentService.save(payment);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.SUCCESS, "添加成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            return new MessageBean(APPConstant.SUCCESS, "添加失败"+e.getMessage());
         }
     }
 
@@ -43,9 +36,9 @@ public class PaymentController {
 
         try {
             paymentService.update(payment);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.SUCCESS, "更新成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            return new MessageBean(APPConstant.SUCCESS, "更新失败"+e.getMessage());
         }
     }
 }

@@ -523,7 +523,7 @@ public class ProductController {
             product.setAddTime(new Date());
             product.setPdtPrc(0d);
             productService.save(product);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.SUCCESS, product.getId());
         }else{
             return new MessageBean(APPConstant.SUCCESS, "上传失败，服务器异常");
         }
