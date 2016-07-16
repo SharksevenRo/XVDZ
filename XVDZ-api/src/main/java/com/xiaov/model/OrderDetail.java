@@ -31,7 +31,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 
 	// Fields
 	private String id;
-	private Integer pdtId;
+	private String pdtId;
 	private String orDtNo;
 	private Double orDtPrc;
 	private Integer orDtMount;
@@ -78,7 +78,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	}
 
 	/** full constructor */
-	public OrderDetail(String id, Integer pdtId, String orDtNo,
+	public OrderDetail(String id, String pdtId, String orDtNo,
 			Double orDtPrc, Integer orDtMount, Double orDtDsct,
 			Double orDtItmeTotal, Double orDtRlTotal, String orDtRemark,
 			Date addTime, Date updateTime, Date deleteTime,
@@ -112,11 +112,11 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	}
 
 	@Column(name = "pdt_id")
-	public Integer getPdtId() {
+	public String getPdtId() {
 		return this.pdtId;
 	}
 
-	public void setPdtId(Integer pdtId) {
+	public void setPdtId(String pdtId) {
 		this.pdtId = pdtId;
 	}
 

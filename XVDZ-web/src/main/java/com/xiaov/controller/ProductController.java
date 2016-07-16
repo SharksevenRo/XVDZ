@@ -47,6 +47,12 @@ public class ProductController {
     private byte[] buf;
     private int readedBytes;
 
+    /**
+     * 商品报保存
+     * @param product
+     * @param imgCut
+     * @return
+     */
     @RequestMapping("/admin/product/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(Product product, ImageCutModel imgCut) {
@@ -93,6 +99,11 @@ public class ProductController {
         }
     }
 
+    /**
+     * 修改跟新商品
+     * @param product
+     * @return
+     */
     @RequestMapping("/admin/product/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(Product product) {
@@ -105,12 +116,16 @@ public class ProductController {
         }
     }
 
+    /**
+     * 商品分页查询
+     * @param product
+     * @return
+     */
     @RequestMapping("/admin/product/page")
     @ResponseBody
     public Page<Product> page(Product product) {
 
         try {
-
             Page<Product> page = productService.page(product);
 
             String[] fileName = {"productType", "img","show","backImage"};
@@ -126,6 +141,11 @@ public class ProductController {
         }
     }
 
+    /**
+     * 删除商品
+     * @param product
+     * @return
+     */
     @RequestMapping("/admin/product/deleteAjax")
     @ResponseBody
     public MessageBean deleteAjax(Product product) {
@@ -140,6 +160,11 @@ public class ProductController {
         }
     }
 
+    /**
+     * 获取某个商品
+     * @param product
+     * @return
+     */
     @RequestMapping("/admin/product/getOneAjax")
     @ResponseBody
     public Product getOne(Product product) {
@@ -155,6 +180,12 @@ public class ProductController {
         }
     }
 
+    /**
+     * 上传图案
+     * @param imgCut
+     * @param request
+     * @return
+     */
     @RequestMapping("/admin/product/picUploadAjax")
     @ResponseBody
     public MessageBean saveProductImage(ImageCutModel imgCut, HttpServletRequest request) {
@@ -201,6 +232,11 @@ public class ProductController {
         }
     }
 
+    /**
+     * 最新商品
+     * @param product
+     * @return
+     */
     @RequestMapping("/admin/product/newProduct")
     @ResponseBody
     public Page<Product> newProduct(Product product) {
@@ -232,12 +268,17 @@ public class ProductController {
 
     }
 
+    /**
+     * 最热商品
+     * @param product
+     * @return
+     */
     @RequestMapping("/admin/product/hotProduct")
     @ResponseBody
     public Page<Product> hotProduct(Product product) {
 
         try {
-            product.setSidx("pdtShareCount");
+            product.setSidx("pdtSaleCount");
             product.setSord("DESC");
             Page<Product> page = productService.page(product);
 
@@ -254,6 +295,12 @@ public class ProductController {
 
     }
 
+    /**
+     * 根据商品名称查询商品
+     * 已废弃
+     * @param searchText
+     * @return
+     */
     @RequestMapping(value = "/admin/product/searchProduct")
     @ResponseBody
     public List<Product> searchProduct(String searchText) {
@@ -273,6 +320,13 @@ public class ProductController {
 
     }
 
+    /**
+     * 基本款上传
+     * 已废弃
+     * @param zip
+     * @param request
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/admin/product/uploadByZip")
     public MessageBean uploadProductByZip(MultipartFile zip, HttpServletRequest request) {
@@ -429,7 +483,7 @@ public class ProductController {
 
     /**
      * 设计师作品上传
-     *
+     *已废弃
      * @param zip
      * @param request
      * @return
@@ -441,32 +495,11 @@ public class ProductController {
 
     }
 
-    public void inputstreamtofile(InputStream ins) {
-        String temp = path + "temp.zip";
-        File file = new File(temp);
-        OutputStream os = null;
-        try {
-            os = new FileOutputStream(file);
-            int bytesRead = 0;
-            byte[] buffer = new byte[8192];
-            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (os != null) {
-                try {
-                    os.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    os = null;
-                }
-            }
-        }
-
-    }
-
+    /**
+     * 获取商品详情，已废弃
+     * @param product
+     * @return
+     */
     @RequestMapping("/admin/product/getPdtDetail")
     @ResponseBody
     public Product getProductDetail(Product product) {
@@ -599,6 +632,11 @@ public class ProductController {
         }
     }
 
+    /**
+     * 设计师作品分页查询
+     * @param product 无参数（分页参数） 可传其他参数，us_id....
+     * @return
+     */
     @RequestMapping("/admin/designer/product/page")
     @ResponseBody
     public Page<Product> designerPage(Product product){
@@ -620,6 +658,11 @@ public class ProductController {
         }
     }
 
+    /**
+     * 获取设计师的某个作品
+     * @param product id
+     * @return
+     */
     @RequestMapping("/admin/designer/product/getOne")
     @ResponseBody
     public Product getOneDesigner(Product product){
@@ -640,6 +683,12 @@ public class ProductController {
             return product;
         }
     }
+
+    /**
+     * 根据类型查询商品
+     * @param product productType.id
+     * @return
+     */
     @RequestMapping("/admin/product/page/type")
     @ResponseBody
     public Page<Product> pageByType(Product product){
@@ -660,6 +709,12 @@ public class ProductController {
             return product;
         }
     }
+
+    /**
+     * 商品搜索
+     * @param search search
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/admin/product/search")
     public Page<SearchModel> search(SearchModel search){
@@ -676,6 +731,13 @@ public class ProductController {
             return  search;
         }
     }
+
+
+    /**
+     * 字母小写转大写
+     * @param str
+     * @return
+     */
     public static String exChange(String str){
         StringBuffer sb = new StringBuffer();
         if(str!=null){
@@ -691,4 +753,35 @@ public class ProductController {
 
         return sb.toString();
     }
+
+    /**
+     * 文件流转文件
+     * @param ins
+     */
+    private void inputstreamtofile(InputStream ins) {
+        String temp = path + "temp.zip";
+        File file = new File(temp);
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream(file);
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    os = null;
+                }
+            }
+        }
+
+    }
+
 }

@@ -107,7 +107,13 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="innerSessionDao" class="com.xiaov.dao.InnerSessionDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="SystemFilter" class="com.xiaov.filter.SystemFilter" >
+		<property name="dao" ref="innerSessionDao" />
 
+	</bean>
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />

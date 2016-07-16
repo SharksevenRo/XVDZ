@@ -38,6 +38,7 @@ public class IdentificationController {
             userService.update(one);
             return new MessageBean(APPConstant.SUCCESS,"认证信息提交，请等待管理员审核");
         }catch (Exception e){
+            e.printStackTrace();
             return  new MessageBean(APPConstant.ERROR,"提交认证失败"+e.getMessage());
         }
     }

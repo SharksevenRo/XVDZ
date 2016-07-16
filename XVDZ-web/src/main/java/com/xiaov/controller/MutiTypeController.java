@@ -67,8 +67,11 @@ public class MutiTypeController {
                 if(one.getUsRemark()!=null){
                     label=one.getUsRemark()+label;
                 }
+                UserInfo userInfo=new UserInfo();
+                userInfo.setId(one.getId());
+                userInfo.setUsRemark(label);
                 one.setUsRemark(label);
-                userService.update(one);
+                userService.update(userInfo);
             }
                 if(type.equals("product")){
                     Product p = productService.getOne(Product.class, types.get(0).getProductId());

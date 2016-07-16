@@ -236,6 +236,7 @@ public class UserController {
 
         String s = saveFile(head, request);
         user.setUsPic(s);
+        userService.update(user);
         return new MessageBean(APPConstant.SUCCESS, "修改头像成功");
 
     }

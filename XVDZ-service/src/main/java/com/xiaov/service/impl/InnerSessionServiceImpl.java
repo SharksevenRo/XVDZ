@@ -1,6 +1,8 @@
 package com.xiaov.service.impl;
 
+import com.xiaov.dao.InnerSessionDao;
 import com.xiaov.model.InnerSession;
+import com.xiaov.orm.hibernate.HibernateSupportDao;
 import com.xiaov.service.interfaces.InnerSessionService;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,17 @@ import java.util.List;
  */
 @Service
 public class InnerSessionServiceImpl extends BaseServiceImpl<InnerSession> implements InnerSessionService {
+
+
+    private InnerSessionDao dao;
+
+    public InnerSessionDao getDao() {
+        return dao;
+    }
+
+    public void setDao(InnerSessionDao dao) {
+        this.dao = dao;
+    }
 
     @Override
     public void delete(InnerSession entity) {

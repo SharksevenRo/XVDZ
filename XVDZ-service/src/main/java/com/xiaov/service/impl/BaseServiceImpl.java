@@ -117,4 +117,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 		}
 		return false;
 	}
+	public List<T> getByids(List<String> ids){
+
+		List<T> ts = dao.get(ids);
+		return ts;
+	}
 }

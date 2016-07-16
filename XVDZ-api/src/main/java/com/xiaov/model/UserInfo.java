@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,9 +30,10 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private String usNcNa;
 	private String usLgNa;
 	private String usName;
+	@JsonIgnore
 	private String usPwd;
 	private String usSex;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date usBirth;
 	private String usPic;
 	private String usPicO;
@@ -57,6 +59,8 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private Integer deleteFlag = 0;
 	private Integer isRecommend;
 	private Integer isTalent;
+
+	private String desc;
 
 	//
 	private String oldPwd;
@@ -399,5 +403,13 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	public void setIsTalent(Integer isTalent) {
 		this.isTalent = isTalent;
+	}
+	@Column(name="description")
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }

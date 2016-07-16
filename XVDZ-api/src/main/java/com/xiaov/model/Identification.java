@@ -2,16 +2,14 @@ package com.xiaov.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 业务员和设计师认证
  * Created by Sharkseven on 2016/7/12.
  */
 @Table(name = "identification", catalog = "xvdz")
+@Entity
 public class Identification {
 
     private String id;
@@ -19,6 +17,7 @@ public class Identification {
     private String userId;
     private String name;
     private String phone;
+
 
     private String type;
 
@@ -83,5 +82,14 @@ public class Identification {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Column(name="type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

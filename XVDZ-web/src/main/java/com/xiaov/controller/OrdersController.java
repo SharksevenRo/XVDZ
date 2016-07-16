@@ -3,12 +3,15 @@ package com.xiaov.controller;
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.OrderDetail;
 import com.xiaov.model.Orders;
+import com.xiaov.model.Product;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.OrdersService;
+import com.xiaov.service.interfaces.ProductService;
 import com.xiaov.utils.LazyObjecUtil;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.JavaType;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,10 @@ import java.util.List;
 public class OrdersController {
     @Autowired
     private OrdersService ordersService;
+    @Autowired
+    private ProductService productService;
+
+
     public final static ObjectMapper mapper = new ObjectMapper();
 
     @RequestMapping("/auth/orders/save")
@@ -115,5 +122,31 @@ public class OrdersController {
     }
     public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
         return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
+    }
+
+    /**
+     * 检查订单金额是否正确
+     * @param orders
+     * @return
+     */
+    private boolean checkOrdes(Orders orders){
+
+        double cost=0;
+
+        List<String> ids=new ArrayList<String>();
+
+
+        for (OrderDetail detail:orders.getOrderDetails()
+             ) {
+            ids.add(detail.getPdtId());
+        }
+
+        List<Product> byids = productService.getByids(ids);
+
+        for (Product poduct:byids
+             ) {
+        }
+
+        return true;
     }
 }

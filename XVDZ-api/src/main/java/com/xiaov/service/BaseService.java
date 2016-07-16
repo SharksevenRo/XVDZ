@@ -4,19 +4,12 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 业务类基本接口
+ */
 import com.xiaov.orm.core.Page;
 
-/**
- * 
- * @类名称:BaseService
- * @类描述:提供基本的service接口供各个模块的service层使用
- * @创建时间:2016-3-25下午5:11:52
- * @作者: 龙华辉
- * @修改人:龙华辉
- * @修改时间:2016-3-25下午5:11:52
- * @修改备注:
- * @版本:v1.0
- */
+
 
 public interface BaseService<T>{
 	
@@ -69,5 +62,12 @@ public interface BaseService<T>{
      * @return
      */
     public T getOne(Class clazz,String pk);
+
+    /**
+     * 根据ids查询实体
+     * @param ids
+     * @return
+     */
+    public List<T> getByids(List<String> ids);
     
 }

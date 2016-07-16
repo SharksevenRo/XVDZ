@@ -1,25 +1,20 @@
 package com.xiaov.filter;
 
-import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import com.xiaov.dao.InnerSessionDao;
+import com.xiaov.model.InnerSession;
+import org.hibernate.Session;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.xiaov.utils.StrKit;
-import com.xiaov.web.support.AuthenticationCahce;
-import com.xiaov.web.support.CookieUtil;
+import java.io.IOException;
 
 public class SystemFilter implements Filter{
+
+
 	private HttpServletRequest request;
+	private InnerSessionDao dao;
+
 
 	public void destroy() {
 		
@@ -38,7 +33,49 @@ public class SystemFilter implements Filter{
 			return;
 			
 		}else{
-			CookieUtil util=new CookieUtil(request);
+
+			Session session= dao.getSessionFactory().openSession();
+			String token=request.getParameter("auth_token");
+			if(token==null){
+				response.sendRedirect("http://localhost/xvstore/index.php?page=account");
+				return;
+			}
+			InnerSession innersion = (InnerSession) session.get(InnerSession.class, token);
+
+			if(innersion!=null){
+
+
+				if(innersion.getId().equals(token)){
+					//判断是否超时
+					if((System.currentTimeMillis()-innersion.getBegin())<innersion.getTime()){
+
+						innersion.setBegin(System.currentTimeMillis());
+						session.update(innersion);
+					}else{
+						response.sendRedirect("http://localhost/xvstore/index.php?page=account");
+						return;
+					}
+
+				}else{
+					response.sendRedirect("http://localhost/xvstore/index.php?page=account");
+					return;
+				}
+				arg2.doFilter(request,response);
+				return;
+			}else{
+				response.sendRedirect("http://localhost/xvstore/index.php?page=account");
+				return;
+			}
+
+			//先查数据库是否已经登录
+
+
+			//已登录刷新时间
+
+			//未登录跳转到登录(返回未登录消息)
+
+
+			/*CookieUtil util=new CookieUtil(request);
 			String openId=util.getValue("login", "user.openId", true);
 			String userId=util.getValue("login", "user.userId", true);
 			String admintoken = util.getValue("login", "user.token", true);
@@ -56,8 +93,8 @@ public class SystemFilter implements Filter{
 						response.sendRedirect("/error/error.html");
 						return;
 					}
-				}
-			}/*else{
+				}*/
+			/*}else{
 				if(!StrKit.isBlank(openId)){
 					arg2.doFilter(request, response);
 				}else{
@@ -74,22 +111,23 @@ public class SystemFilter implements Filter{
 					}
 				}
 			}*/
-			arg2.doFilter(arg0, arg1);
 		}
 	}
 
 	public void init(FilterConfig arg0) throws ServletException {
-		
-		
+
 	}
-	private Map<String, String> getHeadersInfo() {
-		Map<String, String> map = new HashMap<String, String>();
-		Enumeration headerNames = request.getHeaderNames();
-		while (headerNames.hasMoreElements()) {
-			String key = (String) headerNames.nextElement();
-			String value = request.getHeader(key);
-			map.put(key, value);
+	public InnerSessionDao getDao() {
+		return dao;
+	}
+	public void setDao(InnerSessionDao dao) {
+		this.dao = dao;
+	}
+
+	public static void close(Session session){
+
+		if(session!=null){
+			session.close();
 		}
-		return map;
 	}
 }

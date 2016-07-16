@@ -3,6 +3,7 @@ package com.xiaov.model;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,6 +21,28 @@ import com.xiaov.web.support.CustomDateSerializer;
 @Table(name = "orders", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class Orders extends Page<Orders> implements java.io.Serializable {
+
+
+	/**
+	 * 未支付
+	 */
+	public static final Integer UNPAY=new Integer(0);
+	/**
+	 * 已支付
+	 */
+	public static final Integer PAY=new Integer(1);
+	/**
+	 * 失败
+	 */
+	public static final Integer FAILED=new Integer(2);
+	/**
+	 * 配送
+	 */
+	public static final Integer TREANS=new Integer(3);
+	/**
+	 * 结束
+	 */
+	public static final Integer FINISHED=new Integer(3);
 
 	// Fields
 	private String id;
