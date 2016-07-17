@@ -382,37 +382,6 @@
 		//清空表单数据
 		$("input[type=reset]").trigger("click");
 		//加载类型
-		 var json="{"
-				 +"'id': '1',"
-		 +"'dbTypes'：{"
-
-		 +"'id'：'order.common'"
-		 +"}"
-		 +"}";
-		 +"{"
-		 +"'id': '1',"
-		 +"'deleteFlag': 0,"
-		 "["
-		 +"{"
-		 +"'designer_product': {"
-		 +"'id': '4028e3e9544e0e6501544e1063780001'"
-		 +"},"
-		 +"	'designs': '40283f83550fce5e01550fd750df0000_40283f83550fce5e01550fd75d400003'"
-		 +"}"
-		 +"]"
-		 +"}";
-		 debugger;
-		 $.ajax({
-
-			 type:'post',
-			 url:'../auth/orders/save.do',
-			 data:JSON.stringify(json),
-			 dataType: "json",
-			 contentType:"application/json",
-			 success:function(data){
-				 alert(data.message);
-			 }
-		 });
 		$.ajax({
 		
 		type:"get",
@@ -551,40 +520,7 @@
 	
 		
 	});
-		$("#test_ajax").click(
-				function () {
 
-					var json="{"
-							+"'id': '1',"
-					"'dbTypes'：{"
-
-					+"'id'：'order.common'"
-					+"}"
-					+"}";
-					+"{"
-					+"'id': '1',"
-					+"'deleteFlag': 0,"
-					"["
-					+"{"
-					+"'designer_product': {"
-					+"'id': '4028e3e9544e0e6501544e1063780001'"
-					+"},"
-					+"	'designs': '40283f83550fce5e01550fd750df0000_40283f83550fce5e01550fd75d400003'"
-					+"}"
-					+"]"
-					+"}";
-					debugger;
-					$.ajax({
-
-						type:'post',
-						url:'../auth/orders/save.do',
-						data:json,
-						success:function(data){
-							alert(data.message);
-						}
-					});
-				}
-		);
 });
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->

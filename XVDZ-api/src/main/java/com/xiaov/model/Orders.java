@@ -62,7 +62,12 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	private String orRemark;
 	private Integer deleteFlag=0;
 
+	private String logisticsNo;
+	private String logisticsName;
+
 	private List<OrderDetail> orderDetails;
+
+
 
 	// Constructors
 
@@ -246,5 +251,23 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	public void setUser(UserInfo user) {
 		this.user = user;
+	}
+
+	@Column(name="logisticsname",length = 20)
+	public String getLogisticsName() {
+		return logisticsName;
+	}
+
+	public void setLogisticsName(String logisticsName) {
+		this.logisticsName = logisticsName;
+	}
+
+	@Column(name="logisticsno",length = 20)
+	public String getLogisticsNo() {
+		return logisticsNo;
+	}
+
+	public void setLogisticsNo(String logisticsNo) {
+		this.logisticsNo = logisticsNo;
 	}
 }

@@ -278,13 +278,10 @@ public class ProductController {
     public Page<Product> hotProduct(Product product) {
 
         try {
-            product.setSidx("pdtSaleCount");
-            product.setSord("DESC");
-            Page<Product> page = productService.page(product);
 
-            String[] fileName = {"productType", "img","show","backImage"};
-            page = LazyObjecUtil.LazyPageSetNull(page, fileName);
-            return page;
+            List<Product> products = productService.hot(product);
+            product.setResult(products);
+            return product;
         } catch (Exception e) {
             e.printStackTrace();
             Page<Product> page = new Page<Product>();
@@ -554,7 +551,6 @@ public class ProductController {
             product.setShow(mshowImage);
             product.setBackImage(mbackImage);
             product.setAddTime(new Date());
-            product.setPdtPrc(0d);
             productService.save(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
         }else{
@@ -745,8 +741,6 @@ public class ProductController {
                 char c = str.charAt(i);
                 if(Character.isUpperCase(c)){
                     sb.append(Character.toLowerCase(c));
-                }else if(Character.isLowerCase(c)){
-                    sb.append(Character.toUpperCase(c));
                 }
             }
         }

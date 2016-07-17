@@ -79,7 +79,10 @@
 				hibernate.show_sql=true
 				hibernate.hbm2ddl.auto=update
 				hibernate.format_sql=true
+				hibernate.jdbc.batch_size=30
+				hiberante.cache.use_second_level_cache=false
 				current_session_context_class=thread
+				e.cache.use_second_level_cache=false
 			</value>
 		</property>
 		<property name="packagesToScan" value="com.xiaov" />
@@ -107,13 +110,13 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="innerSessionDao" class="com.xiaov.dao.InnerSessionDao">
+	<!--<bean id="innerSessionDao" class="com.xiaov.dao.InnerSessionDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="SystemFilter" class="com.xiaov.filter.SystemFilter" >
 		<property name="dao" ref="innerSessionDao" />
 
-	</bean>
+	</bean>-->
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />

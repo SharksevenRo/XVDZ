@@ -109,6 +109,8 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public T getOne(Class clazz, String pk) {
 		return (T) dao.getSession().get(clazz, pk);
 	}
+
+
 	private boolean isBase(Class clazz) {
 
 		if (clazz.equals(Boolean.class) || clazz.equals(String.class) || clazz.equals(Integer.class)
@@ -117,9 +119,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 		}
 		return false;
 	}
-	public List<T> getByids(List<String> ids){
+	public List<T> getByids(Class clazz,List<String> ids){
 
-		List<T> ts = dao.get(ids);
+		List<T> ts = dao.get(clazz,ids);
 		return ts;
 	}
 }

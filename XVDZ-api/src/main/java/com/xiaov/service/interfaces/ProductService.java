@@ -22,4 +22,6 @@ public interface ProductService extends BaseService<Product>{
 	public List<Product> pageByType(Product product);
 	public Product geOneDetail(Product product);
 
+	public List<Product> hot(Product product);
+
 }

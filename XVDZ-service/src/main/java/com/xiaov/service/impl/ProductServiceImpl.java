@@ -6,6 +6,7 @@ import com.xiaov.model.*;
 import com.xiaov.orm.core.Page;
 import com.xiaov.orm.core.PageRequest;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,5 +158,10 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		Criterion [] criterions={Restrictions.like("pdtName","%"+search.getSearch()+"%"),Restrictions.like("pdtPc","%"+search.getSearch()+"%")};
 		Criterion [] criterions2={Restrictions.or(criterions)};
 		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},criterions2,search.getOffset(),search.getPageSize());
+	}
+
+	public List<Product> hot(Product product) {
+		Criterion [] criterions2={Restrictions.eq("isModule",0)};
+		return dao.getEntitiestNotLazyWithOrder(new Product(),new String[]{"productType","img","show","backImage"},criterions2,0,8, Order.desc("pdtSaleCount"));
 	}
 }

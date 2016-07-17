@@ -271,6 +271,11 @@
 			<version>3.1</version>
 		</dependency>
 		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.ant</groupId>
 			<artifactId>ant</artifactId>
 			<version>1.8.2</version>
@@ -280,7 +285,30 @@
 			<artifactId>pinyin4j</artifactId>
 			<version>2.5.0</version>
 		</dependency>
-		<!-- http://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.xiongyingqi/qrcode -->
+		<dependency>
+			<groupId>com.xiongyingqi</groupId>
+			<artifactId>qrcode</artifactId>
+			<version>0.1.10</version>
+		</dependency>
 
 	</dependencies>
 	<build>
@@ -299,7 +327,7 @@
             </plugin>
 		</plugins>
 	</build>
-	
+
 	<modules>
 		<module>XVDZ-api</module>
 		<module>XVDZ-core</module>

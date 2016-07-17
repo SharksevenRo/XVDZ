@@ -68,6 +68,6 @@ public interface BaseService<T>{
      * @param ids
      * @return
      */
-    public List<T> getByids(List<String> ids);
+    public List<T> getByids(Class clazz,List<String> ids);
     
 }

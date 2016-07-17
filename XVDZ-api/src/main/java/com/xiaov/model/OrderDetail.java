@@ -1,16 +1,8 @@
 package com.xiaov.model;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
@@ -31,9 +23,9 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 
 	// Fields
 	private String id;
-	private String pdtId;
 	private String orDtNo;
 	private Double orDtPrc;
+
 	private Integer orDtMount;
 	private Double orDtDsct;
 	private Double orDtItmeTotal;
@@ -48,7 +40,16 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	private String style;
 	//用户定制图片
 	private String pic;
-	
+
+	private Product designer_product;
+
+	private String designs;
+
+	private String desins_back;
+
+
+	private List<Material> materials;
+
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -78,13 +79,12 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	}
 
 	/** full constructor */
-	public OrderDetail(String id, String pdtId, String orDtNo,
+	public OrderDetail(String id, String orDtNo,
 			Double orDtPrc, Integer orDtMount, Double orDtDsct,
 			Double orDtItmeTotal, Double orDtRlTotal, String orDtRemark,
 			Date addTime, Date updateTime, Date deleteTime,
 			Integer deleteFlag) {
 		this.id = id;
-		this.pdtId = pdtId;
 		this.orDtNo = orDtNo;
 		this.orDtPrc = orDtPrc;
 		this.orDtMount = orDtMount;
@@ -109,15 +109,6 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	@Column(name = "pdt_id")
-	public String getPdtId() {
-		return this.pdtId;
-	}
-
-	public void setPdtId(String pdtId) {
-		this.pdtId = pdtId;
 	}
 
 	@Column(name = "or_dt_no", nullable = true, length = 20)
@@ -253,5 +244,41 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	public void setStyle(String style) {
 		this.style = style;
 	}
-	
+
+	@Transient
+	public String getDesigns() {
+		return designs;
+	}
+
+	public void setDesigns(String designs) {
+		this.designs = designs;
+	}
+
+	@Transient
+	public String getDesins_back() {
+		return desins_back;
+	}
+
+	public void setDesins_back(String desins_back) {
+		this.desins_back = desins_back;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pdtId")
+	public Product getDesigner_product() {
+		return designer_product;
+	}
+
+	public void setDesigner_product(Product designer_product) {
+		this.designer_product = designer_product;
+	}
+
+	@Transient
+	public List<Material> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(List<Material> materials) {
+		this.materials = materials;
+	}
 }

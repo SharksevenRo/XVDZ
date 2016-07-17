@@ -30,7 +30,29 @@
 		 <artifactId>XVDZ-service</artifactId>
 		 <version>0.0.1-SNAPSHOT</version>
   	</dependency>
-  </dependencies>
+	   <dependency>
+		   <groupId>Maven.com.google.code.gson</groupId>
+		   <artifactId>gson</artifactId>
+		   <version>2.2.2</version>
+		   <scope>test</scope>
+	   </dependency>
+	   <dependency>
+		   <groupId>com.google.code.gson</groupId>
+		   <artifactId>gson</artifactId>
+		   <version>2.2.2</version>
+		   <scope>test</scope>
+	   </dependency>
+	   <dependency>
+		   <groupId>com.google.code.gson</groupId>
+		   <artifactId>gson</artifactId>
+		   <version>2.2.2</version>
+	   </dependency>
+	   <dependency>
+		   <groupId>Maven.com.google.code.gson</groupId>
+		   <artifactId>gson</artifactId>
+		   <version>2.2.2</version>
+	   </dependency>
+   </dependencies>
   <build>
     <finalName>XVDZ-web</finalName>
     <plugins>

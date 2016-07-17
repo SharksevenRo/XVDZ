@@ -419,7 +419,7 @@ public class UserController {
         try {
             path = request.getRealPath("/");
             String[] split = img.getOriginalFilename().split("[.]");
-            String suffix = "." + split[split.length - 1];
+            String suffix = "." + exChange(split[split.length - 1]);
             //临时文件路径
             String tempPath = "images/designer/temp/";
             //压缩文件路径
@@ -457,7 +457,7 @@ public class UserController {
             CompressPicUtil mypic = new CompressPicUtil();
             mypic.resizePNG(path + tempPath + "/" + fileName, path + basePath + "/" + fileName, 200, 200, true);
 
-            return path + basePath + "/" + fileName;
+            return tempPath + fileName;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -480,4 +480,23 @@ public class UserController {
             return search;
         }
     }
+    /**
+     * 字母小写转大写
+     * @param str
+     * @return
+     */
+    public static String exChange(String str){
+        StringBuffer sb = new StringBuffer();
+        if(str!=null){
+            for(int i=0;i<str.length();i++){
+                char c = str.charAt(i);
+                if(Character.isUpperCase(c)){
+                    sb.append(Character.toLowerCase(c));
+                }
+            }
+        }
+
+        return sb.toString();
+    }
+
 }

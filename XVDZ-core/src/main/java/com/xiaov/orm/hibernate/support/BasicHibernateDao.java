@@ -323,10 +323,11 @@ public class BasicHibernateDao<T,PK extends Serializable> {
 	 * 
 	 * @return List
 	 */
-	public List<T> get(Collection<PK> ids) {
+	public List<T> get(Class clazz,Collection<PK> ids) {
 		if (CollectionUtils.isEmpty(ids)) {
 			return Collections.emptyList();
 		}
+		this.entityClass=clazz;
 		return createCriteria(Restrictions.in(getIdName(), ids)).list();
 	}
 	
