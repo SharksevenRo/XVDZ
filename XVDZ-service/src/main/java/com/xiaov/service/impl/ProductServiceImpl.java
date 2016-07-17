@@ -129,16 +129,17 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	public List<Product> designerPage(Product product) {
 
 		if(product.getUsId()!=null){
-			Criterion[] eqs={Restrictions.eq("usId",product.getUsId())};
+			Criterion[] eqs={Restrictions.eq("usId",product.getUsId()),Restrictions.eq("deleteFlag",0)};
 			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},eqs,product.getOffset(),product.getPageSize());
 		}
+
 		return null;
 	}
 	public List<Product> pageByType(Product product) {
 
 		if(product.getProductType()!=null){
 
-			Criterion[] eqs={Restrictions.eq("productType",product.getProductType())};
+			Criterion[] eqs={Restrictions.eq("productType",product.getProductType()),Restrictions.eq("deleteFlag",0)};
 			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},eqs,product.getOffset(),product.getPageSize());
 		}
 		return null;
@@ -147,7 +148,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
 		if(product.getId()!=null){
 
-			Criterion[] eqs={Restrictions.eq("id",product.getId())};
+			Criterion[] eqs={Restrictions.eq("id",product.getId()),Restrictions.eq("deleteFlag",0)};
 			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},eqs,product.getOffset(),product.getPageSize()).get(0);
 		}
 		return null;
@@ -156,12 +157,17 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	public List<Product> search(SearchModel search) {
 
 		Criterion [] criterions={Restrictions.like("pdtName","%"+search.getSearch()+"%"),Restrictions.like("pdtPc","%"+search.getSearch()+"%")};
-		Criterion [] criterions2={Restrictions.or(criterions)};
+		Criterion [] criterions2={Restrictions.or(criterions),Restrictions.eq("deleteFlag",0)};
 		return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},criterions2,search.getOffset(),search.getPageSize());
 	}
 
 	public List<Product> hot(Product product) {
-		Criterion [] criterions2={Restrictions.eq("isModule",0)};
+		Criterion [] criterions2={Restrictions.eq("isModule",0),Restrictions.eq("deleteFlag",0)};
+		return dao.getEntitiestNotLazyWithOrder(new Product(),new String[]{"productType","img","show","backImage"},criterions2,0,8, Order.desc("pdtSaleCount"));
+	}
+
+	public List<Product> moudule(Product product) {
+		Criterion [] criterions2={Restrictions.eq("isModule",1),Restrictions.eq("deleteFlag",0)};
 		return dao.getEntitiestNotLazyWithOrder(new Product(),new String[]{"productType","img","show","backImage"},criterions2,0,8, Order.desc("pdtSaleCount"));
 	}
 }

@@ -13,7 +13,6 @@ import com.xiaov.service.interfaces.ProductService;
 import com.xiaov.utils.LazyObjecUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,16 +39,17 @@ public class OrdersController {
 
     @RequestMapping("/auth/orders/save")
     @ResponseBody
-    public MessageBean saveAjax(Orders orders,@RequestBody List<OrderDetail> orderDetails) {
+    public MessageBean saveAjax(Orders orders) {
 
         try {
 
             //检查订单
             checkOrders(orders);
+            orders.setOrState(Orders.UNPAY);
             orders.setAddTime(new Date());
             ordersService.save(orders);
             for (OrderDetail detail:orders.getOrderDetails()
-            ) {
+                    ) {
                 detail.setOrDtNo(orders.getId());
             }
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
@@ -148,9 +148,9 @@ public class OrdersController {
         String materials = "";
         for (OrderDetail detail : orderDetails
                 ) {
-            one= productService.getOne(Product.class, detail.getDesigner_product().getId());
+            one= productService.getOne(Product.class, detail.getDesigner_product_id());
             detail.setDesigner_product(one);
-            materials = detail.getDesins_back() + "_" + detail.getDesigns();
+            materials = detail.getImage_back() + "_" + detail.getImage_front();
             List<String> strings = splitStr(materials);
             List<Material> byids1 = materialService.getByids(Material.class,strings);
             detail.setMaterials(byids1);
@@ -176,7 +176,7 @@ public class OrdersController {
             }
             //判断是否有折扣（如果使用优惠价就不能折扣？）
             if(orders.getDiscountCoupan().getId()!=null){
-                DiscountCoupan discountCoupan = discountCoupanService.getOne(DiscountCoupan.class, orders.getId());
+                DiscountCoupan discountCoupan = discountCoupanService.getOne(DiscountCoupan.class, orders.getDiscountCoupan().getId());
                 //判断优惠卷是否有效
                 if(checkCoupan(orders.getDiscountCoupan())){
                     //有效进行优惠卷使用

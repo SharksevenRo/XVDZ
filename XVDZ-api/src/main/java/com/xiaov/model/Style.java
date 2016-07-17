@@ -34,6 +34,8 @@ public class Style extends Page<Style> implements java.io.Serializable {
 
     private String coordinate;
 
+    private Double price;
+
     private Integer deleteFlag=0;
 
     public Style() {
@@ -155,5 +157,14 @@ public class Style extends Page<Style> implements java.io.Serializable {
 
     public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    @Column(name="price")
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

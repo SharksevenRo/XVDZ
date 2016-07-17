@@ -4,8 +4,8 @@ import com.xiaov.constant.APPConstant;
 import com.xiaov.model.*;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
-import com.xiaov.service.impl.DiscountCodeServiceImpl;
 import com.xiaov.service.impl.UserServiceImpl;
+import com.xiaov.service.interfaces.DiscountCodeService;
 import com.xiaov.service.interfaces.DiscountCodeUseRecordService;
 import com.xiaov.service.interfaces.InnerSessionService;
 import com.xiaov.service.interfaces.UserService;
@@ -47,7 +47,7 @@ public class UserController {
     private InnerSessionService innerSessionService;
 
     @Autowired
-    private DiscountCodeServiceImpl discountCodeService;
+    private DiscountCodeService discountCodeService;
 
     @Autowired
     private DiscountCodeUseRecordService discountCodeUseRecordService;
@@ -90,12 +90,18 @@ public class UserController {
                         try {
                             List<UserInfo> userIsAdd = userServiceimpl.getByProperty("usTel", usTel);
                             if (userIsAdd.isEmpty()) {
-                                if (disCodeNo != null) // 是否绑定优惠码
+                                if (disCodeNo != null&&!"".equals(disCodeNo)) // 是否绑定优惠码
                                 {
                                     List<DiscountCode> discode = discountCodeService.getByProperty("disCodeNo", disCodeNo);
                                     if (discode.isEmpty())// 优惠码是否存在
                                     {
-                                        innerSessionService.delete(one);
+                                        UserInfo user = new UserInfo();
+                                        user.setUsTel(usTel);
+                                        user.setUsName(usTel);
+                                        user.setUsPwd(Md5.GetMD5Code(usPwd));
+                                        user.setUsSex("保密");
+                                        user.setAddTime(new Date());
+                                        userService.save(user); // 注册用户ssionService.delete(one);
                                         return new MessageBean(APPConstant.ERROR, "优惠码不存在或错误,请重新输入注册!");
 
                                     } else {
@@ -118,7 +124,7 @@ public class UserController {
                                     UserInfo user = new UserInfo();
                                     user.setUsTel(usTel);
                                     user.setUsName(usTel);
-                                    user.setUsPwd(usPwd);
+                                    user.setUsPwd(Md5.GetMD5Code(usPwd));
                                     user.setUsSex("保密");
                                     user.setAddTime(new Date());
                                     userService.save(user);// 注册用户
@@ -184,8 +190,30 @@ public class UserController {
         }
 
     }
+    @RequestMapping("/auth/user/page/bydiscountCode")
+    @ResponseBody
+    public Page<UserInfo> getUserByDiscountCode(UserInfo user){
 
-    // 删除
+        DiscountCode code=new DiscountCode();
+        code.setSalesman(user.getId());
+        Page<DiscountCode> page = discountCodeService.page(code);
+
+        if(page.getResult().size()==1){
+
+            code=page.getResult().get(0);
+            user.setId(null);
+            user.setTypeId("user.common");
+            user.setDiscountCode(code.getDisCodeNo());
+            Page<UserInfo> users = userService.page(user);
+            return users;
+        }else{
+            user.setCode(APPConstant.ERROR);
+            user.setMessage("请求异常");
+            return user;
+        }
+
+    }
+     // 删除
     @RequestMapping("/admin/user/delete")
     @ResponseBody
     public MessageBean deleteAjax(UserInfo user) {
@@ -204,7 +232,6 @@ public class UserController {
     @ResponseBody
     public MessageBean updateAjax(UserInfo user) {
         try {
-
 
             if (null != user.getUsPwd() && !"".equals(user.getUsPwd())) {
 

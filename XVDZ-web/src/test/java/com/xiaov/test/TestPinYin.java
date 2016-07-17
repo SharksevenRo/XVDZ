@@ -50,7 +50,7 @@ public class TestPinYin {
         orderDetail.setDesigner_product(product);
 
         orderDetails.add(orderDetail);
-        orderDetail.setDesigns("40283f83550fce5e01550fd750df0000_40283f83550fce5e01550fd75d400003");
+        orderDetail.setImage_front("40283f83550fce5e01550fd750df0000_40283f83550fce5e01550fd75d400003");
 
          orderses.add(order);
         order.setOrderDetails(orderDetails);

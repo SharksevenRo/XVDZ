@@ -43,12 +43,14 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 
 	private Product designer_product;
 
-	private String designs;
+	private String image_front;
 
-	private String desins_back;
+	private String image_back;
 
 
 	private List<Material> materials;
+
+	private String designer_product_id;
 
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
@@ -246,21 +248,21 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	}
 
 	@Transient
-	public String getDesigns() {
-		return designs;
+	public String getImage_front() {
+		return image_front;
 	}
 
-	public void setDesigns(String designs) {
-		this.designs = designs;
+	public void setImage_front(String designs) {
+		this.image_front = designs;
 	}
 
 	@Transient
-	public String getDesins_back() {
-		return desins_back;
+	public String getImage_back() {
+		return image_back;
 	}
 
-	public void setDesins_back(String desins_back) {
-		this.desins_back = desins_back;
+	public void setImage_back(String image_back) {
+		this.image_back = image_back;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -280,5 +282,13 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 
 	public void setMaterials(List<Material> materials) {
 		this.materials = materials;
+	}
+	@Transient
+	public String getDesigner_product_id() {
+		return designer_product_id;
+	}
+
+	public void setDesigner_product_id(String designer_product_id) {
+		this.designer_product_id = designer_product_id;
 	}
 }

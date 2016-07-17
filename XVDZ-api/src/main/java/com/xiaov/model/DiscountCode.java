@@ -29,8 +29,8 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 
 	// Fields
 	private String id;
-	private UserInfo userInfoByGnrtUId;
-	private UserInfo userInfoByProUId;
+	private String  createId;
+	private String  salesman;
 	private String disCodeNo;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date disCodeTime;
@@ -59,13 +59,11 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	}
 
 	/** full constructor */
-	public DiscountCode(String id, UserInfo userInfoByGnrtUId,
-			UserInfo userInfoByProUId, String disCodeNo, Date disCodeTime,
+	public DiscountCode(String id, String disCodeNo, Date disCodeTime,
 			Date disCodeValidTime, Integer disCodeNum,
 			String disCodeRemark, Integer deleteFlag) {
 		this.id = id;
-		this.userInfoByGnrtUId = userInfoByGnrtUId;
-		this.userInfoByProUId = userInfoByProUId;
+
 		this.disCodeNo = disCodeNo;
 		this.disCodeTime = disCodeTime;
 		this.disCodeValidTime = disCodeValidTime;
@@ -85,26 +83,6 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "gnrt_u_id")
-	public UserInfo getUserInfoByGnrtUId() {
-		return this.userInfoByGnrtUId;
-	}
-
-	public void setUserInfoByGnrtUId(UserInfo userInfoByGnrtUId) {
-		this.userInfoByGnrtUId = userInfoByGnrtUId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pro_u_id")
-	public UserInfo getUserInfoByProUId() {
-		return this.userInfoByProUId;
-	}
-
-	public void setUserInfoByProUId(UserInfo userInfoByProUId) {
-		this.userInfoByProUId = userInfoByProUId;
 	}
 
 	@Column(name = "dis_code_no", nullable = true, length = 20)
@@ -163,4 +141,19 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 		this.deleteFlag = deleteFlag;
 	}
 
+	@Column(name="gnrt_u_id")
+	public String getCreateId() {
+		return createId;
+	}
+	public void setCreateId(String createId) {
+		this.createId = createId;
+	}
+	@Column(name="pro_u_id")
+	public String getSalesman() {
+		return salesman;
+	}
+
+	public void setSalesman(String salesman) {
+		this.salesman = salesman;
+	}
 }

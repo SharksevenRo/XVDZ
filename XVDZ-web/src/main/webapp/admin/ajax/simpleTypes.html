@@ -382,25 +382,7 @@
 		//清空表单数据
 		$("input[type=reset]").trigger("click");
 		//加载类型
-		 var json="{"
-				 +"'id': '1',"
-		 +"'dbTypes'：{"
-
-		 +"'id'：'order.common'"
-		 +"}"
-		 +"}";
-		 +"{"
-		 +"'id': '1',"
-		 +"'deleteFlag': 0,"
-		 "["
-		 +"{"
-		 +"'designer_product': {"
-		 +"'id': '4028e3e9544e0e6501544e1063780001'"
-		 +"},"
-		 +"	'designs': '40283f83550fce5e01550fd750df0000_40283f83550fce5e01550fd75d400003'"
-		 +"}"
-		 +"]"
-		 +"}";
+		 var json="{'id':'1','deleteFlag':0,'orderDetails':[{'designer_product':{'id':'4028e3e9544e0e6501544e1063780001','pdtOpenState':true,'deleteFlag':0,'totalItems':-1,'pageNo':1,'pageSize':10,'countTotal':true,'totalPages':0,'code':1},'designs':'40283f83550fce5e01550fd750df0000_40283f83550fce5e01550fd75d400003','deleteFlag':0,'totalItems':-1,'pageNo':1,'pageSize':10,'countTotal':true,'totalPages':0,'code':1}],'totalItems':-1,'pageNo':1,'pageSize':10,'countTotal':true,'totalPages':0,'code':1}";
 		 debugger;
 		 $.ajax({
 

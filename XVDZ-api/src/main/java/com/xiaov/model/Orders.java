@@ -22,7 +22,10 @@ import com.xiaov.web.support.CustomDateSerializer;
 @StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
 public class Orders extends Page<Orders> implements java.io.Serializable {
 
-
+	/**
+	 * 取消
+	 */
+	public static final Integer CONCEL=new Integer(-1);
 	/**
 	 * 未支付
 	 */

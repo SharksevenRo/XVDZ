@@ -24,4 +24,5 @@ public interface ProductService extends BaseService<Product>{
 
 	public List<Product> hot(Product product);
 
+	List<Product> moudule(Product product);
 }

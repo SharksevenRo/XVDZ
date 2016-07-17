@@ -36,6 +36,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	private Double actTtEn;
 	private Double actBlc;
 	private Double actFm;
+	private Double present_amount;
 	private Integer actState;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
@@ -193,6 +194,13 @@ public class Account extends Page<Account> implements java.io.Serializable {
 	@Column(name = "deleteFlag", nullable = true)
 	public Integer getDeleteFlag() {
 		return this.deleteFlag;
+	}
+	@Column(name = "present_amount")
+	public Double getPresent_amount() {
+		return present_amount;
+	}
+	public void setPresent_amount(Double present_amount) {
+		this.present_amount = present_amount;
 	}
 
 	public void setDeleteFlag(Integer deleteFlag) {

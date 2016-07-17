@@ -2,6 +2,7 @@ package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.DiscountCode;
+import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 
@@ -77,12 +78,21 @@ public class DiscountCodeController {
         }
     }
 
-    @RequestMapping(value = "/admin/discountCode/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth/discountCode/getOne", method = RequestMethod.POST)
     @ResponseBody
-    public DiscountCode getOne(DiscountCode discountCode) {
+    public DiscountCode getOne(UserInfo user) {
         try {
-            return discountCodeService.getOne(discountCode.getClass(), discountCode.getId());
+            DiscountCode code=new DiscountCode();
+            code.setSalesman(user.getId());
+            Page<DiscountCode> page = discountCodeService.page(code);
 
+            if(page.getResult().size()==1){
+
+                return page.getResult().get(0);
+
+            }else{
+               return null;
+            }
         } catch (Exception e) {
             DiscountCode page = new DiscountCode();
             page.setCode(APPConstant.ERROR);

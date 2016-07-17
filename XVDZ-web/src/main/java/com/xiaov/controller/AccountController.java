@@ -2,6 +2,7 @@ package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.Account;
+import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.AccountService;
@@ -17,7 +18,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/admin/account/saveAjax")
+    @RequestMapping("/auth/account/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(Account account) {
 
@@ -29,11 +30,12 @@ public class AccountController {
         }
     }
 
-    @RequestMapping("/admin/account/updateAjax")
+    @RequestMapping("/auth/account/updateAjax")
     @ResponseBody
     public MessageBean updateAjax(Account account) {
 
         try {
+
             accountService.update(account);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
@@ -41,7 +43,7 @@ public class AccountController {
         }
     }
 
-    @RequestMapping("/admin/account/deleteAjax")
+    @RequestMapping("/auth/account/deleteAjax")
     @ResponseBody
     public MessageBean deleteAjax(Account account) {
 
@@ -55,7 +57,7 @@ public class AccountController {
         }
     }
 
-    @RequestMapping("/admin/account/page")
+    @RequestMapping("/auth/account/page")
     @ResponseBody
     public Page<Account> page(Page<Account> accountPage) {
 
@@ -70,11 +72,11 @@ public class AccountController {
         }
     }
 
-    @RequestMapping(value = "/admin/account/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth/account/getOne", method = RequestMethod.POST)
     @ResponseBody
-    public Account getOne(Account account) {
+    public Account getOne(UserInfo user) {
         try {
-            return accountService.getOne(account.getClass(), account.getId());
+           return accountService.getAccountByUser(user);
 
         } catch (Exception e) {
             Account page = new Account();

@@ -654,6 +654,27 @@ public class ProductController {
         }
     }
 
+    @RequestMapping("/admin/designer/product/module")
+    @ResponseBody
+    public Page<Product> moudule(Product product){
+        try {
+
+            List<Product> products = productService.moudule(product);
+            if(products!=null){
+                product.setResult(products);
+            }else{
+                product.setCode(APPConstant.ERROR);
+                product.setMessage("参数不完整");
+            }
+
+            return product;
+        }catch (Exception e){
+            product.setCode(APPConstant.ERROR);
+            product.setMessage("服务器异常"+e.getMessage());
+            return product;
+        }
+    }
+
     /**
      * 获取设计师的某个作品
      * @param product id
