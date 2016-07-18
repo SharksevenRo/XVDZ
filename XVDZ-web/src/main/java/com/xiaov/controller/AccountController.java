@@ -6,7 +6,9 @@ import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.AccountService;
+import com.xiaov.utils.LazyObjecUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Created by yymao on 2016/4/25.
  */
+@Controller
 public class AccountController {
     @Autowired
     private AccountService accountService;
@@ -72,12 +75,12 @@ public class AccountController {
         }
     }
 
-    @RequestMapping(value = "/auth/account/getOne", method = RequestMethod.POST)
+    @RequestMapping("/auth/account/getOne")
     @ResponseBody
     public Account getOne(UserInfo user) {
         try {
-           return accountService.getAccountByUser(user);
-
+            Account accountByUser = accountService.getAccountByUser(user);
+            return accountByUser;
         } catch (Exception e) {
             Account page = new Account();
             page.setCode(APPConstant.ERROR);

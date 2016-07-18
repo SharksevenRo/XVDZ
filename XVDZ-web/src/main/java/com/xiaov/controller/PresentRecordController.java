@@ -1,14 +1,12 @@
 package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
-import com.xiaov.model.Account;
-import com.xiaov.model.PresentRecord;
-import com.xiaov.model.User;
-import com.xiaov.model.UserInfo;
+import com.xiaov.model.*;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.AccountService;
 import com.xiaov.service.interfaces.PresentRecordService;
+import com.xiaov.service.interfaces.StyleService;
 import com.xiaov.service.interfaces.UserService;
 import com.xiaov.utils.StrKit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,8 @@ public class PresentRecordController {
     private AccountService accountService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StyleService styleService;
 
     @RequestMapping("/auth/record/save")
     @ResponseBody
@@ -47,13 +47,14 @@ public class PresentRecordController {
                 }else{
 
                     if(StrKit.isBlank(record.getReceiver_account())){
-                        return new MessageBean(APPConstant.SUCCESS, "请填写接受账户");
+                        return new MessageBean(APPConstant.ERROR, "请填写接受账户");
                     }
                     if(StrKit.isBlank(record.getAccount_type())){
-                        return new MessageBean(APPConstant.SUCCESS, "请填写接受账户的账户类型");
+                        return new MessageBean(APPConstant.ERROR, "请填写接受账户的账户类型");
                     }
                     //获取用户的账户
                     Account accountByUser = accountService.getAccountByUser(user);
+
                     //判断账户余额和提现金额
                     if(record.getAmount()<=accountByUser.getActMm()){
 

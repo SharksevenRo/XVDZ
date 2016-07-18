@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,6 +40,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	private String pdtNo;
 	private String pdtName;
 	private Double pdtIntRat;
+	@JsonIgnore
 	private String pdtLabel;
 	private String pdtPc;
 	private String pdtPicBs;

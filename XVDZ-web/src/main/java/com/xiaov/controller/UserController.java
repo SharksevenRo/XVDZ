@@ -329,7 +329,7 @@ public class UserController {
                     temp.setUsPwd("");
                 } else {
                     temp.setCode(APPConstant.ERROR);
-                    temp.setMessage("手机或密码错误，请重试");
+                    temp.setMessage("登录成功");
                     temp.setCode(APPConstant.SUCCESS);
                     temp = LazyObjecUtil.LazyOneSetNull(user, "role");
                 }

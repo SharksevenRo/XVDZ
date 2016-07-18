@@ -55,6 +55,7 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private Date updateTime;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date deleteTime;
+	@JsonIgnore
 	private String usRemark;
 	private Integer deleteFlag = 0;
 	private Integer isRecommend;

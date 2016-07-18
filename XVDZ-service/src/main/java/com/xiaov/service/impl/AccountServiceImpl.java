@@ -56,7 +56,7 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> implements Acco
 
         Criterion [] criterions= {Restrictions.eq("userInfo",userInfo),Restrictions.eq("deleteFlag",0)};
 
-        List<Account> accounts = dao.getEntitiestNotLazy(new Account(), null, criterions);
+        List<Account> accounts = dao.getEntitiestNotLazy(new Account(), new String[]{"userInfo"}, criterions);
 
         if(accounts.size()>1||accounts.size()==0){
             return null;

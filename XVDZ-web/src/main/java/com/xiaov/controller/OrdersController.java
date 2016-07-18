@@ -6,10 +6,7 @@ import com.xiaov.constant.APPConstant;
 import com.xiaov.model.*;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
-import com.xiaov.service.interfaces.DiscountCoupanService;
-import com.xiaov.service.interfaces.MaterialService;
-import com.xiaov.service.interfaces.OrdersService;
-import com.xiaov.service.interfaces.ProductService;
+import com.xiaov.service.interfaces.*;
 import com.xiaov.utils.LazyObjecUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +26,10 @@ public class OrdersController {
     private OrdersService ordersService;
     @Autowired
     private ProductService productService;
-
     @Autowired
     private MaterialService materialService;
-
+    @Autowired
+    private StyleService styleService;
     @Autowired
     private DiscountCoupanService discountCoupanService;
 
@@ -42,7 +39,6 @@ public class OrdersController {
     public MessageBean saveAjax(Orders orders) {
 
         try {
-
             //检查订单
             checkOrders(orders);
             orders.setOrState(Orders.UNPAY);
@@ -52,9 +48,10 @@ public class OrdersController {
                     ) {
                 detail.setOrDtNo(orders.getId());
             }
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.SUCCESS, "添加成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            e.printStackTrace();
+            return new MessageBean(APPConstant.SUCCESS, "添加失败"+e.getMessage());
         }
     }
 
@@ -160,6 +157,15 @@ public class OrdersController {
         //计算价格：
         double sum=0;
         for (OrderDetail detail:orders.getOrderDetails()){
+
+            String styleId=detail.getStyle();
+            //计算基本款式的价格
+            Style style = styleService.getOne(Style.class, styleId);
+            if(style!=null){
+                sum+=style.getPrice();
+            }else{
+                return false;
+            }
             //判断是否是团体订单，以及订单数量是否满足最小数量
             if(orders.getDbTypes().getId().equals("order.group")&&detail.getOrDtMount()>=detail.getDesigner_product().getMinnum()){
                 sum=+detail.getDesigner_product().getPdtPrc();
@@ -174,6 +180,10 @@ public class OrdersController {
                     sum+=material.getPrice();
                 }
             }
+            sum=sum*detail.getOrDtMount();
+            if(!orders.getOrTotal().equals(sum)){
+               throw  new RuntimeException("金额不对，后台计算的金额是"+sum+"前台的总额是"+orders.getOrTotal());
+            }
             //判断是否有折扣（如果使用优惠价就不能折扣？）
             if(orders.getDiscountCoupan().getId()!=null){
                 DiscountCoupan discountCoupan = discountCoupanService.getOne(DiscountCoupan.class, orders.getDiscountCoupan().getId());
@@ -187,6 +197,10 @@ public class OrdersController {
                 Double discount=detail.getDesigner_product().getPdtDsct();
                 if(discount!=null&&(discount>0d&&discount<1)){
                     sum=sum*discount;
+
+                    if(!orders.getOrRealCost().equals(sum)){
+                        throw  new RuntimeException("金额不对，后台计算的应付金额是"+sum+"前台的应付金额是"+orders.getOrRealCost());
+                    }
                 }else{
                     return  false;
                 }
