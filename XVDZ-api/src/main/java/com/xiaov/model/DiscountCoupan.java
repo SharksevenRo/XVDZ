@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,6 +34,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 
 	// Fields
 	private String id;
+	@JsonIgnore
 	private UserInfo userInfo;
 	private String disCouNo;
 	private Double disCouPrice;

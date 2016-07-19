@@ -3,7 +3,10 @@ package com.xiaov.service.impl;
 import com.xiaov.dao.OrderDetailDao;
 import com.xiaov.model.OrderDetail;
 import com.xiaov.service.interfaces.OrderDetailService;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.parsing.ReaderContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,13 +22,18 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail> impleme
     @Override
     public void delete(OrderDetail entity) {
 
+
         super.delete(entity);
     }
 
     @Override
     public List<OrderDetail> loadAll(OrderDetail entity) {
 
-        return super.loadAll(entity);
+        String [] fileds=new String []{"styleObj","designer_product"};
+        Criterion [] criterions={Restrictions.eq("orDtNo",entity.getOrDtNo())};
+        List<OrderDetail> entitiestNotLazy = dao.getEntitiestNotLazy(new OrderDetail(), fileds, criterions);
+        return entitiestNotLazy;
+
     }
 
     @Override

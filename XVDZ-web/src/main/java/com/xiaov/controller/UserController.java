@@ -93,15 +93,9 @@ public class UserController {
                                 if (disCodeNo != null&&!"".equals(disCodeNo)) // 是否绑定优惠码
                                 {
                                     List<DiscountCode> discode = discountCodeService.getByProperty("disCodeNo", disCodeNo);
-                                    if (discode.isEmpty())// 优惠码是否存在
+                                    if (discode.size()!=1)// 优惠码是否存在
                                     {
-                                        UserInfo user = new UserInfo();
-                                        user.setUsTel(usTel);
-                                        user.setUsName(usTel);
-                                        user.setUsPwd(Md5.GetMD5Code(usPwd));
-                                        user.setUsSex("保密");
-                                        user.setAddTime(new Date());
-                                        userService.save(user); // 注册用户ssionService.delete(one);
+                                        innerSessionService.delete(one);
                                         return new MessageBean(APPConstant.ERROR, "优惠码不存在或错误,请重新输入注册!");
 
                                     } else {

@@ -1,5 +1,6 @@
 package com.xiaov.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "mutitype", catalog = "xvdz")
+@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class MutiType {
 
     private String id;

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +21,7 @@ import com.xiaov.web.support.CustomDateSerializer;
 @Entity
 @Table(name = "user_info", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag", type = FieldType.I, value = "1")
+@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	// Fields

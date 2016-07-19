@@ -3,16 +3,17 @@ package com.xiaov.model;
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
-@Entity
-@Table(name = "Style", catalog = "xvdz")
-@StateDelete(propertyName = "deleteFlag", type = FieldType.I, value = "1")
 /**
  * Created by Sharkseven on 2016/7/13.
  */
+@Entity
+@Table(name = "Style", catalog = "xvdz")
+@StateDelete(propertyName = "deleteFlag", type = FieldType.I, value = "1")
+@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class Style extends Page<Style> implements java.io.Serializable {
 
     private String id;

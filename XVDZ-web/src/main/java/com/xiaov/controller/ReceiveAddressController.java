@@ -56,9 +56,9 @@ public class ReceiveAddressController {
 
         try {
             receiveAddressService.update(receiveAddress);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.SUCCESS, "修改成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            return new MessageBean(APPConstant.SUCCESS, "修改失败"+e.getMessage());
         }
     }
 

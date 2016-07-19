@@ -149,7 +149,18 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		if(product.getId()!=null){
 
 			Criterion[] eqs={Restrictions.eq("id",product.getId()),Restrictions.eq("deleteFlag",0)};
-			return dao.getEntitiestNotLazy(new Product(),new String[]{"productType","img","show","backImage"},eqs,product.getOffset(),product.getPageSize()).get(0);
+			Product product1 = dao.getEntitiestNotLazy(new Product(), new String[]{"productType", "img", "show", "backImage"}, eqs).get(0);
+			return  product1;
+		}
+		return null;
+	}
+
+	public Product geOneDetailNotClose(Product product) {
+		if(product.getId()!=null){
+
+			Criterion[] eqs={Restrictions.eq("id",product.getId()),Restrictions.eq("deleteFlag",0)};
+			Product product1 = dao.getEntitiestNotLazy(new Product(), new String[]{"productType", "img", "show", "backImage"}, eqs, product.getOffset(), product.getPageSize()).get(0);
+			return  product1;
 		}
 		return null;
 	}
@@ -167,7 +178,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 	}
 
 	public List<Product> moudule(Product product) {
-		Criterion [] criterions2={Restrictions.eq("isModule",1),Restrictions.eq("deleteFlag",0)};
-		return dao.getEntitiestNotLazyWithOrder(new Product(),new String[]{"productType","img","show","backImage"},criterions2,0,8, Order.desc("pdtSaleCount"));
+		Criterion [] criterions2={Restrictions.eq("isModule",product.getIsModule()),Restrictions.eq("deleteFlag",0)};
+		return dao.getEntitiestNotLazyWithOrder(new Product(),new String[]{"productType","img","show","backImage"},criterions2,product.getOffset(),product.getPageSize(), Order.desc("pdtSaleCount"));
 	}
 }

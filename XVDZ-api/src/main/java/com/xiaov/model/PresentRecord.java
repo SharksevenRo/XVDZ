@@ -4,6 +4,7 @@ import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
 import com.xiaov.web.support.CustomDateSerializer;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +17,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "present_record", catalog = "xvdz")
+@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class PresentRecord extends Page<PresentRecord>{
 
 

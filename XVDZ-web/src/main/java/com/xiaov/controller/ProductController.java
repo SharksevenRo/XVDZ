@@ -541,7 +541,7 @@ public class ProductController {
         Material mImg = saveFile(image, request, types, "设计师作品");
         Material mshowImage = saveFile(showImage, request, types, "设计师作品");
         Material mbackImage = saveFile(backImge, request, types, "设计师作品");
-        if(mImg!=null&&mshowImage!=null){
+        if(mImg!=null&&mshowImage!=null&&mbackImage!=null){
 
             product.setProductType(types);
             //设置溢价
@@ -552,6 +552,40 @@ public class ProductController {
             product.setBackImage(mbackImage);
             product.setAddTime(new Date());
             productService.save(product);
+            return new MessageBean(APPConstant.SUCCESS, product.getId());
+        }else{
+            return new MessageBean(APPConstant.SUCCESS, "上传失败，服务器异常");
+        }
+    }
+    /**
+     * 设计师作品上传
+     *
+     * @param request
+     * @param product
+     * @param showImage
+     * @return
+     */
+    @RequestMapping("/auth/designer/product/update")
+    @ResponseBody
+    public MessageBean designerUpdate(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage,MultipartFile backImge) {
+
+        Types types = new Types();
+        types.setId("designer.product");
+        Material mImg = saveFile(image, request, types, "设计师作品");
+        Material mshowImage = saveFile(showImage, request, types, "设计师作品");
+        Material mbackImage = saveFile(backImge, request, types, "设计师作品");
+        if(mImg!=null&&mshowImage!=null&&mbackImage!=null){
+
+            product.setProductType(types);
+            //设置溢价
+            mImg.setPrice(product.getPdtPrc());
+            mshowImage.setPrice(product.getPdtPrc());
+            product.setImg(mImg);
+            product.setShow(mshowImage);
+            product.setBackImage(mbackImage);
+            product.setAddTime(new Date());
+
+            productService.update(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
         }else{
             return new MessageBean(APPConstant.SUCCESS, "上传失败，服务器异常");
@@ -572,7 +606,12 @@ public class ProductController {
         InputStream inputStream = null;
         FileOutputStream fileOut = null;
         File file = null;
+
         try {
+
+            if(img==null){
+                return null;
+            }
             path = request.getRealPath("/");
             String[] split = img.getOriginalFilename().split("[.]");
             String suffix = "." + exChange(split[split.length - 1]);
@@ -654,11 +693,16 @@ public class ProductController {
         }
     }
 
+    /**
+     * 获取设计模块
+     * @param product
+     * @return
+     */
     @RequestMapping("/admin/designer/product/module")
     @ResponseBody
     public Page<Product> moudule(Product product){
         try {
-
+            product.setIsModule(1);
             List<Product> products = productService.moudule(product);
             if(products!=null){
                 product.setResult(products);
@@ -674,7 +718,31 @@ public class ProductController {
             return product;
         }
     }
+    /**
+     * 获取设计模块
+     * @param product
+     * @return
+     */
+    @RequestMapping("/admin/designer/product/all")
+    @ResponseBody
+    public Page<Product> all(Product product){
+        try {
 
+            product.setIsModule(0);
+            List<Product> products = productService.moudule(product);
+            if(products!=null){
+                product.setResult(products);
+            }else{
+                product.setCode(APPConstant.ERROR);
+                product.setMessage("参数不完整");
+            }
+            return product;
+        }catch (Exception e){
+            product.setCode(APPConstant.ERROR);
+            product.setMessage("服务器异常"+e.getMessage());
+            return product;
+        }
+    }
     /**
      * 获取设计师的某个作品
      * @param product id

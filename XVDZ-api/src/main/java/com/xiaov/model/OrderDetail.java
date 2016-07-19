@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,19 +38,23 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	private String color;
 	
 	//款式
+	@JsonIgnore
 	private String style;
 	//用户定制图片
 	private String pic;
 
 	private Product designer_product;
-
+	@JsonIgnore
 	private String image_front;
 
+	@JsonIgnore
 	private String image_back;
 
 
 	private List<Material> materials;
+	private Style styleObj;
 
+	@JsonIgnore
 	private String designer_product_id;
 
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -238,7 +243,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	public void setPic(String pic) {
 		this.pic = pic;
 	}
-	@Column(name = "style", length = 0)
+	@Transient
 	public String getStyle() {
 		return style;
 	}
@@ -274,7 +279,15 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	public void setDesigner_product(Product designer_product) {
 		this.designer_product = designer_product;
 	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "style")
+	public Style getStyleObj() {
+		return styleObj;
+	}
 
+	public void setStyleObj(Style styleObj) {
+		this.styleObj = styleObj;
+	}
 	@Transient
 	public List<Material> getMaterials() {
 		return materials;
@@ -291,4 +304,6 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	public void setDesigner_product_id(String designer_product_id) {
 		this.designer_product_id = designer_product_id;
 	}
+
+
 }

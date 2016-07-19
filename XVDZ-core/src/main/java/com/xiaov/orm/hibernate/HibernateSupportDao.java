@@ -474,11 +474,9 @@ public class HibernateSupportDao<T, PK extends Serializable> extends BasicHibern
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            getSession().close();
         }
         return null;
     }
-
     public <T> List<T> getEntitiestNotLazyWithOrder(T t, String[] fields,
                                                     Criterion[] eqs,int start, int max, Order order) {
 

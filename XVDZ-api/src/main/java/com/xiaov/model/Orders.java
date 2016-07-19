@@ -45,7 +45,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	/**
 	 * 结束
 	 */
-	public static final Integer FINISHED=new Integer(3);
+	public static final Integer FINISHED=new Integer(4);
 
 	// Fields
 	private String id;

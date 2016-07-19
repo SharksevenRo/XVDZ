@@ -21,7 +21,7 @@ public interface ProductService extends BaseService<Product>{
 	List<Product> search(SearchModel search);
 	public List<Product> pageByType(Product product);
 	public Product geOneDetail(Product product);
-
+	public Product geOneDetailNotClose(Product product);
 	public List<Product> hot(Product product);
 
 	List<Product> moudule(Product product);

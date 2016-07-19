@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,6 +23,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "discount_code_use_record", catalog = "xvdz")
+@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implements java.io.Serializable {
 
 	// Fields

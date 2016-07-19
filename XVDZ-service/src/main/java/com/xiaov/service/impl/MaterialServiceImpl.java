@@ -2,6 +2,8 @@ package com.xiaov.service.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
 import com.xiaov.model.Material;
@@ -34,5 +36,11 @@ public class MaterialServiceImpl extends BaseServiceImpl<Material> implements Ma
 	public Material getOne(Class clazz, String pk) {
 		
 		return super.getOne(clazz, pk);
+	}
+	@Override
+	public List<Material> getByids(Class clazz,List<String> ids){
+
+		Criterion [] criterions={Restrictions.in("id",ids)};
+		return dao.getEntitiestNotLazy(new Material(),new String []{"dbTypes"},criterions);
 	}
 }

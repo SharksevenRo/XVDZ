@@ -1,16 +1,22 @@
 package com.xiaov.service.impl;
 
 import com.xiaov.dao.OrdersDao;
+import com.xiaov.model.Material;
 import com.xiaov.model.OrderDetail;
 import com.xiaov.model.Orders;
+import com.xiaov.model.Product;
+import com.xiaov.service.interfaces.MaterialService;
 import com.xiaov.service.interfaces.OrderDetailService;
 import com.xiaov.service.interfaces.OrdersService;
+import com.xiaov.service.interfaces.ProductService;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,10 +28,12 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 
     @Autowired
     private OrdersDao dao;
-
 	@Autowired
 	private OrderDetailService orderDetailService;
-
+	@Autowired
+	private ProductService productService;
+	@Autowired
+	private MaterialService materialService;
     @Override
 	public void delete(Orders entity) {
 
@@ -40,9 +48,11 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	@Transactional
 	public void save(Orders entity) {
 
+		super.save(entity);
 		for (OrderDetail orderDetail: entity.getOrderDetails()
 				) {
 			orderDetail.setAddTime(new Date());
+			orderDetail.setOrDtNo(entity.getId());
 			orderDetailService.save(orderDetail);
 		}
 		super.save(entity);
@@ -114,7 +124,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		用SQL限定查询
 		*/
 		//先申明要关闭延迟加载的关联对象orderDetail
-		String[] fields=new String[]{"orderDetail","dbTypes","discountCoupan"};
+		String[] fields=new String[]{"user","dbTypes","discountCoupan"};
 		
 		//创建过滤条件,商品状态过滤
 		Criterion eq1 = Restrictions.eq("orState", true);
@@ -129,24 +139,62 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 
 	public List<Orders> getByColumn(Criterion[] criterions) {
 
-		String[] fields = new String[]{"orderDetail", "dbTypes", "discountCoupan"};
+		String[] fields = new String[]{"user", "dbTypes", "discountCoupan"};
 
 		return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
 
 	}
 
-	public List<Orders> getOrderDetai(Orders orders){
-		String[] fields = new String[]{"orderDetail", "dbTypes", "discountCoupan"};
-		if(orders.getUser().getDiscountCode()!=null&&!"".equals(orders.getUser().getDiscountCode())){
-			Criterion [] criterions={Restrictions.eq("discountCoupan.disCouNo",orders.getUser().getDiscountCode())};
-			return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
-		}
+	public List<Orders> getOrderDetail(Orders orders){
 
-		if(orders.getUser().getId()!=null&&!("".equals(orders.getUser().getId()))){
-			Criterion [] criterions={Restrictions.eq("user.id",orders.getUser().getId())};
-			return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
+
+		Criterion [] criterions={Restrictions.eq("user",orders.getUser())};
+		List<Orders> orderses = dao.getEntitiestNotLazy(new Orders(), null, criterions, orders.getOffset(), orders.getPageSize());
+		OrderDetail orderDetail=new OrderDetail();
+		Product product=new Product();
+		for (Orders order:orderses
+			 ) {
+
+			orderDetail.setOrDtNo(order.getId());
+			List<OrderDetail> orderDetails = orderDetailService.loadAll(orderDetail);
+			for (OrderDetail detail:orderDetails
+				 ) {
+				String materials="";
+				if(detail.getDesigner_product()!=null){
+					product.setId(detail.getDesigner_product().getId());
+					detail.setDesigner_product(productService.geOneDetail(product));
+				}
+				materials = detail.getImage_back() + "_" + detail.getImage_front();
+				List<String> strings = splitStr(materials);
+				List<Material> byids1 = materialService.getByids(Material.class,strings);
+				detail.setMaterials(byids1);
+			}
+			order.setOrderDetails(orderDetails);
 		}
-		return  null;
+		return  orderses;
+	}
+
+	/**
+	 * 切割字符串存入List集合
+	 * @param str
+	 * @return
+     */
+	private List<String> splitStr(String str) {
+
+		List<String> strs = null;
+		if (str != null && !"".equals(str)) {
+
+			String[] split = str.split("[_]");
+
+			if (split.length > 1) {
+				strs = new ArrayList<String>();
+
+				for (String str1 : split) {
+					strs.add(str1);
+				}
+			}
+		}
+		return strs;
 	}
 }
 

@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import com.xiaov.orm.core.Page;
 import com.xiaov.web.support.CustomDateSerializer;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,6 +27,7 @@ import com.xiaov.orm.core.FieldType;
 @Entity
 @Table(name = "receive_address", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
+@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class ReceiveAddress extends Page<ReceiveAddress> implements java.io.Serializable {
 
 	// Fields

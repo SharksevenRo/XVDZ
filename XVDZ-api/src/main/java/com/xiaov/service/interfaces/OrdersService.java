@@ -11,5 +11,5 @@ import java.util.List;
 public interface OrdersService extends BaseService<Orders> {
 
 
-    public List<Orders> getOrderDetai(Orders orders);
+    public List<Orders> getOrderDetail(Orders orders);
 }

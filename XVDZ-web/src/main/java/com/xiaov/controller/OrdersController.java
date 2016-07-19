@@ -61,9 +61,9 @@ public class OrdersController {
 
         try {
             ordersService.update(orders);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.SUCCESS, "修改成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            return new MessageBean(APPConstant.SUCCESS, "修改失败"+e.getMessage());
         }
     }
 
@@ -96,6 +96,26 @@ public class OrdersController {
             return page;
         }
     }
+    @RequestMapping("/auth/orders/detail")
+    @ResponseBody
+    public Page<Orders> detail(Orders orders) {
+
+        try{
+
+            List<Orders> orderDetail = ordersService.getOrderDetail(orders);
+            String[] fields = new String[]{"user", "dbTypes", "discountCoupan"};
+            orderDetail= LazyObjecUtil.LazySetNull(orderDetail,fields);
+            orders.setResult(orderDetail);
+            orders.setCode(APPConstant.SUCCESS);
+
+            return  orders;
+        } catch (Exception e) {
+
+            orders.setCode(APPConstant.ERROR);
+            orders.setMessage("获取失败"+orders.getMessage());
+            return orders;
+        }
+    }
 
     @RequestMapping("/auth/orders/getOne")
     @ResponseBody
@@ -118,7 +138,7 @@ public class OrdersController {
     public Page<Orders> pageDetail(Orders orders) {
         Page<Orders> page = new Page<Orders>();
         try {
-            page.setResult(ordersService.getOrderDetai(orders));
+            page.setResult(ordersService.getOrderDetail(orders));
             LazyObjecUtil.LazyPageSetNull(page, new String[]{"user", "discountCoupan", "dbTypes"});
             return page;
         } catch (Exception e) {
@@ -142,9 +162,10 @@ public class OrdersController {
         Product one=null;
 
         List<OrderDetail> orderDetails = getOrderDetails(orders.getMutiType());
-        String materials = "";
+
         for (OrderDetail detail : orderDetails
                 ) {
+            String materials = "";
             one= productService.getOne(Product.class, detail.getDesigner_product_id());
             detail.setDesigner_product(one);
             materials = detail.getImage_back() + "_" + detail.getImage_front();

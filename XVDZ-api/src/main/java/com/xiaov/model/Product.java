@@ -34,6 +34,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
 	// Fields
 
 	private String id;
+	@JsonIgnore
 	private Types productType;
 	private Material img;
 	private String usId;

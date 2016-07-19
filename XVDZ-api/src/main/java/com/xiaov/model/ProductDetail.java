@@ -9,12 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.xiaov.orm.core.Page;
 
 @Entity
 @Table(name = "product_detail", catalog = "xvdz")
+@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class ProductDetail extends Page<ProductDetail>{
 
 	

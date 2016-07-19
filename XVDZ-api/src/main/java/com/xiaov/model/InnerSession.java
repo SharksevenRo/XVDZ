@@ -1,5 +1,6 @@
 package com.xiaov.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "innersession", catalog = "xvdz")
+@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class InnerSession {
 
     private String id;

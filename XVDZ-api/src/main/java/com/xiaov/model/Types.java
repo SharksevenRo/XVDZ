@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,6 +30,7 @@ import com.xiaov.web.support.CustomDateSerializer;
 @Entity
 @Table(name = "types", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
+@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class Types extends Page<Types> implements java.io.Serializable {
 
 	// Fields
