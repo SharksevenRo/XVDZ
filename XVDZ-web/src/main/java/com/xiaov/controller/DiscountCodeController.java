@@ -7,6 +7,7 @@ import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 
 import com.xiaov.service.interfaces.DiscountCodeService;
+import com.xiaov.service.interfaces.UserService;
 import com.xiaov.utils.LazyObjecUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Created by zouziyang on 4/21/16.
  */
@@ -22,6 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DiscountCodeController {
     @Autowired
     private DiscountCodeService discountCodeService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/admin/discountCode/saveAjax")
     @ResponseBody
@@ -35,16 +41,39 @@ public class DiscountCodeController {
         }
     }
 
-    @RequestMapping("/admin/discountCode/updateAjax")
+    @RequestMapping("/admin/discountCode/update")
     @ResponseBody
     public MessageBean updateAjax(DiscountCode discountCode) {
 
         try {
+
             discountCodeService.update(discountCode);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
         	e.printStackTrace();
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
+        }
+    }
+    @RequestMapping("/atuh/discountCode/transfer")
+    @ResponseBody
+    public MessageBean transfer(DiscountCode discountCode) {
+
+        try {
+            List<UserInfo> phone = userService.getByProperty("usTel", discountCode.getTowho());
+            if(phone.size()!=1){
+                return new MessageBean(APPConstant.ERROR, "转让错误，请确认手机号码是否正确");
+            }
+
+            if(phone.get(0).getTypeId().equals("user.salesman")){
+                return new MessageBean(APPConstant.ERROR, "转让错误，你要转让的用户不是业务员");
+            }
+            discountCode.setSalesman(phone.get(0).getId());
+
+            discountCodeService.update(discountCode);
+            return new MessageBean(APPConstant.SUCCESS, "转让成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.SUCCESS, "服务器异常"+e.getMessage());
         }
     }
 

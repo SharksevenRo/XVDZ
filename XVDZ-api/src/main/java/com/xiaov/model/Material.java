@@ -1,26 +1,16 @@
 package com.xiaov.model;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
 import com.xiaov.web.support.CustomDateSerializer;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Material entity. @author MyEclipse Persistence Tools
@@ -28,11 +18,11 @@ import com.xiaov.web.support.CustomDateSerializer;
 @Entity
 @Table(name = "material", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
-@JsonIgnoreProperties(value ={"hibernateLazyInitializer"})
 public class Material extends Page<Material> implements java.io.Serializable {
 
 	// Fields
 	private String id;
+	@JsonIgnore
 	private Types dbTypes;
 	private String materialNo;
 	private String meterialName;

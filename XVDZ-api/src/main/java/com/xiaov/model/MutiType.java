@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "mutitype", catalog = "xvdz")
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
+
 public class MutiType {
 
     private String id;

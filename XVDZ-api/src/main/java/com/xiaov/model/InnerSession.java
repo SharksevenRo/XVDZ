@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "innersession", catalog = "xvdz")
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
+
 public class InnerSession {
 
     private String id;

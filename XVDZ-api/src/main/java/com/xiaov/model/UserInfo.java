@@ -21,7 +21,7 @@ import com.xiaov.web.support.CustomDateSerializer;
 @Entity
 @Table(name = "user_info", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag", type = FieldType.I, value = "1")
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
+
 public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	// Fields
@@ -69,6 +69,8 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private String oldPwd;
 
 	private String authCode;
+
+	private String QRCode_img;
 
 	// Constructors
 
@@ -414,5 +416,14 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+	@Column(name="qrcode_img")
+	public String getQRCode_img() {
+		return QRCode_img;
+	}
+
+	public void setQRCode_img(String QRCode_img) {
+		this.QRCode_img = QRCode_img;
 	}
 }

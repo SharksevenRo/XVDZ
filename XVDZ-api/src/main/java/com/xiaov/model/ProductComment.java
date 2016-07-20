@@ -24,7 +24,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "product_comment", catalog = "xvdz")
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
+
 public class ProductComment extends Page<Orders> implements java.io.Serializable {
 
 	// Fields

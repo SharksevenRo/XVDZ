@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "present_record", catalog = "xvdz")
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
+
 public class PresentRecord extends Page<PresentRecord>{
 
 

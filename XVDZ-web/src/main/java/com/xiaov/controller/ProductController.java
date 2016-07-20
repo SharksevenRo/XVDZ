@@ -719,7 +719,7 @@ public class ProductController {
         }
     }
     /**
-     * 获取设计模块
+     * 获取所有定制作品
      * @param product
      * @return
      */

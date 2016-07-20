@@ -84,16 +84,18 @@ public class OrdersController {
     @RequestMapping("/auth/orders/page")
     @ResponseBody
     public Page<Orders> page(Orders orders) {
-        Page<Orders> page = new Page<Orders>();
         try {
 
-            page = ordersService.page(orders);
-            page = LazyObjecUtil.LazyPageSetNull(page, new String[]{"user", "discountCoupan", "dbTypes"});
-            return page;
+
+            List<Orders> orderes = ordersService.pageOrder(orders);
+           String [] fields= new String[]{"user", "discountCoupan", "dbTypes"};
+            LazyObjecUtil.LazySetNull(orderes,fields);
+            orders.setResult(orderes);
+            return orders;
         } catch (Exception e) {
-            page.setCode(APPConstant.ERROR);
-            page.setMessage("服务器忙");
-            return page;
+            orders.setCode(APPConstant.ERROR);
+            orders.setMessage("服务器忙");
+            return orders;
         }
     }
     @RequestMapping("/auth/orders/detail")
@@ -177,6 +179,7 @@ public class OrdersController {
         orders.setOrderDetails(orderDetails);
         //计算价格：
         double sum=0;
+        Product product;
         for (OrderDetail detail:orders.getOrderDetails()){
 
             String styleId=detail.getStyle();
@@ -187,9 +190,14 @@ public class OrdersController {
             }else{
                 return false;
             }
+            product=productService.getOne(Product.class, detail.getDesigner_product_id());
             //判断是否是团体订单，以及订单数量是否满足最小数量
-            if(orders.getDbTypes().getId().equals("order.group")&&detail.getOrDtMount()>=detail.getDesigner_product().getMinnum()){
-                sum=+detail.getDesigner_product().getPdtPrc();
+            if(orders.getDbTypes().getId().equals("order.group")){
+                if(detail.getOrDtMount()>=detail.getDesigner_product().getMinnum()){
+                    sum=+product.getPdtPrc();
+                }else{
+                    sum=+product.getPdtPrc();
+                }
             }else{
                 //正常价格
                 sum=+detail.getDesigner_product().getPdtPrc();

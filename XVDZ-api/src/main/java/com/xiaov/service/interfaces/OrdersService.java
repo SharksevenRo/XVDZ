@@ -12,4 +12,5 @@ public interface OrdersService extends BaseService<Orders> {
 
 
     public List<Orders> getOrderDetail(Orders orders);
+    public List<Orders> pageOrder(Orders orders);
 }

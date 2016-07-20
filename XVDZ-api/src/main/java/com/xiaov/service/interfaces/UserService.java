@@ -25,4 +25,5 @@ public interface UserService extends BaseService<UserInfo>{
 	public List<UserInfo> getDesignerByMutiType(PageRequest pageRequest, String mutiType);
 
 	public List<UserInfo> search(SearchModel search);
+	public  List<UserInfo> getByProperty(String propertynmae,String propertyvalues);
 }

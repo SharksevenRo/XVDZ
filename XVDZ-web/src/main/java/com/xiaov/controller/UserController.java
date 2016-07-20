@@ -12,10 +12,12 @@ import com.xiaov.service.interfaces.UserService;
 import com.xiaov.utils.CompressPicUtil;
 import com.xiaov.utils.LazyObjecUtil;
 import com.xiaov.utils.Md5;
+import com.xiaov.utils.QRCodeUtil;
 import com.xiaov.web.support.AuthenticationCahce;
 import com.xiaov.web.support.CookieUtil;
 import com.xiaov.web.support.SendMessage;
 import com.xiaov.web.support.UserToken;
+import org.apache.tools.ant.taskdefs.email.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -167,14 +169,12 @@ public class UserController {
     @ResponseBody
     public Page<UserInfo> page(UserInfo page) {
 
-        // Hibnernate 的延迟加载默认是打开的，例如UserInfo有个成员是RoleModel
-        // 也是个持久化对象，正常查询是只能得到一个代理对象，里面只有主键id
-        // 但是有的时候需要得到完整的RoleModel对象，在userService里有动态关闭某一属性的延迟加载的实例
         Page<UserInfo> results = null;
         try {
+
             results = userService.page(page);
-            // 去除代理对象，现在只是简单处理，后期考虑转换成带有id主键的关联对象,user没有，所以注释
-            // results=LazyObjecUtil.LazyPageSetNull(results,"role" );
+
+             results=LazyObjecUtil.LazyPageSetNull(results,"role" );
             return results;
         } catch (Exception e) {
             e.printStackTrace();
@@ -485,6 +485,28 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/atuh/user/gen/qrcode")
+    @ResponseBody
+    public MessageBean genQRCode(UserInfo user,HttpServletRequest request){
+
+        try {
+            List<DiscountCode> salesman = discountCodeService.getByProperty("salesman", user.getId());
+            if(salesman.size()!=1){
+                return new MessageBean(APPConstant.ERROR,"数据错误，该业务员有两个以上优惠码或者无优惠吗,请检查");
+            }
+            String url= "http://store.xiaovdingzhi.com/index.php?page=style&coupon="+salesman.get(0).getDisCodeNo();
+            String path=request.getRealPath("/");
+            String fileName=UUID.randomUUID().toString();
+            QRCodeUtil.encode(url, path+"img/QRCode/xiaoV.jpg", path+"image/salseman/QRCode",fileName, true);
+            user.setQRCode_img("image/salseman/QRCode/"+fileName+".jpg");
+            userService.update(user);
+            return new MessageBean(APPConstant.SUCCESS,user.getQRCode_img());
+        }catch (Exception e){
+            return new MessageBean(APPConstant.ERROR,"生成二维码失败"+e.getMessage());
+        }
+
+
+    }
     @ResponseBody
     @RequestMapping("/admin/designer/search")
     public Page<SearchModel> search(SearchModel search) {
@@ -513,6 +535,8 @@ public class UserController {
                 char c = str.charAt(i);
                 if(Character.isUpperCase(c)){
                     sb.append(Character.toLowerCase(c));
+                }else{
+                    sb.append(c);
                 }
             }
         }

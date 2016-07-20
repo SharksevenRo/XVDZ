@@ -34,6 +34,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	private ProductService productService;
 	@Autowired
 	private MaterialService materialService;
+
     @Override
 	public void delete(Orders entity) {
 
@@ -69,79 +70,10 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	}
 	
 
-	public List<Orders> example(){
-		
-		/*Restrictions.eq
+	public List<Orders> pageOrder(Orders orders) {
 
-		＝
-
-		Restrictions.ne
-
-		Restrictions.allEq
-
-		＜＞
-
-		利用Map来进行多个等于的限制
-
-		Restrictions.gt
-
-		＞
-
-		Restrictions.ge
-
-		＞＝
-
-		Restrictions.lt
-
-		＜
-
-		Restrictions.le
-
-		＜＝
-
-		Restrictions.between
-
-		BETWEEN
-
-		Restrictions.like
-
-		LIKE
-
-		Restrictions.in
-
-		in
-
-		Restrictions.and
-
-		and
-
-		Restrictions.or
-
-		or
-
-		Restrictions.sqlRestriction
-
-		用SQL限定查询
-		*/
-		//先申明要关闭延迟加载的关联对象orderDetail
-		String[] fields=new String[]{"user","dbTypes","discountCoupan"};
-		
-		//创建过滤条件,商品状态过滤
-		Criterion eq1 = Restrictions.eq("orState", true);
-		//商品类型
-		Criterion eq2 = Restrictions.eq("dbTypes.typeName", "非卖品");
-		//总额大于
-		Criterion ge=Restrictions.sizeGe("orTotal", 400);
-		
-		Criterion [] criterions={eq1,eq2,ge};
-		return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
-	}
-
-	public List<Orders> getByColumn(Criterion[] criterions) {
-
-		String[] fields = new String[]{"user", "dbTypes", "discountCoupan"};
-
-		return dao.getEntitiestNotLazy(new Orders(), fields, criterions);
+		Criterion [] criterions={Restrictions.eq("deleteFlag",0),Restrictions.eq("user",orders.getUser()),Restrictions.in("orState",new Integer[]{0,1,2,3,4})};
+		return dao.getEntitiestNotLazy(new Orders(), null,criterions,orders.getOffset(),orders.getPageSize() );
 
 	}
 

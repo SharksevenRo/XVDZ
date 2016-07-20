@@ -57,6 +57,8 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	private Double orDiscount;
 	private Double orRealCost;
 	private Integer orState;
+
+	private String pay_type;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
 	private Date updateTime;
@@ -272,5 +274,13 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	public void setLogisticsNo(String logisticsNo) {
 		this.logisticsNo = logisticsNo;
+	}
+
+	@Column(name="pay_type")
+	public String getPay_type() {
+		return pay_type;
+	}
+	public void setPay_type(String pay_type) {
+		this.pay_type = pay_type;
 	}
 }

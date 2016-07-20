@@ -107,12 +107,19 @@ public class QRCodeUtil {
     }
 
 
-    public static void encode(String content, String imgPath, String destPath,
+    public static void encode(String content, String imgPath, String destPath,String fileName,
                               boolean needCompress) throws Exception {
         BufferedImage image = QRCodeUtil.createImage(content, imgPath,
                 needCompress);
         mkdirs(destPath);
-        String file = new Random().nextInt(99999999)+".jpg";
+        String file;
+        if(fileName==null){
+            file = new Random().nextInt(99999999)+".jpg";
+        }else{
+            file = fileName+".jpg";
+        }
+
+
         ImageIO.write(image, FORMAT_NAME, new File(destPath+"/"+file));
     }
 
@@ -128,18 +135,18 @@ public class QRCodeUtil {
 
     public static void encode(String content, String imgPath, String destPath)
             throws Exception {
-        QRCodeUtil.encode(content, imgPath, destPath, false);
+        QRCodeUtil.encode(content, imgPath, destPath, null,false);
     }
 
 
     public static void encode(String content, String destPath,
                               boolean needCompress) throws Exception {
-        QRCodeUtil.encode(content, null, destPath, needCompress);
+        QRCodeUtil.encode(content, null, destPath,null, needCompress);
     }
 
 
     public static void encode(String content, String destPath) throws Exception {
-        QRCodeUtil.encode(content, null, destPath, false);
+        QRCodeUtil.encode(content, null, destPath, null,false);
     }
 
 

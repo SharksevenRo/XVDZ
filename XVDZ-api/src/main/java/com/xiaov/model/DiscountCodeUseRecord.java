@@ -23,7 +23,7 @@ import com.xiaov.web.support.CustomDateSerializer;
  */
 @Entity
 @Table(name = "discount_code_use_record", catalog = "xvdz")
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
+
 public class DiscountCodeUseRecord extends Page<DiscountCodeUseRecord> implements java.io.Serializable {
 
 	// Fields

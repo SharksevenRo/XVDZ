@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Style", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag", type = FieldType.I, value = "1")
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
+
 public class Style extends Page<Style> implements java.io.Serializable {
 
     private String id;
@@ -34,6 +34,10 @@ public class Style extends Page<Style> implements java.io.Serializable {
     private String backimg2;
 
     private String coordinate;
+
+    private String description;
+
+    private String pdtdesc;
 
     private Double price;
 
@@ -167,5 +171,21 @@ public class Style extends Page<Style> implements java.io.Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+    @Column(name="description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    @Column(name="pdtdesc")
+    public String getPdtdesc() {
+        return pdtdesc;
+    }
+
+    public void setPdtdesc(String pdtdesc) {
+        this.pdtdesc = pdtdesc;
     }
 }

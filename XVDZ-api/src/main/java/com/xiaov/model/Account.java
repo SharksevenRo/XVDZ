@@ -27,7 +27,6 @@ import com.xiaov.web.support.CustomDateSerializer;
 @Entity
 @Table(name = "account", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
 public class Account extends Page<Account> implements java.io.Serializable {
 
 	// Fields

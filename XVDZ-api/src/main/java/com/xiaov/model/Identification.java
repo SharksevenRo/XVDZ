@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Table(name = "identification", catalog = "xvdz")
 @Entity
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
+
 public class Identification {
 
     private String id;

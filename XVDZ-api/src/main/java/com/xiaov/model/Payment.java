@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "payment", catalog = "xvdz")
 @StateDelete(propertyName = "deleteFlag",type = FieldType.I,value="1")
-@JsonIgnoreProperties(value={ "hibernateLazyInitializer" })
+
 public class Payment extends Page<Payment>{
 
 
