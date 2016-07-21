@@ -77,6 +77,14 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 
 	private Integer isModule;
+
+	private String style;
+	private String designer_product_id;
+	private String color;
+
+	//溢价
+	private Double premium;
+
 	
 	private List<ProductDetail> detail;
 
@@ -426,5 +434,36 @@ public class Product extends Page<Product> implements java.io.Serializable {
 
 	public void setPdtPicBp(String pdtPicBp) {
 		this.pdtPicBp = pdtPicBp;
+	}
+
+	@Column(name="style",length = 33)
+	public String getStyle() {
+		return style;
+	}
+	public void setStyle(String style) {
+		this.style = style;
+	}
+	@Column(name="designer_product_id")
+	public String getDesigner_product_id() {
+		return designer_product_id;
+	}
+
+	public void setDesigner_product_id(String designer_product_id) {
+		this.designer_product_id = designer_product_id;
+	}
+	@Column(name="color")
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+	@Column(name="premium")
+	public Double getPremium() {
+		return premium;
+	}
+	public void setPremium(Double premium) {
+		this.premium = premium;
 	}
 }

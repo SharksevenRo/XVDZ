@@ -126,7 +126,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pay_type_id")
+	@JoinColumn(name = "type_id")
 	public Types getDbTypes() {
 		return this.dbTypes;
 	}

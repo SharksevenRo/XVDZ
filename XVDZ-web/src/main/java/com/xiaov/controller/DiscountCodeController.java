@@ -46,7 +46,6 @@ public class DiscountCodeController {
     public MessageBean updateAjax(DiscountCode discountCode) {
 
         try {
-
             discountCodeService.update(discountCode);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
@@ -54,17 +53,19 @@ public class DiscountCodeController {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
     }
-    @RequestMapping("/atuh/discountCode/transfer")
+    @RequestMapping("/auth/discountCode/transfer")
     @ResponseBody
     public MessageBean transfer(DiscountCode discountCode) {
 
         try {
+            if(discountCode.getId()==null){
+                return new MessageBean(APPConstant.ERROR, "转让错误，优惠码id为空");
+            }
             List<UserInfo> phone = userService.getByProperty("usTel", discountCode.getTowho());
             if(phone.size()!=1){
                 return new MessageBean(APPConstant.ERROR, "转让错误，请确认手机号码是否正确");
             }
-
-            if(phone.get(0).getTypeId().equals("user.salesman")){
+            if(!phone.get(0).getTypeId().equals("user.salesman")){
                 return new MessageBean(APPConstant.ERROR, "转让错误，你要转让的用户不是业务员");
             }
             discountCode.setSalesman(phone.get(0).getId());

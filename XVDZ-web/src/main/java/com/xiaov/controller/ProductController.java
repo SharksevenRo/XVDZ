@@ -8,6 +8,7 @@ import com.xiaov.service.impl.ProductDetailServiceImpl;
 import com.xiaov.service.impl.ProductServiceImpl;
 import com.xiaov.service.interfaces.MaterialService;
 import com.xiaov.service.interfaces.ProductService;
+import com.xiaov.service.interfaces.StyleService;
 import com.xiaov.utils.*;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
@@ -21,10 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class ProductController {
@@ -41,6 +39,10 @@ public class ProductController {
 
     @Autowired
     private MaterialService materialService;
+
+    @Autowired
+    private StyleService styleService;
+
 
     private String path;
     private static int bufSize = 512; // size of bytes
@@ -78,6 +80,7 @@ public class ProductController {
     @ResponseBody
     public MessageBean commit(Product product) {
 
+
         String name="定制商品";
         try {
             if(product.getIsGroup()!=null&&product.getIsGroup().equals(1)){
@@ -86,11 +89,14 @@ public class ProductController {
                 }
                 name="团体"+name;
             }
-            if(product.getPdtName()==null){
+            if(product.getPdtName()==null||"".equals(product.getPdtName())){
                 product.setPdtName(name);
             }
             Types types=new Types();
             types.setId("designer.product");
+            Double count = countPrice(product);
+
+            product.setPdtPrc(count);
             product.setProductType(types);
             product.setAddTime(new Date());
             productService.save(product);
@@ -572,28 +578,28 @@ public class ProductController {
     public MessageBean designerUpdate(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage,MultipartFile backImge) {
 
         Types types = new Types();
-        types.setId("designer.product");
+
+        Product one = productService.getOne(Product.class, product.getId());
         Material mImg = saveFile(image, request, types, "设计师作品");
         Material mshowImage = saveFile(showImage, request, types, "设计师作品");
         Material mbackImage = saveFile(backImge, request, types, "设计师作品");
-        if(mImg!=null&&mshowImage!=null&&mbackImage!=null){
 
-            product.setProductType(types);
-            //设置溢价
+        if(mImg!=null){
+            one.setImg(mImg);
             mImg.setPrice(product.getPdtPrc());
-            mshowImage.setPrice(product.getPdtPrc());
-            product.setImg(mImg);
-            product.setShow(mshowImage);
-            product.setBackImage(mbackImage);
-            product.setAddTime(new Date());
-
-            productService.update(product);
-            return new MessageBean(APPConstant.SUCCESS, product.getId());
-        }else{
-            return new MessageBean(APPConstant.SUCCESS, "上传失败，服务器异常");
         }
-
-
+        if(mbackImage!=null){
+            one.setBackImage(mbackImage);
+        }
+        if(mshowImage!=null){
+            one.setShow(mshowImage);
+        }
+        if(product.getPdtPrc()!=null){
+            one.setPdtPrc(product.getPdtPrc());
+        }
+        product.setUpdateTime(new Date());
+        productService.update(product);
+        return new MessageBean(APPConstant.SUCCESS, product.getId());
     }
 
     /**
@@ -770,7 +776,6 @@ public class ProductController {
             return product;
         }
     }
-
     /**
      * 商品搜索
      * @param search search
@@ -843,4 +848,39 @@ public class ProductController {
 
     }
 
+    private Double countPrice(Product product){
+
+        Double sum=0d;
+        Style one = styleService.getOne(Style.class, product.getStyle());
+        sum+=one.getPrice();
+        String images = product.getDesigner_product_id();
+        List<String> strings = splitStr(images);
+        List<Material> byids = materialService.getByids(Material.class, strings);
+
+        for (Material material:byids
+             ) {
+            sum+=material.getPrice();
+        }
+
+        return  sum;
+    }
+
+
+    private List<String> splitStr(String str) {
+
+        List<String> strs = null;
+        if (str != null && !"".equals(str)) {
+
+            String[] split = str.split("[_]");
+
+            if (split.length > 1) {
+                strs = new ArrayList<String>();
+
+                for (String str1 : split) {
+                    strs.add(str1);
+                }
+            }
+        }
+        return strs;
+    }
 }

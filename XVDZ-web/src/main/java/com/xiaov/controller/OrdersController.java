@@ -36,22 +36,20 @@ public class OrdersController {
 
     @RequestMapping("/auth/orders/save")
     @ResponseBody
-    public MessageBean saveAjax(Orders orders) {
+    public Orders saveAjax(Orders orders) {
 
         try {
             //检查订单
-            checkOrders(orders);
+            orders=checkOrders(orders);
             orders.setOrState(Orders.UNPAY);
             orders.setAddTime(new Date());
             ordersService.save(orders);
-            for (OrderDetail detail:orders.getOrderDetails()
-                    ) {
-                detail.setOrDtNo(orders.getId());
-            }
-            return new MessageBean(APPConstant.SUCCESS, "添加成功");
+            return orders;
         } catch (Exception e) {
             e.printStackTrace();
-            return new MessageBean(APPConstant.SUCCESS, "添加失败"+e.getMessage());
+            orders.setCode(APPConstant.ERROR);
+           orders.setMessage("服务器异常"+e.getMessage());
+           return orders;
         }
     }
 
@@ -109,7 +107,9 @@ public class OrdersController {
             orderDetail= LazyObjecUtil.LazySetNull(orderDetail,fields);
             orders.setResult(orderDetail);
             orders.setCode(APPConstant.SUCCESS);
-
+            orders.setOrderDetails(null);
+            orders.setDbTypes(null);
+            orders.setDiscountCoupan(null);
             return  orders;
         } catch (Exception e) {
 
@@ -126,7 +126,6 @@ public class OrdersController {
             Orders one = ordersService.getOne(orders.getClass(), orders.getId());
             one = LazyObjecUtil.LazyOneSetNull(one, new String[]{"user", "discountCoupan", "dbTypes"});
             return one;
-
         } catch (Exception e) {
             Orders page = new Orders();
             page.setCode(APPConstant.ERROR);
@@ -157,85 +156,61 @@ public class OrdersController {
      * @param orders
      * @return
      */
-    private boolean checkOrders(Orders orders) {
+    private Orders checkOrders(Orders orders) {
 
-        double cost = 0;
 
+        boolean isDiscount=false;
         Product one=null;
 
         List<OrderDetail> orderDetails = getOrderDetails(orders.getMutiType());
-
-        for (OrderDetail detail : orderDetails
-                ) {
-            String materials = "";
-            one= productService.getOne(Product.class, detail.getDesigner_product_id());
-            detail.setDesigner_product(one);
-            materials = detail.getImage_back() + "_" + detail.getImage_front();
-            List<String> strings = splitStr(materials);
-            List<Material> byids1 = materialService.getByids(Material.class,strings);
-            detail.setMaterials(byids1);
-        }
-
         orders.setOrderDetails(orderDetails);
         //计算价格：
-        double sum=0;
-        Product product;
-        for (OrderDetail detail:orders.getOrderDetails()){
+        Double sum=0d;
+        Double realCost=0d;
+        for (OrderDetail detail : orderDetails
+                ) {
 
-            String styleId=detail.getStyle();
-            //计算基本款式的价格
-            Style style = styleService.getOne(Style.class, styleId);
-            if(style!=null){
-                sum+=style.getPrice();
-            }else{
-                return false;
-            }
-            product=productService.getOne(Product.class, detail.getDesigner_product_id());
-            //判断是否是团体订单，以及订单数量是否满足最小数量
+            one= productService.getOne(Product.class, detail.getProduct_id());
             if(orders.getDbTypes().getId().equals("order.group")){
-                if(detail.getOrDtMount()>=detail.getDesigner_product().getMinnum()){
-                    sum=+product.getPdtPrc();
-                }else{
-                    sum=+product.getPdtPrc();
-                }
-            }else{
-                //正常价格
-                sum=+detail.getDesigner_product().getPdtPrc();
-            }
-            //计算使用的图片的价格
-            for(Material material:detail.getMaterials()){
-                //计算图案jiage
-                if(material.getPrice()!=null&&material.getPrice()!=0){
-                    sum+=material.getPrice();
-                }
-            }
-            sum=sum*detail.getOrDtMount();
-            if(!orders.getOrTotal().equals(sum)){
-               throw  new RuntimeException("金额不对，后台计算的金额是"+sum+"前台的总额是"+orders.getOrTotal());
-            }
-            //判断是否有折扣（如果使用优惠价就不能折扣？）
-            if(orders.getDiscountCoupan().getId()!=null){
-                DiscountCoupan discountCoupan = discountCoupanService.getOne(DiscountCoupan.class, orders.getDiscountCoupan().getId());
-                //判断优惠卷是否有效
-                if(checkCoupan(orders.getDiscountCoupan())){
-                    //有效进行优惠卷使用
-                    sum-=discountCoupan.getDisCouPrice();
-                    //注销优惠卷
-                }
-            }else{
-                Double discount=detail.getDesigner_product().getPdtDsct();
-                if(discount!=null&&(discount>0d&&discount<1)){
-                    sum=sum*discount;
 
-                    if(!orders.getOrRealCost().equals(sum)){
-                        throw  new RuntimeException("金额不对，后台计算的应付金额是"+sum+"前台的应付金额是"+orders.getOrRealCost());
-                    }
+
+                //判断是否是团体订单，并判读该商品是否支持团体定制
+                if(one.getIsGroup()==1&&detail.getCount()>=one.getMinnum()){
+                    sum=+one.getGroupPrice()*detail.getCount();
+                    realCost=one.getGroupPrice()*detail.getCount();
+                    isDiscount=false;
                 }else{
-                    return  false;
+                    sum+=one.getPdtPrc()*detail.getCount();
+                    realCost=one.getGroupPrice()*detail.getCount();
+                    //判断是否打折
+                    if(one.getPdtDsct()!=null&&one.getPdtDsct()!=0&&one.getPdtDsct()<1){
+                        sum=sum*one.getPdtDsct();
+                        isDiscount=false;
+                    }
+                }
+            }else{
+                sum+=one.getPdtPrc()*detail.getCount();
+                realCost=one.getPdtPrc()*detail.getCount();
+                //判断是否打折
+                if(one.getPdtDsct()!=null&&one.getPdtDsct()!=0&&one.getPdtDsct()<1){
+                    sum=sum*one.getPdtDsct();
+                    isDiscount=false;
                 }
             }
         }
-        return true;
+        if(orders.getDiscountCoupan().getId()!=null){
+            DiscountCoupan discountCoupan = discountCoupanService.getOne(DiscountCoupan.class, orders.getDiscountCoupan().getId());
+            //判断优惠卷是否有效
+            if(checkCoupan(orders.getDiscountCoupan())){
+                //有效进行优惠卷使用
+                sum-=discountCoupan.getDisCouPrice();
+                //注销优惠卷
+                off(discountCoupan);
+            }
+        }
+        orders.setOrTotal(realCost);
+        orders.setOrRealCost(sum);
+        return orders;
     }
 
     public List<OrderDetail> getOrderDetails(String json) {
@@ -248,24 +223,6 @@ public class OrdersController {
         return ps;
     }
 
-    private List<String> splitStr(String str) {
-
-        List<String> strs = null;
-        if (str != null && !"".equals(str)) {
-
-            String[] split = str.split("[_]");
-
-            if (split.length > 1) {
-                strs = new ArrayList<String>();
-
-                for (String str1 : split) {
-                    strs.add(str1);
-                }
-            }
-        }
-        return strs;
-    }
-
     public boolean checkCoupan(DiscountCoupan coupan){
 
         return true;
@@ -273,6 +230,7 @@ public class OrdersController {
 
     public boolean off(DiscountCoupan discountCoupan){
 
+        discountCoupanService.delete(discountCoupan);
         return  true;
     }
 }

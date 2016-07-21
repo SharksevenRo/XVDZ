@@ -43,7 +43,7 @@ public class TestPinYin {
         List<OrderDetail> orderDetails=new ArrayList<OrderDetail>();
 
         OrderDetail orderDetail=new OrderDetail();
-
+/*
         Product product=new Product();
         product.setId("4028e3e9544e0e6501544e1063780001");
 
@@ -55,9 +55,8 @@ public class TestPinYin {
          orderses.add(order);
         order.setOrderDetails(orderDetails);
 
-        String s = gson.toJson(orderses);
+        String s = gson.toJson(orderses);*/
 
-        System.out.print(s);
     }
 
 

@@ -24,38 +24,14 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 
 	// Fields
 	private String id;
-	private String orDtNo;
-	private Double orDtPrc;
 
-	private Integer orDtMount;
-	private Double orDtDsct;
-	private Double orDtItmeTotal;
-	private Double orDtRlTotal;
-	private String orDtRemark;
-	//尺码
-	private String size;
-	//颜色
 	private String color;
-	
-	//款式
-	@JsonIgnore
-	private String style;
-	//用户定制图片
-	private String pic;
+	private String size;
+	private String product_id;
+	private String  remark;
+	private Integer count;
+	private String orderId;
 
-	private Product designer_product;
-	@JsonIgnore
-	private String image_front;
-
-	@JsonIgnore
-	private String image_back;
-
-
-	private List<Material> materials;
-	private Style styleObj;
-
-	@JsonIgnore
-	private String designer_product_id;
 
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
@@ -71,34 +47,14 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	public OrderDetail() {
 	}
 
-	/** minimal constructor */
-	public OrderDetail(String id, String orDtNo, Double orDtPrc,
-			Integer orDtMount, Double orDtItmeTotal, Double orDtRlTotal,
-			Date addTime, Integer deleteFlag) {
-		this.id = id;
-		this.orDtNo = orDtNo;
-		this.orDtPrc = orDtPrc;
-		this.orDtMount = orDtMount;
-		this.orDtItmeTotal = orDtItmeTotal;
-		this.orDtRlTotal = orDtRlTotal;
-		this.addTime = addTime;
-		this.deleteFlag = deleteFlag;
-	}
 
-	/** full constructor */
-	public OrderDetail(String id, String orDtNo,
-			Double orDtPrc, Integer orDtMount, Double orDtDsct,
-			Double orDtItmeTotal, Double orDtRlTotal, String orDtRemark,
-			Date addTime, Date updateTime, Date deleteTime,
-			Integer deleteFlag) {
+	public OrderDetail(String id, String color, String size, String product_id, String remark, Integer count, Date addTime, Date updateTime, Date deleteTime, Integer deleteFlag) {
 		this.id = id;
-		this.orDtNo = orDtNo;
-		this.orDtPrc = orDtPrc;
-		this.orDtMount = orDtMount;
-		this.orDtDsct = orDtDsct;
-		this.orDtItmeTotal = orDtItmeTotal;
-		this.orDtRlTotal = orDtRlTotal;
-		this.orDtRemark = orDtRemark;
+		this.color = color;
+		this.size = size;
+		this.product_id = product_id;
+		this.remark = remark;
+		this.count = count;
 		this.addTime = addTime;
 		this.updateTime = updateTime;
 		this.deleteTime = deleteTime;
@@ -118,68 +74,6 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 		this.id = id;
 	}
 
-	@Column(name = "or_dt_no", nullable = true, length = 20)
-	public String getOrDtNo() {
-		return this.orDtNo;
-	}
-
-	public void setOrDtNo(String orDtNo) {
-		this.orDtNo = orDtNo;
-	}
-
-	@Column(name = "or_dt_prc", nullable = true, precision = 22, scale = 0)
-	public Double getOrDtPrc() {
-		return this.orDtPrc;
-	}
-
-	public void setOrDtPrc(Double orDtPrc) {
-		this.orDtPrc = orDtPrc;
-	}
-
-	@Column(name = "or_dt_mount", nullable = true)
-	public Integer getOrDtMount() {
-		return this.orDtMount;
-	}
-
-	public void setOrDtMount(Integer orDtMount) {
-		this.orDtMount = orDtMount;
-	}
-
-	@Column(name = "or_dt_dsct", precision = 22, scale = 0)
-	public Double getOrDtDsct() {
-		return this.orDtDsct;
-	}
-
-	public void setOrDtDsct(Double orDtDsct) {
-		this.orDtDsct = orDtDsct;
-	}
-
-	@Column(name = "or_dt_itme_total", nullable = true, precision = 22, scale = 0)
-	public Double getOrDtItmeTotal() {
-		return this.orDtItmeTotal;
-	}
-
-	public void setOrDtItmeTotal(Double orDtItmeTotal) {
-		this.orDtItmeTotal = orDtItmeTotal;
-	}
-
-	@Column(name = "or_dt_rl_total", nullable = true, precision = 22, scale = 0)
-	public Double getOrDtRlTotal() {
-		return this.orDtRlTotal;
-	}
-
-	public void setOrDtRlTotal(Double orDtRlTotal) {
-		this.orDtRlTotal = orDtRlTotal;
-	}
-
-	@Column(name = "or_dt_remark", length = 200)
-	public String getOrDtRemark() {
-		return this.orDtRemark;
-	}
-
-	public void setOrDtRemark(String orDtRemark) {
-		this.orDtRemark = orDtRemark;
-	}
 
 	@Column(name = "add_time", nullable = true, length = 0)
 	@JsonSerialize(using = CustomDateSerializer.class)
@@ -219,7 +113,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	public void setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-	@Column(name = "size", length = 0)
+	@Column(name = "size", length = 20)
 	public String getSize() {
 		return size;
 	}
@@ -227,7 +121,7 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	public void setSize(String size) {
 		this.size = size;
 	}
-	@Column(name = "color", length = 0)
+	@Column(name = "color", length = 20)
 	public String getColor() {
 		return color;
 	}
@@ -235,75 +129,33 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	public void setColor(String color) {
 		this.color = color;
 	}
-	@Column(name = "pic", length = 0)
-	public String getPic() {
-		return pic;
+	@Column(name = "p_id", length = 33)
+	public String getProduct_id() {
+		return product_id;
+	}
+	public void setProduct_id(String product_id) {
+		this.product_id = product_id;
+	}
+	@Column(name = "remark")
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	@Column(name = "count")
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+	@Column(name = "orderId")
+	public String getOrderId() {
+		return orderId;
 	}
 
-	public void setPic(String pic) {
-		this.pic = pic;
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
-	@Transient
-	public String getStyle() {
-		return style;
-	}
-
-	public void setStyle(String style) {
-		this.style = style;
-	}
-
-	@Transient
-	public String getImage_front() {
-		return image_front;
-	}
-
-	public void setImage_front(String designs) {
-		this.image_front = designs;
-	}
-
-	@Transient
-	public String getImage_back() {
-		return image_back;
-	}
-
-	public void setImage_back(String image_back) {
-		this.image_back = image_back;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pdtId")
-	public Product getDesigner_product() {
-		return designer_product;
-	}
-
-	public void setDesigner_product(Product designer_product) {
-		this.designer_product = designer_product;
-	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "style")
-	public Style getStyleObj() {
-		return styleObj;
-	}
-
-	public void setStyleObj(Style styleObj) {
-		this.styleObj = styleObj;
-	}
-	@Transient
-	public List<Material> getMaterials() {
-		return materials;
-	}
-
-	public void setMaterials(List<Material> materials) {
-		this.materials = materials;
-	}
-	@Transient
-	public String getDesigner_product_id() {
-		return designer_product_id;
-	}
-
-	public void setDesigner_product_id(String designer_product_id) {
-		this.designer_product_id = designer_product_id;
-	}
-
-
 }

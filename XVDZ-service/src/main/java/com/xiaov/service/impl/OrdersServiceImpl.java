@@ -53,7 +53,6 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		for (OrderDetail orderDetail: entity.getOrderDetails()
 				) {
 			orderDetail.setAddTime(new Date());
-			orderDetail.setOrDtNo(entity.getId());
 			orderDetailService.save(orderDetail);
 		}
 		super.save(entity);
@@ -79,31 +78,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 
 	public List<Orders> getOrderDetail(Orders orders){
 
-
-		Criterion [] criterions={Restrictions.eq("user",orders.getUser())};
-		List<Orders> orderses = dao.getEntitiestNotLazy(new Orders(), null, criterions, orders.getOffset(), orders.getPageSize());
-		OrderDetail orderDetail=new OrderDetail();
-		Product product=new Product();
-		for (Orders order:orderses
-			 ) {
-
-			orderDetail.setOrDtNo(order.getId());
-			List<OrderDetail> orderDetails = orderDetailService.loadAll(orderDetail);
-			for (OrderDetail detail:orderDetails
-				 ) {
-				String materials="";
-				if(detail.getDesigner_product()!=null){
-					product.setId(detail.getDesigner_product().getId());
-					detail.setDesigner_product(productService.geOneDetail(product));
-				}
-				materials = detail.getImage_back() + "_" + detail.getImage_front();
-				List<String> strings = splitStr(materials);
-				List<Material> byids1 = materialService.getByids(Material.class,strings);
-				detail.setMaterials(byids1);
-			}
-			order.setOrderDetails(orderDetails);
-		}
-		return  orderses;
+		return  null;
 	}
 
 	/**

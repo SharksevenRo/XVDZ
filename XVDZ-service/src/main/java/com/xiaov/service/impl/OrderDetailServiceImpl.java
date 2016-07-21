@@ -30,7 +30,7 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail> impleme
     public List<OrderDetail> loadAll(OrderDetail entity) {
 
         String [] fileds=new String []{"styleObj","designer_product"};
-        Criterion [] criterions={Restrictions.eq("orDtNo",entity.getOrDtNo())};
+        Criterion [] criterions={Restrictions.eq("orDtNo",entity.getOrderId())};
         List<OrderDetail> entitiestNotLazy = dao.getEntitiestNotLazy(new OrderDetail(), fileds, criterions);
         return entitiestNotLazy;
 
