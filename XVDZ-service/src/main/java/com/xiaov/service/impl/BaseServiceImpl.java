@@ -1,11 +1,11 @@
 package com.xiaov.service.impl;
 
 import java.lang.reflect.Field;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -40,6 +40,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 					value = ReflectionUtils.invokeGetterMethod(entity, field.getName());
 					if (value != null) {
 						ReflectionUtils.invokeSetterMethod(t, field.getName(), value, field.getType());
+						value=null;
 					}
 				}
 			} catch (Exception e) {
@@ -68,6 +69,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 					if (value != null) {
 						map.put(field.getName(), value);
 						hql.append(" and " + field.getName() + "=:" + field.getName());
+						value=null;
 					}
 				}
 			} catch (Exception e) {
@@ -95,6 +97,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 					if (value != null) {
 						map.put(field.getName(), value);
 						hql.append(" and " + field.getName() + "=:" + field.getName());
+						value=null;
 					}
 				}
 			} catch (Exception e) {
@@ -123,5 +126,47 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
 		List<T> ts = dao.get(clazz,ids);
 		return ts;
+	}
+
+	public Page<T> pageNotLazy(Page page,String [] fields,T t) {
+		String name = page.getClass().getSimpleName();
+		StringBuilder hql = new StringBuilder();
+		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), true);
+		Object value = null;
+		List<Criterion> criterions=new ArrayList<Criterion>();
+		Criterion criterion=null;
+		for (Field field : accessibleFields) {
+			try {
+				criterion=null;
+				if (isBase(field.getType())) {
+					value = ReflectionUtils.invokeGetterMethod(page, field.getName());
+					if (value != null) {
+						criterion=Restrictions.eq(field.getName(),value);
+						value=null;
+					}
+				}
+				if(field.getType().newInstance() instanceof Page){
+					if (value != null) {
+						criterion=Restrictions.eq(field.getName(),value);
+						value=null;
+					}
+				}
+			} catch (Exception e) {
+			}
+			if(criterion!=null){
+				criterions.add(criterion);
+			}
+		}
+		Criteria criteriaEq = dao.createCriteriaEq(criterions,t.getClass());
+
+		if(fields!=null){
+				for (String string : fields) {
+					criteriaEq = criteriaEq.setFetchMode(string, org.hibernate.FetchMode.JOIN);
+				}
+		}
+		page= dao.findPage(page,criteriaEq);
+		//设置总页数
+		page.setTotalPages();
+		return page;
 	}
 }

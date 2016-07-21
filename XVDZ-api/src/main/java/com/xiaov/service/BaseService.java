@@ -69,5 +69,13 @@ public interface BaseService<T>{
      * @return
      */
     public List<T> getByids(Class clazz,List<String> ids);
+
+    /**
+     * 动态代开延迟加载的page查询
+     * @param page
+     * @param fields
+     * @return
+     */
+    public Page<T> pageNotLazy(Page page,String [] fields,T t);
     
 }

@@ -532,8 +532,8 @@ public class HibernateSupportDao<T, PK extends Serializable> extends BasicHibern
         }
         return null;
     }
-    public Criteria createCriteriaEq(List<SimpleExpression> criterions) {
-        Criteria criteria = getSession().createCriteria(this.entityClass);
+    public Criteria createCriteriaEq(List<Criterion> criterions,Class clazz) {
+        Criteria criteria = getSession().createCriteria(clazz);
 
         for (Criterion criterion : criterions) {
 

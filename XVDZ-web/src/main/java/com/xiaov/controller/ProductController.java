@@ -47,6 +47,8 @@ public class ProductController {
     private byte[] buf;
     private int readedBytes;
 
+    private static final String [] lazyField=   {"productType", "img","show","backImage"};
+
     /**
      * 商品报保存
      * @param product
@@ -676,23 +678,14 @@ public class ProductController {
     @ResponseBody
     public Page<Product> designerPage(Product product){
         try {
-
-            List<Product> products = productService.designerPage(product);
-            if(products!=null){
-                product.setResult(products);
-            }else{
-                product.setCode(APPConstant.ERROR);
-                product.setMessage("参数不完整");
-            }
-
-            return product;
+            Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
+            return page;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
             product.setMessage("服务器异常"+e.getMessage());
             return product;
         }
     }
-
     /**
      * 获取设计模块
      * @param product
@@ -703,15 +696,8 @@ public class ProductController {
     public Page<Product> moudule(Product product){
         try {
             product.setIsModule(1);
-            List<Product> products = productService.moudule(product);
-            if(products!=null){
-                product.setResult(products);
-            }else{
-                product.setCode(APPConstant.ERROR);
-                product.setMessage("参数不完整");
-            }
-
-            return product;
+            Page<Product> page = productService.pageNotLazy(product,lazyField,new Product());
+            return page;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
             product.setMessage("服务器异常"+e.getMessage());
@@ -726,17 +712,11 @@ public class ProductController {
     @RequestMapping("/admin/designer/product/all")
     @ResponseBody
     public Page<Product> all(Product product){
-        try {
 
+        try {
             product.setIsModule(0);
-            List<Product> products = productService.moudule(product);
-            if(products!=null){
-                product.setResult(products);
-            }else{
-                product.setCode(APPConstant.ERROR);
-                product.setMessage("参数不完整");
-            }
-            return product;
+            Page<Product> page = productService.pageNotLazy(product,lazyField,new Product());
+            return page;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
             product.setMessage("服务器异常"+e.getMessage());
@@ -760,7 +740,6 @@ public class ProductController {
                 product.setCode(APPConstant.ERROR);
                 product.setMessage("参数不完整");
             }
-
             return product;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
@@ -768,7 +747,6 @@ public class ProductController {
             return product;
         }
     }
-
     /**
      * 根据类型查询商品
      * @param product productType.id
@@ -778,7 +756,6 @@ public class ProductController {
     @ResponseBody
     public Page<Product> pageByType(Product product){
         try {
-
             List<Product> products = productService.pageByType(product);
             if(products!=null){
                 product.setResult(products);
@@ -786,7 +763,6 @@ public class ProductController {
                 product.setCode(APPConstant.ERROR);
                 product.setMessage("参数不完整");
             }
-
             return product;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
