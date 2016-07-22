@@ -294,7 +294,7 @@ public class UserController {
             InnerSession innerSession = new InnerSession();
             innerSession.setKey(usTel);
             innerSession.setToken(rand);
-            innerSession.setTime(600L);
+            innerSession.setTime(60000L);
             innerSession.setBegin(System.currentTimeMillis());
             innerSessionService.save(innerSession);
             return new MessageBean(APPConstant.SUCCESS, innerSession.getId());

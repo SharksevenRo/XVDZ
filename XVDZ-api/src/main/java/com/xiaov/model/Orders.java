@@ -50,7 +50,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	// Fields
 	private String id;
 	private Types dbTypes;
-	private DiscountCoupan discountCoupan;
+	private String discountCoupanId;
 	private UserInfo user;
 	private String orNo;
 	private Double orTotal;
@@ -93,13 +93,13 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	/** full constructor */
 	public Orders(String id, OrderDetail orderDetail, Types dbTypes,
-			DiscountCoupan discountCoupan, String ueId, String orNo,
+			String discountCoupan, String ueId, String orNo,
 			Double orTotal, Double orDiscount, Double orRealCost,
 			Integer orState, Date addTime, Date updateTime,
 			Date deleteTime, String orRemark, Integer deleteFlag) {
 		this.id = id;
 		this.dbTypes = dbTypes;
-		this.discountCoupan = discountCoupan;
+		this.discountCoupanId = discountCoupan;
 		this.orNo = orNo;
 		this.orTotal = orTotal;
 		this.orDiscount = orDiscount;
@@ -135,14 +135,13 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.dbTypes = dbTypes;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "dis_cou_id")
-	public DiscountCoupan getDiscountCoupan() {
-		return this.discountCoupan;
+	@Column(name = "dis_cou_id")
+	public String getDiscountCoupanId() {
+		return this.discountCoupanId;
 	}
 
-	public void setDiscountCoupan(DiscountCoupan discountCoupan) {
-		this.discountCoupan = discountCoupan;
+	public void setDiscountCoupanId(String discountCoupan) {
+		this.discountCoupanId = discountCoupan;
 	}
 
 

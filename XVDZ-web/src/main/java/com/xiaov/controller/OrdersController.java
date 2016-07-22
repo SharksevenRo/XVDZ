@@ -109,7 +109,6 @@ public class OrdersController {
             orders.setCode(APPConstant.SUCCESS);
             orders.setOrderDetails(null);
             orders.setDbTypes(null);
-            orders.setDiscountCoupan(null);
             return  orders;
         } catch (Exception e) {
 
@@ -198,10 +197,10 @@ public class OrdersController {
                 }
             }
         }
-        if(orders.getDiscountCoupan().getId()!=null){
-            DiscountCoupan discountCoupan = discountCoupanService.getOne(DiscountCoupan.class, orders.getDiscountCoupan().getId());
+        if(orders.getDiscountCoupanId()!=null){
+            DiscountCoupan discountCoupan = discountCoupanService.getOne(DiscountCoupan.class, orders.getDiscountCoupanId());
             //判断优惠卷是否有效
-            if(checkCoupan(orders.getDiscountCoupan())){
+            if(checkCoupan(discountCoupan)){
                 //有效进行优惠卷使用
                 sum-=discountCoupan.getDisCouPrice();
                 //注销优惠卷

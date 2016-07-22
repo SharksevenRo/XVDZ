@@ -100,12 +100,51 @@ public class ProductController {
             product.setProductType(types);
             product.setAddTime(new Date());
             productService.save(product);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.SUCCESS, product.getId());
         } catch (Exception e) {
             e.printStackTrace();
             return new MessageBean(APPConstant.ERROR, "上传失败");
         }
     }
+
+    /**
+     * 提交定制
+     * @param product
+     * @return
+     */
+    @RequestMapping("/auth/customization/update")
+    @ResponseBody
+    public MessageBean commitUpdate(Product product) {
+
+
+        String name="定制商品";
+        try {
+            if(product.getIsGroup()!=null&&product.getIsGroup().equals(1)){
+                if(product.getGroupPrice()==null||product.getMinnum()==null){
+                    return new MessageBean(APPConstant.SUCCESS, "团体定制请输入最低优惠数量和价格");
+                }
+                name="团体"+name;
+            }
+            if(product.getPdtName()==null||"".equals(product.getPdtName())){
+                product.setPdtName(name);
+            }
+            Product one = productService.getOne(Product.class, product.getId());
+            if(one==null){
+                return new MessageBean(APPConstant.ERROR, "该商品不存在或者已被删除"+product.getId());
+            }
+            Double count = countPrice(product);
+            if(count!=0){
+                product.setPdtPrc(count);
+            }
+            product.setUpdateTime(new Date());
+            productService.update(product);
+            return new MessageBean(APPConstant.SUCCESS, product.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "修改失败");
+        }
+    }
+
 
     /**
      * 修改跟新商品
@@ -154,7 +193,7 @@ public class ProductController {
      * @param product
      * @return
      */
-    @RequestMapping("/admin/product/deleteAjax")
+    @RequestMapping("/auth/product/delete")
     @ResponseBody
     public MessageBean deleteAjax(Product product) {
 
@@ -762,14 +801,8 @@ public class ProductController {
     @ResponseBody
     public Page<Product> pageByType(Product product){
         try {
-            List<Product> products = productService.pageByType(product);
-            if(products!=null){
-                product.setResult(products);
-            }else{
-                product.setCode(APPConstant.ERROR);
-                product.setMessage("参数不完整");
-            }
-            return product;
+            Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
+            return page;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
             product.setMessage("服务器异常"+e.getMessage());
@@ -851,16 +884,26 @@ public class ProductController {
     private Double countPrice(Product product){
 
         Double sum=0d;
-        Style one = styleService.getOne(Style.class, product.getStyle());
-        sum+=one.getPrice();
-        String images = product.getDesigner_product_id();
-        List<String> strings = splitStr(images);
-        List<Material> byids = materialService.getByids(Material.class, strings);
-
-        for (Material material:byids
-             ) {
-            sum+=material.getPrice();
+        Style one=null;
+        if(product.getStyle()!=null){
+            one= styleService.getOne(Style.class, product.getStyle());
+            sum+=one.getPrice();
         }
+
+
+        String images = product.getDesigner_product_id();
+
+        if(images!=null&&"".equals(images)){
+            List<String> strings = splitStr(images);
+            List<Material> byids = materialService.getByids(Material.class, strings);
+
+
+            for (Material material:byids
+                    ) {
+                sum+=material.getPrice();
+            }
+        }
+
 
         return  sum;
     }
