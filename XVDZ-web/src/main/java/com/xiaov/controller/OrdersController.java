@@ -86,7 +86,7 @@ public class OrdersController {
 
 
             List<Orders> orderes = ordersService.pageOrder(orders);
-           String [] fields= new String[]{"user", "discountCoupan", "dbTypes"};
+           String [] fields= new String[]{"user", "dbTypes"};
             LazyObjecUtil.LazySetNull(orderes,fields);
             orders.setResult(orderes);
             return orders;
@@ -103,7 +103,7 @@ public class OrdersController {
         try{
 
             List<Orders> orderDetail = ordersService.getOrderDetail(orders);
-            String[] fields = new String[]{"user", "dbTypes", "discountCoupan"};
+            String[] fields = new String[]{"user", "dbTypes"};
             orderDetail= LazyObjecUtil.LazySetNull(orderDetail,fields);
             orders.setResult(orderDetail);
             orders.setCode(APPConstant.SUCCESS);
@@ -123,7 +123,7 @@ public class OrdersController {
     public Orders getOne(Orders orders) {
         try {
             Orders one = ordersService.getOne(orders.getClass(), orders.getId());
-            one = LazyObjecUtil.LazyOneSetNull(one, new String[]{"user", "discountCoupan", "dbTypes"});
+            one = LazyObjecUtil.LazyOneSetNull(one, new String[]{"user", "dbTypes"});
             return one;
         } catch (Exception e) {
             Orders page = new Orders();
@@ -139,7 +139,7 @@ public class OrdersController {
         Page<Orders> page = new Page<Orders>();
         try {
             page.setResult(ordersService.getOrderDetail(orders));
-            LazyObjecUtil.LazyPageSetNull(page, new String[]{"user", "discountCoupan", "dbTypes"});
+            LazyObjecUtil.LazyPageSetNull(page, new String[]{"user", "dbTypes"});
             return page;
         } catch (Exception e) {
             page.setCode(APPConstant.ERROR);

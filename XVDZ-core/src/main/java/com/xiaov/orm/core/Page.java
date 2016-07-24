@@ -61,6 +61,7 @@ public class Page<T> extends PageRequest implements Serializable {
 	 * 设置页内的记录列表.
 	 */
 	public void setResult(final List<T> result) {
+
 		this.result = result;
 	}
 

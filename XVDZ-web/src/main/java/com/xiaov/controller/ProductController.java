@@ -99,6 +99,7 @@ public class ProductController {
             product.setPdtPrc(count);
             product.setProductType(types);
             product.setAddTime(new Date());
+            product.longToShort();
             productService.save(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
         } catch (Exception e) {
@@ -137,6 +138,7 @@ public class ProductController {
                 product.setPdtPrc(count);
             }
             product.setUpdateTime(new Date());
+            product.longToShort();
             productService.update(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
         } catch (Exception e) {
@@ -327,7 +329,7 @@ public class ProductController {
         try {
 
             List<Product> products = productService.hot(product);
-            product.setResult(products);
+            product.setResult( fillLong(products));
             return product;
         } catch (Exception e) {
             e.printStackTrace();
@@ -559,16 +561,19 @@ public class ProductController {
 
     @RequestMapping("/admin/product/getUserWorks")
     @ResponseBody
-    public List<Product> getUserProduct() {
-        String values = "1";
-        List<Product> result = productServiceimpl.getByProperty("usId", values);
-        String[] fileds = new String[]{"productType", "img","show"};
+    public Page<Product> getUserProduct(Product product) {
+
+        product.setIsModule(0);
         try {
-            result = LazyObjecUtil.LazySetNull(result, fileds);
+            Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
+            page=fillLong(page);
+            return page;
         } catch (Exception e) {
             e.printStackTrace();
+            product.setCode(APPConstant.ERROR);
+            product.setMessage("服务器异常"+e.getMessage());
+            return product;
         }
-        return result;
     }
 
     /**
@@ -724,6 +729,7 @@ public class ProductController {
     public Page<Product> designerPage(Product product){
         try {
             Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
+            page=fillLong(page);
             return page;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
@@ -742,6 +748,7 @@ public class ProductController {
         try {
             product.setIsModule(1);
             Page<Product> page = productService.pageNotLazy(product,lazyField,new Product());
+            page=fillLong(page);
             return page;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
@@ -761,6 +768,7 @@ public class ProductController {
         try {
             product.setIsModule(0);
             Page<Product> page = productService.pageNotLazy(product,lazyField,new Product());
+            page=fillLong(page);
             return page;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
@@ -779,7 +787,9 @@ public class ProductController {
         try {
 
            Product product1=productService.geOneDetail(product);
+
             if(product1!=null){
+                product1.shortToLong();
                return product1;
             }else{
                 product.setCode(APPConstant.ERROR);
@@ -802,6 +812,7 @@ public class ProductController {
     public Page<Product> pageByType(Product product){
         try {
             Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
+            page=fillLong(page);
             return page;
         }catch (Exception e){
             product.setCode(APPConstant.ERROR);
@@ -816,12 +827,13 @@ public class ProductController {
      */
     @ResponseBody
     @RequestMapping("/admin/product/search")
-    public Page<SearchModel> search(SearchModel search){
+    public Page<Product> search(SearchModel search){
 
         try {
 
+
             List<Product> products = productService.search(search);
-            search.setResult(products);
+            search.setResult(fillLong(products));
             return search;
 
         }catch (Exception e){
@@ -925,5 +937,25 @@ public class ProductController {
             }
         }
         return strs;
+    }
+
+    private  Page fillLong(Page page){
+
+        List<Product> result = page.getResult();
+
+        for (Product product:result
+             ) {
+            product.shortToLong();
+        }
+        return  page;
+    }
+    private  List<Product> fillLong(List<Product> result){
+
+
+        for (Product product:result
+                ) {
+            product.shortToLong();
+        }
+        return  result;
     }
 }
