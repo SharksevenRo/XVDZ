@@ -2,6 +2,7 @@ package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.DiscountCoupan;
+import com.xiaov.model.UserInfo;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.impl.DiscountCoupanServiceImpl;
@@ -9,6 +10,7 @@ import com.xiaov.service.interfaces.DiscountCoupanService;
 
 import com.xiaov.utils.LazyObjecUtil;
 import com.xiaov.web.support.CookieUtil;
+import oracle.jrockit.jfr.events.DynamicValueDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,18 +81,23 @@ public class DiscountCoupanController {
             return page;
         }
     }
-    @RequestMapping("/admin/discountCoupan/getUserCoupan")
+    @RequestMapping("/auth/discountCoupan/getUserCoupan")
     @ResponseBody
-    public List<DiscountCoupan> getUserCoupan(HttpServletRequest request) {
+    public Page<DiscountCoupan> getUserCoupan(UserInfo user) {
+        Page<DiscountCoupan> page;
         try {
-            CookieUtil util=new CookieUtil(request);
-            String userid= util.getValue("user","user.userId",true);
-            List<DiscountCoupan> result = discountCoupanServiceImpl.getByProperty("userInfo.id",userid);
-            result = LazyObjecUtil.LazySetNull(result,"userInfo");
-            return result;
+
+            DiscountCoupan discountCoupan=new DiscountCoupan();
+            discountCoupan.setUserInfo(user);
+            page = discountCoupanServiceImpl.page(discountCoupan);
+            page = LazyObjecUtil.LazyPageSetNull(page,"userInfo");
+            return page;
         } catch (Exception e) {
-            List<DiscountCoupan> list = null;
-            return list;
+            DiscountCoupan discountCoupan=new DiscountCoupan();
+            discountCoupan.setCode(APPConstant.ERROR);
+            discountCoupan.setMessage("请求错误"+e.getMessage());
+            return discountCoupan;
+
         }
     }
 }

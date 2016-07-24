@@ -108,7 +108,7 @@ public class DiscountCodeController {
         }
     }
 
-    @RequestMapping(value = "/auth/discountCode/getOne", method = RequestMethod.POST)
+    @RequestMapping("/auth/discountCode/getOne")
     @ResponseBody
     public DiscountCode getOne(UserInfo user) {
         try {

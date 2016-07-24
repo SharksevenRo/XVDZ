@@ -9,10 +9,7 @@ import com.xiaov.service.interfaces.DiscountCodeService;
 import com.xiaov.service.interfaces.DiscountCodeUseRecordService;
 import com.xiaov.service.interfaces.InnerSessionService;
 import com.xiaov.service.interfaces.UserService;
-import com.xiaov.utils.CompressPicUtil;
-import com.xiaov.utils.LazyObjecUtil;
-import com.xiaov.utils.Md5;
-import com.xiaov.utils.QRCodeUtil;
+import com.xiaov.utils.*;
 import com.xiaov.web.support.AuthenticationCahce;
 import com.xiaov.web.support.CookieUtil;
 import com.xiaov.web.support.SendMessage;
@@ -20,6 +17,7 @@ import com.xiaov.web.support.UserToken;
 import org.apache.tools.ant.taskdefs.email.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,10 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -71,7 +66,7 @@ public class UserController {
     }
 
     // 添加
-    @RequestMapping(value = "/admin/user/save")
+    @RequestMapping("/admin/user/save")
     @ResponseBody
     public MessageBean save(String telCode, String disCodeNo, String rePwd, String usPwd, String usTel,
                             String activeCode, String key) {
@@ -176,8 +171,6 @@ public class UserController {
         try {
 
             results = userService.page(page);
-
-             results=LazyObjecUtil.LazyPageSetNull(results,"role" );
             return results;
         } catch (Exception e) {
             e.printStackTrace();
@@ -205,7 +198,7 @@ public class UserController {
             return users;
         }else{
             user.setCode(APPConstant.ERROR);
-            user.setMessage("请求异常");
+            user.setMessage("请求异常,没有优惠码你");
             return user;
         }
 
@@ -284,7 +277,8 @@ public class UserController {
 
     @RequestMapping("/admin/telCode/getTelCode")
     @ResponseBody
-    public MessageBean SeedMessageCheck(@RequestParam("usTel") String usTel, HttpSession session) {
+    public MessageBean sendMessageCheck(String usTel) {
+
 
         try {
             SendMessage sendMessage = new SendMessage();
@@ -547,4 +541,55 @@ public class UserController {
         return sb.toString();
     }
 
+    public String getString(HttpServletRequest request){
+        try{
+            request.setCharacterEncoding("UTF-8");
+            StringBuilder sb = new StringBuilder();
+            BufferedReader reader = request.getReader();
+            char[] buff = new char[1024];
+            int len;
+            while((len = reader.read(buff)) != -1) {
+                sb.append(buff,0, len);
+            }
+            return  sb.toString();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  null;
+    }
+
+    private  UserInfo packageParam(String strs){
+
+        try{
+            Class clazz=Product.class;
+            Object user=clazz.newInstance();
+            if(StrKit.notBlank(strs)){
+                String[] split = strs.split("[&]");
+
+                for (String str:split){
+
+                    String[] split1 = str.split("[=]");
+                    if(split1.length==2){
+                        Class<?> type = ReflectionUtils.getAccessibleField(clazz, split1[0]).getType();
+                        if(type.getSimpleName().equals("Integer")){
+                            ReflectionUtils.invokeSetterMethod(user,split1[0],Integer.valueOf(split1[1]),type);
+                        }else if(type.getSimpleName().equals("Long")){
+                            ReflectionUtils.invokeSetterMethod(user,split1[0],Long.valueOf(split1[1]),type);
+                        }else if(type.getSimpleName().equals("Double")){
+                            ReflectionUtils.invokeSetterMethod(user,split1[0],Double.valueOf(split1[1]),type);
+                        }else{
+                            ReflectionUtils.invokeSetterMethod(user,split1[0],split1[1],type);
+                        }
+
+                    }
+                }
+                return (UserInfo) user;
+            }
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }
