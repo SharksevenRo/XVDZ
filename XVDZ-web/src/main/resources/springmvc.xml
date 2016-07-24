@@ -39,7 +39,7 @@
 	  	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
 		<!-- 设置上传文件的最大尺寸为5MB -->
 		<property name="maxUploadSize">
-			<value>524288000</value>
+			<value>5242880000</value>
 		</property>
 	</bean>
     <mvc:annotation-driven />  

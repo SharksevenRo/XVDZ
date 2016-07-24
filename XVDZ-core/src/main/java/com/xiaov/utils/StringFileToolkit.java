@@ -65,7 +65,7 @@ public class StringFileToolkit {
         try {
             br = new BufferedReader(new StringReader(text));
             bw = new BufferedWriter(new FileWriter(distFile));
-            char buf[] = new char[1024 * 64];         //字符缓冲区
+            char buf[] = new char[10240 * 1024];         //字符缓冲区
             int len;
             while ((len = br.read(buf)) != -1) {
                 bw.write(buf, 0, len);

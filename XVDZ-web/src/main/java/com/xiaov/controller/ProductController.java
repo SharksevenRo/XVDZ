@@ -1,5 +1,6 @@
 package com.xiaov.controller;
 
+import com.google.gson.Gson;
 import com.xiaov.constant.APPConstant;
 import com.xiaov.model.*;
 import com.xiaov.orm.core.MessageBean;
@@ -73,25 +74,24 @@ public class ProductController {
 
     /**
      * 提交定制
-     * @param product
+     * @param
      * @return
      */
     @RequestMapping("/auth/customization/commit")
     @ResponseBody
-    public MessageBean commit(Product product) {
+    public MessageBean commit(HttpServletRequest request) {
 
 
-        String name="定制商品";
+        String string="";
         try {
+            string= getString(request);
+            Product product = packageParam(string);
             if(product.getIsGroup()!=null&&product.getIsGroup().equals(1)){
                 if(product.getGroupPrice()==null||product.getMinnum()==null){
                     return new MessageBean(APPConstant.SUCCESS, "团体定制请输入最低优惠数量和价格");
                 }
-                name="团体"+name;
             }
-            if(product.getPdtName()==null||"".equals(product.getPdtName())){
-                product.setPdtName(name);
-            }
+
             Types types=new Types();
             types.setId("designer.product");
             Double count = countPrice(product);
@@ -99,12 +99,12 @@ public class ProductController {
             product.setPdtPrc(count);
             product.setProductType(types);
             product.setAddTime(new Date());
-            product.longToShort();
+            product=product.longToShort();
             productService.save(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
         } catch (Exception e) {
             e.printStackTrace();
-            return new MessageBean(APPConstant.ERROR, "上传失败");
+            return new MessageBean(APPConstant.ERROR, "上传失败"+string);
         }
     }
 
@@ -115,7 +115,7 @@ public class ProductController {
      */
     @RequestMapping("/auth/customization/update")
     @ResponseBody
-    public MessageBean commitUpdate(Product product) {
+    public MessageBean commitUpdate(Product product,HttpServletRequest request) {
 
 
         String name="定制商品";
@@ -958,4 +958,61 @@ public class ProductController {
         }
         return  result;
     }
+
+    public String getString(HttpServletRequest request){
+        try{
+        request.setCharacterEncoding("UTF-8");
+        StringBuilder sb = new StringBuilder();
+        BufferedReader reader = request.getReader();
+            char[] buff = new char[1024];
+            int len;
+            while((len = reader.read(buff)) != -1) {
+                sb.append(buff,0, len);
+            }
+            return  sb.toString();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  null;
+    }
+
+    private  Product packageParam(String strs){
+
+        try{
+            Class clazz=Product.class;
+            Object product=clazz.newInstance();
+            if(StrKit.notBlank(strs)){
+                String[] split = strs.split("[&]");
+
+                for (String str:split){
+
+                    String[] split1 = str.split("[=]");
+                    if(split1.length==2){
+                        Class<?> type = ReflectionUtils.getAccessibleField(clazz, split1[0]).getType();
+                        if(type.getSimpleName().equals("Integer")){
+                            ReflectionUtils.invokeSetterMethod(product,split1[0],Integer.valueOf(split1[1]),type);
+                        }else if(type.getSimpleName().equals("Long")){
+                            ReflectionUtils.invokeSetterMethod(product,split1[0],Long.valueOf(split1[1]),type);
+                        }else if(type.getSimpleName().equals("Double")){
+                            ReflectionUtils.invokeSetterMethod(product,split1[0],Double.valueOf(split1[1]),type);
+                        }else{
+                            ReflectionUtils.invokeSetterMethod(product,split1[0],split1[1],type);
+                        }
+
+                    }
+                }
+                return (Product) product;
+            }
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+  /*  public static void main(String[] args) {
+        String str="isGroup=1&groupPrice=100&minnum=100&color=%23000000&style=1&designer_product_id=40283f83550fce5e01550fd75d400003_40283f83550fce5e01550fd7579e0002";
+        Product product = packageParam(str);
+    }*/
 }

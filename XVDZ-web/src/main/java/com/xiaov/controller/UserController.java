@@ -98,7 +98,7 @@ public class UserController {
                                     if (discode.size()!=1)// 优惠码是否存在
                                     {
                                         innerSessionService.delete(one);
-                                        return new MessageBean(APPConstant.ERROR, "优惠码不存在或错误,请重新输入注册!");
+                                        return new MessageBean(APPConstant.ERROR, "优惠码不存在或错误,请重新注册!");
 
                                     } else {
                                         UserInfo user = new UserInfo();
@@ -107,11 +107,13 @@ public class UserController {
                                         user.setUsPwd(Md5.GetMD5Code(usPwd));
                                         user.setUsSex("保密");
                                         user.setAddTime(new Date());
+                                        user.setTypeId("user.common");
                                         userService.save(user); // 注册用户
                                         DiscountCodeUseRecord discountCodeUseRecord = new DiscountCodeUseRecord();
                                         discountCodeUseRecord.setUserInfo(user);
                                         discountCodeUseRecord.setDisCodeId(discode.get(0).getId());
                                         discountCodeUseRecord.setUseTime(new Date());
+
                                         discountCodeUseRecordService.save(discountCodeUseRecord);// 绑定优惠码
                                         innerSessionService.delete(one);
                                         return new MessageBean(1, "注册成功!");
@@ -123,6 +125,7 @@ public class UserController {
                                     user.setUsPwd(Md5.GetMD5Code(usPwd));
                                     user.setUsSex("保密");
                                     user.setAddTime(new Date());
+                                    user.setTypeId("user.common");
                                     userService.save(user);// 注册用户
                                     innerSessionService.delete(one);
                                     return new MessageBean(1, "注册成功!");

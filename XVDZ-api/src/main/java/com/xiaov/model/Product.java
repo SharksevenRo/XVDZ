@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 
 import com.xiaov.utils.PropertiesUtils;
 import com.xiaov.utils.StrKit;
@@ -484,36 +485,40 @@ public class Product extends Page<Product> implements java.io.Serializable {
         this.premium = premium;
     }
 
-    public void longToShort() {
+    public Product longToShort() {
         try {
+
+
             File file;
             String path = PropertiesUtils.getValue("file.path") + "/base64" + "/";
-            file = new File(path);
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-            path = path + "/" + UUID.randomUUID().toString() + ".txt";
-            file = new File(path);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            StringFileToolkit.string2File(imageBase64, file);
-            this.imageBase64 = path;
-            path = PropertiesUtils.getValue("file.path") + "/productDesign" + "/";
 
-            file = new File(path);
-            if (!file.exists()) {
-                file.mkdirs();
+            if(StrKit.notBlank(getImageBase64())){
+                path = path + "/" + UUID.randomUUID().toString() + ".txt";
+                file = new File(path);
+                StringFileToolkit.string2File(getImageBase64(), file);
+                setImageBase64(path);
+                try {
+                    throw  new RuntimeException(path);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }else{
+                throw  new RuntimeException("文本为空");
             }
-            path = path + "/" + UUID.randomUUID().toString() + ".txt";
-            file = new File(path);
-            if (!file.exists()) {
-                file.createNewFile();
+
+            if (StrKit.notBlank(getProductDesigner())){
+                path =  PropertiesUtils.getValue("file.path") +"/productDesign" + "/";
+                path = path + "/" + UUID.randomUUID().toString() + ".txt";
+                file = new File(path);
+                StringFileToolkit.string2File(getProductDesigner(), file);
+                setProductDesigner(path);
+            }else{
+                throw  new RuntimeException("文本为空");
             }
-            StringFileToolkit.string2File(productDesigner, file);
-            this.productDesigner = path;
+            return this;
         } catch (Exception e) {
             e.printStackTrace();
+            return this;
         }
     }
 
@@ -525,14 +530,14 @@ public class Product extends Page<Product> implements java.io.Serializable {
                 file = new File(getImageBase64());
 
                 if (file.exists()) {
-                    this.imageBase64 = StringFileToolkit.file2String(file, "utf-8").replace("\r\n","");
+                    this.imageBase64 = StringFileToolkit.file2String(file, "utf-8").replace("\r","").replace("\n","");
                 }
 
             }
             if(StrKit.notBlank(getProductDesigner())){
                 file =new File(getProductDesigner());
                 if(file.exists()){
-                    this.productDesigner=StringFileToolkit.file2String(file, "utf-8").replace("\r\n","");
+                    this.productDesigner=StringFileToolkit.file2String(file, "utf-8").replace("\r","").replace("\n","");
                 }
 
             }
