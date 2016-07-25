@@ -91,6 +91,7 @@ public class DiscountCoupanController {
             discountCoupan.setUserInfo(user);
             page = discountCoupanServiceImpl.page(discountCoupan);
             page = LazyObjecUtil.LazyPageSetNull(page,"userInfo");
+            page.setCode(APPConstant.SUCCESS);
             return page;
         } catch (Exception e) {
             DiscountCoupan discountCoupan=new DiscountCoupan();

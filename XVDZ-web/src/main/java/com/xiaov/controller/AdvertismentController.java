@@ -38,7 +38,7 @@ public class AdvertismentController {
             advertismentService.save(advertisment);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            return new MessageBean(APPConstant.ERROR, "上传失败");
         }
     }
     
@@ -56,7 +56,7 @@ public class AdvertismentController {
             advertismentService.update(advertisment);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            return new MessageBean(APPConstant.ERROR, "上传失败");
         }
     }
     
@@ -75,7 +75,7 @@ public class AdvertismentController {
         try {
             advertisment=advertismentService.getOne(advertisment.getClass(), advertisment.getId());
             advertismentService.delete(advertisment);
-            return new MessageBean(APPConstant.ERROR, "删除成功");
+            return new MessageBean(APPConstant.SUCCESS, "删除成功");
         } catch (Exception e) {
             e.printStackTrace();
             return new MessageBean(APPConstant.ERROR, "删除失败");
@@ -98,6 +98,7 @@ public class AdvertismentController {
 
         	page= advertismentService.page(advertisment);
         	LazyObjecUtil.LazyPageSetNull(page, new String[]{"userInfoByDeleteId","userInfoByUpdateId"});
+            page.setCode(APPConstant.SUCCESS);
         	return page;
         } catch (Exception e) {
            

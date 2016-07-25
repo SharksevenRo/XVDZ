@@ -27,7 +27,7 @@ public class AccountController {
 
         try {
             accountService.save(account);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.ERROR, "上传成功");
         } catch (Exception e) {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
@@ -80,6 +80,16 @@ public class AccountController {
     public Account getOne(UserInfo user) {
         try {
             Account accountByUser = accountService.getAccountByUser(user);
+
+            if(accountByUser==null){
+                accountByUser=new Account();
+                accountByUser.setPresent_amount(0d);
+                accountByUser.setActBlc(0d);
+                accountByUser.setActMm(0d);
+                accountByUser.setActFm(0d);
+                accountByUser.setActTtEn(0d);
+                accountByUser.setCode(APPConstant.SUCCESS);
+            }
             return accountByUser;
         } catch (Exception e) {
             Account page = new Account();

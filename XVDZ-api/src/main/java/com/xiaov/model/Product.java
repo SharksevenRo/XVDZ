@@ -37,6 +37,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
     private Types productType;
     private Material img;
     private String usId;
+    private UserInfo user;
     private String pdtNo;
     private String pdtName;
     private Double pdtIntRat;
@@ -181,7 +182,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
         this.img = img;
     }
 
-    @Column(name = "us_id", length = 20)
+    @Column(name = "us_id", length = 33)
     public String getUsId() {
         return this.usId;
     }
@@ -484,6 +485,15 @@ public class Product extends Page<Product> implements java.io.Serializable {
     public void setPremium(Double premium) {
         this.premium = premium;
     }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "us_id",insertable = false,updatable = false)
+    public UserInfo getUser() {
+        return user;
+    }
+
+    public void setUser(UserInfo user) {
+        this.user = user;
+    }
 
     public Product longToShort() {
         try {
@@ -521,7 +531,6 @@ public class Product extends Page<Product> implements java.io.Serializable {
             return this;
         }
     }
-
     public void shortToLong() {
         try {
             File file;

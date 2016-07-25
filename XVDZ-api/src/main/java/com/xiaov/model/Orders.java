@@ -50,6 +50,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	// Fields
 	private String id;
 	private Types dbTypes;
+	private String pdtName;
 	private String discountCoupanId;
 	private UserInfo user;
 	private String orNo;
@@ -57,6 +58,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	private Double orDiscount;
 	private Double orRealCost;
 	private Integer orState;
+	private Integer orderCount;
 
 	private String pay_type;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -281,5 +283,22 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	}
 	public void setPay_type(String pay_type) {
 		this.pay_type = pay_type;
+	}
+
+	@Column(name="pdt_name")
+	public String getPdtName() {
+		return pdtName;
+	}
+
+	public void setPdtName(String pdtName) {
+		this.pdtName = pdtName;
+	}
+	@Column(name="order_count")
+	public Integer getOrderCount() {
+		return orderCount;
+	}
+
+	public void setOrderCount(Integer orderCount) {
+		this.orderCount = orderCount;
 	}
 }

@@ -5,10 +5,7 @@ import com.xiaov.model.*;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.impl.UserServiceImpl;
-import com.xiaov.service.interfaces.DiscountCodeService;
-import com.xiaov.service.interfaces.DiscountCodeUseRecordService;
-import com.xiaov.service.interfaces.InnerSessionService;
-import com.xiaov.service.interfaces.UserService;
+import com.xiaov.service.interfaces.*;
 import com.xiaov.utils.*;
 import com.xiaov.web.support.AuthenticationCahce;
 import com.xiaov.web.support.CookieUtil;
@@ -49,6 +46,9 @@ public class UserController {
     @Autowired
     private DiscountCodeUseRecordService discountCodeUseRecordService;
 
+    @Autowired
+    private AccountService accountService;
+
 
     private String path;
     private static int bufSize = 512; // size of bytes
@@ -74,6 +74,7 @@ public class UserController {
 
         InnerSession one = innerSessionService.getOne(InnerSession.class, key);
 
+        Account account=new Account();
         if (one != null) {
             if ((System.currentTimeMillis() - one.getBegin()) <= one.getTime()) {
 
@@ -109,6 +110,7 @@ public class UserController {
                                         discountCodeUseRecord.setDisCodeId(discode.get(0).getId());
                                         discountCodeUseRecord.setUseTime(new Date());
 
+                                        accountService.save(account);
                                         discountCodeUseRecordService.save(discountCodeUseRecord);// 绑定优惠码
                                         innerSessionService.delete(one);
                                         return new MessageBean(1, "注册成功!");
@@ -122,6 +124,7 @@ public class UserController {
                                     user.setAddTime(new Date());
                                     user.setTypeId("user.common");
                                     userService.save(user);// 注册用户
+                                    accountService.save(account);
                                     innerSessionService.delete(one);
                                     return new MessageBean(1, "注册成功!");
                                 }

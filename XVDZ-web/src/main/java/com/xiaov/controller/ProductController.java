@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.net.URLDecoder;
 import java.util.*;
 
 @Controller
@@ -50,10 +51,11 @@ public class ProductController {
     private byte[] buf;
     private int readedBytes;
 
-    private static final String [] lazyField=   {"productType", "img","show","backImage"};
+    private static final String[] lazyField = {"productType", "img", "show", "backImage", "user"};
 
     /**
      * 商品报保存
+     *
      * @param product
      * @param imgCut
      * @return
@@ -74,6 +76,7 @@ public class ProductController {
 
     /**
      * 提交定制
+     *
      * @param
      * @return
      */
@@ -82,37 +85,38 @@ public class ProductController {
     public MessageBean commit(HttpServletRequest request) {
 
 
-        String string="";
+        String string = "";
 
         try {
-            string= getString(request);
+            string = getString(request);
             Product product = packageParam(string);
-            product.setPdtName(new String(product.getPdtName().getBytes("iso8859-1"),"utf-8"));
-            product.setColor(new String(product.getColor().getBytes("iso8859-1"),"utf-8"));
-            if(product.getIsGroup()!=null&&product.getIsGroup().equals(1)){
-                if(product.getGroupPrice()==null||product.getMinnum()==null){
+            product.setPdtName(URLDecoder.decode(product.getPdtName()));
+            product.setColor(URLDecoder.decode(product.getColor()));
+            if (product.getIsGroup() != null && product.getIsGroup().equals(1)) {
+                if (product.getGroupPrice() == null || product.getMinnum() == null) {
                     return new MessageBean(APPConstant.ERROR, "团体定制请输入最低优惠数量和价格");
                 }
             }
 
-            Types types=new Types();
+            Types types = new Types();
             types.setId("product.customization");
             Double count = countPrice(product);
 
             product.setPdtPrc(count);
             product.setProductType(types);
             product.setAddTime(new Date());
-            product=product.longToShort();
+            product = product.longToShort();
             productService.save(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
         } catch (Exception e) {
             e.printStackTrace();
-            return new MessageBean(APPConstant.ERROR, "上传失败"+string);
+            return new MessageBean(APPConstant.ERROR, "上传失败" + string);
         }
     }
 
     /**
      * 提交定制
+     *
      * @param
      * @return
      */
@@ -121,31 +125,30 @@ public class ProductController {
     public MessageBean commitUpdate(HttpServletRequest request) {
 
 
-
-        String string="";
+        String string = "";
         try {
-            string= getString(request);
+            string = getString(request);
             Product product = packageParam(string);
 
-            if(product.getIsGroup()!=null&&product.getIsGroup().equals(1)){
-                if(product.getGroupPrice()==null||product.getMinnum()==null){
+            if (product.getIsGroup() != null && product.getIsGroup().equals(1)) {
+                if (product.getGroupPrice() == null || product.getMinnum() == null) {
                     return new MessageBean(APPConstant.SUCCESS, "团体定制请输入最低优惠数量和价格");
                 }
 
             }
             Product one = productService.getOne(Product.class, product.getId());
-            if(one==null){
-                return new MessageBean(APPConstant.ERROR, "该商品不存在或者已被删除"+product.getId());
+            if (one == null) {
+                return new MessageBean(APPConstant.ERROR, "该商品不存在或者已被删除" + product.getId());
             }
-            if(StrKit.notBlank(product.getPdtName())){
-                one.setPdtName(new String(product.getPdtName().getBytes("iso8859-1"),"utf-8"));
+            if (StrKit.notBlank(product.getPdtName())) {
+                one.setPdtName(URLDecoder.decode(product.getPdtName()));
             }
 
-            if(StrKit.notBlank(product.getColor())){
-                product.setColor(new String(product.getColor().getBytes("iso8859-1"),"utf-8"));
+            if (StrKit.notBlank(product.getColor())) {
+                product.setColor(URLDecoder.decode(product.getColor()));
             }
             Double count = countPrice(product);
-            if(count!=0){
+            if (count != 0) {
                 product.setPdtPrc(count);
             }
             product.setUpdateTime(new Date());
@@ -161,6 +164,7 @@ public class ProductController {
 
     /**
      * 修改跟新商品
+     *
      * @param product
      * @return
      */
@@ -178,6 +182,7 @@ public class ProductController {
 
     /**
      * 商品分页查询
+     *
      * @param product
      * @return
      */
@@ -188,7 +193,7 @@ public class ProductController {
         try {
             Page<Product> page = productService.page(product);
 
-            String[] fileName = {"productType", "img","show","backImage"};
+            String[] fileName = lazyField;
             page = LazyObjecUtil.LazyPageSetNull(page, fileName);
 
             return page;
@@ -203,6 +208,7 @@ public class ProductController {
 
     /**
      * 删除商品
+     *
      * @param product
      * @return
      */
@@ -222,6 +228,7 @@ public class ProductController {
 
     /**
      * 获取某个商品
+     *
      * @param product
      * @return
      */
@@ -242,6 +249,7 @@ public class ProductController {
 
     /**
      * 上传图案
+     *
      * @param imgCut
      * @param request
      * @return
@@ -294,85 +302,53 @@ public class ProductController {
 
     /**
      * 最新商品
+     *
      * @param product
      * @return
      */
     @RequestMapping("/admin/product/newProduct")
     @ResponseBody
     public Page<Product> newProduct(Product product) {
-        /*
-		 * try { product.setSidx("addTime"); product.setSord("DESC");
-		 * Page<Product> page = productService.page(product);
-		 * 
-		 * String [] fileName={"material","productType"}; page =
-		 * LazyObjecUtil.LazyPageSetNull(page, fileName);
-		 * 
-		 * return page; } catch (Exception e) { e.printStackTrace();
-		 * Page<Product> page=new Page<Product>();
-		 * page.setCode(APPConstant.ERROR); page.setMessage("服务器忙"); return
-		 * page; }
-		 */
+
         Page<Product> page = new Page<Product>();
         try {
             product.setSidx("addTime");
-            product.setSord("DESC");
-            page = productService.page(product);
-            LazyObjecUtil.LazyPageSetNull(page, new String[]{"productType", "img","show","backImage"});
+            product.setSord("ACS");
+            product.setIsModule(0);
+            page = productService.pageNotLazy(product, lazyField, new Product());
+            page.setCode(APPConstant.SUCCESS);
             return page;
         } catch (Exception e) {
-
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;
         }
-
     }
 
     /**
      * 最热商品
+     *
      * @param product
      * @return
      */
     @RequestMapping("/admin/product/hotProduct")
     @ResponseBody
     public Page<Product> hotProduct(Product product) {
-
+        Page<Product> page = new Page<Product>();
         try {
 
-            List<Product> products = productService.hot(product);
-            product.setResult( fillLong(products));
-            return product;
+            product.setSidx("pdtSaleCount");
+            product.setSord("DESC");
+            product.setIsModule(0);
+            product.setPageSize(8);
+            page = productService.pageNotLazy(product, lazyField, new Product());
+            page.setCode(APPConstant.SUCCESS);
+            return page;
         } catch (Exception e) {
             e.printStackTrace();
-            Page<Product> page = new Page<Product>();
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;
-        }
-
-    }
-
-    /**
-     * 根据商品名称查询商品
-     * 已废弃
-     * @param searchText
-     * @return
-     */
-    @RequestMapping(value = "/admin/product/searchProduct")
-    @ResponseBody
-    public List<Product> searchProduct(String searchText) {
-
-        Criterion eq1 = Restrictions.or(Restrictions.like("pdtName", "%" + searchText + "%"),
-                Restrictions.like("remark", "%" + searchText + "%"));
-        Criterion[] criterions = {eq1};
-        try {
-            List<Product> productList = productServiceimpl.searchProduct(criterions);
-
-            return productList;
-
-        } catch (Exception e) {
-            System.out.println("系统错误!");
-            return null;
         }
 
     }
@@ -380,6 +356,7 @@ public class ProductController {
     /**
      * 基本款上传
      * 已废弃
+     *
      * @param zip
      * @param request
      * @return
@@ -538,38 +515,6 @@ public class ProductController {
 
     }
 
-    /**
-     * 设计师作品上传
-     *已废弃
-     * @param zip
-     * @param request
-     * @return
-     */
-    @RequestMapping("/admin/product/desingerUploadByZip")
-    @ResponseBody
-    public MessageBean designerUpload(MultipartFile zip, HttpServletRequest request) {
-        return null;
-
-    }
-
-    /**
-     * 获取商品详情，已废弃
-     * @param product
-     * @return
-     */
-    @RequestMapping("/admin/product/getPdtDetail")
-    @ResponseBody
-    public Product getProductDetail(Product product) {
-
-        try {
-            return productServiceimpl.fillDetail(product);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-    }
-
     @RequestMapping("/admin/product/getUserWorks")
     @ResponseBody
     public Page<Product> getUserProduct(Product product) {
@@ -577,12 +522,12 @@ public class ProductController {
         product.setIsModule(0);
         try {
             Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
-            page=fillLong(page);
+            page = fillLong(page);
             return page;
         } catch (Exception e) {
             e.printStackTrace();
             product.setCode(APPConstant.ERROR);
-            product.setMessage("服务器异常"+e.getMessage());
+            product.setMessage("服务器异常" + e.getMessage());
             return product;
         }
     }
@@ -597,14 +542,14 @@ public class ProductController {
      */
     @RequestMapping("/auth/designer/product/upload")
     @ResponseBody
-    public MessageBean designer(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage,MultipartFile backImge) {
+    public MessageBean designer(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge) {
 
         Types types = new Types();
         types.setId("designer.product");
         Material mImg = saveFile(image, request, types, "设计师作品");
         Material mshowImage = saveFile(showImage, request, types, "设计师作品");
         Material mbackImage = saveFile(backImge, request, types, "设计师作品");
-        if(mImg!=null&&mshowImage!=null&&mbackImage!=null){
+        if (mImg != null && mshowImage != null && mbackImage != null) {
 
             product.setProductType(types);
             //设置溢价
@@ -616,12 +561,13 @@ public class ProductController {
             product.setAddTime(new Date());
             productService.save(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
-        }else{
+        } else {
             return new MessageBean(APPConstant.SUCCESS, "上传失败，服务器异常");
         }
     }
+
     /**
-     * 设计师作品上传
+     * 设计师作品修改
      *
      * @param request
      * @param product
@@ -630,7 +576,7 @@ public class ProductController {
      */
     @RequestMapping("/auth/designer/product/update")
     @ResponseBody
-    public MessageBean designerUpdate(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage,MultipartFile backImge) {
+    public MessageBean designerUpdate(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge) {
 
         Types types = new Types();
 
@@ -639,17 +585,17 @@ public class ProductController {
         Material mshowImage = saveFile(showImage, request, types, "设计师作品");
         Material mbackImage = saveFile(backImge, request, types, "设计师作品");
 
-        if(mImg!=null){
+        if (mImg != null) {
             one.setImg(mImg);
             mImg.setPrice(product.getPdtPrc());
         }
-        if(mbackImage!=null){
+        if (mbackImage != null) {
             one.setBackImage(mbackImage);
         }
-        if(mshowImage!=null){
+        if (mshowImage != null) {
             one.setShow(mshowImage);
         }
-        if(product.getPdtPrc()!=null){
+        if (product.getPdtPrc() != null) {
             one.setPdtPrc(product.getPdtPrc());
         }
         product.setUpdateTime(new Date());
@@ -659,6 +605,7 @@ public class ProductController {
 
     /**
      * 图片上传和保存
+     *
      * @param img
      * @param request
      * @param types
@@ -672,7 +619,7 @@ public class ProductController {
 
         try {
 
-            if(img==null){
+            if (img == null) {
                 return null;
             }
             path = request.getRealPath("/");
@@ -719,7 +666,7 @@ public class ProductController {
             material.setDbTypes(types);
             material.setOriginalUrl(tempPath + fileName);
             material.setMeterialName(materialName);
-            material.setUrl(basePath  + fileName);
+            material.setUrl(basePath + fileName);
             material.setAddTime(new Date());
             materialService.save(material);
 
@@ -732,113 +679,124 @@ public class ProductController {
 
     /**
      * 设计师作品分页查询
+     *
      * @param product 无参数（分页参数） 可传其他参数，us_id....
      * @return
      */
     @RequestMapping("/admin/designer/product/page")
     @ResponseBody
-    public Page<Product> designerPage(Product product){
+    public Page<Product> designerPage(Product product) {
         try {
             Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
-            page=fillLong(page);
+            page = fillLong(page);
             return page;
-        }catch (Exception e){
+        } catch (Exception e) {
             product.setCode(APPConstant.ERROR);
-            product.setMessage("服务器异常"+e.getMessage());
+            product.setMessage("服务器异常" + e.getMessage());
             return product;
         }
     }
+
     /**
      * 获取设计模块
+     *
      * @param product
      * @return
      */
     @RequestMapping("/admin/designer/product/module")
     @ResponseBody
-    public Page<Product> moudule(Product product){
+    public Page<Product> moudule(Product product) {
         try {
             product.setIsModule(1);
-            Page<Product> page = productService.pageNotLazy(product,lazyField,new Product());
-            page=fillLong(page);
+            Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
+            page = fillLong(page);
             return page;
-        }catch (Exception e){
+        } catch (Exception e) {
             product.setCode(APPConstant.ERROR);
-            product.setMessage("服务器异常"+e.getMessage());
+            product.setMessage("服务器异常" + e.getMessage());
             return product;
         }
     }
+
     /**
      * 获取所有定制作品
+     *
      * @param product
      * @return
      */
     @RequestMapping("/admin/designer/product/all")
     @ResponseBody
-    public Page<Product> all(Product product){
+    public Page<Product> all(Product product) {
 
         try {
             product.setIsModule(0);
-            Page<Product> page = productService.pageNotLazy(product,lazyField,new Product());
-            page=fillLong(page);
+            Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
+            page = fillLong(page);
             return page;
-        }catch (Exception e){
+        } catch (Exception e) {
             product.setCode(APPConstant.ERROR);
-            product.setMessage("服务器异常"+e.getMessage());
+            product.setMessage("服务器异常" + e.getMessage());
             return product;
         }
     }
+
     /**
      * 获取设计师的某个作品
+     *
      * @param product id
      * @return
      */
     @RequestMapping("/admin/designer/product/getOne")
     @ResponseBody
-    public Product getOneDesigner(Product product){
+    public Product getOneDesigner(Product product) {
         try {
 
-           Product product1=productService.geOneDetail(product);
+            Product product1 = productService.geOneDetail(product);
 
-            if(product1!=null){
+            if (product1 != null) {
                 product1.shortToLong();
-               return product1;
-            }else{
+                return product1;
+            } else {
                 product.setCode(APPConstant.ERROR);
                 product.setMessage("参数不完整");
             }
             return product;
-        }catch (Exception e){
+        } catch (Exception e) {
             product.setCode(APPConstant.ERROR);
-            product.setMessage("服务器异常"+e.getMessage());
+            product.setMessage("服务器异常" + e.getMessage());
             return product;
         }
     }
+
     /**
      * 根据类型查询商品
+     *
      * @param product productType.id
      * @return
      */
     @RequestMapping("/admin/product/page/type")
     @ResponseBody
-    public Page<Product> pageByType(Product product){
+    public Page<Product> pageByType(Product product) {
         try {
             Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
-            page=fillLong(page);
+            page = fillLong(page);
             return page;
-        }catch (Exception e){
+        } catch (Exception e) {
             product.setCode(APPConstant.ERROR);
-            product.setMessage("服务器异常"+e.getMessage());
+            product.setMessage("服务器异常" + e.getMessage());
             return product;
         }
     }
+
     /**
      * 商品搜索
+     *
      * @param search search
      * @return
      */
     @ResponseBody
     @RequestMapping("/admin/product/search")
-    public Page<Product> search(SearchModel search){
+    public Page<Product> search(SearchModel search) {
 
         try {
 
@@ -847,25 +805,26 @@ public class ProductController {
             search.setResult(fillLong(products));
             return search;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             search.setCode(APPConstant.ERROR);
-            search.setMessage("服务器异常"+e.getMessage());
-            return  search;
+            search.setMessage("服务器异常" + e.getMessage());
+            return search;
         }
     }
 
 
     /**
      * 字母小写转大写
+     *
      * @param str
      * @return
      */
-    public static String exChange(String str){
+    public static String exChange(String str) {
         StringBuffer sb = new StringBuffer();
-        if(str!=null){
-            for(int i=0;i<str.length();i++){
+        if (str != null) {
+            for (int i = 0; i < str.length(); i++) {
                 char c = str.charAt(i);
-                if(Character.isUpperCase(c)){
+                if (Character.isUpperCase(c)) {
                     sb.append(Character.toLowerCase(c));
                 }
             }
@@ -876,6 +835,7 @@ public class ProductController {
 
     /**
      * 文件流转文件
+     *
      * @param ins
      */
     private void inputstreamtofile(InputStream ins) {
@@ -904,31 +864,29 @@ public class ProductController {
 
     }
 
-    private Double countPrice(Product product){
+    private Double countPrice(Product product) {
 
-        Double sum=0d;
-        Style one=null;
-        if(product.getStyle()!=null){
-            one= styleService.getOne(Style.class, product.getStyle());
-            sum+=one.getPrice();
+        Double sum = 0d;
+        Style one = null;
+        if (product.getStyle() != null) {
+            one = styleService.getOne(Style.class, product.getStyle());
+            sum += one.getPrice();
         }
 
 
         String images = product.getDesigner_product_id();
 
-        if(images!=null&&"".equals(images)){
+        if (images != null && "".equals(images)) {
             List<String> strings = splitStr(images);
             List<Material> byids = materialService.getByids(Material.class, strings);
 
 
-            for (Material material:byids
+            for (Material material : byids
                     ) {
-                sum+=material.getPrice();
+                sum += material.getPrice();
             }
         }
-
-
-        return  sum;
+        return sum;
     }
 
 
@@ -950,69 +908,80 @@ public class ProductController {
         return strs;
     }
 
-    private  Page fillLong(Page page){
+    private Page fillLong(Page page) {
 
         List<Product> result = page.getResult();
 
-        for (Product product:result
-             ) {
-            product.shortToLong();
-        }
-        return  page;
-    }
-    private  List<Product> fillLong(List<Product> result){
-
-
-        for (Product product:result
+        for (Product product : result
                 ) {
             product.shortToLong();
         }
-        return  result;
+        return page;
     }
 
-    public String getString(HttpServletRequest request){
-        try{
-        request.setCharacterEncoding("UTF-8");
-        StringBuilder sb = new StringBuilder();
-        BufferedReader reader = request.getReader();
-            char[] buff = new char[1024];
-            int len;
-            while((len = reader.read(buff)) != -1) {
-                sb.append(buff,0, len);
-            }
-            return  sb.toString();
-        }catch (IOException e) {
-            e.printStackTrace();
+    private List<Product> fillLong(List<Product> result) {
+
+
+        for (Product product : result
+                ) {
+            product.shortToLong();
         }
-        return  null;
+        return result;
     }
 
-    private  Product packageParam(String strs){
+    public String getString(HttpServletRequest request) {
+        try {
+            request.setCharacterEncoding("ISO8859-1");
+        } catch (UnsupportedEncodingException e1) {
+            e1.printStackTrace();
+        }
+        StringBuilder buffer = new StringBuilder();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(request.getInputStream(), "ISO8859-1"));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != reader) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return buffer.toString();
+    }
 
-        try{
-            Class clazz=Product.class;
-            Object product=clazz.newInstance();
-            if(StrKit.notBlank(strs)){
+    private Product packageParam(String strs) {
+        try {
+            Class clazz = Product.class;
+            Object product = clazz.newInstance();
+            if (StrKit.notBlank(strs)) {
                 String[] split = strs.split("[&]");
-                for (String str:split){
+                for (String str : split) {
                     String[] split1 = str.split("[=]");
-                    if(split1.length==2){
+                    if (split1.length == 2) {
                         Class<?> type = ReflectionUtils.getAccessibleField(clazz, split1[0]).getType();
-                        if(type.getSimpleName().equals("Integer")){
-                            if(split1[1].equals("false")){
-                                ReflectionUtils.invokeSetterMethod(product,split1[0],0,type);
-                            }else if(split1[1].equals("true")){
-                                ReflectionUtils.invokeSetterMethod(product,split1[0],1,type);
-                            }else{
-                                ReflectionUtils.invokeSetterMethod(product,split1[0],Integer.valueOf(split1[1]),type);
+                        if (type.getSimpleName().equals("Integer")) {
+                            if (split1[1].equals("false")) {
+                                ReflectionUtils.invokeSetterMethod(product, split1[0], 0, type);
+                            } else if (split1[1].equals("true")) {
+                                ReflectionUtils.invokeSetterMethod(product, split1[0], 1, type);
+                            } else {
+                                ReflectionUtils.invokeSetterMethod(product, split1[0], Integer.valueOf(split1[1]), type);
                             }
 
-                        }else if(type.getSimpleName().equals("Long")){
-                            ReflectionUtils.invokeSetterMethod(product,split1[0],Long.valueOf(split1[1]),type);
-                        }else if(type.getSimpleName().equals("Double")){
-                            ReflectionUtils.invokeSetterMethod(product,split1[0],Double.valueOf(split1[1]),type);
-                        }else{
-                            ReflectionUtils.invokeSetterMethod(product,split1[0],split1[1],type);
+                        } else if (type.getSimpleName().equals("Long")) {
+                            ReflectionUtils.invokeSetterMethod(product, split1[0], Long.valueOf(split1[1]), type);
+                        } else if (type.getSimpleName().equals("Double")) {
+                            ReflectionUtils.invokeSetterMethod(product, split1[0], Double.valueOf(split1[1]), type);
+                        } else {
+                            ReflectionUtils.invokeSetterMethod(product, split1[0], split1[1], type);
                         }
 
                     }
@@ -1020,13 +989,40 @@ public class ProductController {
                 return (Product) product;
             }
             return null;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
 
     }
 
+    public String getRequestInputStream(HttpServletRequest req) {
+        try {
+            req.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e1) {
+            e1.printStackTrace();
+        }
+        StringBuilder buffer = new StringBuilder();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(req.getInputStream(), "UTF-8"));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != reader) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return buffer.toString();
+    }
   /*  public static void main(String[] args) {
         String str="isGroup=1&groupPrice=100&minnum=100&color=%23000000&style=1&designer_product_id=40283f83550fce5e01550fd75d400003_40283f83550fce5e01550fd7579e0002";
         Product product = packageParam(str);

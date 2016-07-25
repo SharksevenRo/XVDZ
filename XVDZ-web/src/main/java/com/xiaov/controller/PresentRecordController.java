@@ -121,7 +121,9 @@ public class PresentRecordController {
                 record.setMessage("非法请求");
                 return  record;
             }
-            return resentRecordService.page(record);
+            Page<PresentRecord> page = resentRecordService.page(record);
+            page.setCode(APPConstant.SUCCESS);
+            return page;
         } catch (Exception e) {
             Page<PresentRecord> page = new Page<PresentRecord>();
             page.setCode(APPConstant.ERROR);
@@ -134,8 +136,10 @@ public class PresentRecordController {
     @ResponseBody
     public PresentRecord getOne(PresentRecord record) {
         try {
-            return resentRecordService.getOne(record.getClass(), record.getId());
 
+            PresentRecord one = resentRecordService.getOne(record.getClass(), record.getId());
+            one.setCode(APPConstant.SUCCESS);
+            return one;
         } catch (Exception e) {
             PresentRecord page = new PresentRecord();
             page.setCode(APPConstant.ERROR);

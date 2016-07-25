@@ -26,7 +26,7 @@ public class PaymentController {
             paymentService.save(payment);
             return new MessageBean(APPConstant.SUCCESS, "添加成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "添加失败"+e.getMessage());
+            return new MessageBean(APPConstant.ERROR, "添加失败"+e.getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ public class PaymentController {
             paymentService.update(payment);
             return new MessageBean(APPConstant.SUCCESS, "更新成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "更新失败"+e.getMessage());
+            return new MessageBean(APPConstant.ERROR, "更新失败"+e.getMessage());
         }
     }
 }

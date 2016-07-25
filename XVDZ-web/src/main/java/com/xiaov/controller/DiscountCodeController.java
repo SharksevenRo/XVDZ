@@ -99,7 +99,7 @@ public class DiscountCodeController {
         try {
 
         	page=discountCodeService.page(discountCode);
-        	page=LazyObjecUtil.LazyPageSetNull(page, new String []{"userInfoByGnrtUId","userInfoByProUId"});
+            page.setCode(APPConstant.SUCCESS);
             return page;
         } catch (Exception e) {
             page.setCode(APPConstant.ERROR);
@@ -115,13 +115,12 @@ public class DiscountCodeController {
             DiscountCode code=new DiscountCode();
             code.setSalesman(user.getId());
             Page<DiscountCode> page = discountCodeService.page(code);
-
             if(page.getResult().size()==1){
-
                 return page.getResult().get(0);
-
             }else{
-               return null;
+                code.setCode(APPConstant.ERROR);
+                code.setMessage("数据异常，你存在多个优惠码，请联系管理员");
+               return code;
             }
         } catch (Exception e) {
             DiscountCode page = new DiscountCode();

@@ -58,7 +58,7 @@ public class MaterialController {
 			materialService.save(Material);
 			return new MessageBean(APPConstant.SUCCESS, "上传成功");
 		} catch (Exception e) {
-			return new MessageBean(APPConstant.SUCCESS, "上传失败");
+			return new MessageBean(APPConstant.ERROR, "上传失败");
 		}
 	}
 
@@ -70,7 +70,7 @@ public class MaterialController {
 			materialService.update(Material);
 			return new MessageBean(APPConstant.SUCCESS, "上传成功");
 		} catch (Exception e) {
-			return new MessageBean(APPConstant.SUCCESS, "上传失败");
+			return new MessageBean(APPConstant.ERROR, "上传失败");
 		}
 	}
 
@@ -81,7 +81,7 @@ public class MaterialController {
 		try {
 			Material = materialService.getOne(Material.getClass(), Material.getId());
 			materialService.delete(Material);
-			return new MessageBean(APPConstant.ERROR, "删除成功");
+			return new MessageBean(APPConstant.SUCCESS, "删除成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new MessageBean(APPConstant.ERROR, "删除失败");

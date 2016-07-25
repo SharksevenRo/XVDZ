@@ -109,14 +109,15 @@ public class MutiTypeController {
         try{
             List<Product> products = productService.getProductByMutiType(page, page.getMutiType());
             page.setResult(products);
+            page.setCode(APPConstant.SUCCESS);
             return page;
         }catch (Exception e){
             e.printStackTrace();
+            page.setCode(APPConstant.ERROR);
+            page.setMessage("服务器异常");
+            page.setMutiType(null);
+            return page;
         }
-        page.setCode(APPConstant.ERROR);
-        page.setMessage("服务器异常");
-        page.setMutiType(null);
-        return page;
     }
     @ResponseBody
     @RequestMapping("/admin/designer/list/label")
@@ -125,14 +126,16 @@ public class MutiTypeController {
         try{
             List<UserInfo> users = userService.getDesignerByMutiType(page, page.getMutiType());
             page.setResult(users);
+            page.setCode(APPConstant.SUCCESS);
             return page;
         }catch (Exception e){
             e.printStackTrace();
+            page.setCode(APPConstant.ERROR);
+            page.setMessage("服务器异常");
+            page.setMutiType(null);
+            return page;
         }
-        page.setCode(APPConstant.ERROR);
-        page.setMessage("服务器异常");
-        page.setMutiType(null);
-        return page;
+
     }
     public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
         return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);

@@ -28,7 +28,7 @@ public class OrderDetailController {
             orderDetailService.save(orderDetail);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            return new MessageBean(APPConstant.ERROR, "上传失败");
         }
     }
 
@@ -38,7 +38,7 @@ public class OrderDetailController {
 
         try {
             orderDetailService.update(orderDetail);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.ERROR, "上传成功");
         } catch (Exception e) {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }

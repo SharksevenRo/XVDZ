@@ -35,7 +35,7 @@ public class StyleController {
             styleService.save(style);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
-            return new MessageBean(APPConstant.SUCCESS, "上传失败");
+            return new MessageBean(APPConstant.ERROR, "上传失败");
         }
     }
 
@@ -45,7 +45,7 @@ public class StyleController {
 
         try {
             styleService.update(style);
-            return new MessageBean(APPConstant.SUCCESS, "上传成功");
+            return new MessageBean(APPConstant.ERROR, "上传成功");
         } catch (Exception e) {
             return new MessageBean(APPConstant.SUCCESS, "上传失败");
         }
@@ -57,6 +57,7 @@ public class StyleController {
         try {
             List<Style> styles = styleService.loadAll(style);
             style.setResult(styles);
+            style.setCode(APPConstant.SUCCESS);
             return style;
         } catch (Exception e) {
             style.setCode(APPConstant.ERROR);
@@ -65,12 +66,11 @@ public class StyleController {
         }
     }
 
-    @RequestMapping(value = "/admin/style/getOne", method = RequestMethod.POST)
+    @RequestMapping("/admin/style/getOne")
     @ResponseBody
     public Style getOne(Style style) {
         try {
             return styleService.getOne(style.getClass(), style.getId());
-
         } catch (Exception e) {
             Style page = new Style();
             page.setCode(APPConstant.ERROR);
