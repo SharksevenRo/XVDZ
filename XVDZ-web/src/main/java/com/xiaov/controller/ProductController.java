@@ -83,17 +83,20 @@ public class ProductController {
 
 
         String string="";
+
         try {
             string= getString(request);
             Product product = packageParam(string);
+            product.setPdtName(new String(product.getPdtName().getBytes("iso8859-1"),"utf-8"));
+            product.setColor(new String(product.getColor().getBytes("iso8859-1"),"utf-8"));
             if(product.getIsGroup()!=null&&product.getIsGroup().equals(1)){
                 if(product.getGroupPrice()==null||product.getMinnum()==null){
-                    return new MessageBean(APPConstant.SUCCESS, "团体定制请输入最低优惠数量和价格");
+                    return new MessageBean(APPConstant.ERROR, "团体定制请输入最低优惠数量和价格");
                 }
             }
 
             Types types=new Types();
-            types.setId("designer.product");
+            types.setId("product.customization");
             Double count = countPrice(product);
 
             product.setPdtPrc(count);
@@ -110,28 +113,36 @@ public class ProductController {
 
     /**
      * 提交定制
-     * @param product
+     * @param
      * @return
      */
     @RequestMapping("/auth/customization/update")
     @ResponseBody
-    public MessageBean commitUpdate(Product product,HttpServletRequest request) {
+    public MessageBean commitUpdate(HttpServletRequest request) {
 
 
-        String name="定制商品";
+
+        String string="";
         try {
+            string= getString(request);
+            Product product = packageParam(string);
+
             if(product.getIsGroup()!=null&&product.getIsGroup().equals(1)){
                 if(product.getGroupPrice()==null||product.getMinnum()==null){
                     return new MessageBean(APPConstant.SUCCESS, "团体定制请输入最低优惠数量和价格");
                 }
-                name="团体"+name;
-            }
-            if(product.getPdtName()==null||"".equals(product.getPdtName())){
-                product.setPdtName(name);
+
             }
             Product one = productService.getOne(Product.class, product.getId());
             if(one==null){
                 return new MessageBean(APPConstant.ERROR, "该商品不存在或者已被删除"+product.getId());
+            }
+            if(StrKit.notBlank(product.getPdtName())){
+                one.setPdtName(new String(product.getPdtName().getBytes("iso8859-1"),"utf-8"));
+            }
+
+            if(StrKit.notBlank(product.getColor())){
+                product.setColor(new String(product.getColor().getBytes("iso8859-1"),"utf-8"));
             }
             Double count = countPrice(product);
             if(count!=0){
@@ -983,14 +994,19 @@ public class ProductController {
             Object product=clazz.newInstance();
             if(StrKit.notBlank(strs)){
                 String[] split = strs.split("[&]");
-
                 for (String str:split){
-
                     String[] split1 = str.split("[=]");
                     if(split1.length==2){
                         Class<?> type = ReflectionUtils.getAccessibleField(clazz, split1[0]).getType();
                         if(type.getSimpleName().equals("Integer")){
-                            ReflectionUtils.invokeSetterMethod(product,split1[0],Integer.valueOf(split1[1]),type);
+                            if(split1[1].equals("false")){
+                                ReflectionUtils.invokeSetterMethod(product,split1[0],0,type);
+                            }else if(split1[1].equals("true")){
+                                ReflectionUtils.invokeSetterMethod(product,split1[0],1,type);
+                            }else{
+                                ReflectionUtils.invokeSetterMethod(product,split1[0],Integer.valueOf(split1[1]),type);
+                            }
+
                         }else if(type.getSimpleName().equals("Long")){
                             ReflectionUtils.invokeSetterMethod(product,split1[0],Long.valueOf(split1[1]),type);
                         }else if(type.getSimpleName().equals("Double")){

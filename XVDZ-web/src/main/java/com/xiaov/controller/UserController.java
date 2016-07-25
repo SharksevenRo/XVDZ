@@ -320,9 +320,7 @@ public class UserController {
                     temp.setUsPwd("");
                 } else {
                     temp.setCode(APPConstant.ERROR);
-                    temp.setMessage("登录成功");
-                    temp.setCode(APPConstant.SUCCESS);
-                    temp = LazyObjecUtil.LazyOneSetNull(user, "role");
+                    temp.setMessage("登录失败");
                 }
             } else {
                 temp.setCode(APPConstant.ERROR);
@@ -559,13 +557,11 @@ public class UserController {
     }
 
     private  UserInfo packageParam(String strs){
-
         try{
             Class clazz=Product.class;
             Object user=clazz.newInstance();
             if(StrKit.notBlank(strs)){
                 String[] split = strs.split("[&]");
-
                 for (String str:split){
 
                     String[] split1 = str.split("[=]");
