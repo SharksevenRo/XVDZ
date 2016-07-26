@@ -573,7 +573,8 @@ public class Product extends Page<Product> implements java.io.Serializable {
                 this.setBackImage("/base64" + "/"+name);
             }
         }
-        return  null;
+        this.setImageBase64("");
+        return  this;
 
     }
 }

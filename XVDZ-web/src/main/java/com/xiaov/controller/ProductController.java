@@ -51,7 +51,7 @@ public class ProductController {
     private byte[] buf;
     private int readedBytes;
 
-    private static final String[] lazyField = {"productType", "img", "show", "backImage", "user"};
+    private static final String[] lazyField = {"productType","user"};
 
     /**
      * 商品报保存

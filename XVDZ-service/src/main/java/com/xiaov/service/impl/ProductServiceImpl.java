@@ -149,7 +149,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		if(product.getId()!=null){
 
 			Criterion[] eqs={Restrictions.eq("id",product.getId()),Restrictions.eq("deleteFlag",0)};
-			Product product1 = dao.getEntitiestNotLazy(new Product(), new String[]{"productType", "img", "show", "backImage"}, eqs).get(0);
+			Product product1 = dao.getEntitiestNotLazy(new Product(), new String[]{"productType", "user"}, eqs).get(0);
 			return  product1;
 		}
 		return null;
@@ -159,7 +159,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		if(product.getId()!=null){
 
 			Criterion[] eqs={Restrictions.eq("id",product.getId()),Restrictions.eq("deleteFlag",0)};
-			Product product1 = dao.getEntitiestNotLazy(new Product(), new String[]{"productType", "img", "show", "backImage"}, eqs, product.getOffset(), product.getPageSize()).get(0);
+			Product product1 = dao.getEntitiestNotLazy(new Product(), new String[]{"productType", "user"}, eqs, product.getOffset(), product.getPageSize()).get(0);
 			return  product1;
 		}
 		return null;
