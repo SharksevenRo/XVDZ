@@ -1,18 +1,23 @@
 package com.xiaov.model;
 
 import java.io.File;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xiaov.utils.PropertiesUtils;
 import com.xiaov.utils.StrKit;
 import com.xiaov.utils.StringFileToolkit;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,7 +40,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
     private String id;
     @JsonIgnore
     private Types productType;
-    private Material img;
+    private String img;
     private String usId;
     private UserInfo user;
     private String pdtNo;
@@ -60,9 +65,10 @@ public class Product extends Page<Product> implements java.io.Serializable {
     private Boolean pdtOpenState = true;
     private String remark;
     private String baseId;
-    private Material show;
+    private String show;
+    private String img_back;
 
-    private Material backImage;
+    private String backImage;
     private String imageBase64;
 
     private String productDesigner;
@@ -120,7 +126,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
      * full constructor
      */
     public Product(String id, Types productType,
-                   Material img, String usId, String pdtNo,
+                   String img, String usId, String pdtNo,
                    String pdtName, Double pdtIntRat, String pdtLabel, String pdtPc,
                    String pdtPicBs, Double pdtPrc, Double pdtDsct,
                    Integer pdtSaleCount, Integer pdtGdCount, Integer pdtShareCount,
@@ -172,13 +178,12 @@ public class Product extends Page<Product> implements java.io.Serializable {
         this.productType = productType;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "img")
-    public Material getImg() {
+    @Column(name = "img",length = 255)
+    public String getImg() {
         return this.img;
     }
 
-    public void setImg(Material img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
@@ -365,14 +370,12 @@ public class Product extends Page<Product> implements java.io.Serializable {
         this.baseId = baseId;
     }
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "allpic")
-    public Material getShow() {
+    @Column(name = "allpic",length = 255)
+    public String getShow() {
         return show;
     }
 
-    public void setShow(Material show) {
+    public void setShow(String show) {
         this.show = show;
     }
 
@@ -422,13 +425,12 @@ public class Product extends Page<Product> implements java.io.Serializable {
         this.groupPrice = groupPrice;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "backimage")
-    public Material getBackImage() {
+    @Column(name = "backimage",length = 255)
+    public String getBackImage() {
         return backImage;
     }
 
-    public void setBackImage(Material backImage) {
+    public void setBackImage(String backImage) {
         this.backImage = backImage;
     }
 
@@ -494,28 +496,19 @@ public class Product extends Page<Product> implements java.io.Serializable {
     public void setUser(UserInfo user) {
         this.user = user;
     }
+    @Column(name = "img_back",length = 255)
+    public String getImg_back() {
+        return img_back;
+    }
+
+    public void setImg_back(String img_back) {
+        this.img_back = img_back;
+    }
 
     public Product longToShort() {
         try {
-
-
             File file;
-            String path = PropertiesUtils.getValue("file.path") + "/base64" + "/";
-
-            if(StrKit.notBlank(getImageBase64())){
-                path = path + "/" + UUID.randomUUID().toString() + ".txt";
-                file = new File(path);
-                StringFileToolkit.string2File(getImageBase64(), file);
-                setImageBase64(path);
-                try {
-                    throw  new RuntimeException(path);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }else{
-                throw  new RuntimeException("文本为空");
-            }
-
+            String path = "";
             if (StrKit.notBlank(getProductDesigner())){
                 path =  PropertiesUtils.getValue("file.path") +"/productDesign" + "/";
                 path = path + "/" + UUID.randomUUID().toString() + ".txt";
@@ -534,24 +527,53 @@ public class Product extends Page<Product> implements java.io.Serializable {
     public void shortToLong() {
         try {
             File file;
-
-            if (StrKit.notBlank(getImageBase64())) {
-                file = new File(getImageBase64());
-
-                if (file.exists()) {
-                    this.imageBase64 = StringFileToolkit.file2String(file, "utf-8").replace("\r","").replace("\n","");
-                }
-
-            }
             if(StrKit.notBlank(getProductDesigner())){
                 file =new File(getProductDesigner());
                 if(file.exists()){
                     this.productDesigner=StringFileToolkit.file2String(file, "utf-8").replace("\r","").replace("\n","");
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Product buidImage(){
+
+        String base64=getImageBase64();
+        base64=URLDecoder.decode(base64);
+        String path =  PropertiesUtils.getValue("file.path") +"/base64" + "/";
+        Gson gson=new Gson();
+        Base64Model base64Model = gson.fromJson(base64, Base64Model.class);
+        String [] strs=base64Model.getaDesignImgsBase64();
+        File file;
+        String name;
+        for ( int i=0;i<strs.length;i++){
+            name=UUID.randomUUID().toString()+".png";
+            if(StrKit.notBlank(strs[i])){
+                file=new File(path+name);
+                StringFileToolkit.GenerateImage(strs[i].split("[,]")[1],file);
+            }
+            if(i==0){
+                this.setImg("/base64" + "/"+name);
+            }else{
+                this.setImg_back("/base64" + "/"+name);
+            }
+        }
+        strs=base64Model.getaFullImgsBase64();
+        for ( int i=0;i<strs.length;i++){
+            name=UUID.randomUUID().toString()+".png";
+            if(StrKit.notBlank(strs[i])){
+                file=new File(path+name);
+                StringFileToolkit.GenerateImage(strs[i].split("[,]")[1],file);
+            }
+            if(i==0){
+                this.setShow("/base64" + "/"+name);
+            }else{
+                this.setBackImage("/base64" + "/"+name);
+            }
+        }
+        return  null;
+
     }
 }

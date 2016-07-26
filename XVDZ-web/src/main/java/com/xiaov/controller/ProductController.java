@@ -91,7 +91,7 @@ public class ProductController {
             string = getString(request);
             Product product = packageParam(string);
             product.setPdtName(URLDecoder.decode(product.getPdtName()));
-            product.setColor(URLDecoder.decode(product.getColor()));
+    //        product.setColor(URLDecoder.decode(product.getColor()));
             if (product.getIsGroup() != null && product.getIsGroup().equals(1)) {
                 if (product.getGroupPrice() == null || product.getMinnum() == null) {
                     return new MessageBean(APPConstant.ERROR, "团体定制请输入最低优惠数量和价格");
@@ -106,6 +106,7 @@ public class ProductController {
             product.setProductType(types);
             product.setAddTime(new Date());
             product = product.longToShort();
+            product=product.buidImage();
             productService.save(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
         } catch (Exception e) {
@@ -153,6 +154,7 @@ public class ProductController {
             }
             product.setUpdateTime(new Date());
             product.longToShort();
+            product=product.buidImage();
             productService.update(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
         } catch (Exception e) {
@@ -546,15 +548,13 @@ public class ProductController {
 
         Types types = new Types();
         types.setId("designer.product");
-        Material mImg = saveFile(image, request, types, "设计师作品");
-        Material mshowImage = saveFile(showImage, request, types, "设计师作品");
-        Material mbackImage = saveFile(backImge, request, types, "设计师作品");
+        String mImg = saveFile(image, request, types, "设计师作品");
+        String mshowImage = saveFile(showImage, request, types, "设计师作品");
+        String mbackImage = saveFile(backImge, request, types, "设计师作品");
         if (mImg != null && mshowImage != null && mbackImage != null) {
 
             product.setProductType(types);
             //设置溢价
-            mImg.setPrice(product.getPdtPrc());
-            mshowImage.setPrice(product.getPdtPrc());
             product.setImg(mImg);
             product.setShow(mshowImage);
             product.setBackImage(mbackImage);
@@ -581,13 +581,12 @@ public class ProductController {
         Types types = new Types();
 
         Product one = productService.getOne(Product.class, product.getId());
-        Material mImg = saveFile(image, request, types, "设计师作品");
-        Material mshowImage = saveFile(showImage, request, types, "设计师作品");
-        Material mbackImage = saveFile(backImge, request, types, "设计师作品");
+        String mImg = saveFile(image, request, types, "设计师作品");
+        String mshowImage = saveFile(showImage, request, types, "设计师作品");
+        String mbackImage = saveFile(backImge, request, types, "设计师作品");
 
         if (mImg != null) {
             one.setImg(mImg);
-            mImg.setPrice(product.getPdtPrc());
         }
         if (mbackImage != null) {
             one.setBackImage(mbackImage);
@@ -612,7 +611,7 @@ public class ProductController {
      * @param materialName
      * @return
      */
-    private Material saveFile(MultipartFile img, HttpServletRequest request, Types types, String materialName) {
+    private String saveFile(MultipartFile img, HttpServletRequest request, Types types, String materialName) {
         InputStream inputStream = null;
         FileOutputStream fileOut = null;
         File file = null;
@@ -659,7 +658,7 @@ public class ProductController {
             fileOut.close();
 
             //文件压缩
-            CompressPicUtil mypic = new CompressPicUtil();
+          /*  CompressPicUtil mypic = new CompressPicUtil();
             mypic.resizePNG(path + tempPath + "/" + fileName, path + basePath + "/" + fileName, 200, 200, true);
             Material material;
             material = new Material();
@@ -668,9 +667,9 @@ public class ProductController {
             material.setMeterialName(materialName);
             material.setUrl(basePath + fileName);
             material.setAddTime(new Date());
-            materialService.save(material);
+            materialService.save(material);*/
 
-            return material;
+            return tempPath + fileName;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

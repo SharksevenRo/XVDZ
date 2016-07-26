@@ -54,9 +54,7 @@ public class MutiTypeController {
     public MessageBean saveMore(String mutiType,String type){
 
         try {
-            JavaType javaType = getCollectionType(ArrayList.class, MutiType.class);
             List<MutiType> types =  parse(mutiType,type);
-
          String label="";
             for (int i=0;i<types.size() ;i++) {
                 mutiTypeService.save(types.get(i));

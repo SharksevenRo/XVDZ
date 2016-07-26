@@ -71,10 +71,10 @@ public class UserController {
     public MessageBean save(String telCode, String disCodeNo, String rePwd, String usPwd, String usTel,
                             String activeCode, String key) {
 
-
         InnerSession one = innerSessionService.getOne(InnerSession.class, key);
 
         Account account=new Account();
+        account.setAddTime(new Date());
         if (one != null) {
             if ((System.currentTimeMillis() - one.getBegin()) <= one.getTime()) {
 
