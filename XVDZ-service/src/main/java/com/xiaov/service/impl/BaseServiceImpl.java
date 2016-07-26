@@ -146,6 +146,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 					}
 				}
 				if(field.getType().newInstance() instanceof Page){
+					value = ReflectionUtils.invokeGetterMethod(page, field.getName());
 					if (value != null) {
 						criterion=Restrictions.eq(field.getName(),value);
 						value=null;
