@@ -105,21 +105,44 @@ public class Product extends Page<Product> implements java.io.Serializable {
     /**
      * minimal constructor
      */
-    public Product(String id, String pdtNo, String pdtName,
-                   String pdtPicBs, Double pdtPrc, Integer pdtSaleCount,
-                   Integer pdtGdCount, Integer pdtShareCount, Date addTime,
-                   Boolean pdtOpenState, Integer deleteFlag) {
+    public Product(Double premium, String id, Types productType, String img, String usId, UserInfo user, String pdtNo, String pdtName, Double pdtIntRat, String pdtLabel, String pdtPc, String pdtPicBs, String pdtPicBp, Double pdtPrc, Double pdtDsct, Integer pdtSaleCount, Integer pdtGdCount, Integer pdtShareCount, Date addTime, Date updateTime, Date deleteTime, Boolean pdtOpenState, String remark, String baseId, String show, String img_back, String backImage, String imageBase64, String productDesigner, Integer isGroup, Integer minnum, Double groupPrice, Integer deleteFlag, Integer isModule, String style, String designer_product_id, String color) {
+        this.premium = premium;
         this.id = id;
+        this.productType = productType;
+        this.img = img;
+        this.usId = usId;
+        this.user = user;
         this.pdtNo = pdtNo;
         this.pdtName = pdtName;
+        this.pdtIntRat = pdtIntRat;
+        this.pdtLabel = pdtLabel;
+        this.pdtPc = pdtPc;
         this.pdtPicBs = pdtPicBs;
+        this.pdtPicBp = pdtPicBp;
         this.pdtPrc = pdtPrc;
+        this.pdtDsct = pdtDsct;
         this.pdtSaleCount = pdtSaleCount;
         this.pdtGdCount = pdtGdCount;
         this.pdtShareCount = pdtShareCount;
         this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleteTime = deleteTime;
         this.pdtOpenState = pdtOpenState;
+        this.remark = remark;
+        this.baseId = baseId;
+        this.show = show;
+        this.img_back = img_back;
+        this.backImage = backImage;
+        this.imageBase64 = imageBase64;
+        this.productDesigner = productDesigner;
+        this.isGroup = isGroup;
+        this.minnum = minnum;
+        this.groupPrice = groupPrice;
         this.deleteFlag = deleteFlag;
+        this.isModule = isModule;
+        this.style = style;
+        this.designer_product_id = designer_product_id;
+        this.color = color;
     }
 
     /**

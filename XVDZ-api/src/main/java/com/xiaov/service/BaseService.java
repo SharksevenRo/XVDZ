@@ -2,6 +2,7 @@ package com.xiaov.service;
 
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -77,5 +78,15 @@ public interface BaseService<T>{
      * @return
      */
     public Page<T> pageNotLazy(Page page,String [] fields,T t);
+
+    /**
+     * 添加额外条件
+     * @param page
+     * @param fields
+     * @param t
+     * @param criterions
+     * @return
+     */
+    public Page<T> pageNotLazy(Page page, String [] fields, Criterion [] criterions, T t);
     
 }

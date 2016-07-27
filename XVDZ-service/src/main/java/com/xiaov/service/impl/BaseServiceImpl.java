@@ -16,6 +16,10 @@ import com.xiaov.orm.hibernate.HibernateSupportDao;
 import com.xiaov.service.BaseService;
 import com.xiaov.utils.ReflectionUtils;
 
+/**
+ * service基础类。提供基本业务对象的基本操作
+ * @param <T>
+ */
 @Service
 public class BaseServiceImpl<T> implements BaseService<T> {
 
@@ -129,7 +133,12 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	public Page<T> pageNotLazy(Page page,String [] fields,T t) {
-		String name = page.getClass().getSimpleName();
+		return pageNotLazy(page,fields,null,t);
+	}
+
+	public Page<T> pageNotLazy(Page page,String [] fields,Criterion [] criterions1,T t) {
+
+		String name = t.getClass().getSimpleName();
 		StringBuilder hql = new StringBuilder();
 		List<Field> accessibleFields = ReflectionUtils.getAccessibleFields(page.getClass(), true);
 		Object value = null;
@@ -158,12 +167,17 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 				criterions.add(criterion);
 			}
 		}
+		if(criterions1!=null&&criterions1.length>1){
+			for (Criterion c:criterions1
+					) {
+				criterions.add(c);
+			}
+		}
 		Criteria criteriaEq = dao.createCriteriaEq(criterions,t.getClass());
-
 		if(fields!=null){
-				for (String string : fields) {
-					criteriaEq = criteriaEq.setFetchMode(string, org.hibernate.FetchMode.JOIN);
-				}
+			for (String string : fields) {
+				criteriaEq = criteriaEq.setFetchMode(string, org.hibernate.FetchMode.JOIN);
+			}
 		}
 		page= dao.findPage(page,criteriaEq);
 		//设置总页数

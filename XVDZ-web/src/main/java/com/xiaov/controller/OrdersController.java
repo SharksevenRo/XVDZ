@@ -8,6 +8,9 @@ import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.*;
 import com.xiaov.utils.LazyObjecUtil;
+import com.xiaov.utils.StrKit;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +30,7 @@ public class OrdersController {
     @Autowired
     private ProductService productService;
     @Autowired
-    private MaterialService materialService;
-    @Autowired
-    private StyleService styleService;
+    private UserService userService;
     @Autowired
     private DiscountCoupanService discountCoupanService;
 
@@ -94,6 +95,58 @@ public class OrdersController {
             orders.setCode(APPConstant.ERROR);
             orders.setMessage("服务器忙");
             return orders;
+        }
+    }
+
+    /**
+     * 业务员的订单发展用户产生的订单
+     * @param user
+     * @return
+     */
+    @RequestMapping("/auth/orders/salesman/page")
+    @ResponseBody
+    public Page<Orders> salesmanPage(UserInfo user) {
+
+        Page<Orders> page=new Page<Orders>();
+        try {
+
+            if(StrKit.notBlank(user.getId())){
+                UserInfo one = userService.getOne(UserInfo.class, user.getId());
+
+                if(one.getTypeId().equals("user.salesman")&&StrKit.notBlank(one.getDiscountCode())){
+                    List<UserInfo> users = userService.getByProperty("discountCode", one.getDiscountCode());
+
+                    List<String> ids=new ArrayList<String>();
+
+                    for (UserInfo temp:users
+                         ) {
+                        //去除业务员自己
+                        if(!temp.getId().equals(user.getId())){
+                            ids.add(temp.getId());
+                        }
+                    }
+                    Criterion [] criterions={Restrictions.in("userId",ids),Restrictions.in("orState",new Integer[]{0,1,2,3,4})};
+
+                    user.setId(null);
+                    page = ordersService.pageNotLazy(user, new String []{"dbTypes"}, criterions, new Orders());
+                    page.setCode(APPConstant.SUCCESS);
+                    return page;
+
+                }else{
+                    page.setCode(APPConstant.ERROR);
+                    page.setMessage("请确认你的身份是业务员，或者你没有优惠码，请联系管理员");
+                    return page;
+                }
+            }else{
+                page.setCode(APPConstant.ERROR);
+                page.setMessage("参数异常");
+                return page;
+            }
+
+        } catch (Exception e) {
+            page.setCode(APPConstant.ERROR);
+            page.setMessage("服务器忙");
+            return page;
         }
     }
     @RequestMapping("/auth/orders/detail")

@@ -116,7 +116,7 @@ public class ProductController {
             return new MessageBean(APPConstant.SUCCESS, product.getId());
         } catch (Exception e) {
             e.printStackTrace();
-            return new MessageBean(APPConstant.ERROR, "上传失败" + string);
+            return new MessageBean(APPConstant.ERROR, "提交定制失败" + string);
         }
     }
 
@@ -546,14 +546,14 @@ public class ProductController {
      */
     @RequestMapping("/auth/designer/product/upload")
     @ResponseBody
-    public MessageBean designer(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge,MultipartFile img_back) {
+    public MessageBean designer(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge,MultipartFile imgback) {
 
         Types types = new Types();
         types.setId("designer.product");
         String mImg = saveFile(image, request, types, "设计师作品");
         String mshowImage = saveFile(showImage, request, types, "设计师作品");
         String mbackImage = saveFile(backImge, request, types, "设计师作品");
-        String mimg_back = saveFile(img_back, request, types, "设计师作品");
+        String mimg_back = saveFile(imgback, request, types, "设计师作品");
         if (mImg != null && mshowImage != null && mbackImage != null) {
 
             product.setProductType(types);
@@ -580,7 +580,7 @@ public class ProductController {
      */
     @RequestMapping("/auth/designer/product/update")
     @ResponseBody
-    public MessageBean designerUpdate(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge, MultipartFile img_back) {
+    public MessageBean designerUpdate(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge, MultipartFile imgback) {
 
         Types types = new Types();
 
@@ -588,7 +588,7 @@ public class ProductController {
         String mImg = saveFile(image, request, types, "设计师作品");
         String mshowImage = saveFile(showImage, request, types, "设计师作品");
         String mbackImage = saveFile(backImge, request, types, "设计师作品");
-        String mimg_back = saveFile(img_back, request, types, "设计师作品");
+        String mimg_back = saveFile(imgback, request, types, "设计师作品");
 
         if (mImg != null) {
             one.setImg(mImg);
@@ -760,16 +760,17 @@ public class ProductController {
 
             Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
 
-            if(page.getResult().size()!=1){
+            if(page.getResult().size()>1){
                 product.setCode(APPConstant.ERROR);
                 product.setMessage("参数不完整");
                 return  product;
             }
-            Product product1 =product.getResult().get(0);
+            Product product1 =page.getResult().get(0);
             product1.shortToLong();
             product1.setCode(APPConstant.SUCCESS);
             return product1;
         } catch (Exception e) {
+            e.printStackTrace();
             product.setCode(APPConstant.ERROR);
             product.setMessage("服务器异常" + e.getMessage());
             return product;

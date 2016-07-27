@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -59,6 +60,8 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 	private Double orRealCost;
 	private Integer orState;
 	private Integer orderCount;
+	@JsonIgnore
+	private String userId;
 
 	private String pay_type;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -300,5 +303,14 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	public void setOrderCount(Integer orderCount) {
 		this.orderCount = orderCount;
+	}
+
+	@Column(name = "u_id",insertable = false,updatable = false)
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }
