@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.xiaov.utils.PropertiesUtils;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,7 +128,7 @@ public class MaterialController {
 		File file=null;
 
 		try {
-			path = request.getRealPath("/");
+			path = PropertiesUtils.getValue("file.designer");
 			
 			System.out.println(path);
 			inputstreamtofile(zip.getInputStream());

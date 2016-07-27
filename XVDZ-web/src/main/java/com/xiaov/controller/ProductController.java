@@ -90,6 +90,11 @@ public class ProductController {
         try {
             string = getString(request);
             Product product = packageParam(string);
+            try {
+                new RuntimeException("isModuel"+product.getIsModule());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             product.setPdtName(URLDecoder.decode(product.getPdtName()));
     //        product.setColor(URLDecoder.decode(product.getColor()));
             if (product.getIsGroup() != null && product.getIsGroup().equals(1)) {
@@ -339,11 +344,8 @@ public class ProductController {
         Page<Product> page = new Page<Product>();
         try {
 
-            product.setSidx("pdtSaleCount");
-            product.setSord("DESC");
-            product.setIsModule(0);
-            product.setPageSize(8);
-            page = productService.pageNotLazy(product, lazyField, new Product());
+            List<Product>  products= productService.hot(product);
+            page.setResult(products);
             page.setCode(APPConstant.SUCCESS);
             return page;
         } catch (Exception e) {
@@ -544,13 +546,14 @@ public class ProductController {
      */
     @RequestMapping("/auth/designer/product/upload")
     @ResponseBody
-    public MessageBean designer(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge) {
+    public MessageBean designer(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge,MultipartFile img_back) {
 
         Types types = new Types();
         types.setId("designer.product");
         String mImg = saveFile(image, request, types, "设计师作品");
         String mshowImage = saveFile(showImage, request, types, "设计师作品");
         String mbackImage = saveFile(backImge, request, types, "设计师作品");
+        String mimg_back = saveFile(img_back, request, types, "设计师作品");
         if (mImg != null && mshowImage != null && mbackImage != null) {
 
             product.setProductType(types);
@@ -558,6 +561,7 @@ public class ProductController {
             product.setImg(mImg);
             product.setShow(mshowImage);
             product.setBackImage(mbackImage);
+            product.setImg_back(mimg_back);
             product.setAddTime(new Date());
             productService.save(product);
             return new MessageBean(APPConstant.SUCCESS, product.getId());
@@ -576,7 +580,7 @@ public class ProductController {
      */
     @RequestMapping("/auth/designer/product/update")
     @ResponseBody
-    public MessageBean designerUpdate(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge) {
+    public MessageBean designerUpdate(HttpServletRequest request, Product product, MultipartFile image, MultipartFile showImage, MultipartFile backImge, MultipartFile img_back) {
 
         Types types = new Types();
 
@@ -584,6 +588,7 @@ public class ProductController {
         String mImg = saveFile(image, request, types, "设计师作品");
         String mshowImage = saveFile(showImage, request, types, "设计师作品");
         String mbackImage = saveFile(backImge, request, types, "设计师作品");
+        String mimg_back = saveFile(img_back, request, types, "设计师作品");
 
         if (mImg != null) {
             one.setImg(mImg);
@@ -593,6 +598,9 @@ public class ProductController {
         }
         if (mshowImage != null) {
             one.setShow(mshowImage);
+        }
+        if (mbackImage!=null){
+            one.setShow(mbackImage);
         }
         if (product.getPdtPrc() != null) {
             one.setPdtPrc(product.getPdtPrc());
@@ -621,7 +629,7 @@ public class ProductController {
             if (img == null) {
                 return null;
             }
-            path = request.getRealPath("/");
+            path = PropertiesUtils.getValue("file.designer");
             String[] split = img.getOriginalFilename().split("[.]");
             String suffix = "." + exChange(split[split.length - 1]);
             //临时文件路径
@@ -750,16 +758,17 @@ public class ProductController {
     public Product getOneDesigner(Product product) {
         try {
 
-            Product product1 = productService.geOneDetail(product);
+            Page<Product> page = productService.pageNotLazy(product, lazyField, new Product());
 
-            if (product1 != null) {
-                product1.shortToLong();
-                return product1;
-            } else {
+            if(page.getResult().size()!=1){
                 product.setCode(APPConstant.ERROR);
                 product.setMessage("参数不完整");
+                return  product;
             }
-            return product;
+            Product product1 =product.getResult().get(0);
+            product1.shortToLong();
+            product1.setCode(APPConstant.SUCCESS);
+            return product1;
         } catch (Exception e) {
             product.setCode(APPConstant.ERROR);
             product.setMessage("服务器异常" + e.getMessage());

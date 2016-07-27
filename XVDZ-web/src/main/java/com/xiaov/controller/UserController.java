@@ -65,7 +65,17 @@ public class UserController {
         return users;
     }
 
-    // 添加
+    /**
+     * 用户注册
+     * @param telCode 手机验证码
+     * @param disCodeNo 优惠码
+     * @param rePwd 重复密码
+     * @param usPwd 密码
+     * @param usTel 用户手机号
+     * @param activeCode
+     * @param key 验证的key，获取验证码返回的key
+     * @return
+     */
     @RequestMapping("/admin/user/save")
     @ResponseBody
     public MessageBean save(String telCode, String disCodeNo, String rePwd, String usPwd, String usTel,
@@ -183,6 +193,12 @@ public class UserController {
         }
 
     }
+
+    /**
+     * 通过优惠码查询用户，即获取业务员发展的用户
+     * @param user
+     * @return
+     */
     @RequestMapping("/auth/user/page/bydiscountCode")
     @ResponseBody
     public Page<UserInfo> getUserByDiscountCode(UserInfo user){
@@ -220,7 +236,11 @@ public class UserController {
         return new MessageBean(APPConstant.SUCCESS, "删除成功");
     }
 
-    // 删除
+    /**
+     * 用户资料修改
+     * @param user
+     * @return
+     */
     @RequestMapping("/auth/user/update")
     @ResponseBody
     public MessageBean updateAjax(UserInfo user) {
@@ -250,17 +270,31 @@ public class UserController {
 
     }
 
+    /**
+     * 修改头像
+     * @param user
+     * @param head
+     * @param request
+     * @return
+     */
     @RequestMapping("/auth/user/head/update")
-    @ResponseBody
-    public MessageBean updateHead(UserInfo user,MultipartFile head, HttpServletRequest request) {
+    public void updateHead(UserInfo user,MultipartFile head, HttpServletRequest request,HttpServletResponse response) {
 
         String s = saveFile(head, request);
         user.setUsPic(s);
         userService.update(user);
-        return new MessageBean(APPConstant.SUCCESS, "修改头像成功");
-
+        try {
+            response.sendRedirect("http://store.xiaovdingzhi.com/index.php?page=personalCenter");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * 获取某个用户信息
+     * @param user
+     * @return
+     */
     @RequestMapping("/admin/user/getOne")
     @ResponseBody
     public UserInfo getOne(UserInfo user) {
@@ -277,7 +311,11 @@ public class UserController {
 
     }
 
-
+    /**
+     * 获取验证码
+     * @param usTel
+     * @return
+     */
     @RequestMapping("/admin/telCode/getTelCode")
     @ResponseBody
     public MessageBean sendMessageCheck(String usTel) {
@@ -306,6 +344,13 @@ public class UserController {
 
     }
 
+    /**
+     * 用户登录
+     * @param user
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/client/user/login")
     @ResponseBody
     public UserInfo login_user(UserInfo user, HttpServletRequest request, HttpServletResponse response) {
@@ -337,6 +382,12 @@ public class UserController {
 
     }
 
+    /**
+     * 后台管理员登录
+     * @param user
+     * @param request
+     * @param response
+     */
     @RequestMapping("/admin/adminLogin")
     public void login(UserInfo user, HttpServletRequest request, HttpServletResponse response) {
 
@@ -367,7 +418,11 @@ public class UserController {
         }
     }
 
-    // 分页查询
+    /**
+     * 推荐设计师
+     * @param page
+     * @return
+     */
     @RequestMapping("/admin/user/recommand/page")
     @ResponseBody
     public Page<UserInfo> recommandPage(UserInfo page) {
@@ -387,7 +442,11 @@ public class UserController {
 
     }
 
-    // 分页查询
+    /**
+     * 达人
+     * @param page
+     * @return
+     */
     @RequestMapping("/admin/user/talent/page")
     @ResponseBody
     public Page<UserInfo> talentPage(UserInfo page) {
