@@ -115,7 +115,7 @@ public class DiscountCodeController {
             DiscountCode code=new DiscountCode();
             code.setSalesman(user.getId());
             Page<DiscountCode> page = discountCodeService.page(code);
-            if(page.getResult().size()==1){
+            if(page.getResult().size()<=1){
                 return page.getResult().get(0);
             }else{
                 code.setCode(APPConstant.ERROR);
