@@ -11,6 +11,9 @@ import com.xiaov.service.interfaces.DiscountCoupanService;
 import com.xiaov.utils.LazyObjecUtil;
 import com.xiaov.web.support.CookieUtil;
 import oracle.jrockit.jfr.events.DynamicValueDescriptor;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -68,7 +72,7 @@ public class DiscountCoupanController {
         }
     }
 
-    @RequestMapping(value = "/admin/discountCoupan/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping("/admin/discountCoupan/getOneAjax")
     @ResponseBody
     public DiscountCoupan getOne(DiscountCoupan discountCoupan) {
         try {
@@ -89,7 +93,10 @@ public class DiscountCoupanController {
 
             DiscountCoupan discountCoupan=new DiscountCoupan();
             discountCoupan.setUserInfo(user);
-            page = discountCoupanServiceImpl.page(discountCoupan);
+
+            Criterion [] criterions={ Restrictions.gt("disCouValidTime", new Date()),Restrictions.eq("disCouState",0)};
+
+            page = discountCoupanServiceImpl.pageNotLazy(discountCoupan,null,criterions,new DiscountCoupan());
             page = LazyObjecUtil.LazyPageSetNull(page,"userInfo");
             page.setCode(APPConstant.SUCCESS);
             return page;

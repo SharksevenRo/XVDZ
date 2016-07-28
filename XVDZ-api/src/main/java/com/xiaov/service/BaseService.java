@@ -21,7 +21,6 @@ public interface BaseService<T>{
      * @return void
      * @throws
      */
-    @Transactional
     void delete(T entity);
     
     /**
@@ -32,7 +31,6 @@ public interface BaseService<T>{
      * @return int
      * @throws
      */
-    @Transactional
     void save(T entity);
     /**
      * 更新

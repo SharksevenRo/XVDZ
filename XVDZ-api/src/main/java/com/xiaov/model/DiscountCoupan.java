@@ -23,7 +23,6 @@ import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
 import com.xiaov.web.support.CustomDateSerializer;
-
 /**
  * DiscountCoupan entity. @author MyEclipse Persistence Tools
  */
@@ -38,11 +37,11 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 	private UserInfo userInfo;
 	private String disCouNo;
 	private Double disCouPrice;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH")
 	private Date disCouTime;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH")
 	private Date disCouValidTime;
-	private Integer disCouState;
+	private Integer disCouState=0;
 	private String disCouRemark;
 	private Integer deleteFlag=0;
 

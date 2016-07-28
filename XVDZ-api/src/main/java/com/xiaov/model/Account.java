@@ -20,7 +20,6 @@ import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
 import com.xiaov.web.support.CustomDateSerializer;
-
 /**
  * Account entity. @author MyEclipse Persistence Tools
  */

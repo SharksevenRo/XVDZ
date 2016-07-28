@@ -32,7 +32,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public void delete(T entity) {
 		dao.delete(entity);
 	}
-
+	@Transactional
 	public void update(T entity) {
 		String string = ReflectionUtils.invokeGetterMethod(entity, "id").toString();
 		T t = dao.get(entity.getClass(),string);
@@ -52,6 +52,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 			}
 		}
 		dao.update(t);
+		throw new RuntimeException("测试事务");
 	}
 
 	@Transactional
@@ -60,6 +61,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	public List<T> loadAll(T entity) {
+
 		String name = entity.getClass().getSimpleName();
 		StringBuilder hql = new StringBuilder();
 		hql.append("from " + name + " where 1=1");
@@ -84,7 +86,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 		return dao.createQuery(hql.toString(), map).list();
 	}
 
-	@SuppressWarnings("unchecked")
+
 	public Page<T> page(Page page) {
 		String name = page.getClass().getSimpleName();
 		StringBuilder hql = new StringBuilder();

@@ -277,11 +277,16 @@ public class OrdersController {
 
     public boolean checkCoupan(DiscountCoupan coupan){
 
+        DiscountCoupan one = discountCoupanService.getOne(DiscountCoupan.class, coupan.getId());
+        //有效期检验
+        //if(one.getDisCouValidTime())
+        if(one==null){
+            throw  new RuntimeException("对不起，非法优惠卷");
+        }
         return true;
     }
 
     public boolean off(DiscountCoupan discountCoupan){
-
         discountCoupanService.delete(discountCoupan);
         return  true;
     }
