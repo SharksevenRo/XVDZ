@@ -50,9 +50,11 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	// Fields
 	private String id;
+	@JsonIgnore
 	private Types dbTypes;
 	private String pdtName;
 	private String discountCoupanId;
+	@JsonIgnore
 	private UserInfo user;
 	private String orNo;
 	private Double orTotal;
@@ -74,7 +76,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	private String logisticsNo;
 	private String logisticsName;
-
+	@JsonIgnore
 	private List<OrderDetail> orderDetails;
 
 
@@ -159,7 +161,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.orNo = orNo;
 	}
 
-	@Column(name = "or_total", nullable = true, precision = 22, scale = 0)
+	@Column(name = "or_total", nullable = true, precision = 22, scale = 2)
 	public Double getOrTotal() {
 		return this.orTotal;
 	}
@@ -168,7 +170,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.orTotal = orTotal;
 	}
 
-	@Column(name = "or_discount", precision = 22, scale = 0)
+	@Column(name = "or_discount", precision = 22, scale = 2)
 	public Double getOrDiscount() {
 		return this.orDiscount;
 	}
@@ -177,7 +179,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 		this.orDiscount = orDiscount;
 	}
 
-	@Column(name = "or_real_cost", precision = 22, scale = 0)
+	@Column(name = "or_real_cost", precision = 22, scale = 2)
 	public Double getOrRealCost() {
 		return this.orRealCost;
 	}

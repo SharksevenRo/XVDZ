@@ -128,8 +128,9 @@ public class OrdersController {
                     Criterion [] criterions={Restrictions.in("userId",ids),Restrictions.in("orState",new Integer[]{0,1,2,3,4})};
 
                     user.setId(null);
-                    page = ordersService.pageNotLazy(user, new String []{"dbTypes"}, criterions, new Orders());
+                    page = ordersService.pageNotLazy(user, new String []{"dbTypes","user"}, criterions, new Orders());
                     page.setCode(APPConstant.SUCCESS);
+                    System.out.print("page"+page.getResult().size());
                     return page;
 
                 }else{
@@ -144,6 +145,7 @@ public class OrdersController {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             page.setCode(APPConstant.ERROR);
             page.setMessage("服务器忙");
             return page;
@@ -221,10 +223,8 @@ public class OrdersController {
         Double realCost=0d;
         for (OrderDetail detail : orderDetails
                 ) {
-
             one= productService.getOne(Product.class, detail.getProduct_id());
             if(orders.getDbTypes().getId().equals("order.group")){
-
 
                 //判断是否是团体订单，并判读该商品是否支持团体定制
                 if(one.getIsGroup()==1&&detail.getCount()>=one.getMinnum()){

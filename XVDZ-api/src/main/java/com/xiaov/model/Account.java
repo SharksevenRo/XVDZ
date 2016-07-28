@@ -108,7 +108,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.userInfo = userInfo;
 	}
 
-	@Column(name = "act_mm", nullable = true, precision = 22, scale = 0)
+	@Column(name = "act_mm", nullable = true, precision = 22, scale = 2)
 	public Double getActMm() {
 		return this.actMm;
 	}
@@ -117,7 +117,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.actMm = actMm;
 	}
 
-	@Column(name = "act_tt_en", nullable = true, precision = 22, scale = 0)
+	@Column(name = "act_tt_en", nullable = true, precision = 22, scale = 2)
 	public Double getActTtEn() {
 		return this.actTtEn;
 	}
@@ -126,7 +126,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.actTtEn = actTtEn;
 	}
 
-	@Column(name = "act_blc", nullable = true, precision = 22, scale = 0)
+	@Column(name = "act_blc", nullable = true, precision = 22, scale = 2)
 	public Double getActBlc() {
 		return this.actBlc;
 	}
@@ -135,7 +135,7 @@ public class Account extends Page<Account> implements java.io.Serializable {
 		this.actBlc = actBlc;
 	}
 
-	@Column(name = "act_fm", nullable = true, precision = 22, scale = 0)
+	@Column(name = "act_fm", nullable = true, precision = 22, scale = 2)
 	public Double getActFm() {
 		return this.actFm;
 	}

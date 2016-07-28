@@ -237,7 +237,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
         this.pdtName = pdtName;
     }
 
-    @Column(name = "pdt_int_rat", precision = 22, scale = 0)
+    @Column(name = "pdt_int_rat", precision = 22, scale = 2)
     public Double getPdtIntRat() {
         return this.pdtIntRat;
     }
@@ -273,7 +273,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
         this.pdtPicBs = pdtPicBs;
     }
 
-    @Column(name = "pdt_prc", nullable = true, precision = 22, scale = 0)
+    @Column(name = "pdt_prc", nullable = true, precision = 22, scale = 2)
     public Double getPdtPrc() {
         return this.pdtPrc;
     }
@@ -282,7 +282,7 @@ public class Product extends Page<Product> implements java.io.Serializable {
         this.pdtPrc = pdtPrc;
     }
 
-    @Column(name = "pdt_dsct", precision = 22, scale = 0)
+    @Column(name = "pdt_dsct", precision = 22, scale = 2)
     public Double getPdtDsct() {
         return this.pdtDsct;
     }

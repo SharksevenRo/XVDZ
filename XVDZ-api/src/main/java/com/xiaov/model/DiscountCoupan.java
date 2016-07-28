@@ -113,7 +113,7 @@ public class DiscountCoupan extends Page<DiscountCoupan> implements java.io.Seri
 		this.disCouNo = disCouNo;
 	}
 
-	@Column(name = "dis_cou_price", nullable = true, precision = 22, scale = 0)
+	@Column(name = "dis_cou_price", nullable = true, precision = 22, scale = 2)
 	public Double getDisCouPrice() {
 		return this.disCouPrice;
 	}
