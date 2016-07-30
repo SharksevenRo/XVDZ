@@ -1,6 +1,7 @@
 package com.xiaov.controller;
 
 import com.xiaov.constant.APPConstant;
+import com.xiaov.model.Product;
 import com.xiaov.model.Style;
 import com.xiaov.orm.core.MessageBean;
 import com.xiaov.orm.core.Page;
@@ -78,5 +79,17 @@ public class StyleController {
             return page;
         }
     }
+    @RequestMapping("/admin/product/delete")
+    @ResponseBody
+    public MessageBean deleteAjax(Style style) {
 
+        try {
+            style = styleService.getOne(style.getClass(), style.getId());
+            styleService.delete(style);
+            return new MessageBean(APPConstant.SUCCESS, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean(APPConstant.ERROR, "删除失败");
+        }
+    }
 }

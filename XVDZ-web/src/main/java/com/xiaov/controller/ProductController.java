@@ -320,7 +320,7 @@ public class ProductController {
         Page<Product> page = new Page<Product>();
         try {
             product.setSidx("addTime");
-            product.setSord("ACS");
+            product.setSord("asc");
             product.setIsModule(0);
             page = productService.pageNotLazy(product, lazyField, new Product());
             page.setCode(APPConstant.SUCCESS);

@@ -3,10 +3,14 @@ package com.xiaov.model;
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * 支付记录
@@ -36,6 +40,8 @@ public class Payment extends Page<Payment>{
     private String sign;
     private String sign_type;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date addTime;
     private Integer deleteFlag=0;
 
     public Payment(String id, String body, String buyer_email, String buyer_id, String exterface, String is_success, String notify_id, String notify_time, String notify_type, String payment_type, String seller_email, String seller_id, String trade_no, String trade_status, String sign, String sign_type) {
@@ -216,5 +222,14 @@ public class Payment extends Page<Payment>{
 
     public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+    @Column(name = "add_time", nullable = true, length = 0)
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getAddTime() {
+        return this.addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 }

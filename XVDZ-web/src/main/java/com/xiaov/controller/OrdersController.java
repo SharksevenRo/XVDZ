@@ -66,6 +66,18 @@ public class OrdersController {
         }
     }
 
+    @RequestMapping("/admin/orders/update")
+    @ResponseBody
+    public MessageBean updateAdmin(Orders orders) {
+
+        try {
+            ordersService.update(orders);
+            return new MessageBean(APPConstant.SUCCESS, "修改成功");
+        } catch (Exception e) {
+            return new MessageBean(APPConstant.SUCCESS, "修改失败"+e.getMessage());
+        }
+    }
+
     @RequestMapping("/auth/orders/delete")
     @ResponseBody
     public MessageBean deleteAjax(Orders orders) {
@@ -191,18 +203,31 @@ public class OrdersController {
     @RequestMapping("/auth/orders/page/detail")
     @ResponseBody
     public Page<Orders> pageDetail(Orders orders) {
-        Page<Orders> page = new Page<Orders>();
+
         try {
-            page.setResult(ordersService.getOrderDetail(orders));
-            LazyObjecUtil.LazyPageSetNull(page, new String[]{"user", "dbTypes"});
+            String [] fields= new String[]{"user", "dbTypes"};
+            Page<Orders> page = ordersService.pageNotLazy(orders, fields, new Orders());
             return page;
         } catch (Exception e) {
-            page.setCode(APPConstant.ERROR);
-            page.setMessage("服务器忙");
-            return page;
+            orders.setCode(APPConstant.ERROR);
+            orders.setMessage("服务器忙");
+            return orders;
         }
     }
+    @RequestMapping("/admin/orders/page")
+    @ResponseBody
+    public Page<Orders> pageAdmin(Orders orders) {
+        try {
 
+            String [] fields= new String[]{"user", "dbTypes"};
+            Page<Orders> page = ordersService.pageNotLazy(orders, fields, new Orders());
+            return page;
+        } catch (Exception e) {
+            orders.setCode(APPConstant.ERROR);
+            orders.setMessage("服务器忙"+e.getMessage());
+            return orders;
+        }
+    }
 
     /**
      * 检查订单金额是否正确

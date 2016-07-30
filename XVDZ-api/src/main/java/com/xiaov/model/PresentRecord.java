@@ -33,6 +33,8 @@ public class PresentRecord extends Page<PresentRecord>{
 
     private String  receiver_account;
     private String  account_type;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date addTime;
 
     public PresentRecord() {
     }
@@ -115,5 +117,14 @@ public class PresentRecord extends Page<PresentRecord>{
 
     public void setAccount_type(String account_type) {
         this.account_type = account_type;
+    }
+    @Column(name = "add_time", nullable = true, length = 0)
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getAddTime() {
+        return this.addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 }

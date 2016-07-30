@@ -3,10 +3,15 @@ package com.xiaov.model;
 import com.xiaov.orm.annotation.StateDelete;
 import com.xiaov.orm.core.FieldType;
 import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
+
 /**
  * Created by Sharkseven on 2016/7/13.
  */
@@ -42,6 +47,8 @@ public class Style extends Page<Style> implements java.io.Serializable {
     private Double price;
 
     private Integer deleteFlag=0;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date addTime;
 
     public Style() {
     }
@@ -187,5 +194,14 @@ public class Style extends Page<Style> implements java.io.Serializable {
 
     public void setPdtdesc(String pdtdesc) {
         this.pdtdesc = pdtdesc;
+    }
+    @Column(name = "add_time", nullable = true, length = 0)
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getAddTime() {
+        return this.addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 }

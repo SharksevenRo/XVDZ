@@ -1,9 +1,14 @@
 package com.xiaov.model;
 
+import com.xiaov.orm.core.Page;
+import com.xiaov.web.support.CustomDateSerializer;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * 业务员和设计师认证
@@ -12,14 +17,15 @@ import javax.persistence.*;
 @Table(name = "identification", catalog = "xvdz")
 @Entity
 
-public class Identification {
+public class Identification extends Page<Identification>{
 
     private String id;
     private String idCard;
     private String userId;
     private String name;
     private String phone;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date addTime;
 
     private String type;
 
@@ -93,5 +99,14 @@ public class Identification {
 
     public void setType(String type) {
         this.type = type;
+    }
+    @Column(name = "add_time", nullable = true, length = 0)
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getAddTime() {
+        return this.addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 }

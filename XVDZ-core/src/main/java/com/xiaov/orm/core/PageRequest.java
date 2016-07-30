@@ -46,13 +46,13 @@ public class PageRequest  implements java.io.Serializable {
 	/**
 	 * 排序字段
 	 */
-	protected String sidx = null;
+	protected String sidx = "addTime";
 	
 	/**
 	 * 排序方式
 	 * @see Sort
 	 */
-	protected String sord = null;
+	protected String sord = "desc";
 
 	/**
 	 * 是否默认计算总记录数.
