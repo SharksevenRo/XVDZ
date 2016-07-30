@@ -633,9 +633,9 @@ public class ProductController {
             String[] split = img.getOriginalFilename().split("[.]");
             String suffix = "." + exChange(split[split.length - 1]);
             //临时文件路径
-            String tempPath = "images/designer/temp/";
+            String tempPath = "/temp/";
             //压缩文件路径
-            String basePath = "images/designer/compress/";
+            String basePath = "/compress/";
             //创建文件夹和文件
             file = new File(path + tempPath);
             if (!file.exists()) {
@@ -835,10 +835,11 @@ public class ProductController {
                 char c = str.charAt(i);
                 if (Character.isUpperCase(c)) {
                     sb.append(Character.toLowerCase(c));
+                }else{
+                    sb.append(c);
                 }
             }
         }
-
         return sb.toString();
     }
 

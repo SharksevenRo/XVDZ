@@ -52,7 +52,6 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 			}
 		}
 		dao.update(t);
-		throw new RuntimeException("测试事务");
 	}
 
 	@Transactional
