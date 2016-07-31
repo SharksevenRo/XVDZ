@@ -12,6 +12,8 @@ import com.xiaov.web.support.CookieUtil;
 import com.xiaov.web.support.SendMessage;
 import com.xiaov.web.support.UserToken;
 import org.apache.tools.ant.taskdefs.email.Message;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,10 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class UserController {
@@ -48,6 +47,9 @@ public class UserController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private IdentificationService identificationService;
 
 
     private String path;
@@ -190,6 +192,34 @@ public class UserController {
             results.setCode(APPConstant.ERROR);
             results.setMessage("服务器正忙，请重试");
             return results;
+        }
+
+    }
+    @RequestMapping("/admin/user/identification/page")
+    @ResponseBody
+    public Page<UserInfo> identificationPage(UserInfo user) {
+
+        try {
+
+            Identification identification=new Identification();
+            identification.setType(user.getTypeId());
+            List<Identification> identifications = identificationService.loadAll(identification);
+            List<String> ids=new ArrayList<String>();
+            for (Identification tem:identifications
+                 ) {
+                ids.add(tem.getUserId());
+            }
+            Criterion [] criterions={Restrictions.in("id",ids),Restrictions.eq("typeId","user.common")};
+            user.setId(null);
+            user.setTypeId(null);
+            Page<UserInfo> page = userService.pageNotLazy(user, null, criterions, new UserInfo());
+            page.setCode(APPConstant.SUCCESS);
+            return page;
+        } catch (Exception e) {
+            e.printStackTrace();
+            user.setCode(APPConstant.ERROR);
+            user.setMessage("服务器正忙，请重试"+e.getMessage());
+            return user;
         }
 
     }

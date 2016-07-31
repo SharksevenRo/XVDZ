@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 /**
  * Created by Sharkseven on 2016/7/12.
  */
@@ -29,6 +31,14 @@ public class IdentificationController {
     public MessageBean auth(Identification identification){
 
         try {
+            Identification temp=new Identification();
+            temp.setUserId(identification.getUserId());
+            Page<Identification> page = identificationService.page(temp);
+
+            if(page.getResult()!=null&&page.getResult().size()!=0){
+                return new MessageBean(APPConstant.ERROR,"认证信息提交失败，你已经提交过认证");
+            }
+            identification.setAddTime(new Date());
             identificationService.save(identification);
 
             UserInfo one = userService.getOne(UserInfo.class, identification.getUserId());
@@ -62,6 +72,8 @@ public class IdentificationController {
                     }
                     one.setUsState(user.getUsState());
                     userService.update(one);
+                    //删除认证信息
+                    identificationService.delete(temp);
                     return new MessageBean(APPConstant.SUCCESS,"认证信息提交，修改状态成功");
                 }else{
                     return new MessageBean(APPConstant.ERROR,"认证信息提交，修改状态失败");

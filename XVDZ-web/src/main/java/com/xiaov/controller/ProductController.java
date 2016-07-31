@@ -606,7 +606,7 @@ public class ProductController {
             one.setPdtPrc(product.getPdtPrc());
         }
         product.setUpdateTime(new Date());
-        productService.update(product);
+        productService.update(one);
         return new MessageBean(APPConstant.SUCCESS, product.getId());
     }
 
