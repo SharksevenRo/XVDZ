@@ -110,15 +110,15 @@ public class DiscountCodeController {
 
     @RequestMapping("/auth/discountCode/getOne")
     @ResponseBody
-    public DiscountCode getOne(UserInfo user) {
+    public Page<DiscountCode> getOne(UserInfo user) {
         try {
             DiscountCode code=new DiscountCode();
             code.setSalesman(user.getId());
             Page<DiscountCode> page = discountCodeService.page(code);
             if(page.getResult().size()==1){
-                return page.getResult().get(0);
+                return page;
             }else{
-                code.setCode(APPConstant.ERROR);
+                code.setCode(APPConstant.SUCCESS);
                 code.setMessage("数据异常，你存在多个优惠码或者没有优惠码，请联系管理员");
                return code;
             }

@@ -37,6 +37,8 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	private Integer deleteFlag=0;
 	@JsonIgnore
 	private String towho;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date addTime;
 
 	// Constructors
 
@@ -162,5 +164,14 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 
 	public void setTowho(String towho) {
 		this.towho = towho;
+	}
+	@Column(name = "add_time", nullable = true, length = 0)
+	@JsonSerialize(using = CustomDateSerializer.class)
+	public Date getAddTime() {
+		return this.addTime;
+	}
+
+	public void setAddTime(Date addTime) {
+		this.addTime = addTime;
 	}
 }

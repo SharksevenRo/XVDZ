@@ -11,7 +11,7 @@ import java.util.Date;
  * 属性数据类型
  * S代表String,I代表Integer,L代表Long, N代表Double, D代表Date,B代表Boolean
  * 
- * @author calvin
+ * @author Sharkseven
  * 
  */
 public enum FieldType {

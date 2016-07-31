@@ -79,7 +79,7 @@ public class StyleController {
             return page;
         }
     }
-    @RequestMapping("/admin/product/delete")
+    @RequestMapping("/admin/style/delete")
     @ResponseBody
     public MessageBean deleteAjax(Style style) {
 

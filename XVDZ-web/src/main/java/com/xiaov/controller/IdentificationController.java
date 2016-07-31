@@ -54,14 +54,14 @@ public class IdentificationController {
             identification.setUserId(user.getId());
             Page<Identification> page = identificationService.page(identification);
             if(page.getResult().size()==1){
-                Identification temp = page.getResult().get(0);
-                UserInfo one = userService.getOne(UserInfo.class, identification.getUserId());
-                //将用户状态设置为认证中
-                if(user.getUsState().equals(2)){
-                    one.setTypeId(temp.getType());
-                }
-                one.setUsState(user.getUsState());
-                userService.update(one);
+                    Identification temp = page.getResult().get(0);
+                    UserInfo one = userService.getOne(UserInfo.class, identification.getUserId());
+                    //将用户状态设置认证成功
+                    if(user.getUsState().equals(2)){
+                        one.setTypeId(temp.getType());
+                    }
+                    one.setUsState(user.getUsState());
+                    userService.update(one);
                     return new MessageBean(APPConstant.SUCCESS,"认证信息提交，修改状态成功");
                 }else{
                     return new MessageBean(APPConstant.ERROR,"认证信息提交，修改状态失败");
