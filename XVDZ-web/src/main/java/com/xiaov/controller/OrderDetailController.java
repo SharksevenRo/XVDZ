@@ -58,7 +58,7 @@ public class OrderDetailController {
         }
     }
 
-    @RequestMapping(value = "/admin/orderDetail/getOneAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/order/getOne", method = RequestMethod.POST)
     @ResponseBody
     public OrderDetail getOne(OrderDetail orderDetail) {
         try {

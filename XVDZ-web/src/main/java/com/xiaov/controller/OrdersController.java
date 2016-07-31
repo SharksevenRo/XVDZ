@@ -169,13 +169,7 @@ public class OrdersController {
 
         try{
 
-            List<Orders> orderDetail = ordersService.getOrderDetail(orders);
-            String[] fields = new String[]{"user", "dbTypes"};
-            orderDetail= LazyObjecUtil.LazySetNull(orderDetail,fields);
-            orders.setResult(orderDetail);
-            orders.setCode(APPConstant.SUCCESS);
-            orders.setOrderDetails(null);
-            orders.setDbTypes(null);
+
             return  orders;
         } catch (Exception e) {
 

@@ -76,7 +76,7 @@ public class Orders extends Page<Orders> implements java.io.Serializable {
 
 	private String logisticsNo;
 	private String logisticsName;
-	@JsonIgnore
+
 	private List<OrderDetail> orderDetails;
 
 

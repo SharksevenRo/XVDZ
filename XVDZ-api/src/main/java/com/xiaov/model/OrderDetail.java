@@ -32,6 +32,8 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 	private Integer count;
 	private String orderId;
 
+	private Product product;
+
 
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date addTime;
@@ -157,5 +159,14 @@ public class OrderDetail extends Page<OrderDetail> implements java.io.Serializab
 
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "p_id",insertable = false,updatable = false)
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 }

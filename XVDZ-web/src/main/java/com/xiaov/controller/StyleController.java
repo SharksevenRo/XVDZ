@@ -33,6 +33,7 @@ public class StyleController {
     public MessageBean saveAjax(Style style) {
 
         try {
+            style.setAddTime(new Date());
             styleService.save(style);
             return new MessageBean(APPConstant.SUCCESS, "上传成功");
         } catch (Exception e) {
