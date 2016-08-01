@@ -204,6 +204,9 @@ public class UserController {
             Identification identification=new Identification();
             identification.setType(user.getTypeId());
             List<Identification> identifications = identificationService.loadAll(identification);
+            if(identifications.size()>0){
+
+
             List<String> ids=new ArrayList<String>();
             for (Identification tem:identifications
                  ) {
@@ -215,6 +218,8 @@ public class UserController {
             Page<UserInfo> page = userService.pageNotLazy(user, null, criterions, new UserInfo());
             page.setCode(APPConstant.SUCCESS);
             return page;
+            }
+            return user;
         } catch (Exception e) {
             e.printStackTrace();
             user.setCode(APPConstant.ERROR);

@@ -5,6 +5,7 @@ import com.xiaov.model.Material;
 import com.xiaov.model.OrderDetail;
 import com.xiaov.model.Orders;
 import com.xiaov.model.Product;
+import com.xiaov.orm.core.Page;
 import com.xiaov.service.interfaces.MaterialService;
 import com.xiaov.service.interfaces.OrderDetailService;
 import com.xiaov.service.interfaces.OrdersService;
@@ -77,9 +78,23 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 
 	}
 
-	public List<Orders> getOrderDetail(Orders orders){
+	public Orders getOrderDetail(Orders orders){
 
-		return  null;
+		orders=this.pageNotLazy(orders,new String[]{"user", "dbTypes"},new Orders()).getResult().get(0);
+		OrderDetail temp=new OrderDetail();
+		temp.setOrderId(orders.getId());
+        Page<OrderDetail> page = orderDetailService.pageNotLazy(temp, new String[]{"product"}, new OrderDetail());
+        Product product=new Product();
+        if(page.getResult().size()>0){
+            for (OrderDetail detail: page.getResult()
+                 ) {
+                product.setId(detail.getProduct_id());
+                Page<Product> productPage = productService.pageNotLazy(product, new String[]{"productType", "user"}, new Product());
+                detail.setProduct(productPage.getResult().get(0));
+            }
+        }
+        orders.setOrderDetails(page.getResult());
+        return  orders;
 	}
 
 	/**

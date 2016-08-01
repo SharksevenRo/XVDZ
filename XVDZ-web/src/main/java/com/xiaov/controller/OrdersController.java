@@ -163,16 +163,14 @@ public class OrdersController {
             return page;
         }
     }
-    @RequestMapping("/auth/orders/detail")
+    @RequestMapping("/admin/orders/detail")
     @ResponseBody
     public Page<Orders> detail(Orders orders) {
 
         try{
-
-
+            orders=ordersService.getOrderDetail(orders);
             return  orders;
         } catch (Exception e) {
-
             orders.setCode(APPConstant.ERROR);
             orders.setMessage("获取失败"+orders.getMessage());
             return orders;
@@ -230,7 +228,6 @@ public class OrdersController {
      * @return
      */
     private Orders checkOrders(Orders orders) {
-
 
         boolean isDiscount=false;
         Product one=null;
