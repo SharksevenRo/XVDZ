@@ -83,7 +83,13 @@ public class IdentificationController {
                         code.setCreateId(one.getId());
                         code.setDisCodeNo(user.getDiscountCode());
                         code.setAddTime(new Date());
-                        discountCodeService.save(code);
+                        if(user.getDisCodeNum()!=null&&user.getDisCodeNum()<1){
+                            code.setDisCodeNum(user.getDisCodeNum());
+                            discountCodeService.save(code);
+                            one.setDisCodeNum(user.getDisCodeNum());
+                        }else{
+                            return new MessageBean(APPConstant.ERROR, "认证信息修改状态成功,抽成点大于1或者没有传");
+                        }
                     }
                 }
                 one.setUsState(user.getUsState());

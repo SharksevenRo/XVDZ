@@ -168,6 +168,57 @@ public class UserController {
 
     }
 
+    @RequestMapping("/admin/user/forget")
+    @ResponseBody
+    public MessageBean forget(String telCode, String rePwd, String usPwd, String usTel,
+                            String activeCode, String key) {
+
+        InnerSession one = innerSessionService.getOne(InnerSession.class, key);
+
+        if (one != null) {
+            if ((System.currentTimeMillis() - one.getBegin()) <= one.getTime()) {
+
+                if (!usTel.equals(one.getKey())) {
+                    innerSessionService.delete(one);
+                    return new MessageBean(APPConstant.ERROR, "手机号码有误");
+                }
+                if (one.getToken().equals(telCode)) {
+                    if (usPwd.equals(rePwd)) {
+                        try {
+                            List<UserInfo> userIsAdd = userServiceimpl.getByProperty("usTel", usTel);
+
+                            if(userIsAdd.size()!=1){
+                                return new MessageBean(APPConstant.ERROR, "账号不存在或者手机号码错误!");
+                            }
+                            UserInfo user=userIsAdd.get(0);
+                            user.setUsPwd(Md5.GetMD5Code(usPwd));
+                            userService.update(user);
+                            innerSessionService.delete(one);
+                            return new MessageBean(APPConstant.SUCCESS, "重置密码成功");
+                        } catch (Exception e) {
+                            innerSessionService.delete(one);
+                            return new MessageBean(APPConstant.ERROR, "系统错误!");
+                        }
+                    } else {
+                        innerSessionService.delete(one);
+                        return new MessageBean(-2, "两次密码不匹配");
+                    }
+                } else {
+                    innerSessionService.delete(one);
+                    return new MessageBean(-3, "验证码错误!");
+                }
+            } else {
+
+                innerSessionService.delete(one);
+                return new MessageBean(APPConstant.ERROR, "验证码过时，请重新获取");
+            }
+
+        } else {
+            return new MessageBean(APPConstant.ERROR, "请获取验证码");
+        }
+
+    }
+
     /**
      * 如果要向前途返回json格式数据，加@ResponseBody，返回要返回的对象，
      * 如果查询的结果有代理对象调用LazyObjecUtil.LazyPageSetNull去除代理对象

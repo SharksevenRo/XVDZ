@@ -48,6 +48,8 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 	private String school;
 	private String discountCode;
 
+	private Double disCodeNum;
+
 	private Integer usLoginErrorTimes;
 	private Date usLastLoginTime;
 	private Boolean usLoginState;
@@ -425,5 +427,14 @@ public class UserInfo extends Page<UserInfo> implements java.io.Serializable {
 
 	public void setQRCode_img(String QRCode_img) {
 		this.QRCode_img = QRCode_img;
+	}
+
+	@Column(name = "dis_code_num",precision = 10,scale = 2)
+	public Double getDisCodeNum() {
+		return disCodeNum;
+	}
+
+	public void setDisCodeNum(Double disCodeNum) {
+		this.disCodeNum = disCodeNum;
 	}
 }

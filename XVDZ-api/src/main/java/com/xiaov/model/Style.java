@@ -46,6 +46,10 @@ public class Style extends Page<Style> implements java.io.Serializable {
 
     private Double price;
 
+    private String clothingsex;
+
+    private String clothingstyle;
+
     private Integer deleteFlag=0;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date addTime;
@@ -195,7 +199,7 @@ public class Style extends Page<Style> implements java.io.Serializable {
     public void setPdtdesc(String pdtdesc) {
         this.pdtdesc = pdtdesc;
     }
-    @Column(name = "add_time", nullable = true, length = 0)
+    @Column(name = "add_time", nullable = true)
     @JsonSerialize(using = CustomDateSerializer.class)
     public Date getAddTime() {
         return this.addTime;
@@ -203,5 +207,21 @@ public class Style extends Page<Style> implements java.io.Serializable {
 
     public void setAddTime(Date addTime) {
         this.addTime = addTime;
+    }
+    @Column(name="clothingsex")
+    public String getClothingsex() {
+        return clothingsex;
+    }
+
+    public void setClothingsex(String clothingsex) {
+        this.clothingsex = clothingsex;
+    }
+    @Column(name="clothingstyle")
+    public String getClothingstyle() {
+        return clothingstyle;
+    }
+
+    public void setClothingstyle(String clothingstyle) {
+        this.clothingstyle = clothingstyle;
     }
 }

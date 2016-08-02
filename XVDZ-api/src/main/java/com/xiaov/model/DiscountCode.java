@@ -32,7 +32,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	private Date disCodeTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date disCodeValidTime;
-	private Integer disCodeNum;
+	private Double disCodeNum;
 	private String disCodeRemark;
 	private Integer deleteFlag=0;
 	@JsonIgnore
@@ -49,7 +49,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 	/** minimal constructor */
 	public DiscountCode(String id, String disCodeNo,
 			Date disCodeTime, Date disCodeValidTime,
-			Integer disCodeNum, Integer deleteFlag) {
+						Double disCodeNum, Integer deleteFlag) {
 		this.id = id;
 		this.disCodeNo = disCodeNo;
 		this.disCodeTime = disCodeTime;
@@ -60,7 +60,7 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 
 	/** full constructor */
 	public DiscountCode(String id, String disCodeNo, Date disCodeTime,
-			Date disCodeValidTime, Integer disCodeNum,
+			Date disCodeValidTime, Double disCodeNum,
 			String disCodeRemark, Integer deleteFlag) {
 		this.id = id;
 
@@ -114,12 +114,12 @@ public class DiscountCode extends Page<DiscountCode> implements java.io.Serializ
 		this.disCodeValidTime = disCodeValidTime;
 	}
 
-	@Column(name = "dis_code_num", nullable = true)
-	public Integer getDisCodeNum() {
+	@Column(name = "dis_code_num",precision = 10,scale = 2)
+	public Double getDisCodeNum() {
 		return this.disCodeNum;
 	}
 
-	public void setDisCodeNum(Integer disCodeNum) {
+	public void setDisCodeNum(Double disCodeNum) {
 		this.disCodeNum = disCodeNum;
 	}
 
