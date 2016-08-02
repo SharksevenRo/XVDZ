@@ -53,7 +53,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		super.save(entity);
 		for (OrderDetail orderDetail: entity.getOrderDetails()
 				) {
-			orderDetail.setId(entity.getId());
+			orderDetail.setOrderId(entity.getId());
 			orderDetail.setAddTime(new Date());
 			orderDetailService.save(orderDetail);
 		}
