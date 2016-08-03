@@ -21,7 +21,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/auth/account/saveAjax")
+    /*@RequestMapping("/auth/account/saveAjax")
     @ResponseBody
     public MessageBean saveAjax(Account account) {
 
@@ -97,5 +97,5 @@ public class AccountController {
             page.setMessage("服务器忙");
             return page;
         }
-    }
+    }*/
 }
